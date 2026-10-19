@@ -2,78 +2,71 @@
 
 # Tishe
 
-**Private memory for your conversations.** Диктовка и расшифровка длинных записей на русском — целиком на вашем компьютере, без интернета и без аккаунта.
+**Private memory for your conversations.** Dictation and transcription of long recordings, entirely on your own computer: no internet, no account. Built first for Russian, works for English and many other languages.
 
-[English version](README.en.md) · [Скачать](https://github.com/PereverzevVV/tishe/releases/latest) · [Что дальше](#что-дальше)
+[Русская версия](README.ru.md) · [Download](https://github.com/PereverzevVV/tishe/releases/latest) · [What's next](#whats-next)
 
-Tishe читается «тише» (по-английски TEE-sheh).
+Tishe is pronounced TEE-sheh (Russian for "quieter").
 
-## Что умеет
+## What it does
 
-- **Расшифровка файлов.** Перетащите аудио или видео любой длины — лекцию, интервью, созвон из Zoom или Телемоста. Получится документ Word или Markdown: текст по говорящим («Спикер 1», «Спикер 2»), с тайм-кодами, разбитый на части.
-- **Разделение по говорящим** — встроенной моделью, без интернета.
-- **Редактура встроенной нейросетью.** Исправляет ошибки распознавания и пунктуацию, убирает «э-э» и «ммм». Нейросеть работает на процессоре, скачивается по желанию. Можно приложить исходную расшифровку рядом с исправленной.
-- **Очередь файлов.** Добавьте несколько записей — они расшифруются по очереди, пока вы заняты другим.
-- **Диктовка** в любую программу по горячей клавише: Word, браузер, мессенджер.
-- **Модели на выбор:** GigaAM v3 для русского, NVIDIA Parakeet для английского и европейских языков, Qwen3-ASR и Whisper для остальных. Первый запуск спрашивает язык ваших записей и предлагает подходящую модель.
-- **Без облака.** Звук и текст не покидают компьютер. Облачные сервисы (OpenAI, Groq и др.) можно подключить своим ключом, но по умолчанию они выключены.
+- **Transcribes files.** Drop in audio or video of any length — a lecture, an interview, a Zoom call. You get a Word or Markdown document: text by speaker ("Speaker 1", "Speaker 2"), with timestamps, split into parts.
+- **Separates speakers** with a built-in model, offline.
+- **Edits the text with a built-in language model.** Fixes recognition errors and punctuation, removes "uh" and "um". The model runs on the CPU and is downloaded only if you want it. The raw transcript can be kept next to the edited one.
+- **Queues files.** Add several recordings; they are transcribed one after another while you do something else.
+- **Dictation** into any app with a hotkey: Word, a browser, a messenger.
+- **Your choice of models:** GigaAM v3 for Russian, NVIDIA Parakeet for English and European languages, Qwen3-ASR and Whisper for the rest. The first start asks which language your recordings are in and suggests a model.
+- **No cloud.** Audio and text never leave the computer. Cloud services (OpenAI, Groq and others) can be added with your own key, but are off by default.
 
-## Цифры
+## Numbers
 
-Замеры на ноутбуке с Ryzen 5 7530U и 16 ГБ памяти, без дискретной видеокарты, Windows 11. Одна запись на язык, один повтор; WER — доля ошибок в словах против ручного эталона, меньше — лучше.
+Measured on a laptop with a Ryzen 5 7530U and 16 GB of RAM, no discrete GPU, Windows 11. One recording per language, one run; WER is the share of wrong words against a hand-made reference, lower is better.
 
-| Запись                       | Как расшифровано                      | Время   | WER   |
-| ---------------------------- | ------------------------------------- | ------- | ----- |
-| Встреча на русском, 24 мин   | GigaAM v3, с разделением по говорящим | 2,2 мин | 8,9 % |
-| то же                        | GigaAM v3 + редактура Gemma 4 E2B     | 6,7 мин | 8,4 % |
-| Подкаст на английском, 8 мин | Parakeet TDT 0.6B v2                  | 1,0 мин | 1,0 % |
+| Recording                  | How                                | Time    | WER   |
+| -------------------------- | ---------------------------------- | ------- | ----- |
+| Meeting in Russian, 24 min | GigaAM v3, with speaker separation | 2.2 min | 8.9 % |
+| same                       | GigaAM v3 + editing by Gemma 4 E2B | 6.7 min | 8.4 % |
+| Podcast in English, 8 min  | Parakeet TDT 0.6B v2               | 1.0 min | 1.0 % |
 
-Час записи на русском с говорящими и редактурой — примерно 17 минут на таком ноутбуке (оценка по замеру выше). Замер на слабом ноутбуке с GeForce MX150 будет в следующем выпуске.
+An hour of Russian speech with speakers and editing takes about 17 minutes on this laptop (estimated from the run above). A measurement on a weaker laptop with a GeForce MX150 will come with the next release.
 
-Сравнение моделей на русской встрече (28 мин, без редактуры):
+Models on a Russian meeting (28 min, no editing): **GigaAM v3** — WER **7.1 %**, 1.6 min; Parakeet Ultra 0.6B — 11.0 %, 2.2 min. Qwen3-ASR 1.7B on another Russian meeting makes about twice as many errors as GigaAM and is 4 times slower.
 
-| Модель                                    | WER       | Время   |
-| ----------------------------------------- | --------- | ------- |
-| **GigaAM v3** (по умолчанию для русского) | **7,1 %** | 1,6 мин |
-| Parakeet Ultra 0.6B                       | 11,0 %    | 2,2 мин |
+Details, method and every run are in [DOCUMENTATION.md](../DOCUMENTATION.md), section 9 (in Russian).
 
-Qwen3-ASR 1.7B на другой русской встрече (24 мин) ошибается вдвое чаще GigaAM (около 19 %) и работает в 4 раза медленнее.
+## Install
 
-Подробности, методика и все прогоны — в [DOCUMENTATION.md](../DOCUMENTATION.md), раздел 9.
+1. Download `Tishe_…_x64-setup.exe` from the [release page](https://github.com/PereverzevVV/tishe/releases/latest).
+2. Run it. The installer is not signed with a paid certificate, so Windows shows a blue "Windows protected your PC" window. Click **More info**, then **Run anyway**.
+3. On first start, pick the language of your recordings; Tishe downloads a speech model (0.3 to 1.6 GB).
 
-## Установка
+Requirements: Windows 10 or 11 (64-bit), a CPU with AVX2 (almost all since 2013). Tested with 16 GB of RAM; 8 GB is not tested yet. ffmpeg for reading audio and video is included in the installer.
 
-1. Скачайте `Tishe_…_x64-setup.exe` со [страницы выпуска](https://github.com/PereverzevVV/tishe/releases/latest).
-2. Запустите. Установщик не подписан платным сертификатом, поэтому Windows покажет синее окно «Система Windows защитила ваш компьютер». Нажмите **«Подробнее»**, затем **«Выполнить в любом случае»**.
-3. При первом запуске выберите язык записей — Tishe скачает модель распознавания (от 0,3 до 1,6 ГБ).
+What Tishe sends over the internet: model downloads only (Hugging Face and the Handy mirror) and, once per start, a question to GitHub about a new version (turn it off in App → Updates). Recordings and text go nowhere unless you connect a cloud service yourself.
 
-Требования: Windows 10 или 11 (64 бит), процессор с AVX2 (почти все с 2013 года). Проверено на 16 ГБ памяти; на 8 ГБ пока не проверяли. ffmpeg для чтения аудио и видео уже внутри установщика.
+## What's next
 
-Что Tishe отправляет в интернет: только скачивание моделей (Hugging Face и зеркало Handy) и раз при запуске вопрос GitHub о новой версии (выключается в «Приложение» → «Обновления»). Записи и тексты не отправляются никуда, если вы сами не подключили облачный сервис.
+Tishe is the first part of Private Memory: a private memory of your conversations that lives on your computer. Next versions, in order:
 
-## Что дальше
+1. **Meeting recording** — your microphone and the other side as two tracks, with text as you talk.
+2. **Meeting summaries** — decisions and tasks right after you stop, in the language of the meeting.
+3. **Search across meetings** — first by words, then by meaning.
+4. **Notes and assistants** — a meeting folder for Obsidian, access for AI assistants over MCP.
 
-Tishe — первая часть Private Memory: личной памяти разговоров, которая живёт на вашем компьютере. Следующие версии, по порядку:
+No dates: the order may change based on feedback. Star the repo to follow along, and tell me in [Issues](https://github.com/PereverzevVV/tishe/issues) what is missing.
 
-1. **Запись встреч** — ваш микрофон и собеседники двумя дорожками, текст по ходу разговора.
-2. **Итоги встречи** — решения и задачи сразу после остановки, на языке встречи.
-3. **Поиск по встречам** — сначала по словам, потом по смыслу.
-4. **Заметки и ассистенты** — папка встречи для Obsidian, доступ AI-ассистентов к встречам по MCP.
+## How it was made
 
-Сроков не обещаю: порядок может измениться по отзывам. Поставьте звезду, чтобы следить, и пишите в [Issues](https://github.com/PereverzevVV/tishe/issues), чего не хватает.
+Tishe is based on [Handy](https://github.com/cjpais/Handy), the open-source dictation app by CJ Pais. Dictation, the speech engines and the model manager come from Handy; Tishe adds file transcription, speakers, the built-in language model and its own interface. Thanks to CJ Pais and all Handy contributors.
 
-## Как сделан проект
+The code was written with Claude Code. I designed the product, set the tasks, built a bench to compare models on my own reference recordings, and made the decisions from the measurements.
 
-Tishe основан на [Handy](https://github.com/cjpais/Handy) — открытой программе для диктовки от CJ Pais. Из Handy пришли диктовка, движки распознавания и менеджер моделей; Tishe добавил расшифровку файлов, говорящих, встроенную нейросеть и свой интерфейс. Спасибо CJ Pais и всем участникам Handy.
+Building from source and how the app works: [DOCUMENTATION.md](../DOCUMENTATION.md), sections 4 and 8 (in Russian). Change history: [CHANGELOG.md](../CHANGELOG.md) (in Russian).
 
-Код написан с Claude Code. Я спроектировал продукт, ставил задачи, собрал стенд для сравнения моделей на своих эталонных записях и принимал решения по замерам.
+## License
 
-Сборка из исходников и устройство программы — в [DOCUMENTATION.md](../DOCUMENTATION.md) (разделы 4 и 8), история изменений — в [CHANGELOG.md](../CHANGELOG.md).
+[MIT](../LICENSE), like Handy. The core is free and will stay free; paid extensions may come later. Licenses of third-party libraries and models: [THIRD_PARTY_NOTICES.txt](../src-tauri/licenses/THIRD_PARTY_NOTICES.txt), and in the app under About → Licenses.
 
-## Лицензия
+## Author
 
-[MIT](../LICENSE), как и у Handy. Ядро бесплатное и останется бесплатным; в будущем возможны платные расширения. Лицензии сторонних библиотек и моделей — в [THIRD_PARTY_NOTICES.txt](../src-tauri/licenses/THIRD_PARTY_NOTICES.txt) и в программе: «О программе» → «Лицензии».
-
-## Автор
-
-Разработчик — Виктор Переверзев (Viktor Pereverzev), финансовый аналитик. [Профиль на GitHub](https://github.com/PereverzevVV), почта — [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com): пишите, если есть вопрос или предложение.
+Developed by Viktor Pereverzev, a financial analyst. [GitHub profile](https://github.com/PereverzevVV), email [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com) for questions and ideas.
