@@ -76,4 +76,4 @@ Tishe основан на [Handy](https://github.com/cjpais/Handy) — откр�
 
 ## Автор
 
-Разработчик — Виктор Переверзев (Viktor Pereverzev), финансовый аналитик. [Профиль на GitHub](https://github.com/PereverzevVV).
+Разработчик — Виктор Переверзев (Viktor Pereverzev), финансовый аналитик. [Профиль на GitHub](https://github.com/PereverzevVV), почта — [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com): пишите, если есть вопрос или предложение.

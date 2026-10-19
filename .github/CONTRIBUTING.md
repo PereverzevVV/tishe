@@ -8,9 +8,10 @@ Tishe is a fork of [Handy](https://github.com/cjpais/Handy). The root `README.md
 
 - Ошибки — в [Issues](https://github.com/PereverzevVV/tishe/issues), по шаблону: версия, компьютер, шаги, файл журнала («О программе» → «Папки» → «Папка журналов»).
 - Не прикладывайте записи с личными разговорами.
+- Вопрос или предложение без кода можно прислать на почту [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com).
 - Ошибки, которые есть и в самом Handy (диктовка, горячие клавиши, движки распознавания), лучше сообщать в Handy: Tishe регулярно вливает его исправления.
 
-Bugs go to [Issues](https://github.com/PereverzevVV/tishe/issues). Bugs that also happen in Handy itself are best reported to Handy; Tishe merges its fixes regularly.
+Bugs go to [Issues](https://github.com/PereverzevVV/tishe/issues). Bugs that also happen in Handy itself are best reported to Handy; Tishe merges its fixes regularly. Questions and ideas can also go to [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com).
 
 ## Код / Code
 

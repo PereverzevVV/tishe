@@ -11,7 +11,7 @@ export const AUTHOR_URL = "https://github.com/PereverzevVV";
  * releases are told apart by this date. Set it to the release date when
  * building a release installer; the GitHub release tag is `v` + this value.
  */
-export const TISHE_RELEASE = "2026.10.17";
+export const TISHE_RELEASE = "2026.10.19";
 
 export type LatestRelease = { release: string; url: string };
 

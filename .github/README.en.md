@@ -69,4 +69,4 @@ Building from source and how the app works: [DOCUMENTATION.md](../DOCUMENTATION.
 
 ## Author
 
-Developed by Viktor Pereverzev, a financial analyst. [GitHub profile](https://github.com/PereverzevVV).
+Developed by Viktor Pereverzev, a financial analyst. [GitHub profile](https://github.com/PereverzevVV), email [vvpereverzev@yahoo.com](mailto:vvpereverzev@yahoo.com) for questions and ideas.
