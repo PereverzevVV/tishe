@@ -26,6 +26,10 @@ interface DialogProps {
   className?: string;
   contentClassName?: string;
   contentFades?: boolean;
+  /** 400 for confirmations, 560 for parameters, editors, «Что нового» (§12.10). */
+  size?: "narrow" | "wide";
+  /** Confirmation of an irreversible action: role alertdialog. */
+  alert?: boolean;
 }
 
 const isVisible = (element: HTMLElement) => {
@@ -57,7 +61,9 @@ export const Dialog: React.FC<DialogProps> = ({
   initialFocusRef,
   className = "",
   contentClassName = "",
-  contentFades = true,
+  contentFades: _contentFades = false,
+  size = "wide",
+  alert = false,
 }) => {
   const titleId = useId();
   const descriptionId = useId();
@@ -147,38 +153,26 @@ export const Dialog: React.FC<DialogProps> = ({
       onOpenChange(false);
     }
   };
-  const contentStyle: React.CSSProperties | undefined = contentFades
-    ? {
-        maskImage:
-          "linear-gradient(to bottom, transparent 0, black 10px, black calc(100% - 20px), transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to bottom, transparent 0, black 10px, black calc(100% - 20px), transparent 100%)",
-      }
-    : undefined;
-
   return createPortal(
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 sm:p-6"
-      onMouseDown={handleBackdropMouseDown}
-    >
+    <div className="t-scrim" onMouseDown={handleBackdropMouseDown}>
       <div
         ref={contentRef}
-        role="dialog"
+        role={alert ? "alertdialog" : "dialog"}
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
-        className={`flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-lg border border-mid-gray/20 bg-background shadow-xl outline-none sm:max-h-[calc(100dvh-3rem)] ${className}`}
+        className={`t-dialog ${size === "wide" ? "t-dialog-wide" : ""} ${className}`}
       >
-        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-mid-gray/20 px-4 py-2.5">
+        <div className="t-dialog-head">
           <div className="min-w-0">
-            <h2 id={titleId} className="text-base font-semibold text-text">
+            <h2 id={titleId} className="t-dialog-title">
               {title}
             </h2>
             {description && (
-              <p id={descriptionId} className="mt-1 text-sm text-mid-gray">
+              <div id={descriptionId} className="t-dialog-desc">
                 {description}
-              </p>
+              </div>
             )}
           </div>
           {dismissible && showCloseButton && (
@@ -186,22 +180,18 @@ export const Dialog: React.FC<DialogProps> = ({
               type="button"
               onClick={() => onOpenChange(false)}
               aria-label={closeLabel}
-              className="shrink-0 cursor-pointer rounded-md border border-transparent p-1 text-mid-gray transition-colors hover:border-mid-gray/20 hover:bg-mid-gray/10 hover:text-text focus:outline-none focus-visible:ring-1 focus-visible:ring-logo-primary"
+              title={closeLabel}
+              className="t-btn t-btn-quiet t-btn-sm t-btn-icon"
             >
-              <X className="h-4 w-4" aria-hidden="true" />
+              <X aria-hidden="true" />
             </button>
           )}
         </div>
-        <div
-          className={`min-h-0 overflow-y-auto px-4 pb-4 pt-3 ${contentClassName}`}
-          style={contentStyle}
-        >
-          {children}
-        </div>
-        {footer && (
-          <div className="flex shrink-0 justify-end gap-2 border-t border-mid-gray/20 px-4 py-3">
-            {footer}
-          </div>
+        <div className={`t-dialog-body ${contentClassName}`}>{children}</div>
+        {footer ? (
+          <div className="t-dialog-foot">{footer}</div>
+        ) : (
+          <div className="h-6 flex-none" aria-hidden="true" />
         )}
       </div>
     </div>,

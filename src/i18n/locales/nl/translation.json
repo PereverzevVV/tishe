@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Instellingen...",
-    "checkUpdates": "Controleren op updates...",
-    "copyLastTranscript": "Laatste transcriptie kopiëren",
+    "settings": "Tishe openen…",
+    "checkUpdates": "Controleren op updates…",
+    "copyLastTranscript": "Laatste dictaat kopiëren",
     "unloadModel": "Model ontladen",
     "model": "Model",
     "quit": "Afsluiten",
     "cancel": "Annuleren",
-    "secureInputWarning": "⚠ Sneltoetsen geblokkeerd door Secure Input"
+    "secureInputWarning": "⚠ Sneltoetsen geblokkeerd door Secure Input",
+    "modelLocked": "Het model kan niet wisselen terwijl er een transcriptie loopt",
+    "tooltipDictation": "Dicteren: {{shortcut}}",
+    "backgroundTitle": "Tishe blijft op de achtergrond werken",
+    "backgroundBody": "De transcriptie gaat door. Je krijgt een melding zodra hij klaar is."
   },
   "sidebar": {
     "general": "Algemeen",
-    "models": "Modellen",
+    "models": "Herkenning",
     "advanced": "Geavanceerd",
     "postProcessing": "Naverwerking",
     "history": "Geschiedenis",
     "debug": "Probleemoplossing",
-    "about": "Over Handy"
+    "about": "Over Tishe",
+    "label": "Onderdelen",
+    "transcription": "Transcriptie",
+    "dictation": "Dicteren",
+    "meetings": "Vergaderingen",
+    "llm": "AI-redactie",
+    "app": "App",
+    "soon": "binnenkort",
+    "state": {
+      "running": "bezig",
+      "new": "klaar, nog niet bekeken",
+      "downloading": "wordt gedownload"
+    },
+    "next": "Wat komt er"
   },
   "onboarding": {
     "subtitle": "Kies een transcriptiemodel om aan de slag te gaan",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Machtigingen vereist",
-      "description": "Handy heeft een aantal machtigingen nodig om goed te kunnen werken.",
+      "description": "Tishe heeft een aantal machtigingen nodig om goed te kunnen werken.",
       "microphone": {
         "title": "Microfoontoegang",
         "description": "Vereist om je stem op te nemen voor transcriptie."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Machtigingen controleren mislukt. Probeer het opnieuw.",
         "requestFailed": "Machtiging aanvragen mislukt. Probeer het opnieuw."
-      }
+      },
+      "skip": "Doorgaan zonder microfoon",
+      "skipHint": "De microfoon is alleen nodig voor dicteren – bestanden transcriberen werkt ook zonder. Je kunt hem later toestaan in de Windows-instellingen."
+    },
+    "step": "Stap {{n}} van {{total}}",
+    "language": {
+      "title": "In welke taal zijn je opnames?",
+      "description": "We downloaden een spraakherkenningsmodel voor deze taal. Het draait op deze computer.",
+      "ru": {
+        "title": "Russisch",
+        "limit": "Alleen Russisch: herkent geen Engelse spraak"
+      },
+      "en": {
+        "title": "Engels",
+        "limit": "Alleen Engels"
+      },
+      "eu": {
+        "title": "Nederlands of een andere Europese taal",
+        "limit": "25 Europese talen, herkent de taal zelf"
+      },
+      "other": {
+        "title": "Een andere taal",
+        "limit": "30 talen: Chinees, Japans, Koreaans, Arabisch, Turks, Hindi en andere",
+        "limitWhisper": "veel talen, trager op de processor"
+      },
+      "onDisk": "al op deze computer",
+      "shared": "Het model wordt gebruikt voor zowel dicteren als het transcriberen van bestanden. Je kunt het later wijzigen bij ‘$t(sidebar.models)’.",
+      "otherModel": "Ander model kiezen",
+      "hideCatalog": "Lijst met modellen verbergen",
+      "download": "{{size}} downloaden",
+      "use": "{{name}} gebruiken",
+      "downloadNamed": "{{name}} downloaden · {{size}}",
+      "once": "Wordt één keer gedownload en werkt daarna zonder internet"
+    },
+    "download": {
+      "title": "{{name}} wordt gedownload",
+      "description": "Je kunt intussen iets anders doen: het venster sluiten stopt de download niet.",
+      "starting": "Verbinden…",
+      "amount": "{{done}} van {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Model voorbereiden…",
+      "cancel": "Annuleren",
+      "failed": "Het model is niet gedownload",
+      "failedTitle": "Kan het model niet downloaden",
+      "failedHint": "Geen verbinding met de server. Controleer het internet en klik op Opnieuw proberen.",
+      "retry": "Opnieuw proberen",
+      "continue": "Tishe openen zonder te wachten"
+    },
+    "welcome": {
+      "title": "Welkom bij Tishe",
+      "lead": "Tishe zet spraak om in tekst, direct op je computer – zonder internet en zonder account.",
+      "files": "Opnames – vergaderingen, colleges, interviews – transcriberen naar een Word-document",
+      "dictation": "Dicteren in elke app: houd een toets ingedrukt, spreek – en de tekst verschijnt",
+      "private": "Opnames en teksten verlaten de computer niet",
+      "stepsLabel": "Installatiestappen",
+      "steps": {
+        "permissions": "Machtigingen",
+        "language": "Taal van de opnames",
+        "download": "Model downloaden"
+      },
+      "credit": "Viktor Pereverzev · gebaseerd op Handy"
+    },
+    "tips": {
+      "title": "Tijdens het downloaden – zo werkt het",
+      "dictationBefore": "Dicteren: houd in elke app",
+      "dictationAfter": "ingedrukt en spreek. Laat los – de tekst verschijnt bij de cursor.",
+      "files": "Transcriptie: sleep een audio- of videobestand naar het Tishe-venster en je krijgt een Word-document.",
+      "editing": "Redactie door AI verbetert fouten en interpunctie – zet het aan in het recept van de transcriptie."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "Algemeen",
       "shortcut": {
-        "title": "Sneltoetsen",
+        "title": "Sneltoetsen van Tishe",
         "description": "Configureer sneltoetsen om spraak-naar-tekst-opnames te starten",
         "loading": "Sneltoetsen laden...",
         "none": "Geen sneltoetsen geconfigureerd",
         "notFound": "Sneltoets niet gevonden",
-        "pressKeys": "Druk op toetsen...",
+        "pressKeys": "Druk op een combinatie… (Esc annuleert)",
         "bindings": {
           "transcribe": {
-            "name": "Sneltoets voor dicteren",
-            "description": "De sneltoets om je stem op te nemen en te transcriberen."
+            "name": "Dicteren",
+            "description": "Houd ingedrukt en praat – de tekst wordt in het actieve venster geplakt"
           },
           "cancel": {
-            "name": "Sneltoets voor annuleren",
-            "description": "De sneltoets om de huidige opname te annuleren."
+            "name": "Annuleren",
+            "description": "Stopt de lopende opname"
           },
           "transcribe_with_post_process": {
-            "name": "Sneltoets voor naverwerking",
-            "description": "Optioneel: Een specifieke sneltoets die altijd AI-naverwerking toepast op je transcriptie."
+            "name": "Toets voor dicteren met redactie",
+            "description": "De tekst wordt geplakt na redactie door de AI"
           }
         },
         "errors": {
           "restore": "Herstellen van originele sneltoets mislukt",
           "set": "Instellen van sneltoets mislukt: {{error}}",
-          "reset": "Sneltoets terugzetten naar standaardwaarde mislukt"
+          "reset": "Sneltoets terugzetten naar standaardwaarde mislukt",
+          "taken": "Een ander programma gebruikt deze toets al. Kies een andere.",
+          "duplicate": "Deze toets wordt hier al voor een andere actie gebruikt."
         }
       },
       "language": {
-        "title": "Taal",
-        "description": "Selecteer de taal voor spraakherkenning. 'Automatisch' detecteert de taal vanzelf, terwijl het kiezen van een specifieke taal de nauwkeurigheid voor die taal kan verbeteren.",
+        "title": "Herkenningstaal",
+        "description": "‘Automatisch’ herkent de taal zelf; zelf kiezen is betrouwbaarder",
         "searchPlaceholder": "Talen zoeken...",
         "noResults": "Geen talen gevonden",
         "auto": "Automatisch"
       },
       "shortcutActivation": {
-        "title": "Gedrag van sneltoets",
-        "description": "Kies hoe de sneltoets voor dicteren de opname start en stopt.",
+        "title": "Gedrag van de toets",
+        "description": "Hoe de toets de opname start en stopt",
         "options": {
           "holdOrToggle": "Automatisch",
           "pushToTalk": "Vasthouden",
@@ -212,7 +298,7 @@
     "models": {
       "title": "Transcriptiemodellen",
       "description": "Selecteer een transcriptiemodel of download extra modellen. Verschillende modellen bieden variërende niveaus van nauwkeurigheid en snelheid.",
-      "searchPlaceholder": "Modellen zoeken op naam...",
+      "searchPlaceholder": "Zoeken op naam",
       "yourModels": "Gedownloade modellen",
       "availableModels": "Beschikbaar voor download",
       "deleteConfirm": "Weet je zeker dat je {{modelName}} wilt verwijderen? Je moet het model opnieuw downloaden om het weer te gebruiken.",
@@ -225,37 +311,104 @@
       },
       "rescan": {
         "label": "Opnieuw scannen",
-        "tooltip": "Scannen naar modellen die buiten Handy om zijn toegevoegd aan de modellenmap of Hugging Face-cache"
+        "tooltip": "Modellen zoeken die handmatig aan de map zijn toegevoegd"
       },
-      "noModelsMatch": "Geen modellen voldoen aan dit filter."
+      "noModelsMatch": "Geen modellen voldoen aan dit filter.",
+      "params": {
+        "button": "Parameters",
+        "open": "Modelparameters",
+        "title": "Parameters: {{name}}",
+        "savedAtOnce": "Wijzigingen worden meteen opgeslagen. De velden tonen de gebruikte waarden; een gewijzigde waarde heeft een herstelknop.",
+        "resetAll": "Standaardwaarden herstellen",
+        "done": "Klaar",
+        "resetField": "Terug naar standaard",
+        "defaultRange": "Standaard {{value}}; toegestaan {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Ingebouwde instructie. Bewerk de tekst om je eigen te gebruiken; maak hem leeg om terug te gaan naar de ingebouwde.",
+          "own": "Jouw instructie. De herstelknop zet de ingebouwde terug."
+        },
+        "asr": {
+          "segment": {
+            "label": "Segmentlengte voor bestanden, seconden",
+            "description": "Bestanden worden herkend in stukken die bij pauzes worden geknipt en hooguit zo lang zijn. Het kortste stuk krimpt mee (12 s bij 25 s). Gemeten: 12–25 s behoudt de interpunctie beter dan 60–120 s."
+          },
+          "device": {
+            "label": "Apparaat",
+            "description": "‘Alleen processor’ ontlast de grafische chip, maar is meestal trager. Geldt ook voor dicteren; werkt vanaf de volgende herkenning.",
+            "general": "Zoals in de versnellingsinstelling",
+            "cpu": "Alleen processor",
+            "notHere": "Het apparaat van dit model volgt de algemene versnellingsinstelling."
+          }
+        },
+        "llm": {
+          "promptNote": "Instructies voor Russische en Engelse tekst. Andere talen krijgen de ingebouwde Engelse instructie met de naam van de taal. Een eigen instructie in het onderdeel Transcriptie vervangt deze voor alle talen.",
+          "promptRu": "Instructie voor Russische tekst",
+          "promptEn": "Instructie voor Engelse tekst",
+          "temperature": {
+            "label": "Temperatuur",
+            "description": "Lager is voorzichtiger: bij 0,8 verzon het model woorden, 0,2 is de gemeten waarde voor redactie."
+          },
+          "chunk": {
+            "label": "Blokgrootte, tekens",
+            "description": "Hoeveel tekst het model per keer bewerkt. Kleine modellen blijven trouwer bij korte blokken."
+          },
+          "context": {
+            "label": "Context, tokens",
+            "description": "Ruimte voor de instructie, het blok en het antwoord. Meer kost meer geheugen."
+          },
+          "answer": {
+            "label": "Antwoordlimiet, tokens",
+            "description": "Stopt een model dat zichzelf begint te herhalen. Een blok van 3000 tekens is ongeveer 1100 tokens."
+          },
+          "threads": {
+            "label": "Processorthreads voor het antwoord",
+            "description": "Het lezen van de tekst gebruikt altijd alle hardwarethreads.",
+            "auto": "Automatisch – één per kern"
+          },
+          "restartNote": "Temperatuur, context, antwoordlimiet en threads gelden bij de volgende start van het model: een draaiend model herstart vóór de volgende taak.",
+          "invalid": "Niet opgeslagen: {{detail}}",
+          "contextTooSmall": "Niet opgeslagen: de context moet het blok en het antwoord bevatten – minstens {{min}} tokens met de huidige blokgrootte en antwoordlimiet."
+        }
+      }
     },
     "sound": {
       "title": "Geluid",
       "microphone": {
         "title": "Microfoon",
-        "description": "Selecteer de gewenste microfoon",
+        "description": "Waar je stem wordt opgenomen",
         "placeholder": "Microfoon selecteren...",
         "loading": "Laden..."
       },
       "channel": {
         "title": "Ingangskanaal",
-        "description": "Selecteer het ingangskanaal waarvan moet worden opgenomen. Gebruik dit als je audio-interface meerdere ingangen heeft.",
+        "description": "Voor geluidskaarten met meerdere ingangen",
         "average": "Gemiddelde van alle kanalen",
         "channel": "Kanaal {{n}}"
       },
       "audioFeedback": {
         "label": "Geluidsfeedback",
-        "description": "Geluid afspelen wanneer de opname start en stopt"
+        "description": "Een geluid bij het begin en einde van de opname"
       },
       "outputDevice": {
         "title": "Afspeelapparaat",
-        "description": "Selecteer het gewenste audioapparaat voor feedbackgeluiden",
+        "description": "Waar de feedbackgeluiden klinken",
         "placeholder": "Afspeelapparaat selecteren...",
         "loading": "Laden..."
       },
       "volume": {
         "title": "Volume",
-        "description": "Pas het volume van de geluidsfeedback aan"
+        "description": "Pas het volume van de geluidsfeedback aan",
+        "levels": {
+          "quiet": "Zacht",
+          "medium": "Gemiddeld",
+          "loud": "Luid"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Eigen",
+        "preview": "Start- en stopgeluid afspelen"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Experimenteel"
       },
       "experimentalToggle": {
-        "label": "Experimentele functies",
-        "description": "Schakel experimentele functies in die nog in ontwikkeling zijn."
+        "label": "Experimentele functies tonen",
+        "description": "Functies in ontwikkeling; kunnen instabiel zijn"
       },
       "lazyStreamClose": {
         "label": "Microfoon openhouden tussen transcripties",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Geminimaliseerd opstarten",
-        "description": "Start op de achtergrond in het systeemvak zonder het hoofdvenster te openen."
+        "label": "Venster verbergen bij het starten",
+        "description": "Het programma start in het systeemvak"
       },
       "autostart": {
-        "label": "Starten bij opstarten",
-        "description": "Handy automatisch starten zodra je inlogt op je computer."
+        "label": "Starten met Windows",
+        "description": "Dicteren is klaar direct na het aanmelden"
       },
       "showTrayIcon": {
-        "label": "Pictogram in systeemvak tonen",
-        "description": "Toon het Handy-pictogram in het systeemvak."
+        "label": "Pictogram in het systeemvak",
+        "description": "Zonder pictogram komt een gesloten venster alleen terug door het programma opnieuw te starten"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Kies de opname-overlay: 'Geen' verbergt deze, 'Minimaal' toont een compacte balk, 'Live' toont de tekst in realtime tijdens het spreken (alleen voor streaming-modellen). Op Linux wordt 'Geen' aanbevolen.",
+          "title": "Stijl van de indicator",
+          "description": "Wat er tijdens het dicteren bij de cursor wordt getoond",
           "options": {
             "none": "Geen",
             "minimal": "Minimaal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Zonder indicator worden fouten niet getoond: een niet geplakte tekst staat in Geschiedenis"
         },
         "position": {
-          "title": "Overlay-positie",
-          "description": "Waar de overlay op het scherm verschijnt tijdens het opnemen en transcriberen.",
+          "title": "Positie van de indicator",
+          "description": "Boven- of onderaan het scherm",
           "options": {
             "bottom": "Onderkant",
             "top": "Bovenkant"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Plakmethode",
-        "description": "Kies hoe tekst wordt ingevoegd. 'Direct' simuleert typen via het systeem. 'Geen' slaat het plakken over en werkt alleen de geschiedenis en het klembord bij.",
+        "description": "Hoe de tekst in het actieve venster komt",
         "options": {
           "clipboard": "Klembord ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Klembord (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Klembordbeheer",
-        "description": "'Klembord niet aanpassen' behoudt je huidige klembordinhoud na een transcriptie. 'Kopiëren naar klembord' laat de getranscribeerde tekst achter op je klembord.",
+        "title": "Klembord",
+        "description": "De vorige inhoud van het klembord houden of de gedicteerde tekst erin laten",
         "options": {
           "dontModify": "Klembord niet aanpassen",
           "copyToClipboard": "Kopiëren naar klembord"
         }
       },
       "autoSubmit": {
-        "title": "Automatisch verzenden",
-        "description": "Verzend automatisch de geselecteerde toetsencombinatie na het invoegen van de tekst. Cmd+Enter geldt voor macOS, Windows/Linux gebruiken Super+Enter.",
+        "title": "Versturen na plakken",
+        "description": "Direct na het plakken de gekozen toets indrukken, bijvoorbeeld Enter in een chat",
         "options": {
           "off": "Uit",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Vertalen naar het Engels",
-        "description": "Vertaal spraak uit andere talen tijdens het transcriberen automatisch naar het Engels."
+        "description": "Spraak in elke taal wordt Engelse tekst"
       },
       "modelUnload": {
-        "title": "Model ontladen",
-        "description": "Geheugen (GPU/CPU) automatisch vrijmaken wanneer het model voor de opgegeven tijd niet is gebruikt",
+        "title": "Model uit het geheugen halen na…",
+        "description": "Maakt geheugen vrij als het model een tijdje niet nodig is",
         "options": {
           "never": "Nooit",
           "immediately": "Direct",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Eigen woordenlijst",
-        "description": "Help ondersteunde modellen namen en vaktermen te herkennen. Fuzzy-correctie is momenteel beperkt tot woorden met de letters A–Z en cijfers.",
+        "title": "Eigen woorden",
+        "description": "Een hint voor Whisper-modellen; andere modellen krijgen alleen correcties, en alleen voor woorden in A–Z",
         "placeholder": "Woord toevoegen",
         "add": "Toevoegen",
         "remove": "{{word}} verwijderen",
-        "duplicate": "\"{{word}}\" bestaat al"
+        "duplicate": "\"{{word}}\" bestaat al",
+        "removed": "‘{{word}}’ verwijderd"
       },
       "voiceActivityDetection": {
-        "title": "Spraakactiviteitsdetectie (VAD)",
-        "description": "Filter stilte uit opnames. Streaming-modellen gebruiken een langere VAD-uitloop; het uitschakelen van VAD neemt de ruwe audio op."
+        "title": "Stilte weglaten",
+        "description": "Alleen spraak gaat naar de herkenning"
       },
       "vadBackend": {
         "title": "VAD-backend",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Opvulwoorden verwijderen",
-        "description": "Verwijdert veelvoorkomende aarzelwoorden uit transcripties. Schakel dit uit om ze te behouden."
+        "description": "‘uh’, ‘hmm’ in de geplakte tekst"
       },
       "chineseScript": {
         "title": "Chinees schrift",
-        "description": "Schrijft Mandarijn- en Kantonese transcripties in vereenvoudigde of traditionele karakters. Andere talen blijven ongewijzigd.",
+        "description": "Vereenvoudigde of traditionele tekens",
         "options": {
           "asTranscribed": "Zoals getranscribeerd",
           "simplified": "Vereenvoudigd",
@@ -434,20 +589,21 @@
           "title": "Basis-URL",
           "description": "API-basis-URL voor de geselecteerde provider. Alleen de aangepaste provider kan worden bewerkt.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Het adres wordt bepaald door de gekozen aanbieder",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API-sleutel",
-          "description": "API-sleutel voor de geselecteerde provider.",
+          "description": "Alleen op deze computer opgeslagen",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Geef de model-ID op die door je aangepaste eindpunt wordt verwacht.",
-          "descriptionDefault": "Kies een model dat door de geselecteerde provider wordt aangeboden.",
+          "descriptionCustom": "De modelnaam op je server",
+          "descriptionDefault": "De knop rechts vernieuwt de lijst",
           "placeholderWithOptions": "Zoek of selecteer een model",
           "placeholderNoOptions": "Typ een modelnaam",
-          "refreshModels": "Modellen verversen"
+          "refreshModels": "Modellijst vernieuwen"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Geselecteerde prompt",
           "description": "Selecteer een sjabloon voor het verfijnen van transcripties of maak een nieuwe aan. Gebruik ${output} in de prompttekst om naar de gemaakte transcriptie te verwijzen."
         },
-        "noPrompts": "Geen prompts beschikbaar",
-        "selectPrompt": "Selecteer een prompt",
+        "noPrompts": "Geen instructies",
+        "selectPrompt": "Kies een instructie",
         "createNew": "Nieuwe prompt maken",
-        "promptLabel": "Promptnaam",
+        "promptLabel": "Naam",
         "promptLabelPlaceholder": "Voer promptnaam in",
-        "promptInstructions": "Prompt-instructies",
+        "promptInstructions": "Tekst van de instructie",
         "promptInstructionsPlaceholder": "Schrijf de instructies die na de transcriptie moeten worden uitgevoerd. Voorbeeld: Verbeter de grammatica en helderheid van de volgende tekst: ${output}",
         "promptTip": "Tip: Gebruik <code>${output}</code> om de getranscribeerde tekst in je prompt in te voegen.",
         "updatePrompt": "Prompt bijwerken",
-        "deletePrompt": "Prompt verwijderen",
-        "createPrompt": "Prompt maken",
+        "deletePrompt": "Verwijderen",
+        "createPrompt": "Maken",
         "cancel": "Annuleren",
-        "selectToEdit": "Selecteer hierboven een prompt om de details te bekijken en te bewerken.",
-        "createFirst": "Klik hierboven op 'Nieuwe prompt maken' om je eerste naverwerkingsprompt aan te maken."
+        "selectToEdit": "Kies een instructie om die te bewerken.",
+        "createFirst": "Klik op ‘Maken’ om de eerste instructie toe te voegen."
+      },
+      "local": {
+        "intro": "Het model draait rechtstreeks op deze computer: geen internet, geen sleutels, je tekst verlaat het apparaat nooit. Download een model als je wilt. Het start vanzelf wanneer nodig en wordt uit het geheugen gehaald als het niets doet. Het draait op de processor en is daardoor trager dan clouddiensten. Alle modellen passen op een laptop met 16 GB RAM.",
+        "runtimeMissing": "De ingebouwde AI-engine is niet gevonden. Installeer Tishe opnieuw.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Gebalanceerd",
+            "model": "Qwen3.5 4B",
+            "description": "De gewone Qwen 4B-versie. Zorgvuldig met interpunctie, maar verbetert weinig herkenningsfouten in echte gesprekken (onze tests, 06-10-2026). De versie met versnelling is nauwkeuriger en sneller."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Het model van Google, trouw aan het origineel. Bewerkt zoals de Gemma in Googles versie met versnelling, maar ongeveer 1,25 keer trager."
+          },
+          "gigachat31": {
+            "title": "Voor Russisch",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Vanaf het begin op Russisch getraind. Per token zijn slechts 1,8B van de 10B parameters actief, dus het is sneller dan zijn grootte doet vermoeden. Heeft meer geheugen nodig."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen voor Russisch",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) met een Russische woordenschat en extra training op Russische teksten. In de test verbetert hij minder dan Gemma E2B en is hij half zo snel (ongeveer 27 min per uur opname)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Klein model van NVIDIA, officieel alleen Engels. In de test liet hij de tekst in het Russisch en het Engels bijna ongewijzigd en is hij trager dan Gemma (ongeveer 35 min per uur opname)."
+          },
+          "qwen35_9b": {
+            "title": "Maximaal",
+            "model": "Qwen3.5 9B",
+            "description": "Het slimste lokale model: het beste met context en lastige correcties. Het traagst."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Gebalanceerd",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B in een nieuwere versie met ingebouwde versnelling. Nauwkeuriger en ongeveer 1,2 keer sneller dan de gewone Qwen 4B, maar verbetert in onze tests half zo veel fouten als Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma licht",
+            "model": "Gemma 4 E2B · Google-versie",
+            "description": "De kleinere Gemma in de officiële versie van Google, met versnelling (+98 MB). Twee keer zo snel als Gemma E4B (ongeveer 14 min per uur opname) met ongeveer 2/3 van haar correcties."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google-versie",
+            "description": "De beste kwaliteit in onze tests (06-10-2026). De officiële versie van Google met versnelling (+99 MB): bewerkt zoals de gewone Gemma E4B, ongeveer 1,25 keer sneller. Ongeveer 26 min per uur opname."
+          }
+        },
+        "speedupBadge": "versnelling",
+        "speedupHint": "Een klein hulpmodel raadt een paar woorden vooruit en het hoofdmodel controleert ze. Op een processor is dat ongeveer 1,2–1,3 keer sneller.",
+        "untested": "niet getest",
+        "delete": "Model verwijderen",
+        "state": {
+          "stopped": "Niet in het geheugen geladen",
+          "loading": "Laden in het geheugen…",
+          "ready": "In het geheugen geladen"
+        },
+        "unloadNow": "Nu uit geheugen halen",
+        "unload": {
+          "title": "Uit het geheugen halen",
+          "description": "Hoe lang het model ongebruikt mag blijven voordat het uit het geheugen wordt gehaald, wat ongeveer 2–3 GB vrijmaakt.",
+          "immediately": "Direct na de verwerking",
+          "min2": "Na 2 minuten",
+          "min5": "Na 5 minuten",
+          "min15": "Na 15 minuten",
+          "never": "Nooit"
+        },
+        "recommended": "Aanbevolen"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Opnamemap openen",
       "loading": "Geschiedenis laden...",
       "empty": "Nog geen transcripties. Start met opnemen om je geschiedenis op te bouwen!",
-      "copyToClipboard": "Transcriptie naar klembord kopiëren",
+      "copyToClipboard": "Tekst kopiëren",
       "copyError": "Transcriptie naar het klembord kopiëren mislukt.",
       "save": "Transcriptie opslaan",
       "unsave": "Verwijderen uit opgeslagen",
       "delete": "Item verwijderen",
       "deleteError": "Item verwijderen mislukt. Probeer het opnieuw.",
-      "retranscribe": "Opnieuw transcriberen",
+      "retranscribe": "Opnieuw herkennen",
       "retranscribeError": "Opnieuw transcriberen mislukt. Probeer het opnieuw.",
-      "transcribing": "Transcriberen...",
+      "transcribing": "Herkennen…",
       "transcriptionFailed": "Transcriptie mislukt. Je kunt het opnieuw proberen via het herlaad-pictogram."
     },
     "debug": {
       "title": "Probleemoplossing",
       "logDirectory": {
         "title": "Logboekmap",
-        "description": "Locatie waar logbestanden worden opgeslagen"
+        "description": "Voeg het logboek toe aan een foutmelding"
       },
       "logLevel": {
         "title": "Logboekniveau",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Controleren op updates",
-        "description": "Automatisch controleren op nieuwe versies van Handy",
-        "lockedDescription": "Uitgeschakeld door systeemconfiguratie (HANDY_DISABLE_UPDATER)"
+        "description": "Eén keer per start aan GitHub vragen of er een nieuwe versie van Tishe is. Er worden geen opnamen of teksten verstuurd",
+        "lockedDescription": "Controleren op updates is uitgeschakeld in deze versie"
       },
       "whatsNewPreview": {
         "title": "Voorbeeld van release-notes",
@@ -534,16 +761,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Drempelwaarde woordcorrectie",
-        "description": "Gevoeligheid voor eigen woordcorrecties"
+        "description": "Hoeveel een woord op een van jouw woorden moet lijken om te worden vervangen"
       },
       "historyLimit": {
-        "title": "Geschiedenislimiet",
-        "description": "Maximum aantal te bewaren geschiedenisitems",
+        "title": "Hoeveel dictaten bewaren",
+        "description": "Bewaarde dictaten tellen niet mee",
         "entries": "items"
       },
       "recordingRetention": {
-        "title": "Opnames automatisch verwijderen",
-        "description": "Oude opnames automatisch verwijderen om ruimte te besparen",
+        "title": "Oude dictaten verwijderen",
+        "description": "Samen met de tekst wordt ook de audio verwijderd",
         "never": "Nooit",
         "preserveLimit": "Bewaar de nieuwste {{count}}",
         "days3": "Na 3 dagen",
@@ -552,24 +779,24 @@
         "placeholder": "Selecteer bewaarperiode..."
       },
       "alwaysOnMicrophone": {
-        "label": "Microfoon altijd aan",
-        "description": "Houd de microfoon actief voor een snellere reactietijd"
+        "label": "Microfoon aan laten",
+        "description": "De opname start sneller, maar de microfoon is steeds bezet"
       },
       "clamshellMicrophone": {
-        "title": "Clamshell-microfoon",
-        "description": "Microfoon die gebruikt moet worden wanneer het laptopscherm gesloten is"
+        "title": "Microfoon met gesloten deksel",
+        "description": "Welke microfoon gebruiken als de laptop dicht is"
       },
       "postProcessingToggle": {
         "label": "Naverwerking",
         "description": "Schakel AI-gestuurde tekstverfijning in na transcriptie"
       },
       "muteWhileRecording": {
-        "label": "Dempen tijdens opname",
-        "description": "Systeemgeluid dempen tijdens het opnemen"
+        "label": "Computer dempen tijdens de opname",
+        "description": "Muziek en video komen niet in de opname"
       },
       "appendTrailingSpace": {
-        "label": "Spatie achteraan toevoegen",
-        "description": "Voeg een spatie toe na de geplakte transcriptie"
+        "label": "Spatie aan het einde toevoegen",
+        "description": "De volgende zin plakt niet aan de vorige vast"
       },
       "keyboardImplementation": {
         "title": "Toetsenbord-implementatie",
@@ -582,28 +809,28 @@
         "settings": "Instellingen:"
       },
       "pasteDelay": {
-        "title": "Plakvertraging (voor)",
-        "description": "Vertraging (in milliseconden) na het kopiëren van de tekst, voordat de plak-toetsaanslag wordt verzonden. Verhoog dit als er niets wordt geplakt."
+        "title": "Vertraging vóór plakken",
+        "description": "Verhoog als er niets wordt geplakt"
       },
       "pasteDelayAfter": {
-        "title": "Plakvertraging (na)",
-        "description": "Vertraging (in milliseconden) na de plak-toetsaanslag, voordat je vorige klembord wordt hersteld. Verhoog dit als de oude klembordinhoud wordt geplakt in plaats van de transcriptie."
+        "title": "Vertraging na plakken",
+        "description": "Verhoog als er oude tekst van het klembord wordt geplakt"
       },
       "holdThreshold": {
         "title": "Vasthouddrempel",
-        "description": "Alleen in de modus Automatisch: hoe lang (in milliseconden) de sneltoets ingedrukt moet blijven om als vasthouden te tellen in plaats van als tik. Verlaag dit als de opname na kort vasthouden blijft doorlopen; verhoog het als bewuste tikken als vasthouden worden gezien."
+        "description": "Korter drukken schakelt, langer drukken telt als vasthouden"
       },
       "reliablePaste": {
         "title": "Betrouwbaar plakken (Beta)",
-        "description": "Herstel het klembord pas nadat de doelapp de transcriptie daadwerkelijk heeft gelezen, in plaats van na een vaste vertraging. Bedoeld om te verhelpen dat bij systeembelasting de oude klembordinhoud wordt geplakt. Vereist een plakmethode via het klembord; alleen macOS en Windows."
+        "description": "Wachten tot het programma de tekst heeft gelezen in plaats van een vaste tijd"
       },
       "recordingBuffer": {
-        "title": "Extra opnamebuffer",
-        "description": "Extra tijd (in milliseconden) om te blijven opnemen nadat je de toets loslaat, om naloopaudio op te vangen. 0 = geen extra buffer."
+        "title": "Doorgaan met opnemen na loslaten",
+        "description": "Hoe lang er nog wordt opgenomen nadat de toets is losgelaten"
       },
       "keyboardDiagnostic": {
         "title": "Toetsenborddiagnose",
-        "description": "Controleert of toetsenbordgebeurtenissen Handy bereiken. Alleen het aantal gebeurtenissen wordt vastgelegd — nooit welke toetsen je indrukt.",
+        "description": "Controleert of toetsenbordgebeurtenissen Tishe bereiken. Alleen het aantal gebeurtenissen wordt vastgelegd – nooit welke toetsen je indrukt.",
         "run": "Diagnose van 10 s uitvoeren",
         "running": "Luisteren… druk je sneltoets een paar keer in (bijv. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -617,24 +844,24 @@
         "mouse": "Muis",
         "verdictBlocked": "Secure Input blokkeert toetsgebeurtenissen — sneltoetsen met een gewone toets kunnen pas weer werken als dit is opgelost.",
         "verdictSuspicious": "Er kwamen wel modificatiegebeurtenissen binnen, maar geen toetsgebeurtenissen — iets onderdrukt toetsen terwijl Secure Input als uitgeschakeld wordt gemeld. Meld dit op GitHub.",
-        "verdictOk": "Toetsgebeurtenissen bereiken Handy normaal.",
+        "verdictOk": "Toetsgebeurtenissen bereiken Tishe normaal.",
         "verdictNoEvents": "Geen gebeurtenissen vastgelegd — heb je tijdens de test toetsen ingedrukt?",
         "failed": "Diagnose mislukt: {{error}}"
       }
     },
     "about": {
-      "title": "Over Handy",
+      "title": "Over Tishe",
       "version": {
         "title": "Versie",
-        "description": "Huidige versie van Handy"
+        "description": "Huidige versie van Tishe"
       },
       "whatsNewUpdates": {
-        "label": "Toon 'Wat is er nieuw'",
-        "description": "Release-notes tonen nadat Handy is bijgewerkt"
+        "label": "‘Wat is er nieuw’ tonen na een update",
+        "description": "Een korte lijst met wijzigingen bij de eerste start van een nieuwe versie"
       },
       "appDataDirectory": {
-        "title": "App-datamap",
-        "description": "Locatie waar Handy de gegevens opslaat"
+        "title": "Gegevensmap",
+        "description": "Instellingen, modellen en geschiedenis"
       },
       "sourceCode": {
         "title": "Broncode",
@@ -643,7 +870,7 @@
       },
       "supportDevelopment": {
         "title": "Ontwikkeling ondersteunen",
-        "description": "Help ons om te blijven bouwen aan Handy",
+        "description": "Tishe is gebaseerd op hun programma",
         "button": "Doneren"
       },
       "acknowledgments": {
@@ -651,7 +878,7 @@
         "ggml": {
           "title": "ggml",
           "description": "Krachtige tensorbibliotheek voor lokale AI-verwerking",
-          "details": "Handy's lokale spraak-naar-tekst is gebouwd op transcribe.cpp en ggml. Met dank aan het geweldige werk van Georgi Gerganov en alle bijdragers."
+          "details": "Snelle spraakherkenning op de computer. Dank aan Georgi Gerganov en de bijdragers van het project."
         }
       }
     }
@@ -672,7 +899,7 @@
     "portableUpdateBrowseButton": "GitHub Releases openen"
   },
   "whatsNew": {
-    "title": "Nieuw in Handy v{{version}}"
+    "title": "Nieuw in Tishe"
   },
   "common": {
     "loading": "Laden...",
@@ -681,10 +908,14 @@
     "open": "Openen",
     "copy": "Kopiëren",
     "clear": "Wissen",
-    "noOptionsFound": "Geen opties gevonden"
+    "noOptionsFound": "Geen opties gevonden",
+    "cancel": "Annuleren",
+    "choose": "Kiezen…",
+    "reset": "Standaard herstellen",
+    "search": "Zoeken"
   },
   "accessibility": {
-    "permissionsDescription": "Handy heeft toegankelijkheidsmachtigingen nodig om getranscribeerde tekst te kunnen typen.",
+    "permissionsDescription": "Om tekst te plakken heeft het programma de machtiging ‘Toegankelijkheid’ nodig.",
     "openSettings": "Systeeminstellingen openen"
   },
   "errors": {
@@ -703,17 +934,17 @@
     "modelLoadFailedUnknown": "onbekend model",
     "pasteFailedTitle": "Tekst plakken mislukt",
     "pasteFailed": "Tekst kon niet worden geplakt in de actieve applicatie.",
-    "transcriptionFailedTitle": "Transcriptie mislukt"
+    "transcriptionFailedTitle": "Herkennen mislukt"
   },
   "appLanguage": {
-    "title": "Interfacetaal",
-    "description": "Wijzig de taal van de Handy-interface"
+    "title": "Taal van de interface",
+    "description": "De taal van de teksten in het programma"
   },
   "theme": {
-    "title": "App-thema",
-    "description": "Kies of Handy het systeemthema volgt of licht of donker blijft",
+    "title": "Thema",
+    "description": "Kies of Tishe het systeemthema volgt of altijd licht of donker blijft",
     "options": {
-      "system": "Systeem",
+      "system": "Zoals het systeem",
       "light": "Licht",
       "dark": "Donker"
     }
@@ -721,6 +952,14 @@
   "overlay": {
     "transcribing": "Transcriberen...",
     "processing": "Verwerken...",
+    "waiting": "Het model is bezig met een bestand – het dictaat komt later",
+    "message": {
+      "paste_failed": "Plakken mislukt. De tekst is opgeslagen in Geschiedenis",
+      "editing_skipped": "Geplakt zonder redactie: de AI is niet klaar",
+      "no_microphone": "Geen microfoon gevonden",
+      "microphone_denied": "Geen toegang tot de microfoon",
+      "help": "Wat te doen"
+    },
     "loadingModel": "Model laden..."
   },
   "secureInput": {
@@ -733,5 +972,715 @@
     "learnMore": "Hoe je dit oplost",
     "recorderBlocked": "Sneltoetsen kunnen nu niet worden opgenomen — Secure Input van macOS blokkeert toetsgebeurtenissen. Los eerst de Secure Input-waarschuwing op.",
     "dismiss": "Sluiten"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg is niet gevonden. Het is nodig om audio- en videobestanden te lezen en zit in het installatieprogramma van Tishe: installeer Tishe opnieuw. Of installeer het met de opdracht: winget install Gyan.FFmpeg — en start Tishe opnieuw.",
+    "input": {
+      "choose": "Bestanden toevoegen…",
+      "filterName": "Audio en video"
+    },
+    "maxPart": {
+      "title": "Maximale lengte van een deel",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Aanbieder",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Aangepast (OpenAI-compatibel)"
+      },
+      "baseUrl": "API-URL",
+      "baseUrlDescription": "Basis-URL die eindigt op /v1.",
+      "apiKey": "API-sleutel",
+      "apiKeyDescription": "Lokaal opgeslagen op deze computer.",
+      "model": "Model",
+      "modelDescription": "gpt-4o-transcribe-modellen accepteren maximaal ~23 min per verzoek; delen worden automatisch ingekort.",
+      "language": "Taal",
+      "languageDescription": "Taalcode, bijvoorbeeld nl of en. Laat leeg voor automatische herkenning.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Personen in de opname",
+      "auto": "Automatisch herkennen",
+      "model": "Sprekersmodel",
+      "modelDescription": "Wordt één keer gedownload; onderscheidt stemmen. Beide zijn klein en snel.",
+      "recommended": "Aanbevolen",
+      "cloudUntimed": "Het model {{model}} geeft geen tijdstempels terug, dus sprekers kunnen niet worden aangegeven. Kies whisper-1, een whisper-model bij Groq of lokale herkenning.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Getraind op duizenden stemmen; onderscheidt stemmen betrouwbaar in echte opnames. Goede standaardkeuze."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Een alternatief model: probeer het als het eerste stemmen door elkaar haalt in jouw opnames."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Ook de ruwe transcriptie toevoegen",
+      "includeRawDescription": "De onbewerkte uitvoer van de herkenning aan het einde van het document toevoegen.",
+      "promptPlaceholder": "Ingebouwde instructie voor de taal van de opname (Russisch of Engels)"
+    },
+    "output": {
+      "format": "Formaat",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Tijdstempels",
+      "location": "Opslaan in",
+      "choose": "Map kiezen…",
+      "nextToSource": "Naast het bronbestand",
+      "notes": "Verwerkingsnotities",
+      "removeFillers": "Aarzelingen verwijderen",
+      "saveDebug": "Tussenbestanden opslaan",
+      "saveDebugDescription": "Maakt naast het document een map ‘<name>.debug’ met de tekst na elke stap: herkenning, opschoning, elk verzoek aan het taalmodel en zijn antwoord, eindresultaat. Om fouten op te sporen en voor de modelvergelijking."
+    },
+    "actions": {
+      "start": "Transcriberen",
+      "cancel": "Annuleren"
+    },
+    "progress": {
+      "starting": "Starten…",
+      "elapsed": "Verstreken: {{time}}",
+      "extracting": "Audio extraheren…",
+      "extractingPart": "Audio extraheren…",
+      "diarizing": "Sprekers herkennen…",
+      "diarizingPart": "Sprekers herkennen…",
+      "splitting": "In delen splitsen…",
+      "splittingPart": "In delen splitsen…",
+      "transcribing": "Transcriberen…",
+      "transcribingPart": "Deel {{part}} van {{total}} transcriberen…",
+      "post_processing": "Opschonen met LLM…",
+      "post_processingPart": "Deel {{part}} van {{total}} opschonen met LLM…",
+      "writing": "Document schrijven…",
+      "writingPart": "Document schrijven…"
+    },
+    "result": {
+      "open": "Openen",
+      "reveal": "Tonen in map"
+    },
+    "document": {
+      "title": "Transcriptie",
+      "sourceFile": "Bestand",
+      "duration": "Duur",
+      "parts": "Delen",
+      "engine": "Herkenning",
+      "llm": "Nabewerking met LLM",
+      "created": "Gemaakt",
+      "part": "Deel",
+      "rawTranscript": "Ruwe transcriptie",
+      "speaker": "Spreker",
+      "notes": "Verwerkingsnotities",
+      "notesTotal": "Verwerkingstijd",
+      "notesExtracting": "Audio-extractie",
+      "notesDiarizing": "Sprekerherkenning",
+      "notesTranscribing": "Herkenning",
+      "notesLlm": "LLM-verwerking",
+      "notesWarnings": "Waarschuwingen",
+      "notesNone": "geen",
+      "notesLanguage": "Taal van de tekst",
+      "llmLocal": "{{model}}, op deze computer",
+      "warnings": {
+        "noTimestampsModel": "sprekers niet aangegeven: dit spraakmodel geeft geen tijdstempels terug; gebruik een whisper-model of lokale herkenning",
+        "noTimestampsPart": "deel {{part}}: de spraakdienst gaf geen tijdstempels terug, dus sprekers konden niet worden aangegeven",
+        "llmEmpty": "deel {{part}}, fragment {{fragment}}: de LLM gaf een leeg antwoord, ruwe tekst behouden",
+        "llmError": "deel {{part}}, fragment {{fragment}}: LLM-fout, ruwe tekst behouden ({{error}})",
+        "numbersBack": "deel {{part}}, fragment {{fragment}}: getallen teruggezet in {{lines}} regels (de LLM schreef ze in woorden of liet ze weg)",
+        "linesLost": "deel {{part}}, fragment {{fragment}}: het LLM-antwoord behield de genummerde regels niet, ruwe tekst behouden",
+        "linesKept": "deel {{part}}, fragment {{fragment}}: {{kept}} van {{total}} regels behielden hun ruwe tekst ({{reasons}})",
+        "kept": {
+          "missing": "ontbreekt",
+          "duplicate": "dubbel",
+          "empty": "leeg",
+          "tooLong": "te lang",
+          "translated": "vertaald",
+          "tooShort": "te kort",
+          "cutOff": "afgekapt"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Voltooide wissen"
+    },
+    "events": {
+      "title": "Gebeurtenisscript",
+      "choose": "Kiezen…",
+      "none": "Niet ingesteld – gebeurtenissen worden nergens heen gestuurd",
+      "filterName": "Programma’s en scripts",
+      "test": "Testen",
+      "testOk": "Het script heeft een testgebeurtenis ontvangen",
+      "testFailed": "Mislukt: {{error}}",
+      "testMessage": "Tishe: testgebeurtenis",
+      "remaining": "nog ~{{minutes}} min",
+      "started": "Transcriptie gestart",
+      "finished": "Klaar",
+      "cancelled": "Geannuleerd",
+      "interval": {
+        "title": "Interval voor voortgangsmeldingen",
+        "description": "Hooguit één keer per zoveel seconden. Een nieuwe fase of een nieuw deel, de start en het einde worden direct verstuurd.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Wijzigen",
+    "choose": "Kiezen",
+    "open": "Openen",
+    "hide": "Verbergen",
+    "save": "Opslaan",
+    "saved": "Opgeslagen",
+    "copied": "Gekopieerd",
+    "undo": "Ongedaan maken",
+    "download": "Downloaden",
+    "downloadSize": "{{size}} downloaden",
+    "downloadingPercent": "Downloaden · {{percent}} %",
+    "cancelDownload": "Annuleren",
+    "deleteNamed": "{{name}} verwijderen",
+    "percent": "{{n}} %",
+    "useValue": "‘{{value}}’ gebruiken",
+    "fold": {
+      "more": "Meer",
+      "changed_one": "gewijzigd: {{count}}",
+      "changed_other": "gewijzigd: {{count}}",
+      "changedA11y_one": "{{count}} instelling gewijzigd",
+      "changedA11y_other": "{{count}} instellingen gewijzigd"
+    },
+    "number": {
+      "hint": "Van {{min}} tot {{max}}",
+      "hintDefault": "Standaard {{value}}; van {{min}} tot {{max}}",
+      "notNumber": "Voer een getal in",
+      "range": "Voer een getal in van {{min}} tot {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} u",
+      "hourMin": "{{h}} u {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "vandaag {{time}}",
+      "yesterday": "gisteren {{time}}",
+      "todayTitle": "Vandaag",
+      "yesterdayTitle": "Gisteren"
+    },
+    "player": {
+      "play": "Afspelen",
+      "pause": "Pauzeren",
+      "position": "Afspeelpositie"
+    },
+    "shortcut": {
+      "change": "Toets voor ‘{{name}}’ wijzigen",
+      "reset": "Toets terugzetten naar standaard"
+    },
+    "echo": {
+      "recognition": "Herkenning: {{model}}",
+      "language": "taal: {{language}}",
+      "sharedWithDictation": "gedeeld met dicteren",
+      "sharedWithFiles": "gedeeld met bestandstranscriptie",
+      "noModel": "Geen spraakherkenningsmodel"
+    },
+    "llm": {
+      "ready": "Klaar · {{model}} op deze computer",
+      "needed": "Heeft de AI nodig · {{model}}",
+      "downloading": "AI wordt gedownload · {{percent}} %",
+      "runtimeMissing": "De ingebouwde AI-engine ontbreekt",
+      "otherOptions": "Andere opties",
+      "noKey": "Heeft een {{provider}}-sleutel nodig",
+      "noUrl": "Heeft het serveradres nodig",
+      "noServerModel": "Heeft een modelnaam nodig",
+      "localServer": "Je eigen server op deze computer · {{model}}",
+      "textToServer": "Tekst gaat naar {{address}}",
+      "textToService": "Tekst gaat naar {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Model {{name}} verwijderen?",
+      "deleteModel": "Model verwijderen",
+      "deleteModelBody": "Er komt {{size}} vrij. Om het model opnieuw te gebruiken, moet je het weer downloaden.",
+      "deleteActiveTitle": "{{name}} verwijderen? Het is het huidige model",
+      "deleteActiveBody": "Dicteren en transcriptie werken niet meer tot je een ander model kiest. Er komt {{size}} vrij.",
+      "deleteLlmTitle": "AI-model {{name}} verwijderen?",
+      "deleteLlm": "AI-model verwijderen",
+      "deleteLlmBody": "Er komt {{size}} vrij. Redactie werkt niet tot je het opnieuw downloadt of een ander kiest.",
+      "deleteSpeakerModelBody": "Opsplitsen per spreker werkt niet tot je opnieuw een stemmodel downloadt."
+    },
+    "back": {
+      "transcription": "Terug naar Transcriptie",
+      "dictation": "Terug naar Dicteren",
+      "meetings": "Terug naar Vergaderingen",
+      "history": "Terug naar Geschiedenis",
+      "models": "Terug naar Herkenning",
+      "llm": "Terug naar AI-redactie",
+      "app": "Terug naar App",
+      "about": "Terug naar Over Tishe",
+      "debug": "Terug naar Probleemoplossing",
+      "next": "Terug naar Wat komt er"
+    },
+    "changed": "gewijzigd"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "geladen",
+      "loading": "laden…",
+      "error": "laden mislukt",
+      "unloaded": "niet in geheugen",
+      "none": "Geen model",
+      "a11y": "Model {{model}}, {{state}}. Model wijzigen",
+      "menu": "Gedownloade modellen",
+      "all": "Alle modellen…",
+      "locked": "Er loopt een transcriptie – wijzig na afloop"
+    },
+    "task": "Transcriptie: bestand {{current}} van {{total}} · {{percent}} %",
+    "downloading": "Downloaden: {{name}} · {{percent}} %",
+    "downloadingMany": "Downloaden: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transcriptie heeft ffmpeg nodig"
+    },
+    "drop": {
+      "title": "Sleep een opname hierheen",
+      "text": "Audio of video: mp3, m4a, wav, mp4, mkv en meer. Elk bestand wordt een apart document.",
+      "more": "Sleep meer opnames hierheen of",
+      "release": "Loslaten om toe te voegen",
+      "rejected": "{{names}} – geen audio of video",
+      "oneText": "‘{{name}}’ komt in de transcriptiewachtrij",
+      "manyText_one": "{{count}} opname komt in de transcriptiewachtrij",
+      "manyText_other": "{{count}} opnames komen in de transcriptiewachtrij",
+      "anyText": "Audio- en videobestanden komen in de transcriptiewachtrij",
+      "noneTitle": "Deze bestanden werken niet",
+      "noneText": "Alleen audio en video kunnen worden getranscribeerd: mp3, m4a, wav, mp4, mkv en meer.",
+      "otherNote_one": "Nog {{count}} bestand wordt overgeslagen: het is geen audio of video",
+      "otherNote_other": "Nog {{count}} bestanden worden overgeslagen: het zijn geen audio of video",
+      "alreadyOne": "‘{{name}}’ staat al in de wachtrij",
+      "alreadyMany": "Deze opnames staan al in de wachtrij"
+    },
+    "list": {
+      "label": "Opnames",
+      "waiting": "Wacht",
+      "cancelled": "Geannuleerd",
+      "remaining": "nog ongeveer {{time}}",
+      "remove": "Verwijderen",
+      "removeFile": "{{name}} verwijderen",
+      "removeFromList": "Uit de lijst verwijderen",
+      "more": "Meer: {{name}}",
+      "recipeSpeakers": "sprekers",
+      "recipeEditing": "redactie",
+      "recipeCloud": "in de cloud",
+      "parts_one": "{{count}} deel",
+      "parts_other": "{{count}} delen",
+      "notes_one": "{{count}} verwerkingsnotitie",
+      "notes_other": "{{count}} verwerkingsnotities",
+      "showAll": "Alles tonen ({{count}})",
+      "showFewer": "Minder tonen",
+      "removedOne": "Uit de lijst verwijderd",
+      "removedMany_one": "{{count}} rij uit de lijst verwijderd",
+      "removedMany_other": "{{count}} rijen uit de lijst verwijderd",
+      "chars_one": "{{n}} teken",
+      "chars_other": "{{n}} tekens",
+      "keptNote": "De laatste {{count}} resultaten worden bewaard. Documenten op schijf worden nooit verwijderd.",
+      "missing": "Document niet gevonden: het is verplaatst of verwijderd, of de schijf is losgekoppeld",
+      "openDocument": "Document {{name}} openen"
+    },
+    "recipe": {
+      "title": "Recept",
+      "locked": "Tijdens de transcriptie blijven de instellingen ongewijzigd. Nieuwe bestanden gebruiken dezelfde instellingen.",
+      "where": "Waar herkennen",
+      "local": "Op deze computer",
+      "cloud": "In de cloud",
+      "audioToService": "Audio gaat naar {{provider}}",
+      "cloudEcho": "Herkenning: {{model}} bij {{provider}}",
+      "speakers": "Sprekers",
+      "speakersDescription": "Het document wordt een gespreksverslag: ‘Spreker 1: …’, ‘Spreker 2: …’",
+      "speakersMissing": "Heeft een stemmodel nodig · {{size}}",
+      "speakersDownloading": "Stemmodel wordt gedownload · {{percent}} %",
+      "speakersReady": "Stemmodel klaar",
+      "countDescription": "Als je het weet, wordt de opsplitsing nauwkeuriger",
+      "editing": "Redactie door AI",
+      "editingDescription": "Verbetert herkenningsfouten en interpunctie. Duurt merkbaar langer: ongeveer 15–35 min per uur opname",
+      "result": "Resultaat",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "naast de opname"
+    },
+    "more": {
+      "recognition": "Herkenning",
+      "maxPartDescription": "Een lange opname wordt bij pauzes geknipt in delen die niet langer zijn dan dit",
+      "speakers": "Sprekers",
+      "editing": "Redactie",
+      "prompt": "Instructie voor bestanden",
+      "promptDescription": "Leeg – de ingebouwde instructie in de taal van de opname. Volgorde: dit veld, dan ⚙ van het model, dan de ingebouwde",
+      "document": "Document",
+      "locationDescription": "De naam komt van de opname; niets wordt overschreven, in plaats daarvan wordt (2) toegevoegd",
+      "timestampsDescription": "Opnametijd vóór elke alinea",
+      "removeFillersDescription": "Verwijdert ‘uh’, ‘um’, ‘hmm’ in Engelse en Russische opnames. Woorden blijven staan",
+      "globalFillers": "De brontranscriptie blijft letterlijk. Dicteren heeft een eigen instelling voor opvulwoorden",
+      "notesDescription": "Aan het einde: duur van elke fase en waarschuwingen",
+      "integrations": "Integraties",
+      "eventsDescription": "Een programma dat wordt geïnformeerd over start, voortgang en einde (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Voeg bestanden toe om te beginnen",
+      "noFfmpeg": "Heeft ffmpeg nodig",
+      "noModel": "Download eerst een spraakmodel",
+      "cloudIncomplete": "Heeft een {{provider}}-sleutel nodig",
+      "cloudIncompleteCustom": "Heeft het API-adres, de sleutel en het model nodig",
+      "noSpeakerModel": "Heeft een stemmodel nodig",
+      "running": "Bestand {{current}} van {{total}} · {{time}} verstreken",
+      "start_one": "{{count}} bestand transcriberen",
+      "start_other": "{{count}} bestanden transcriberen",
+      "done_one": "Klaar: {{count}} bestand",
+      "done_other": "Klaar: {{count}} bestanden",
+      "errors_one": "{{count}} bestand met een fout",
+      "errors_other": "{{count}} bestanden met fouten",
+      "summary_one": "{{count}} opname",
+      "summary_other": "{{count}} opnames",
+      "modelDownloading": "Spraakmodel wordt gedownload · {{percent}} %",
+      "llmDownloading": "AI voor redactie wordt gedownload · {{percent}} %",
+      "llmMissing": "Voor redactie is een AI nodig",
+      "llmNotSetUp": "De AI voor redactie is niet ingesteld",
+      "withoutEditing": "Zonder redactie",
+      "modelNotActive": "Het spraakmodel is niet ingeschakeld"
+    },
+    "stop": {
+      "title": "Transcriptie stoppen?",
+      "body": "Voltooide bestanden ({{done}}) zijn opgeslagen. Het huidige bestand ({{percent}} %) en de wachtende ({{waiting}}) moeten opnieuw worden gestart.",
+      "confirm": "Stoppen",
+      "keep": "Doorgaan"
+    },
+    "tray": {
+      "running": "Transcriptie: bestand {{current}} van {{total}} · {{pct}}%",
+      "ready_one": "Transcriptie klaar: {{count}} bestand",
+      "ready_other": "Transcriptie klaar: {{count}} bestanden"
+    },
+    "notify": {
+      "readyOne": "Transcriptie klaar",
+      "readyMany_one": "Transcriptie klaar: {{count}} bestand",
+      "readyMany_other": "Transcriptie klaar: {{count}} bestanden",
+      "failedOne": "Transcriptie mislukt",
+      "failedMany_one": "Transcriptie mislukt: {{count}} bestand",
+      "failedMany_other": "Transcriptie mislukt: {{count}} bestanden",
+      "partial": "{{ok}} van {{total}} klaar · {{errors}}",
+      "errors_one": "{{count}} mislukt",
+      "errors_other": "{{count}} mislukt",
+      "failedFile": "Mislukt: {{name}} · {{reason}}",
+      "open": "Openen"
+    },
+    "try": {
+      "before": "Open een willekeurige editor, zet de cursor erin en houd",
+      "after": "ingedrukt terwijl je praat. Laat los en de tekst verschijnt daar.",
+      "changeKey": "Toets wijzigen"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Dicteren is klaar ·",
+      "anyWindow": "in elk venster",
+      "keyBusy": "Dicteren start niet: de toets is bezet",
+      "keyBusyDetail": "Een ander programma gebruikt {{key}}. Kies een andere toets.",
+      "changeKey": "Toets wijzigen"
+    },
+    "keys": {
+      "title": "Toetsen",
+      "second": "Dicteren met redactie – tweede toets",
+      "secondDescription": "De gewone toets plakt de tekst zoals hij is. Deze plakt hem na redactie door de AI",
+      "instruction": "Instructie",
+      "manage": "Beheren…",
+      "secondBusy": "Een ander programma gebruikt deze toets: kies een andere"
+    },
+    "more": {
+      "paste": "Tekst plakken",
+      "indicator": "Opname-indicator",
+      "microphone": "Microfoon en opname",
+      "prompts": "Instructies voor dicteren met redactie",
+      "promptsDescription_one": "{{count}} instructie",
+      "promptsDescription_other": "{{count}} instructies",
+      "promptsRow": "Instructies maken en bewerken",
+      "text": "Dicteertekst",
+      "fillersDocuments": "Alleen voor dicteren. In documenten doet ‘Aarzelingen verwijderen’ op de pagina Transcriptie dit"
+    },
+    "fix": {
+      "title": "Als iets niet werkt",
+      "paste": "Tekst wordt niet geplakt",
+      "pasteHelp": "Als je dicteert in een programma dat als administrator draait, laat Windows plakken daarin niet toe. Verhoog anders de vertragingen hieronder.",
+      "cutOff": "Het einde van een zin wordt afgekapt",
+      "hold": "Een korte druk telt als vasthouden"
+    },
+    "prompts": {
+      "title": "Instructies voor dicteren met redactie",
+      "intro": "De instructie vertelt de AI wat er met de gedicteerde tekst moet gebeuren. ${output} is de gedicteerde tekst.",
+      "current": "Huidige instructie",
+      "create": "Maken",
+      "deleted": "Instructie ‘{{name}}’ verwijderd"
+    }
+  },
+  "meetings": {
+    "what": "Tishe gaat vergaderingen en gesprekken op deze computer opnemen: jouw microfoon en de andere kant, en daarna een transcriptie per spreker.",
+    "how": "Opnames blijven op de computer, net als al het andere in Tishe.",
+    "nowTitle": "Nu al",
+    "nowText": "Is een vergadering al opgenomen – met Zoom, Teams of een dictafoon –, voeg het bestand dan toe bij ‘Transcriptie’.",
+    "goTranscription": "Naar Transcriptie"
+  },
+  "history": {
+    "storage": {
+      "title": "Bewaren",
+      "limit_one": "Het laatste dictaat wordt bewaard",
+      "limit_other": "De laatste {{count}} dictaten worden bewaard",
+      "never": "Dictaten worden niet automatisch verwijderd",
+      "days_3": "Dictaten worden na 3 dagen verwijderd",
+      "weeks_2": "Dictaten worden na 2 weken verwijderd",
+      "months_3": "Dictaten worden na 3 maanden verwijderd"
+    },
+    "empty": {
+      "title": "Hier verschijnen je dictaten",
+      "textBefore": "Houd",
+      "textAfter": "ingedrukt in een willekeurig venster en praat.",
+      "textNoKey": "Stel een dicteertoets in bij ‘Dicteren’."
+    },
+    "copy": "Tekst kopiëren",
+    "more": "Meer acties",
+    "keep": "Bewaren",
+    "keepDescription": "Wordt niet automatisch verwijderd",
+    "retry": "Opnieuw herkennen",
+    "delete": "Verwijderen",
+    "deleted": "Dictaat verwijderd",
+    "failed": "Herkennen mislukt",
+    "savedTag": "bewaard",
+    "editingSkipped": "zonder redactie",
+    "showMore": "Volledig tonen",
+    "showLess": "Inklappen",
+    "version": "Tekstversie",
+    "versionEdited": "Na redactie",
+    "versionRaw": "Origineel"
+  },
+  "models": {
+    "purpose": "Modellen die spraak omzetten in tekst, voor dicteren en bestandstranscriptie. Redactie van de tekst door AI vind je bij",
+    "active": {
+      "title": "Actief model",
+      "change": "Model wijzigen",
+      "none": "Geen model gekozen",
+      "noneHint": "Download het aanbevolen model voor je taal – of een willekeurig model uit de catalogus hieronder"
+    },
+    "lockedByTranscription": "Er loopt een transcriptie – wijzig na afloop",
+    "language": {
+      "title": "Taal en vertaling",
+      "scope": "Geldt voor dicteren en bestandstranscriptie"
+    },
+    "cleanup": {
+      "title": "Tekst opschonen",
+      "scope": "Werkt binnen het herkenningsmodel, voor dicteren en bestanden"
+    },
+    "memory": {
+      "title": "Geheugen"
+    },
+    "onlyLanguage": "alleen {{language}}",
+    "languageCount_one": "{{count}} taal",
+    "languageCount_other": "{{count}} talen",
+    "catalog": {
+      "title": "Catalogus",
+      "yours": "Jouw modellen",
+      "yoursCount": "Jouw modellen ({{count}})",
+      "recommended": "Aanbevolen",
+      "all": "Alle modellen",
+      "languageFilter": "Taal",
+      "streaming": "Streaming",
+      "translation": "Vertaling",
+      "showAll": "Alle modellen tonen ({{count}})",
+      "showFewer": "Minder tonen"
+    },
+    "row": {
+      "use": "Gebruiken",
+      "inUse": "in gebruik",
+      "more": "Meer: {{name}}",
+      "delete": "Model verwijderen",
+      "translate": "vertaalt naar het Engels",
+      "streaming": "streaming",
+      "accuracy": "nauwkeurigheid {{n}}/10",
+      "speed": "snelheid {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Waar en met welke AI tekst wordt bewerkt",
+    "status": {
+      "usedFor": "Gebruikt voor",
+      "files": "redactie van bestanden ({{state}})",
+      "dictation": "dicteren met redactie ({{state}})",
+      "on": "aan",
+      "off": "uit"
+    },
+    "where": {
+      "title": "Waar de AI draait",
+      "local": "Op deze computer",
+      "localText": "Tekst blijft op de computer",
+      "localUnavailable": "Niet beschikbaar in deze versie",
+      "server": "Eigen server",
+      "serverText": "Ollama, LM Studio of je eigen adres · tekst gaat naar je server",
+      "cloud": "Clouddienst",
+      "cloudText": "OpenAI en andere · tekst gaat naar de dienst"
+    },
+    "variant": {
+      "local": "Ingebouwde AI",
+      "server": "Server",
+      "cloud": "Dienst"
+    },
+    "local": {
+      "speed": "snelheid {{n}} van 5",
+      "quality": "kwaliteit {{n}} van 5",
+      "footprint": "schijf {{disk}} · geheugen ~{{ram}} GB",
+      "showAll": "Alle modellen tonen ({{count}})",
+      "showFewer": "Minder tonen"
+    },
+    "server": {
+      "urlDescription": "OpenAI-compatibel adres dat eindigt op /v1",
+      "keyDescription": "Alleen als je server erom vraagt"
+    }
+  },
+  "app": {
+    "purpose": "Hoe het programma zich in het geheel gedraagt",
+    "launch": "Opstarten en systeemvak",
+    "look": "Uiterlijk",
+    "updates": "Updates",
+    "checkNow": "Controleren op een nieuwe versie",
+    "checkNowButton": "Nu controleren",
+    "experimental": "Experimentele functies",
+    "quit": {
+      "title": "Tishe afsluiten?",
+      "body": "‘{{name}}’ wordt getranscribeerd ({{pct}}%). Dat stopt; voltooide documenten zijn opgeslagen.",
+      "bodyIdle": "De transcriptie stopt; voltooide documenten zijn opgeslagen.",
+      "confirm": "Afsluiten",
+      "stay": "Blijven"
+    },
+    "notifications": "Meldingen",
+    "notifyLabel": "Melden als een transcriptie klaar is",
+    "notifyDescription": "Een Windows-melding, alleen als het venster verborgen is of geen focus heeft. Een klik opent het resultaat.",
+    "trayHint": "Windows verbergt nieuwe pictogrammen. Om het in zicht te houden, sleep je het van de verborgen pictogrammen naar de taakbalk."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Wat is er nieuw",
+    "project": {
+      "title": "Over het project",
+      "basedOn": "Gebaseerd op Handy",
+      "basedOnText": "Open source, MIT-licentie",
+      "tishe": "Tishe",
+      "tisheText": "Open source, MIT-licentie. Releases en foutmeldingen staan op GitHub",
+      "licenses": "Licenties",
+      "licensesText": "Bibliotheken en modellen van derden die Tishe gebruikt",
+      "licensesOpen": "Openen",
+      "licensesError": "Het licentiebestand kon niet worden geopend",
+      "author": "Ontwikkelaar",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub-profiel"
+    },
+    "supportHandy": "De makers van Handy steunen",
+    "folders": "Mappen",
+    "versionRelease": "Tishe {{version}}, release {{release}}"
+  },
+  "debug": {
+    "onBefore": "De foutopsporingsmodus staat aan en blijft aan tussen starts.",
+    "onAfter": "verbergt hem.",
+    "log": "Logboek",
+    "previews": "Voorbeelden",
+    "keyboard": "Toetsenbord",
+    "transcription": "Transcriptie"
+  },
+  "release": {
+    "available": "Versie {{release}} is uit",
+    "openPage": "Releasepagina op GitHub openen",
+    "upToDate": "Dit is de nieuwste versie",
+    "checkFailed": "Kon niet op updates controleren"
+  },
+  "next": {
+    "lead": "Tishe is het eerste deel van Private Memory: een privégeheugen van je gesprekken dat volledig op je computer staat.",
+    "now": "Nu al typt Tishe wat je dicteert in elke app en zet lange opnamen om in tekst met sprekerlabels. Zonder internet en zonder account.",
+    "planTitle": "In de volgende versies",
+    "plan": {
+      "meetings": {
+        "title": "Vergaderingen opnemen",
+        "text": "je microfoon en de andere deelnemers als twee sporen, de tekst verschijnt tijdens het gesprek."
+      },
+      "summaries": {
+        "title": "Samenvattingen van vergaderingen",
+        "text": "besluiten en taken direct na het stoppen, in de taal van de vergadering, door het ingebouwde taalmodel."
+      },
+      "search": {
+        "title": "Zoeken in vergaderingen",
+        "text": "eerst op woorden, daarna op betekenis."
+      },
+      "agents": {
+        "title": "Notities en assistenten",
+        "text": "een vergadermap voor Obsidian en toegang voor AI-assistenten tot je vergaderingen via MCP, nog steeds zonder cloud."
+      }
+    },
+    "order": "Geen data: de volgorde kan veranderen op basis van feedback.",
+    "freeTitle": "Gratis en open source",
+    "freeText": "De kern van Tishe is gratis en blijft gratis. Volg de releases en laat op GitHub weten wat je mist.",
+    "follow": "Volgen op GitHub",
+    "feedback": "Een probleem of idee melden"
+  },
+  "fileErrors": {
+    "notFound": "Bestand niet gevonden: het is verplaatst of verwijderd.",
+    "noAudio": "Het bestand heeft geen geluid, of het kon niet worden gelezen.",
+    "unreadable": "Het geluid kon niet uit het bestand worden gelezen. Het bestand is mogelijk beschadigd.",
+    "noModel": "Er is geen spraakmodel gekozen: kies er een in «$t(sidebar.models)».",
+    "noSpeakerModel": "Het stemmenmodel is niet gedownload: download het in «$t(transcription.more.speakers)».",
+    "noLlmModel": "Het taalmodel is niet gedownload: download het in «$t(sidebar.llm)».",
+    "noLlmRuntime": "De ingebouwde taalmodel-engine ontbreekt. Installeer Tishe opnieuw.",
+    "cloudKey": "Cloudherkenning heeft een API-sleutel nodig.",
+    "cloudConfig": "Cloudherkenning is niet ingesteld: vul het adres en het model in.",
+    "busy": "Er wordt al een ander bestand uitgeschreven.",
+    "noSpace": "De schijf is vol.",
+    "fileInUse": "Het document is geopend in een ander programma (bijvoorbeeld Word). Sluit het en probeer het opnieuw.",
+    "accessDenied": "Geen toegang tot de map voor het document. Kies een andere map: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Download een spraakherkenningsmodel",
+      "text": "Het zet spraak om in tekst – voor opnames en voor dicteren. Het draait op deze computer, zonder internet. Je hoeft het maar één keer te downloaden.",
+      "language": "Taal van de opnames",
+      "allModels": "Alle modellen",
+      "onDisk": "Het model {{name}} staat al op de computer – je hoeft het alleen nog aan te zetten.",
+      "whileDownloading": "Tijdens het downloaden kun je al opnames toevoegen: de transcriptie begint zodra het model klaar is."
+    },
+    "llm": {
+      "title": "Voor redactie is een AI nodig",
+      "what": "De AI verbetert herkenningsfouten en interpunctie. We raden de ingebouwde aan: die draait op deze computer en de tekst gaat nergens heen.",
+      "recommended": "{{size}} op schijf · heeft ongeveer {{ram}} GB geheugen nodig · eenmalige download",
+      "otherWays": "Eigen server of cloud",
+      "downloadOn": "{{size}} downloaden en aanzetten",
+      "runtimeTitle": "De ingebouwde AI is niet beschikbaar",
+      "runtime": "Deze build heeft geen engine voor de ingebouwde AI. Je kunt bij ‘$t(sidebar.llm)’ een eigen server (Ollama, LM Studio) of een clouddienst koppelen.",
+      "openPage": "‘$t(sidebar.llm)’ openen",
+      "notSetUp": "{{reason}} – zonder dat werkt de AI niet. Zet redactie aan en rond de instelling af bij ‘$t(sidebar.llm)’.",
+      "onAndSetUp": "Aanzetten en instellen",
+      "onDisk": "Staat al op deze computer — niets te downloaden.",
+      "turnOn": "Redactie inschakelen"
+    },
+    "quick": {
+      "title": "Snel aan de slag",
+      "progress": "{{done}} van {{total}}",
+      "hide": "Verbergen",
+      "hideHint": "‘Snel aan de slag’ verbergen – alle instellingen blijven in de onderdelen links",
+      "model": "Download een spraakherkenningsmodel",
+      "modelDone": "Spraakmodel klaar · {{name}}",
+      "dictation": "Probeer dicteren",
+      "dictationDone": "Dicteren werkt · dictaten worden bewaard in ‘Geschiedenis’",
+      "file": "Transcribeer een opname",
+      "fileDone": "Eerste opname getranscribeerd",
+      "fileHint": "Sleep een audio- of videobestand naar dit venster of kies bestanden – naast de opname verschijnt een Word-document.",
+      "llm": "Redactie door AI",
+      "optional": "optioneel",
+      "llmHint": "Verbetert herkenningsfouten en interpunctie in documenten. {{model}}: {{size}}, draait op deze computer.",
+      "llmReady": "AI klaar · {{model}}",
+      "doneTitle": "Alles klaar",
+      "doneText": "Tishe is ingesteld. Dictaten staan in ‘Geschiedenis’, documenten in de lijst hieronder, instellingen in de onderdelen links.",
+      "close": "Sluiten"
+    }
   }
 }

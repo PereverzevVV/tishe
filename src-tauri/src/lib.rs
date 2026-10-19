@@ -9,12 +9,18 @@ mod chinese_script;
 pub mod cli;
 mod clipboard;
 mod commands;
+mod data_migration;
 pub mod engine_supervisor;
+mod file_transcription;
 mod helpers;
+mod hf_download;
 mod input;
 mod llm_client;
+mod local_llm;
 mod managers;
 mod memory;
+mod model_settings;
+mod notifications;
 mod overlay;
 mod paste_tx;
 pub mod portable;
@@ -96,7 +102,7 @@ fn build_console_filter() -> env_filter::Filter {
     builder.build()
 }
 
-fn show_main_window(app: &AppHandle) {
+pub(crate) fn show_main_window(app: &AppHandle) {
     if let Some(main_window) = app.get_webview_window("main") {
         if let Err(e) = main_window.unminimize() {
             log::error!("Failed to unminimize webview window: {}", e);
@@ -215,6 +221,10 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     app_handle.manage(model_manager.clone());
     app_handle.manage(transcription_manager.clone());
     app_handle.manage(history_manager.clone());
+    app_handle.manage(local_llm::LocalLlmManager::new(app_handle));
+    app_handle.manage(file_transcription::diarize::models::DiarizationModels::new(
+        app_handle,
+    ));
     app_handle.manage(tray::TrayState::new());
 
     // Note: Shortcuts are NOT initialized here.
@@ -316,7 +326,14 @@ fn initialize_core_logic(app_handle: &AppHandle) {
                 cancel_current_operation(app);
             }
             "quit" => {
-                app.exit(0);
+                // Tishe: quitting stops a running transcription, so the window
+                // asks first (UX_INTERACTION_ARCHITECTURE, Destructive Actions).
+                if file_transcription::queue_running() {
+                    show_main_window(app);
+                    let _ = app.emit("confirm-quit", ());
+                } else {
+                    app.exit(0);
+                }
             }
             id if id.starts_with("model_select:") => {
                 let model_id = id.strip_prefix("model_select:").unwrap().to_string();
@@ -703,6 +720,8 @@ pub fn run(cli_args: CliArgs) {
             shortcut::change_app_language_setting,
             shortcut::change_update_checks_setting,
             shortcut::change_show_whats_new_on_update_setting,
+            shortcut::change_transcription_notifications_setting,
+            shortcut::get_shortcut_conflicts,
             shortcut::change_whats_new_last_seen_version_setting,
             shortcut::change_keyboard_implementation_setting,
             shortcut::get_keyboard_implementation,
@@ -769,6 +788,32 @@ pub fn run(cli_args: CliArgs) {
             commands::history::update_history_limit,
             commands::history::update_recording_retention_period,
             helpers::clamshell::is_laptop,
+            file_transcription::transcribe_media_file,
+            file_transcription::cancel_media_file_transcription,
+            file_transcription::is_ffmpeg_available,
+            file_transcription::set_file_queue_hold,
+            file_transcription::set_file_queue_tooltip,
+            file_transcription::paths_exist,
+            notifications::notify_file_queue,
+            overlay::overlay_help,
+            file_transcription::unique_output_path,
+            file_transcription::events::send_test_file_event,
+            local_llm::local_llm_list_models,
+            local_llm::local_llm_download_model,
+            local_llm::local_llm_cancel_download,
+            local_llm::local_llm_delete_model,
+            local_llm::local_llm_status,
+            local_llm::local_llm_stop,
+            local_llm::set_local_llm_unload_timeout,
+            model_settings::get_llm_model_settings,
+            model_settings::set_llm_model_settings,
+            model_settings::get_asr_model_settings,
+            model_settings::set_asr_model_settings,
+            file_transcription::open_transcript_file,
+            file_transcription::diarize::models::diarization_list_models,
+            file_transcription::diarize::models::diarization_download_model,
+            file_transcription::diarize::models::diarization_cancel_download,
+            file_transcription::diarize::models::diarization_delete_model,
         ])
         .events(collect_events![
             managers::history::HistoryUpdatePayload,
@@ -798,7 +843,9 @@ pub fn run(cli_args: CliArgs) {
         .plugin(
             LogBuilder::new()
                 .level(log::LevelFilter::Trace) // Set to most verbose level globally
-                .max_file_size(500_000)
+                // Tishe: 5 MB instead of 500 KB, so a long file
+                // transcription's log survives until it can be read.
+                .max_file_size(5_000_000)
                 .rotation_strategy(RotationStrategy::KeepOne)
                 .clear_targets()
                 .targets([
@@ -892,6 +939,9 @@ pub fn run(cli_args: CliArgs) {
         ))
         .manage(cli_args.clone())
         .setup(move |app| {
+            // Tishe: before anything opens the settings store or the window.
+            data_migration::run(app.handle());
+
             #[cfg(target_os = "windows")]
             log::info!(
                 "Vulkan layer policy: VK_LOADER_LAYERS_DISABLE={:?}, HANDY_KEEP_VULKAN_IMPLICIT_LAYERS={}",
@@ -946,9 +996,13 @@ pub fn run(cli_args: CliArgs) {
             // for portable mode (redirects WebView2 cache to portable Data dir)
             let mut win_builder =
                 tauri::WebviewWindowBuilder::new(app, "main", tauri::WebviewUrl::App("/".into()))
-                    .title("Handy")
+                    .title("Tishe")
                     .inner_size(680.0, 570.0)
                     .min_inner_size(680.0, 570.0)
+                    // Tishe: Ctrl+Plus / Ctrl+Minus / Ctrl+0 and Ctrl+wheel zoom
+                    // the window (WCAG 1.4.4); a narrow work area turns the
+                    // sidebar into a rail of icons.
+                    .zoom_hotkeys_enabled(true)
                     .resizable(true)
                     .maximizable(true)
                     .visible(false);
@@ -1067,6 +1121,11 @@ pub fn run(cli_args: CliArgs) {
             tauri::WindowEvent::CloseRequested { api, .. } => {
                 api.prevent_close();
                 let _res = window.hide();
+                // Tishe: once in the program's life, say that a running
+                // transcription goes on in the background (CF6).
+                if file_transcription::queue_running() {
+                    notifications::notify_background_once(window.app_handle());
+                }
 
                 #[cfg(target_os = "macos")]
                 {
@@ -1123,7 +1182,13 @@ pub fn run(cli_args: CliArgs) {
         // No transcription teardown on exit: transcribe.cpp runs only in the
         // worker process, which exits by itself as soon as this process's end
         // of its stdin closes, even if it is hung. Waiting on an unload here
-        // could block quitting behind a hung model load.
+        // could block quitting behind a hung model load. Tishe: the built-in
+        // LLM server is a separate process too, stopped here.
+        tauri::RunEvent::Exit => {
+            if let Some(llm) = app.try_state::<Arc<local_llm::LocalLlmManager>>() {
+                llm.stop();
+            }
+        }
         _ => {}
     });
 }

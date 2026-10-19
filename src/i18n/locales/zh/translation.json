@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "设置...",
-    "checkUpdates": "检查更新...",
-    "copyLastTranscript": "复制最新转录",
+    "settings": "打开 Tishe…",
+    "checkUpdates": "检查更新…",
+    "copyLastTranscript": "复制上一次语音输入",
     "unloadModel": "卸载模型",
     "model": "模型",
     "quit": "退出",
     "cancel": "取消",
-    "secureInputWarning": "⚠ 快捷键被 Secure Input 阻止"
+    "secureInputWarning": "⚠ 快捷键被 Secure Input 阻止",
+    "modelLocked": "转录进行中，无法更换模型",
+    "tooltipDictation": "语音输入：{{shortcut}}",
+    "backgroundTitle": "Tishe 仍在后台运行",
+    "backgroundBody": "转录仍在继续。完成后你会收到通知。"
   },
   "sidebar": {
     "general": "通用",
-    "models": "模型",
+    "models": "语音识别",
     "advanced": "高级",
     "postProcessing": "后处理",
     "history": "历史记录",
     "debug": "调试",
-    "about": "关于"
+    "about": "关于",
+    "label": "栏目",
+    "transcription": "转录",
+    "dictation": "语音输入",
+    "meetings": "会议",
+    "llm": "AI 编辑",
+    "app": "应用",
+    "soon": "即将推出",
+    "state": {
+      "running": "进行中",
+      "new": "已完成，未查看",
+      "downloading": "下载中"
+    },
+    "next": "接下来"
   },
   "onboarding": {
     "subtitle": "请选择一个转录模型以开始使用",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "需要权限",
-      "description": "Handy 需要一些权限才能正常工作。",
+      "description": "Tishe 需要一些权限才能正常工作。",
       "microphone": {
         "title": "麦克风访问",
         "description": "需要听取您的语音进行转录。"
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "检查权限失败。请重试。",
         "requestFailed": "请求权限失败。请重试。"
-      }
+      },
+      "skip": "不使用麦克风，继续",
+      "skipHint": "只有语音输入需要麦克风——文件转录不用麦克风也能使用。之后可以在 Windows 设置中允许访问。"
+    },
+    "step": "第 {{n}} 步，共 {{total}} 步",
+    "language": {
+      "title": "你的录音是什么语言？",
+      "description": "我们将为这种语言下载语音识别模型。模型在这台电脑上运行。",
+      "ru": {
+        "title": "俄语",
+        "limit": "仅限俄语：无法识别英语语音"
+      },
+      "en": {
+        "title": "英语",
+        "limit": "仅限英语"
+      },
+      "eu": {
+        "title": "其他欧洲语言",
+        "limit": "25 种欧洲语言，可自动识别语言"
+      },
+      "other": {
+        "title": "中文或其他语言",
+        "limit": "30 种语言：中文、日语、韩语、阿拉伯语、土耳其语、印地语等",
+        "limitWhisper": "支持多种语言，在处理器上较慢"
+      },
+      "onDisk": "已在这台电脑上",
+      "shared": "该模型将同时用于语音输入和文件转录。之后可在“$t(sidebar.models)”中更换。",
+      "otherModel": "选择其他模型",
+      "hideCatalog": "隐藏模型列表",
+      "download": "下载（{{size}}）",
+      "use": "使用 {{name}}",
+      "downloadNamed": "下载 {{name}} · {{size}}",
+      "once": "只需下载一次，之后无需联网即可使用"
+    },
+    "download": {
+      "title": "正在下载 {{name}}",
+      "description": "下载期间你可以做别的事：关闭窗口不会停止下载。",
+      "starting": "正在连接…",
+      "amount": "{{done}} / {{total}}",
+      "speed": "{{n}} MB/秒",
+      "preparing": "正在准备模型…",
+      "cancel": "取消",
+      "failed": "模型未下载",
+      "failedTitle": "无法下载模型",
+      "failedHint": "无法连接服务器。请检查网络后点击“重试”。",
+      "retry": "重试",
+      "continue": "不必等待，直接打开 Tishe"
+    },
+    "welcome": {
+      "title": "欢迎使用 Tishe",
+      "lead": "Tishe 直接在你的电脑上把语音转成文字——无需联网，无需账号。",
+      "files": "把录音（会议、讲座、访谈）转录成 Word 文档",
+      "dictation": "在任何应用中语音输入：按住按键说话，文字就会出现",
+      "private": "录音和文字不会离开电脑",
+      "stepsLabel": "设置步骤",
+      "steps": {
+        "permissions": "权限",
+        "language": "录音语言",
+        "download": "下载模型"
+      },
+      "credit": "Viktor Pereverzev · 基于 Handy"
+    },
+    "tips": {
+      "title": "下载期间——了解使用方法",
+      "dictationBefore": "语音输入：在任何应用中按住",
+      "dictationAfter": "并说话。松开后，文字会出现在光标处。",
+      "files": "转录：把音频或视频文件拖到 Tishe 窗口中，即可得到 Word 文档。",
+      "editing": "AI 编辑可修正错误和标点——在转录配方中开启。"
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "筛选支持翻译为英语的模型"
       },
       "noModelsMatch": "没有符合此筛选条件的模型。",
+      "params": {
+        "button": "参数",
+        "open": "模型参数",
+        "title": "参数：{{name}}",
+        "savedAtOnce": "更改会立即保存。各栏显示当前使用的值；修改过的值带有重置按钮。",
+        "resetAll": "恢复默认值",
+        "done": "完成",
+        "resetField": "恢复默认",
+        "defaultRange": "默认 {{value}}；允许范围 {{min}}–{{max}}。",
+        "prompt": {
+          "builtIn": "内置指令。修改文本即可使用你自己的指令；清空则恢复为内置指令。",
+          "own": "你的指令。重置按钮可恢复内置指令。"
+        },
+        "asr": {
+          "segment": {
+            "label": "文件分段长度（秒）",
+            "description": "文件按停顿处切成不超过此长度的片段进行识别。最短片段也随之缩短（25 秒时为 12 秒）。实测：12–25 秒比 60–120 秒更能保留标点。"
+          },
+          "device": {
+            "label": "设备",
+            "description": "“仅处理器”会腾出显卡芯片，但通常更慢。也适用于语音输入；从下一次识别开始生效。",
+            "general": "跟随加速设置",
+            "cpu": "仅处理器",
+            "notHere": "此模型的设备跟随通用加速设置。"
+          }
+        },
+        "llm": {
+          "promptNote": "用于俄语和英语文本的指令。其他语言使用带语言名称的内置英文指令。在“转录”中填写的自定义指令会替代所有语言的这些指令。",
+          "promptRu": "俄语文本指令",
+          "promptEn": "英语文本指令",
+          "temperature": {
+            "label": "温度",
+            "description": "越低越谨慎：0.8 时模型会编造词语，0.2 是实测适合编辑的值。"
+          },
+          "chunk": {
+            "label": "分块大小（字符）",
+            "description": "模型一次编辑的文本量。小模型在短分块上更忠实于原文。"
+          },
+          "context": {
+            "label": "上下文（token）",
+            "description": "容纳指令、分块和回答的空间。越大越占内存。"
+          },
+          "answer": {
+            "label": "回答上限（token）",
+            "description": "让开始重复的模型停下来。3000 字符的分块约为 1100 个 token。"
+          },
+          "threads": {
+            "label": "用于回答的处理器线程",
+            "description": "读取文本时始终使用全部硬件线程。",
+            "auto": "自动 – 每个核心一个"
+          },
+          "restartNote": "温度、上下文、回答上限和线程数在模型下次启动时生效：正在运行的模型会在下一个任务前重启。",
+          "invalid": "未保存：{{detail}}",
+          "contextTooSmall": "未保存：上下文必须能容纳分块和回答——按当前分块大小和回答上限，至少需要 {{min}} 个 token。"
+        }
+      },
       "yourModels": "已下载的模型",
       "availableModels": "可供下载",
-      "searchPlaceholder": "按名称搜索模型…",
+      "searchPlaceholder": "按名称搜索",
       "rescan": {
         "label": "重新扫描",
-        "tooltip": "重新扫描在 Handy 之外添加到模型文件夹或 Hugging Face 缓存中的模型"
+        "tooltip": "查找手动放入文件夹的模型"
       }
     },
     "general": {
       "title": "通用",
       "shortcut": {
-        "title": "Handy 快捷键",
+        "title": "Tishe 快捷键",
         "description": "配置启动语音转文字录制的键盘快捷键",
         "loading": "加载快捷键中...",
         "none": "未配置快捷键",
         "notFound": "未找到快捷键",
-        "pressKeys": "请按键...",
+        "pressKeys": "按下组合键…（Esc 取消）",
         "bindings": {
           "transcribe": {
-            "name": "转录快捷键",
-            "description": "用于录制和转录语音的键盘快捷键。"
+            "name": "语音输入",
+            "description": "按住并说话——文本将粘贴到当前窗口"
           },
           "cancel": {
-            "name": "取消快捷键",
-            "description": "用于取消当前录制的键盘快捷键。"
+            "name": "取消",
+            "description": "中止正在进行的录音"
           },
           "transcribe_with_post_process": {
-            "name": "后处理快捷键",
-            "description": "可选：一个专用快捷键，始终对您的转录应用 AI 后处理。"
+            "name": "带编辑的语音输入按键",
+            "description": "文本经 AI 编辑后再粘贴"
           }
         },
         "errors": {
           "restore": "无法恢复原始快捷键",
           "set": "无法设置快捷键: {{error}}",
-          "reset": "无法将快捷键重置为原始值"
+          "reset": "无法将快捷键重置为原始值",
+          "taken": "该按键已被其他程序占用。请换一个。",
+          "duplicate": "该按键在此处已用于其他操作。"
         }
       },
       "language": {
-        "title": "语言",
-        "description": "选择语音识别的语言。自动将自动确定语言，选择特定语言可以提高该语言的准确度。",
+        "title": "识别语言",
+        "description": "“自动”会自行判断语言；手动选择更可靠",
         "searchPlaceholder": "搜索语言...",
         "noResults": "未找到语言",
         "auto": "自动"
       },
       "shortcutActivation": {
-        "title": "快捷键行为",
-        "description": "选择转录快捷键开始和停止录音的方式。",
+        "title": "按键行为",
+        "description": "按键如何开始和结束录音",
         "options": {
           "holdOrToggle": "自动",
           "pushToTalk": "按住",
@@ -233,29 +375,40 @@
       "title": "声音",
       "microphone": {
         "title": "麦克风",
-        "description": "选择您偏好的麦克风设备",
+        "description": "从哪里录制声音",
         "placeholder": "选择麦克风...",
         "loading": "加载中..."
       },
       "channel": {
         "title": "输入通道",
-        "description": "选择要录制的输入通道。如果您的音频接口有多个输入，请使用此选项。",
+        "description": "适用于有多个输入的声卡",
         "average": "所有通道的平均值",
         "channel": "通道 {{n}}"
       },
       "audioFeedback": {
-        "label": "音频反馈",
-        "description": "录制开始和停止时播放声音"
+        "label": "声音反馈",
+        "description": "录音开始和结束时播放提示音"
       },
       "outputDevice": {
         "title": "输出设备",
-        "description": "选择用于反馈声音的音频输出设备",
+        "description": "在哪里播放提示音",
         "placeholder": "选择输出设备...",
         "loading": "加载中..."
       },
       "volume": {
         "title": "音量",
-        "description": "调整音频反馈的音量"
+        "description": "调整音频反馈的音量",
+        "levels": {
+          "quiet": "小",
+          "medium": "中",
+          "loud": "大"
+        }
+      },
+      "theme": {
+        "marimba": "马林巴",
+        "pop": "流行",
+        "custom": "自定义",
+        "preview": "播放开始和结束提示音"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "实验性"
       },
       "experimentalToggle": {
-        "label": "实验性功能",
-        "description": "启用仍在开发中的实验性功能。"
+        "label": "显示实验性功能",
+        "description": "开发中的功能；可能不稳定"
       },
       "lazyStreamClose": {
         "label": "在转录之间保持麦克风开启",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "隐藏启动",
-        "description": "启动到系统托盘而不打开窗口。"
+        "label": "启动时隐藏窗口",
+        "description": "程序启动后驻留在托盘"
       },
       "autostart": {
-        "label": "开机启动",
-        "description": "登录计算机时自动启动 Handy。"
+        "label": "随 Windows 启动",
+        "description": "登录后即可使用语音输入"
       },
       "showTrayIcon": {
-        "label": "显示托盘图标",
-        "description": "在系统托盘中显示 Handy 图标。"
+        "label": "托盘图标",
+        "description": "没有图标时，关闭的窗口只能通过重新启动程序找回"
       },
       "overlay": {
         "style": {
-          "title": "悬浮窗",
-          "description": "选择录音悬浮窗的样式：「无」会隐藏悬浮窗，「精简」显示小巧的胶囊状指示，「实时」在您说话时实时显示转录内容（仅限支持流式的模型——请在模型选择器中查找「流式」标签）。在 Linux 上建议选择「无」。",
+          "title": "指示器样式",
+          "description": "语音输入时在光标旁显示什么",
           "options": {
             "none": "无",
             "minimal": "精简",
             "live": "实时"
-          }
+          },
+          "noneConsequence": "没有指示器时不会显示失败：未能粘贴的文本在历史记录中"
         },
         "position": {
-          "title": "悬浮窗位置",
-          "description": "在录制和转录期间显示可视反馈悬浮窗。在 Linux 上建议选择「无」。",
+          "title": "指示器位置",
+          "description": "屏幕顶部或底部",
           "options": {
             "bottom": "底部",
             "top": "顶部"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "粘贴方式",
-        "description": "选择文字插入方式。直接：通过系统输入模拟打字。无：跳过粘贴，仅更新历史记录/剪贴板。",
+        "description": "文本如何进入当前窗口",
         "options": {
           "clipboard": "剪贴板 ({{modifier}}+V)",
           "clipboardCtrlShiftV": "剪贴板 (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "剪贴板处理",
-        "description": "不修改剪贴板将在转录后保留当前剪贴板内容。复制到剪贴板将在粘贴后将转录结果留在剪贴板中。",
+        "title": "剪贴板",
+        "description": "保留剪贴板原有内容，或在其中留下语音输入的文本",
         "options": {
           "dontModify": "不修改剪贴板",
           "copyToClipboard": "复制到剪贴板"
         }
       },
       "autoSubmit": {
-        "title": "自动提交",
-        "description": "在文本插入后自动发送所选的按键组合。macOS 上使用 Cmd+Enter，Windows/Linux 上使用 Super+Enter。",
+        "title": "粘贴后发送",
+        "description": "粘贴后立即按下所选按键，例如聊天中的 Enter",
         "options": {
           "off": "关闭",
           "enter": "回车",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "翻译为英语",
-        "description": "在转录过程中自动将其他语言的语音翻译为英语。"
+        "description": "任何语言的语音都会变成英文文本"
       },
       "modelUnload": {
-        "title": "卸载模型",
-        "description": "当模型在指定时间内未使用时自动释放 GPU/CPU 内存",
+        "title": "从内存卸载模型的时间…",
+        "description": "模型一段时间不用时释放内存",
         "options": {
           "never": "从不",
           "immediately": "立即",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "自定义词汇",
-        "description": "帮助受支持的模型识别名称和专业术语。目前，模糊纠错仅适用于使用 A–Z 字母和数字的词语。",
+        "title": "自定义词语",
+        "description": "给 Whisper 模型的提示；其他模型只会做纠正，而且只针对由 A–Z 组成的词",
         "placeholder": "添加词汇",
         "add": "添加",
         "remove": "删除 {{word}}",
-        "duplicate": "\"{{word}}\" 已存在"
+        "duplicate": "\"{{word}}\" 已存在",
+        "removed": "已删除“{{word}}”"
       },
       "voiceActivityDetection": {
-        "title": "语音活动检测",
-        "description": "过滤录音中的静音。支持流式的模型会使用更长的 VAD 尾段；停用 VAD 则会录制原始音频。"
+        "title": "丢弃静音",
+        "description": "只有语音会送去识别"
       },
       "vadBackend": {
         "title": "语音活动检测后端",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "移除语气词",
-        "description": "从转录中移除常见的语气词。关闭此选项即可保留这些词。"
+        "description": "粘贴文本中的“uh”“hmm”"
       },
       "chineseScript": {
         "title": "简繁转换",
-        "description": "将普通话和粤语转录输出为简体或繁体中文。其他语言不受影响。",
+        "description": "简体字或繁体字",
         "options": {
           "asTranscribed": "保持原样",
           "simplified": "简体",
@@ -434,20 +589,21 @@
           "title": "基础 URL",
           "description": "所选提供商的 API 基础 URL。仅自定义提供商可编辑。",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "地址由所选服务商决定",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API 密钥",
-          "description": "所选提供商的 API 密钥。",
+          "description": "仅保存在这台电脑上",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "模型",
-          "descriptionCustom": "提供自定义端点期望的模型标识符。",
-          "descriptionDefault": "选择所选提供商提供的模型。",
+          "descriptionCustom": "你服务器上的模型名称",
+          "descriptionDefault": "右侧按钮可刷新列表",
           "placeholderWithOptions": "搜索或选择模型",
           "placeholderNoOptions": "输入模型名称",
-          "refreshModels": "刷新模型"
+          "refreshModels": "刷新模型列表"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "已选提示词",
           "description": "选择用于优化转录的模板或创建新模板。在提示词文本中使用 ${output} 来引用捕获的转录。"
         },
-        "noPrompts": "没有可用的提示词",
-        "selectPrompt": "选择提示词",
+        "noPrompts": "没有指令",
+        "selectPrompt": "选择一条指令",
         "createNew": "创建新提示词",
-        "promptLabel": "提示词名称",
+        "promptLabel": "名称",
         "promptLabelPlaceholder": "输入提示词名称",
-        "promptInstructions": "提示词指令",
+        "promptInstructions": "指令内容",
         "promptInstructionsPlaceholder": "编写转录后要执行的指令。示例：改进以下文本的语法和清晰度: ${output}",
         "promptTip": "提示：使用 <code>${output}</code> 将转录文本插入到您的提示词中。",
         "updatePrompt": "更新提示词",
-        "deletePrompt": "删除提示词",
-        "createPrompt": "创建提示词",
+        "deletePrompt": "删除",
+        "createPrompt": "创建",
         "cancel": "取消",
-        "selectToEdit": "选择上方的提示词以查看和编辑其详细信息。",
-        "createFirst": "点击上方的「创建新提示词」来创建您的第一个后处理提示词。"
+        "selectToEdit": "选择一条指令进行编辑。",
+        "createFirst": "点击“创建”添加第一条指令。"
+      },
+      "local": {
+        "intro": "模型直接在这台电脑上运行：无需联网，无需密钥，你的文本绝不会离开本机。如有需要可下载一个模型。需要时它会自动启动，空闲时会从内存中卸载。它在处理器上运行，因此比云服务慢。所有模型都能在 16 GB 内存的笔记本上运行。",
+        "runtimeMissing": "未找到内置 AI 引擎。请重新安装 Tishe。",
+        "models": {
+          "qwen35_4b": {
+            "title": "均衡",
+            "model": "Qwen3.5 4B",
+            "description": "普通版 Qwen 4B。标点处理细致，但在真实对话中修正的识别错误较少（我们的测试，2026-10-06）。加速版更准确也更快。"
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Google 的模型，忠实于原文。编辑效果与 Google 加速版 Gemma 相同，但慢约 1.25 倍。"
+          },
+          "gigachat31": {
+            "title": "面向俄语",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "从一开始就用俄语训练。每个 token 只激活 10B 参数中的 1.8B，因此比其体积看起来更快。需要更多内存。"
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "俄语版 Qwen",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507)，换用俄语词表并在俄语文本上继续训练。测试中修正的错误比 Gemma E2B 少，速度只有它的一半（每小时录音约 27 分钟）。"
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIA 的小模型，官方只支持英语。测试中无论俄语还是英语，它几乎都不改动文本，而且比 Gemma 慢（每小时录音约 35 分钟）。"
+          },
+          "qwen35_9b": {
+            "title": "最强",
+            "model": "Qwen3.5 9B",
+            "description": "最聪明的本地模型：最擅长理解上下文和处理疑难修改。速度最慢。"
+          },
+          "qwen35_4b_mtp": {
+            "title": "均衡",
+            "model": "Qwen3.5 4B MTP",
+            "description": "内置加速的新版 Qwen 4B。比普通 Qwen 4B 更准确、快约 1.2 倍，但在我们的测试中修正的错误只有 Gemma 的一半。"
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma 轻量",
+            "model": "Gemma 4 E2B · Google 版",
+            "description": "Google 官方版的小型 Gemma，另加加速（+98 MB）。比 Gemma E4B 快一倍（每小时录音约 14 分钟），修正量约为其 2/3。"
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google 版",
+            "description": "我们测试中质量最好（2026-10-06）。Google 官方版另加加速（+99 MB）：编辑效果与普通 Gemma E4B 相同，快约 1.25 倍。每小时录音约 26 分钟。"
+          }
+        },
+        "speedupBadge": "加速",
+        "speedupHint": "一个小型辅助模型提前猜测几个词，由主模型核对。在处理器上约快 1.2–1.3 倍。",
+        "untested": "未经测试",
+        "delete": "删除模型",
+        "state": {
+          "stopped": "未载入内存",
+          "loading": "正在载入内存…",
+          "ready": "已载入内存"
+        },
+        "unloadNow": "立即卸载",
+        "unload": {
+          "title": "从内存卸载",
+          "description": "模型空闲多久后从内存卸载，卸载可释放约 2–3 GB 内存。",
+          "immediately": "处理完立即",
+          "min2": "2 分钟后",
+          "min5": "5 分钟后",
+          "min15": "15 分钟后",
+          "never": "从不"
+        },
+        "recommended": "推荐"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "打开录音文件夹",
       "loading": "加载历史记录中...",
       "empty": "还没有转录记录。开始录制以建立您的历史记录！",
-      "copyToClipboard": "复制转录到剪贴板",
+      "copyToClipboard": "复制文本",
       "copyError": "无法将转录复制到剪贴板。",
       "save": "保存转录",
       "unsave": "从已保存中移除",
       "delete": "删除条目",
       "deleteError": "删除条目失败，请重试。",
-      "retranscribe": "重新转录",
+      "retranscribe": "重新识别",
       "retranscribeError": "重新转录失败。请重试。",
-      "transcribing": "转录中...",
+      "transcribing": "正在识别…",
       "transcriptionFailed": "转录失败。您可以使用重试图标重新转录。"
     },
     "debug": {
       "title": "调试",
       "logDirectory": {
-        "title": "日志目录",
-        "description": "日志文件的存储位置"
+        "title": "日志文件夹",
+        "description": "报告错误时请附上日志"
       },
       "logLevel": {
         "title": "日志级别",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "检查更新",
-        "description": "自动检查 Handy 的新版本",
-        "lockedDescription": "已被系统配置禁用 (HANDY_DISABLE_UPDATER)"
+        "description": "每次启动时询问 GitHub 一次是否有 Tishe 新版本。不会发送任何录音或文本",
+        "lockedDescription": "此版本已关闭更新检查"
       },
       "soundTheme": {
         "label": "声音主题",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "词汇修正阈值",
-        "description": "自定义词汇修正的灵敏度"
+        "description": "一个词与你的词有多相似时才会被替换"
       },
       "historyLimit": {
-        "title": "历史记录上限",
-        "description": "保留的最大历史条目数",
+        "title": "保留多少条语音输入记录",
+        "description": "已保留的记录不计入",
         "entries": "条"
       },
       "recordingRetention": {
-        "title": "自动删除录音",
-        "description": "自动删除旧录音以节省空间",
+        "title": "删除旧的语音输入记录",
+        "description": "删除文本时一并删除音频",
         "never": "从不",
         "preserveLimit": "保留最新 {{count}} 条",
         "days3": "3 天后",
@@ -538,24 +765,24 @@
         "placeholder": "选择保留期限..."
       },
       "alwaysOnMicrophone": {
-        "label": "麦克风常开",
-        "description": "保持麦克风活跃以获得更快的响应"
+        "label": "保持麦克风开启",
+        "description": "录音启动更快，但麦克风会一直被占用"
       },
       "clamshellMicrophone": {
-        "title": "合盖麦克风",
-        "description": "笔记本电脑盖子关闭时使用的麦克风"
+        "title": "合盖时的麦克风",
+        "description": "笔记本合上时使用哪个麦克风"
       },
       "postProcessingToggle": {
         "label": "后处理",
         "description": "启用转录后的 AI 文本优化"
       },
       "muteWhileRecording": {
-        "label": "录制时静音",
-        "description": "录制期间静音系统音频"
+        "label": "录音时将电脑静音",
+        "description": "音乐和视频的声音不会录进去"
       },
       "appendTrailingSpace": {
-        "label": "追加尾部空格",
-        "description": "在粘贴的转录后添加空格"
+        "label": "在末尾添加空格",
+        "description": "下一句不会与上一句粘在一起"
       },
       "keyboardImplementation": {
         "title": "键盘实现",
@@ -568,28 +795,28 @@
         "settings": "设置:"
       },
       "pasteDelay": {
-        "title": "粘贴延迟（前）",
-        "description": "复制文本后、发送粘贴按键前的延迟（毫秒）。如果没有粘贴任何内容，请增加此值。"
+        "title": "粘贴前延迟",
+        "description": "如果没有粘贴任何内容，请调大"
       },
       "pasteDelayAfter": {
-        "title": "粘贴延迟（后）",
-        "description": "发送粘贴按键后、恢复先前剪贴板前的延迟（毫秒）。如果粘贴的是旧的剪贴板内容而非转录文本，请增加此值。"
+        "title": "粘贴后延迟",
+        "description": "如果粘贴出剪贴板里的旧文本，请调大"
       },
       "holdThreshold": {
         "title": "长按判定时长",
-        "description": "仅适用于“自动”模式：快捷键需要按住多长时间（毫秒）才算作按住而不是轻按。如果短暂按住后录音仍持续，请调低；如果有意的轻按被当作按住，请调高。"
+        "description": "短按切换，长按视为按住"
       },
       "reliablePaste": {
         "title": "可靠粘贴（Beta）",
-        "description": "在目标应用程序真正读取转录文本之后再恢复剪贴板，而不是等待固定延迟。用于解决系统负载较高时粘贴旧剪贴板内容的问题。需要使用剪贴板类的粘贴方式；仅支持 macOS 和 Windows。"
+        "description": "等待程序读取文本，而不是固定时间"
       },
       "recordingBuffer": {
-        "title": "额外录音缓冲",
-        "description": "放开按键后继续录音的额外时间（毫秒），以捕捉尾音。0 = 无额外缓冲。"
+        "title": "松开后继续录音",
+        "description": "松开按键后继续录音的时长"
       },
       "keyboardDiagnostic": {
         "title": "键盘诊断",
-        "description": "检查键盘事件是否能到达 Handy。仅记录事件数量，绝不记录您按了哪些键。",
+        "description": "检查键盘事件是否到达 Tishe。只记录事件数量——从不记录你按了哪些键。",
         "run": "运行 10 秒诊断",
         "running": "正在监听… 请按几次您的快捷键（例如 Option+Space）",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "鼠标",
         "verdictBlocked": "Secure Input 正在阻止按键事件——在问题解决前，包含普通按键的快捷键无法工作。",
         "verdictSuspicious": "收到了修饰键事件，但没有按键事件——尽管 Secure Input 报告为已禁用，仍有程序在抑制按键。请在 GitHub 上反馈此问题。",
-        "verdictOk": "按键事件正常到达 Handy。",
+        "verdictOk": "按键事件正常到达 Tishe。",
         "verdictNoEvents": "未捕获到任何事件——测试期间您按过键吗？",
         "failed": "诊断失败：{{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "关于",
       "version": {
         "title": "版本",
-        "description": "Handy 的当前版本"
+        "description": "Tishe 当前版本"
       },
       "appDataDirectory": {
-        "title": "应用数据目录",
-        "description": "Handy 存储数据的位置"
+        "title": "数据文件夹",
+        "description": "设置、模型和历史记录"
       },
       "sourceCode": {
         "title": "源代码",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "支持开发",
-        "description": "帮助我们继续开发 Handy",
+        "description": "Tishe 基于他们的程序开发",
         "button": "捐赠"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "OpenAI Whisper 自动语音识别模型的高性能推理",
-          "details": "Handy 使用 ggml 进行快速的本地语音转文字处理。感谢 Georgi Gerganov 和贡献者们的出色工作。"
+          "details": "在电脑上快速进行语音识别。感谢 Georgi Gerganov 和项目贡献者。"
         }
       },
       "whatsNewUpdates": {
-        "label": "显示新功能",
-        "description": "Handy 更新后显示发行说明"
+        "label": "更新后显示“新功能”",
+        "description": "新版本首次启动时显示简短的更新列表"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "打开",
     "copy": "复制",
     "clear": "清除",
-    "noOptionsFound": "未找到选项"
+    "noOptionsFound": "未找到选项",
+    "cancel": "取消",
+    "choose": "选择…",
+    "reset": "恢复默认",
+    "search": "搜索"
   },
   "accessibility": {
-    "permissionsDescription": "Handy 需要辅助功能权限才能输入转录的文字。",
+    "permissionsDescription": "要粘贴文本，程序需要“辅助功能”权限。",
     "openSettings": "打开系统设置"
   },
   "errors": {
@@ -700,15 +931,15 @@
     "modelLoadFailedUnknown": "未知模型",
     "pasteFailedTitle": "粘贴文本失败",
     "pasteFailed": "无法将文本粘贴到当前活动的应用程序中。",
-    "transcriptionFailedTitle": "转录失败"
+    "transcriptionFailedTitle": "无法识别"
   },
   "appLanguage": {
-    "title": "应用语言",
-    "description": "更改 Handy 界面的语言"
+    "title": "界面语言",
+    "description": "程序界面文字的语言"
   },
   "theme": {
-    "title": "应用主题",
-    "description": "选择 Handy 跟随系统主题，还是保持浅色或深色",
+    "title": "主题",
+    "description": "选择 Tishe 跟随系统主题，还是始终保持浅色或深色",
     "options": {
       "system": "跟随系统",
       "light": "浅色",
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "正在转录...",
     "processing": "处理中...",
+    "waiting": "模型正在处理文件——语音输入会延迟",
+    "message": {
+      "paste_failed": "粘贴失败。文本已保存在历史记录中",
+      "editing_skipped": "未经编辑即已粘贴：AI 尚未就绪",
+      "no_microphone": "未找到麦克风",
+      "microphone_denied": "无法访问麦克风",
+      "help": "怎么办"
+    },
     "loadingModel": "正在加载模型..."
   },
   "whatsNew": {
-    "title": "Handy v{{version}} 新功能"
+    "title": "Tishe 新功能"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 可能正在阻止 1 个快捷键",
@@ -733,5 +972,696 @@
     "learnMore": "如何解决",
     "recorderBlocked": "当前无法录制快捷键——macOS 的 Secure Input 正在阻止按键事件。请先解决 Secure Input 警告。",
     "dismiss": "关闭"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "未找到 ffmpeg。读取音频和视频文件需要它，它已包含在 Tishe 安装程序中：请重新安装 Tishe。也可以用以下命令安装：winget install Gyan.FFmpeg，然后重启 Tishe。",
+    "input": {
+      "choose": "添加文件…",
+      "filterName": "音频和视频"
+    },
+    "maxPart": {
+      "title": "每段最长时长",
+      "unit": "分钟"
+    },
+    "cloud": {
+      "provider": "服务商",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "自定义（兼容 OpenAI）"
+      },
+      "baseUrl": "API 地址",
+      "baseUrlDescription": "以 /v1 结尾的基础地址。",
+      "apiKey": "API 密钥",
+      "apiKeyDescription": "仅保存在这台电脑上。",
+      "model": "模型",
+      "modelDescription": "gpt-4o-transcribe 模型每次请求最多接受约 23 分钟；分段会自动缩短。",
+      "language": "语言",
+      "languageDescription": "语言代码，例如 zh 或 en。留空则自动检测。",
+      "languagePlaceholder": "自动"
+    },
+    "diarization": {
+      "count": "录音中的人数",
+      "auto": "自动检测",
+      "model": "说话人模型",
+      "modelDescription": "只需下载一次；用于区分声音。两个模型都小巧快速。",
+      "recommended": "推荐",
+      "cloudUntimed": "模型 {{model}} 不返回时间戳，因此无法标注说话人。请选择 whisper-1、Groq 上的 whisper 模型或本地识别。",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "用数千种声音训练；能在真实录音中可靠地区分声音。默认首选。"
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "备选模型：如果第一个模型在你的录音里混淆了声音，可以试试这个。"
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "同时附上原始转录",
+      "includeRawDescription": "在文档末尾附上未经编辑的识别结果。",
+      "promptPlaceholder": "按录音语言使用的内置指令（俄语或英语）"
+    },
+    "output": {
+      "format": "格式",
+      "docx": "Word（.docx）",
+      "markdown": "Markdown（.md）",
+      "timestamps": "时间戳",
+      "location": "保存到",
+      "choose": "选择文件夹…",
+      "nextToSource": "源文件旁边",
+      "notes": "处理说明",
+      "removeFillers": "去除迟疑声",
+      "saveDebug": "保存中间文件",
+      "saveDebugDescription": "在文档旁创建“<name>.debug”文件夹，保存每一步之后的文本：识别、清理、发给语言模型的每个请求及其回答、最终结果。用于排查错误和模型对比。"
+    },
+    "actions": {
+      "start": "转录",
+      "cancel": "取消"
+    },
+    "progress": {
+      "starting": "正在启动…",
+      "elapsed": "已用时 {{time}}",
+      "extracting": "正在提取音频…",
+      "extractingPart": "正在提取音频…",
+      "diarizing": "正在识别说话人…",
+      "diarizingPart": "正在识别说话人…",
+      "splitting": "正在分段…",
+      "splittingPart": "正在分段…",
+      "transcribing": "正在转录…",
+      "transcribingPart": "正在转录第 {{part}} 段，共 {{total}} 段…",
+      "post_processing": "正在用 LLM 整理…",
+      "post_processingPart": "正在用 LLM 整理第 {{part}} 段，共 {{total}} 段…",
+      "writing": "正在写入文档…",
+      "writingPart": "正在写入文档…"
+    },
+    "result": {
+      "open": "打开",
+      "reveal": "在文件夹中显示"
+    },
+    "document": {
+      "title": "转录稿",
+      "sourceFile": "文件",
+      "duration": "时长",
+      "parts": "段数",
+      "engine": "识别",
+      "llm": "LLM 后处理",
+      "created": "创建时间",
+      "part": "段",
+      "rawTranscript": "原始转录",
+      "speaker": "说话人",
+      "notes": "处理说明",
+      "notesTotal": "处理时间",
+      "notesExtracting": "音频提取",
+      "notesDiarizing": "说话人识别",
+      "notesTranscribing": "识别",
+      "notesLlm": "LLM 处理",
+      "notesWarnings": "警告",
+      "notesNone": "无",
+      "notesLanguage": "文本语言",
+      "llmLocal": "{{model}}，在这台电脑上",
+      "warnings": {
+        "noTimestampsModel": "未标注说话人：此语音模型不返回时间戳；请使用 whisper 模型或本地识别",
+        "noTimestampsPart": "第 {{part}} 段：语音服务未返回时间戳，因此无法标注说话人",
+        "llmEmpty": "第 {{part}} 段，片段 {{fragment}}：LLM 返回了空回答，保留原始文本",
+        "llmError": "第 {{part}} 段，片段 {{fragment}}：LLM 出错，保留原始文本（{{error}}）",
+        "numbersBack": "第 {{part}} 段，片段 {{fragment}}：已在 {{lines}} 行中恢复数字（LLM 将其写成了文字或删掉了）",
+        "linesLost": "第 {{part}} 段，片段 {{fragment}}：LLM 的回答没有保留编号行，保留原始文本",
+        "linesKept": "第 {{part}} 段，片段 {{fragment}}：{{total}} 行中有 {{kept}} 行保留了原始文本（{{reasons}}）",
+        "kept": {
+          "missing": "缺失",
+          "duplicate": "重复",
+          "empty": "为空",
+          "tooLong": "过长",
+          "translated": "被翻译",
+          "tooShort": "过短",
+          "cutOff": "被截断"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "清除已完成"
+    },
+    "events": {
+      "title": "事件脚本",
+      "choose": "选择…",
+      "none": "未设置——事件不会发送到任何地方",
+      "filterName": "程序和脚本",
+      "test": "测试",
+      "testOk": "脚本已收到测试事件",
+      "testFailed": "失败：{{error}}",
+      "testMessage": "Tishe：测试事件",
+      "remaining": "剩余约 {{minutes}} 分钟",
+      "started": "转录已开始",
+      "finished": "完成",
+      "cancelled": "已取消",
+      "interval": {
+        "title": "进度通知间隔",
+        "description": "每隔这么多秒最多发送一次。新阶段或新分段、开始和结束会立即发送。",
+        "unit": "秒"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "更改",
+    "choose": "选择",
+    "open": "打开",
+    "hide": "隐藏",
+    "save": "保存",
+    "saved": "已保存",
+    "copied": "已复制",
+    "undo": "撤销",
+    "download": "下载",
+    "downloadSize": "下载（{{size}}）",
+    "downloadingPercent": "下载中 · {{percent}}%",
+    "cancelDownload": "取消",
+    "deleteNamed": "删除 {{name}}",
+    "percent": "{{n}}%",
+    "useValue": "使用“{{value}}”",
+    "fold": {
+      "more": "更多",
+      "changed_other": "已更改：{{count}}",
+      "changedA11y_other": "已更改 {{count}} 项设置"
+    },
+    "number": {
+      "hint": "{{min}} 到 {{max}}",
+      "hintDefault": "默认 {{value}}；{{min}} 到 {{max}}",
+      "notNumber": "请输入数字",
+      "range": "请输入 {{min}} 到 {{max}} 之间的数字"
+    },
+    "units": {
+      "ms": "毫秒",
+      "sec": "{{n}} 秒",
+      "min": "{{n}} 分钟",
+      "hour": "{{n}} 小时",
+      "hourMin": "{{h}} 小时 {{m}} 分钟",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "今天 {{time}}",
+      "yesterday": "昨天 {{time}}",
+      "todayTitle": "今天",
+      "yesterdayTitle": "昨天"
+    },
+    "player": {
+      "play": "播放",
+      "pause": "暂停",
+      "position": "播放位置"
+    },
+    "shortcut": {
+      "change": "更改“{{name}}”的按键",
+      "reset": "将按键恢复默认"
+    },
+    "echo": {
+      "recognition": "识别：{{model}}",
+      "language": "语言：{{language}}",
+      "sharedWithDictation": "与语音输入共用",
+      "sharedWithFiles": "与文件转录共用",
+      "noModel": "没有语音识别模型"
+    },
+    "llm": {
+      "ready": "就绪 · {{model}} 在这台电脑上",
+      "needed": "需要 AI · {{model}}",
+      "downloading": "正在下载 AI · {{percent}}%",
+      "runtimeMissing": "缺少内置 AI 引擎",
+      "otherOptions": "其他选项",
+      "noKey": "需要 {{provider}} 密钥",
+      "noUrl": "需要服务器地址",
+      "noServerModel": "需要模型名称",
+      "localServer": "这台电脑上的你的服务器 · {{model}}",
+      "textToServer": "文本发送到 {{address}}",
+      "textToService": "文本发送到 {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "删除模型 {{name}}？",
+      "deleteModel": "删除模型",
+      "deleteModelBody": "将释放 {{size}}。要再次使用该模型，需要重新下载。",
+      "deleteActiveTitle": "删除 {{name}}？这是当前模型",
+      "deleteActiveBody": "在你选择其他模型之前，语音输入和转录将无法使用。将释放 {{size}}。",
+      "deleteLlmTitle": "删除 AI 模型 {{name}}？",
+      "deleteLlm": "删除 AI 模型",
+      "deleteLlmBody": "将释放 {{size}}。在重新下载或选择其他模型之前，编辑功能将无法使用。",
+      "deleteSpeakerModelBody": "在重新下载声音模型之前，按说话人拆分将无法使用。"
+    },
+    "back": {
+      "transcription": "返回“转录”",
+      "dictation": "返回“语音输入”",
+      "meetings": "返回“会议”",
+      "history": "返回“历史记录”",
+      "models": "返回“语音识别”",
+      "llm": "返回“AI 编辑”",
+      "app": "返回“应用”",
+      "about": "返回“关于”",
+      "debug": "返回“调试”",
+      "next": "返回“接下来”"
+    },
+    "changed": "已更改"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "已载入",
+      "loading": "载入中…",
+      "error": "载入失败",
+      "unloaded": "不在内存中",
+      "none": "无模型",
+      "a11y": "模型 {{model}}，{{state}}。更换模型",
+      "menu": "已下载的模型",
+      "all": "全部模型…",
+      "locked": "转录进行中——结束后再更换"
+    },
+    "task": "转录：第 {{current}} 个文件，共 {{total}} 个 · {{percent}}%",
+    "downloading": "下载中：{{name}} · {{percent}}%",
+    "downloadingMany": "下载中：{{count}} 个 · {{percent}}%"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "转录需要 ffmpeg"
+    },
+    "drop": {
+      "title": "把录音拖到这里",
+      "text": "音频或视频：mp3、m4a、wav、mp4、mkv 等。每个文件生成一份独立文档。",
+      "more": "拖入更多录音，或",
+      "release": "松开即可添加",
+      "rejected": "{{names}}——不是音频或视频",
+      "oneText": "“{{name}}”将加入转录队列",
+      "manyText_other": "{{count}} 个录音将加入转录队列",
+      "anyText": "音频和视频文件将加入转录队列",
+      "noneTitle": "这些文件无法使用",
+      "noneText": "只能转录音频和视频：mp3、m4a、wav、mp4、mkv 等。",
+      "otherNote_other": "另有 {{count}} 个文件将被跳过：不是音频或视频",
+      "alreadyOne": "“{{name}}”已在队列中",
+      "alreadyMany": "这些录音已在队列中"
+    },
+    "list": {
+      "label": "录音",
+      "waiting": "等待中",
+      "cancelled": "已取消",
+      "remaining": "剩余约 {{time}}",
+      "remove": "移除",
+      "removeFile": "移除 {{name}}",
+      "removeFromList": "从列表中移除",
+      "more": "更多：{{name}}",
+      "recipeSpeakers": "说话人",
+      "recipeEditing": "编辑",
+      "recipeCloud": "云端",
+      "parts_other": "{{count}} 段",
+      "notes_other": "{{count}} 条处理说明",
+      "showAll": "全部显示（{{count}}）",
+      "showFewer": "收起",
+      "removedOne": "已从列表中移除",
+      "removedMany_other": "已从列表中移除 {{count}} 行",
+      "chars_other": "{{n}} 个字符",
+      "keptNote": "保留最近 {{count}} 个结果。磁盘上的文档永远不会被删除。",
+      "missing": "找不到文档：已被移动或删除，或其所在驱动器已断开",
+      "openDocument": "打开文档 {{name}}"
+    },
+    "recipe": {
+      "title": "配方",
+      "locked": "转录进行期间设置保持不变。新文件将使用相同设置。",
+      "where": "在哪里识别",
+      "local": "在这台电脑上",
+      "cloud": "在云端",
+      "audioToService": "音频发送到 {{provider}}",
+      "cloudEcho": "识别：{{provider}} 上的 {{model}}",
+      "speakers": "说话人",
+      "speakersDescription": "文档将变成对话记录：“说话人 1：…”“说话人 2：…”",
+      "speakersMissing": "需要声音模型 · {{size}}",
+      "speakersDownloading": "正在下载声音模型 · {{percent}}%",
+      "speakersReady": "声音模型已就绪",
+      "countDescription": "如果知道人数，拆分会更准确",
+      "editing": "AI 编辑",
+      "editingDescription": "修正识别错误和标点。耗时明显更长：每小时录音约 15–35 分钟",
+      "result": "结果",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "录音旁边"
+    },
+    "more": {
+      "recognition": "识别",
+      "maxPartDescription": "长录音会在停顿处切成不超过此时长的分段",
+      "speakers": "说话人",
+      "editing": "编辑",
+      "prompt": "文件指令",
+      "promptDescription": "留空——使用与录音语言对应的内置指令。优先级：此栏，然后是模型的 ⚙，最后是内置指令",
+      "document": "文档",
+      "locationDescription": "文件名取自录音；不会覆盖任何文件，而是加上 (2)",
+      "timestampsDescription": "每段前标注录音时间",
+      "removeFillersDescription": "去除英语和俄语录音中的“uh”“um”“hmm”。词语保留",
+      "globalFillers": "源转录保持逐字原样。语音输入有单独的语气词设置",
+      "notesDescription": "末尾附上：各阶段用时和警告",
+      "integrations": "集成",
+      "eventsDescription": "接收开始、进度和结束通知的程序（.exe、.ps1、.bat、.cmd）"
+    },
+    "panel": {
+      "addFiles": "添加文件即可开始",
+      "noFfmpeg": "需要 ffmpeg",
+      "noModel": "请先下载语音识别模型",
+      "cloudIncomplete": "需要 {{provider}} 密钥",
+      "cloudIncompleteCustom": "需要 API 地址、密钥和模型",
+      "noSpeakerModel": "需要声音模型",
+      "running": "第 {{current}} 个文件，共 {{total}} 个 · 已用时 {{time}}",
+      "start_other": "转录 {{count}} 个文件",
+      "done_other": "完成：{{count}} 个文件",
+      "errors_other": "{{count}} 个文件出错",
+      "summary_other": "{{count}} 个录音",
+      "modelDownloading": "正在下载语音识别模型 · {{percent}}%",
+      "llmDownloading": "正在下载用于编辑的 AI · {{percent}}%",
+      "llmMissing": "编辑需要 AI",
+      "llmNotSetUp": "用于编辑的 AI 尚未设置",
+      "withoutEditing": "不编辑",
+      "modelNotActive": "语音识别模型尚未启用"
+    },
+    "stop": {
+      "title": "停止转录？",
+      "body": "已完成的文件（{{done}}）已保存。当前文件（{{percent}}%）和等待中的文件（{{waiting}}）需要重新开始。",
+      "confirm": "停止",
+      "keep": "继续"
+    },
+    "tray": {
+      "running": "转录：第 {{current}} 个文件，共 {{total}} 个 · {{pct}}%",
+      "ready_other": "转录完成：{{count}} 个文件"
+    },
+    "notify": {
+      "readyOne": "转录完成",
+      "readyMany_other": "转录完成：{{count}} 个文件",
+      "failedOne": "转录失败",
+      "failedMany_other": "转录失败：{{count}} 个文件",
+      "partial": "已完成 {{ok}}/{{total}} · {{errors}}",
+      "errors_other": "{{count}} 个失败",
+      "failedFile": "失败：{{name}} · {{reason}}",
+      "open": "打开"
+    },
+    "try": {
+      "before": "打开任意编辑器，把光标放进去，说话时按住",
+      "after": "。松开后，文字就会出现在那里。",
+      "changeKey": "更换按键"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "语音输入已就绪 ·",
+      "anyWindow": "在任意窗口中",
+      "keyBusy": "语音输入无法启动：按键被占用",
+      "keyBusyDetail": "{{key}} 被其他程序占用。请换一个按键。",
+      "changeKey": "更换按键"
+    },
+    "keys": {
+      "title": "按键",
+      "second": "带编辑的语音输入——第二个按键",
+      "secondDescription": "普通按键按原样粘贴文本。这个按键会在 AI 编辑后再粘贴",
+      "instruction": "指令",
+      "manage": "管理…",
+      "secondBusy": "该按键被其他程序占用：请换一个"
+    },
+    "more": {
+      "paste": "粘贴文本",
+      "indicator": "录音指示器",
+      "microphone": "麦克风和录音",
+      "prompts": "带编辑的语音输入指令",
+      "promptsDescription_other": "{{count}} 条指令",
+      "promptsRow": "创建和编辑指令",
+      "text": "语音输入文本",
+      "fillersDocuments": "仅用于语音输入。文档中由“转录”页面的“去除迟疑声”完成"
+    },
+    "fix": {
+      "title": "如果有问题",
+      "paste": "文本没有粘贴",
+      "pasteHelp": "如果你在以管理员身份运行的程序中语音输入，Windows 不允许向其粘贴。否则请增大下方的延迟。",
+      "cutOff": "句尾被截断",
+      "hold": "短按被当成按住"
+    },
+    "prompts": {
+      "title": "带编辑的语音输入指令",
+      "intro": "指令告诉 AI 如何处理语音输入的文本。${output} 就是语音输入的文本。",
+      "current": "当前指令",
+      "create": "创建",
+      "deleted": "已删除指令“{{name}}”"
+    }
+  },
+  "meetings": {
+    "what": "Tishe 将在这台电脑上录制会议和通话：你的麦克风和对方的声音，然后生成按说话人拆分的转录稿。",
+    "how": "录音和 Tishe 中的其他一切一样，都留在电脑上。",
+    "nowTitle": "现在就能做",
+    "nowText": "如果会议已经录好——用 Zoom、Teams 或录音笔——请在“转录”中添加文件。",
+    "goTranscription": "前往“转录”"
+  },
+  "history": {
+    "storage": {
+      "title": "保存",
+      "limit_other": "保留最近 {{count}} 次语音输入",
+      "never": "语音输入记录不会自动删除",
+      "days_3": "语音输入记录 3 天后删除",
+      "weeks_2": "语音输入记录 2 周后删除",
+      "months_3": "语音输入记录 3 个月后删除"
+    },
+    "empty": {
+      "title": "你的语音输入记录会显示在这里",
+      "textBefore": "在任意窗口中按住",
+      "textAfter": "并说话。",
+      "textNoKey": "请在“语音输入”中设置语音输入按键。"
+    },
+    "copy": "复制文本",
+    "more": "更多操作",
+    "keep": "保留",
+    "keepDescription": "不会自动删除",
+    "retry": "重新识别",
+    "delete": "删除",
+    "deleted": "已删除语音输入记录",
+    "failed": "无法识别",
+    "savedTag": "已保留",
+    "editingSkipped": "未编辑",
+    "showMore": "显示全文",
+    "showLess": "收起",
+    "version": "文本版本",
+    "versionEdited": "编辑后",
+    "versionRaw": "原文"
+  },
+  "models": {
+    "purpose": "将语音转为文字的模型，用于语音输入和文件转录。用 AI 编辑文本的功能位于",
+    "active": {
+      "title": "当前模型",
+      "change": "更换模型",
+      "none": "未选择模型",
+      "noneHint": "下载为你的语言推荐的模型——或从下方目录中任选一个"
+    },
+    "lockedByTranscription": "转录进行中——结束后再更换",
+    "language": {
+      "title": "语言和翻译",
+      "scope": "适用于语音输入和文件转录"
+    },
+    "cleanup": {
+      "title": "文本清理",
+      "scope": "在识别模型内部进行，适用于语音输入和文件"
+    },
+    "memory": {
+      "title": "内存"
+    },
+    "onlyLanguage": "仅限{{language}}",
+    "languageCount_other": "{{count}} 种语言",
+    "catalog": {
+      "title": "目录",
+      "yours": "你的模型",
+      "yoursCount": "你的模型（{{count}}）",
+      "recommended": "推荐",
+      "all": "全部模型",
+      "languageFilter": "语言",
+      "streaming": "流式",
+      "translation": "翻译",
+      "showAll": "显示全部模型（{{count}}）",
+      "showFewer": "收起"
+    },
+    "row": {
+      "use": "使用",
+      "inUse": "使用中",
+      "more": "更多：{{name}}",
+      "delete": "删除模型",
+      "translate": "翻译成英语",
+      "streaming": "流式",
+      "accuracy": "准确度 {{n}}/10",
+      "speed": "速度 {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "在哪里、用哪个 AI 编辑文本",
+    "status": {
+      "usedFor": "用于",
+      "files": "文件编辑（{{state}}）",
+      "dictation": "带编辑的语音输入（{{state}}）",
+      "on": "开",
+      "off": "关"
+    },
+    "where": {
+      "title": "AI 运行位置",
+      "local": "在这台电脑上",
+      "localText": "文本留在电脑上",
+      "localUnavailable": "此版本不可用",
+      "server": "自己的服务器",
+      "serverText": "Ollama、LM Studio 或你的地址 · 文本发送到你的服务器",
+      "cloud": "云服务",
+      "cloudText": "OpenAI 等 · 文本发送到该服务"
+    },
+    "variant": {
+      "local": "内置 AI",
+      "server": "服务器",
+      "cloud": "服务"
+    },
+    "local": {
+      "speed": "速度 {{n}}/5",
+      "quality": "质量 {{n}}/5",
+      "footprint": "磁盘 {{disk}} · 内存约 {{ram}} GB",
+      "showAll": "显示全部模型（{{count}}）",
+      "showFewer": "收起"
+    },
+    "server": {
+      "urlDescription": "以 /v1 结尾的 OpenAI 兼容地址",
+      "keyDescription": "仅当你的服务器要求时"
+    }
+  },
+  "app": {
+    "purpose": "程序的整体行为",
+    "launch": "启动和托盘",
+    "look": "外观",
+    "updates": "更新",
+    "checkNow": "检查新版本",
+    "checkNowButton": "立即检查",
+    "experimental": "实验性功能",
+    "quit": {
+      "title": "退出 Tishe？",
+      "body": "正在转录“{{name}}”（{{pct}}%）。转录将停止；已完成的文档已保存。",
+      "bodyIdle": "转录将停止；已完成的文档已保存。",
+      "confirm": "退出",
+      "stay": "留下"
+    },
+    "notifications": "通知",
+    "notifyLabel": "转录完成时通知我",
+    "notifyDescription": "Windows 通知，仅在窗口隐藏或未处于焦点时显示。点击即可打开结果。",
+    "trayHint": "Windows 会隐藏新图标。要让它保持可见，请把它从隐藏图标中拖到任务栏上。"
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "新功能",
+    "project": {
+      "title": "关于项目",
+      "basedOn": "基于 Handy",
+      "basedOnText": "开源，MIT 许可证",
+      "tishe": "Tishe",
+      "tisheText": "开源，MIT 许可证。发布版本和错误报告都在 GitHub 上",
+      "licenses": "许可证",
+      "licensesText": "Tishe 使用的第三方库和模型",
+      "licensesOpen": "打开",
+      "licensesError": "无法打开许可证文件",
+      "author": "开发者",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub 主页"
+    },
+    "supportHandy": "支持 Handy 的作者",
+    "folders": "文件夹",
+    "versionRelease": "Tishe {{version}}，发布 {{release}}"
+  },
+  "debug": {
+    "onBefore": "调试模式已开启，重启后仍保持开启。",
+    "onAfter": "可将其隐藏。",
+    "log": "日志",
+    "previews": "预览",
+    "keyboard": "键盘",
+    "transcription": "转录"
+  },
+  "release": {
+    "available": "版本 {{release}} 已发布",
+    "openPage": "在 GitHub 上打开发布页面",
+    "upToDate": "这是最新版本",
+    "checkFailed": "无法检查更新"
+  },
+  "next": {
+    "lead": "Tishe 是 Private Memory 的第一部分：你的对话的私人记忆，完全保存在你的电脑上。",
+    "now": "现在 Tishe 已经可以在任何应用中听写输入，并把长录音转写成文字、区分说话人。无需联网，无需账号。",
+    "planTitle": "后续版本",
+    "plan": {
+      "meetings": {
+        "title": "会议录制",
+        "text": "你的麦克风和其他参会者分成两条音轨录制，文字在对话过程中实时出现。"
+      },
+      "summaries": {
+        "title": "会议纪要",
+        "text": "停止录制后立即由内置语言模型用会议语言整理出决定和任务。"
+      },
+      "search": {
+        "title": "会议搜索",
+        "text": "先按词语，再按含义。"
+      },
+      "agents": {
+        "title": "笔记与助手",
+        "text": "为 Obsidian 准备的会议文件夹，以及 AI 助手通过 MCP 访问你的会议，同样无需云端。"
+      }
+    },
+    "order": "不承诺日期：顺序可能根据反馈调整。",
+    "freeTitle": "免费且开源",
+    "freeText": "Tishe 的核心免费，并将一直免费。关注发布版本，并在 GitHub 上告诉我们还缺什么。",
+    "follow": "在 GitHub 上关注",
+    "feedback": "报告问题或想法"
+  },
+  "fileErrors": {
+    "notFound": "找不到文件：它已被移动或删除。",
+    "noAudio": "文件没有声音，或无法读取。",
+    "unreadable": "无法读取文件中的声音。文件可能已损坏。",
+    "noModel": "未选择语音识别模型：请在「$t(sidebar.models)」中选择。",
+    "noSpeakerModel": "声纹模型尚未下载：请在「$t(transcription.more.speakers)」中下载。",
+    "noLlmModel": "语言模型尚未下载：请在「$t(sidebar.llm)」中下载。",
+    "noLlmRuntime": "缺少内置语言模型引擎。请重新安装 Tishe。",
+    "cloudKey": "云端识别需要 API 密钥。",
+    "cloudConfig": "云端识别尚未设置：请填写地址和模型。",
+    "busy": "当前正在转写另一个文件。",
+    "noSpace": "磁盘已满。",
+    "fileInUse": "文档已在其他程序（例如 Word）中打开。请关闭后重试。",
+    "accessDenied": "无法访问文档所在的文件夹。请选择其他文件夹：「$t(ui.fold.more) → $t(transcription.more.document)」。"
+  },
+  "setup": {
+    "asr": {
+      "title": "下载语音识别模型",
+      "text": "它把语音转成文字——录音和语音输入都会用到。它在这台电脑上离线运行。只需下载一次。",
+      "language": "录音语言",
+      "allModels": "所有模型",
+      "onDisk": "模型 {{name}} 已在这台电脑上——只需开启即可。",
+      "whileDownloading": "下载期间就可以添加录音：模型就绪后会开始转录。"
+    },
+    "llm": {
+      "title": "编辑需要 AI",
+      "what": "AI 会修正识别错误和标点。推荐使用内置 AI：它在这台电脑上运行，文本不会外传。",
+      "recommended": "占用磁盘 {{size}} · 需要约 {{ram}} GB 内存 · 只需下载一次",
+      "otherWays": "自己的服务器或云服务",
+      "downloadOn": "下载 {{size}} 并开启",
+      "runtimeTitle": "内置 AI 不可用",
+      "runtime": "此版本不包含内置 AI 引擎。你可以在“$t(sidebar.llm)”栏目中连接自己的服务器（Ollama、LM Studio）或云服务。",
+      "openPage": "打开“$t(sidebar.llm)”",
+      "notSetUp": "{{reason}}——没有它，AI 无法工作。请开启编辑，并在“$t(sidebar.llm)”栏目中完成设置。",
+      "onAndSetUp": "开启并设置",
+      "onDisk": "已在这台电脑上，无需下载。",
+      "turnOn": "开启编辑"
+    },
+    "quick": {
+      "title": "快速入门",
+      "progress": "{{done}} / {{total}}",
+      "hide": "隐藏",
+      "hideHint": "隐藏“快速入门”——所有设置仍在左侧栏目中",
+      "model": "下载语音识别模型",
+      "modelDone": "语音识别模型已就绪 · {{name}}",
+      "dictation": "试试语音输入",
+      "dictationDone": "语音输入可以使用了 · 语音输入的内容保存在“历史记录”中",
+      "file": "转录一段录音",
+      "fileDone": "第一段录音已转录",
+      "fileHint": "把音频或视频文件拖到此窗口，或选择文件——Word 文档会出现在录音旁边。",
+      "llm": "AI 编辑",
+      "optional": "可选",
+      "llmHint": "修正文档中的识别错误和标点。{{model}}：{{size}}，在这台电脑上运行。",
+      "llmReady": "AI 已就绪 · {{model}}",
+      "doneTitle": "一切就绪",
+      "doneText": "Tishe 已设置完成。语音输入的内容在“历史记录”中，文档在下方列表中，设置在左侧栏目中。",
+      "close": "关闭"
+    }
   }
 }

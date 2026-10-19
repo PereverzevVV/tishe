@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Pengaturan...",
-    "checkUpdates": "Periksa Pembaruan...",
-    "copyLastTranscript": "Salin Transkripsi Terakhir",
+    "settings": "Buka Tishe…",
+    "checkUpdates": "Periksa pembaruan…",
+    "copyLastTranscript": "Salin dikte terakhir",
     "unloadModel": "Keluarkan Model dari Memori",
     "model": "Model",
     "quit": "Keluar",
     "cancel": "Batal",
-    "secureInputWarning": "⚠ Pintasan diblokir oleh Secure Input"
+    "secureInputWarning": "⚠ Pintasan diblokir oleh Secure Input",
+    "modelLocked": "Model tidak bisa diganti selama transkripsi berjalan",
+    "tooltipDictation": "Dikte: {{shortcut}}",
+    "backgroundTitle": "Tishe tetap berjalan di latar belakang",
+    "backgroundBody": "Transkripsi terus berjalan. Anda akan mendapat notifikasi saat selesai."
   },
   "sidebar": {
     "general": "Umum",
-    "models": "Model",
+    "models": "Suara ke teks",
     "advanced": "Lanjutan",
     "postProcessing": "Pascaproses",
     "history": "Riwayat",
     "debug": "Debug",
-    "about": "Tentang"
+    "about": "Tentang",
+    "label": "Bagian",
+    "transcription": "Transkripsi",
+    "dictation": "Dikte",
+    "meetings": "Rapat",
+    "llm": "Penyuntingan AI",
+    "app": "Aplikasi",
+    "soon": "segera",
+    "state": {
+      "running": "sedang berjalan",
+      "new": "selesai, belum dilihat",
+      "downloading": "mengunduh"
+    },
+    "next": "Selanjutnya"
   },
   "onboarding": {
     "subtitle": "Untuk memulai, pilih model transkripsi",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Izin Diperlukan",
-      "description": "Handy memerlukan beberapa izin agar dapat berfungsi dengan baik.",
+      "description": "Tishe memerlukan beberapa izin agar dapat berfungsi dengan baik.",
       "microphone": {
         "title": "Akses Mikrofon",
         "description": "Diperlukan untuk menangkap suara Anda agar dapat ditranskripsikan."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Gagal memeriksa izin. Silakan coba lagi.",
         "requestFailed": "Gagal meminta izin. Silakan coba lagi."
-      }
+      },
+      "skip": "Lanjutkan tanpa mikrofon",
+      "skipHint": "Mikrofon hanya diperlukan untuk dikte – transkripsi file tetap berfungsi tanpanya. Anda bisa mengizinkannya nanti di pengaturan Windows."
+    },
+    "step": "Langkah {{n}} dari {{total}}",
+    "language": {
+      "title": "Rekaman Anda dalam bahasa apa?",
+      "description": "Kami akan mengunduh model pengenalan suara untuk bahasa ini. Model berjalan di komputer ini.",
+      "ru": {
+        "title": "Rusia",
+        "limit": "Hanya bahasa Rusia: tidak mengenali ucapan bahasa Inggris"
+      },
+      "en": {
+        "title": "Inggris",
+        "limit": "Hanya bahasa Inggris"
+      },
+      "eu": {
+        "title": "Bahasa Eropa lain",
+        "limit": "25 bahasa Eropa, mengenali bahasanya sendiri"
+      },
+      "other": {
+        "title": "Bahasa Indonesia atau bahasa lain",
+        "limit": "30 bahasa: Tionghoa, Jepang, Korea, Arab, Turki, Hindi, dan lainnya",
+        "limitWhisper": "banyak bahasa, lebih lambat di prosesor"
+      },
+      "onDisk": "sudah ada di komputer ini",
+      "shared": "Model akan dipakai untuk dikte sekaligus transkripsi file. Anda bisa menggantinya nanti di bagian “$t(sidebar.models)”.",
+      "otherModel": "Pilih model lain",
+      "hideCatalog": "Sembunyikan daftar model",
+      "download": "Unduh {{size}}",
+      "use": "Gunakan {{name}}",
+      "downloadNamed": "Unduh {{name}} · {{size}}",
+      "once": "Diunduh sekali, lalu berfungsi tanpa internet"
+    },
+    "download": {
+      "title": "Mengunduh {{name}}",
+      "description": "Sambil menunggu, Anda bisa melakukan hal lain: menutup jendela tidak menghentikan unduhan.",
+      "starting": "Menghubungkan…",
+      "amount": "{{done}} dari {{total}}",
+      "speed": "{{n}} MB/dtk",
+      "preparing": "Menyiapkan model…",
+      "cancel": "Batal",
+      "failed": "Model tidak terunduh",
+      "failedTitle": "Model gagal diunduh",
+      "failedHint": "Tidak ada koneksi ke server. Periksa internet lalu tekan Coba lagi.",
+      "retry": "Coba lagi",
+      "continue": "Buka Tishe tanpa menunggu"
+    },
+    "welcome": {
+      "title": "Selamat datang di Tishe",
+      "lead": "Tishe mengubah ucapan menjadi teks langsung di komputer Anda – tanpa internet dan tanpa akun.",
+      "files": "Transkripsi rekaman – rapat, kuliah, wawancara – ke dokumen Word",
+      "dictation": "Dikte di aplikasi apa pun: tahan tombol, bicara – teks pun muncul",
+      "private": "Rekaman dan teks tidak pernah keluar dari komputer",
+      "stepsLabel": "Langkah penyiapan",
+      "steps": {
+        "permissions": "Izin",
+        "language": "Bahasa rekaman",
+        "download": "Unduh model"
+      },
+      "credit": "Viktor Pereverzev · berbasis Handy"
+    },
+    "tips": {
+      "title": "Sambil mengunduh – begini cara kerjanya",
+      "dictationBefore": "Dikte: di aplikasi apa pun, tahan",
+      "dictationAfter": "lalu bicara. Lepaskan – teks muncul di posisi kursor.",
+      "files": "Transkripsi: seret file audio atau video ke jendela Tishe – Anda akan mendapatkan dokumen Word.",
+      "editing": "Penyuntingan dengan AI memperbaiki kesalahan dan tanda baca – aktifkan di resep transkripsi."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "Umum",
       "shortcut": {
-        "title": "Pintasan Handy",
+        "title": "Pintasan Tishe",
         "description": "Atur pintasan keyboard untuk memulai perekaman ucapan-ke-teks",
         "loading": "Memuat pintasan...",
         "none": "Belum ada pintasan yang diatur",
         "notFound": "Pintasan tidak ditemukan",
-        "pressKeys": "Tekan tombol...",
+        "pressKeys": "Tekan kombinasi… (Esc untuk batal)",
         "bindings": {
           "transcribe": {
-            "name": "Pintasan Transkripsi",
-            "description": "Pintasan keyboard untuk merekam dan mentranskripsikan suara Anda."
+            "name": "Dikte",
+            "description": "Tahan dan bicara – teks ditempel ke jendela aktif"
           },
           "cancel": {
-            "name": "Pintasan Batal",
-            "description": "Pintasan keyboard untuk membatalkan perekaman saat ini."
+            "name": "Batal",
+            "description": "Menghentikan perekaman yang sedang berjalan"
           },
           "transcribe_with_post_process": {
-            "name": "Pintasan Pascaproses",
-            "description": "Opsional: pintasan khusus yang selalu menerapkan pascaproses AI pada transkripsi Anda."
+            "name": "Tombol dikte dengan penyuntingan",
+            "description": "Teks ditempel setelah disunting AI"
           }
         },
         "errors": {
           "restore": "Gagal memulihkan pintasan asli",
           "set": "Gagal mengatur pintasan: {{error}}",
-          "reset": "Gagal mengembalikan pintasan ke nilai awal"
+          "reset": "Gagal mengembalikan pintasan ke nilai awal",
+          "taken": "Tombol ini sudah dipakai program lain. Pilih tombol lain.",
+          "duplicate": "Tombol ini sudah dipakai di sini untuk tindakan lain."
         }
       },
       "language": {
-        "title": "Bahasa",
-        "description": "Pilih bahasa untuk pengenalan ucapan. Opsi Otomatis akan mendeteksi bahasa, sedangkan memilih bahasa tertentu dapat meningkatkan akurasi untuk bahasa tersebut.",
+        "title": "Bahasa pengenalan",
+        "description": "“Otomatis” mendeteksi bahasa sendiri; memilihnya lebih andal",
         "searchPlaceholder": "Cari bahasa...",
         "noResults": "Bahasa tidak ditemukan",
         "auto": "Otomatis"
       },
       "shortcutActivation": {
-        "title": "Perilaku Pintasan",
-        "description": "Pilih cara pintasan transkripsi memulai dan menghentikan perekaman.",
+        "title": "Perilaku tombol",
+        "description": "Cara tombol memulai dan menghentikan perekaman",
         "options": {
           "holdOrToggle": "Otomatis",
           "pushToTalk": "Tahan",
@@ -212,7 +298,7 @@
     "models": {
       "title": "Model Transkripsi",
       "description": "Pilih model transkripsi atau unduh model tambahan. Setiap model menawarkan tingkat akurasi dan kecepatan yang berbeda.",
-      "searchPlaceholder": "Cari model berdasarkan nama…",
+      "searchPlaceholder": "Cari berdasarkan nama",
       "yourModels": "Model yang Diunduh",
       "availableModels": "Tersedia untuk Diunduh",
       "deleteConfirm": "Yakin ingin menghapus {{modelName}}? Anda harus mengunduhnya lagi untuk menggunakannya.",
@@ -225,37 +311,104 @@
       },
       "rescan": {
         "label": "Pindai Ulang",
-        "tooltip": "Pindai ulang model yang ditambahkan ke folder model atau cache Hugging Face dari luar Handy"
+        "tooltip": "Cari model yang ditambahkan ke folder secara manual"
       },
-      "noModelsMatch": "Tidak ada model yang cocok dengan kriteria ini."
+      "noModelsMatch": "Tidak ada model yang cocok dengan kriteria ini.",
+      "params": {
+        "button": "Parameter",
+        "open": "Parameter model",
+        "title": "Parameter: {{name}}",
+        "savedAtOnce": "Perubahan langsung disimpan. Kolom menampilkan nilai yang dipakai; nilai yang diubah punya tombol atur ulang.",
+        "resetAll": "Kembalikan ke bawaan",
+        "done": "Selesai",
+        "resetField": "Kembali ke bawaan",
+        "defaultRange": "Bawaan {{value}}; diizinkan {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Instruksi bawaan. Ubah teksnya untuk memakai instruksi sendiri; kosongkan untuk kembali ke yang bawaan.",
+          "own": "Instruksi Anda. Tombol atur ulang mengembalikan yang bawaan."
+        },
+        "asr": {
+          "segment": {
+            "label": "Panjang segmen untuk file, detik",
+            "description": "File dikenali per potongan yang dipotong di jeda, paling panjang sebesar nilai ini. Potongan terpendek ikut mengecil (12 dtk pada 25 dtk). Hasil ukur: 12–25 dtk menjaga tanda baca lebih baik daripada 60–120 dtk."
+          },
+          "device": {
+            "label": "Perangkat",
+            "description": "“Hanya prosesor” membebaskan chip grafis, tetapi biasanya lebih lambat. Berlaku juga untuk dikte; aktif mulai pengenalan berikutnya.",
+            "general": "Sesuai pengaturan akselerasi",
+            "cpu": "Hanya prosesor",
+            "notHere": "Perangkat model ini mengikuti pengaturan akselerasi umum."
+          }
+        },
+        "llm": {
+          "promptNote": "Instruksi untuk teks bahasa Rusia dan Inggris. Bahasa lain mendapat instruksi bawaan berbahasa Inggris dengan nama bahasanya. Instruksi sendiri di bagian Transkripsi menggantikannya untuk semua bahasa.",
+          "promptRu": "Instruksi untuk teks bahasa Rusia",
+          "promptEn": "Instruksi untuk teks bahasa Inggris",
+          "temperature": {
+            "label": "Temperatur",
+            "description": "Makin rendah makin hati-hati: pada 0,8 model mengarang kata, 0,2 adalah nilai terukur untuk penyuntingan."
+          },
+          "chunk": {
+            "label": "Ukuran potongan, karakter",
+            "description": "Seberapa banyak teks yang disunting model sekaligus. Model kecil lebih setia pada potongan pendek."
+          },
+          "context": {
+            "label": "Konteks, token",
+            "description": "Ruang untuk instruksi, potongan, dan jawaban. Makin besar makin banyak memori."
+          },
+          "answer": {
+            "label": "Batas jawaban, token",
+            "description": "Menghentikan model yang mulai mengulang-ulang. Potongan 3000 karakter sekitar 1100 token."
+          },
+          "threads": {
+            "label": "Thread prosesor untuk jawaban",
+            "description": "Membaca teks selalu memakai semua thread perangkat keras.",
+            "auto": "Otomatis – satu per inti"
+          },
+          "restartNote": "Temperatur, konteks, batas jawaban, dan thread berlaku saat model dimulai lagi: model yang sedang berjalan dimulai ulang sebelum tugas berikutnya.",
+          "invalid": "Tidak disimpan: {{detail}}",
+          "contextTooSmall": "Tidak disimpan: konteks harus memuat potongan dan jawaban – minimal {{min}} token dengan ukuran potongan dan batas jawaban saat ini."
+        }
+      }
     },
     "sound": {
       "title": "Suara",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Pilih perangkat mikrofon yang Anda inginkan",
+        "description": "Dari mana suara direkam",
         "placeholder": "Pilih mikrofon...",
         "loading": "Memuat..."
       },
       "channel": {
         "title": "Kanal Masukan",
-        "description": "Pilih kanal masukan yang akan direkam. Gunakan ini jika antarmuka audio Anda memiliki beberapa masukan.",
+        "description": "Untuk kartu suara dengan beberapa input",
         "average": "Rata-ratakan semua kanal",
         "channel": "Kanal {{n}}"
       },
       "audioFeedback": {
-        "label": "Umpan Balik Audio",
-        "description": "Putar suara saat perekaman dimulai dan dihentikan"
+        "label": "Umpan balik suara",
+        "description": "Suara di awal dan akhir perekaman"
       },
       "outputDevice": {
         "title": "Perangkat Keluaran",
-        "description": "Pilih perangkat keluaran audio yang Anda inginkan untuk suara umpan balik",
+        "description": "Tempat suara umpan balik diputar",
         "placeholder": "Pilih perangkat keluaran...",
         "loading": "Memuat..."
       },
       "volume": {
         "title": "Volume",
-        "description": "Sesuaikan volume suara umpan balik audio"
+        "description": "Sesuaikan volume suara umpan balik audio",
+        "levels": {
+          "quiet": "Pelan",
+          "medium": "Sedang",
+          "loud": "Keras"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Milik sendiri",
+        "preview": "Putar suara mulai dan berhenti"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Eksperimental"
       },
       "experimentalToggle": {
-        "label": "Fitur Eksperimental",
-        "description": "Aktifkan fitur eksperimental yang masih dalam pengembangan."
+        "label": "Tampilkan fitur eksperimental",
+        "description": "Fitur dalam pengembangan; mungkin tidak stabil"
       },
       "lazyStreamClose": {
         "label": "Biarkan Mikrofon Tetap Aktif di Antara Transkripsi",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Mulai dalam Keadaan Tersembunyi",
-        "description": "Jalankan ke baki sistem tanpa membuka jendela."
+        "label": "Sembunyikan jendela saat diluncurkan",
+        "description": "Program dimulai di baki sistem"
       },
       "autostart": {
-        "label": "Jalankan saat Komputer Dinyalakan",
-        "description": "Mulai Handy secara otomatis saat Anda masuk ke komputer."
+        "label": "Mulai bersama Windows",
+        "description": "Dikte siap begitu Anda masuk ke komputer"
       },
       "showTrayIcon": {
-        "label": "Tampilkan Ikon Baki Sistem",
-        "description": "Tampilkan ikon Handy di baki sistem."
+        "label": "Ikon di baki sistem",
+        "description": "Tanpa ikon, jendela yang ditutup hanya muncul lagi jika program dijalankan ulang"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Pilih overlay perekaman: Tidak Ada menyembunyikannya, Minimal menampilkan indikator ringkas, dan Langsung menampilkan transkripsi secara waktu nyata saat Anda berbicara (hanya model yang mendukung streaming — cari lencana Streaming di pemilih model). Di Linux, 'Tidak Ada' direkomendasikan.",
+          "title": "Gaya indikator",
+          "description": "Apa yang ditampilkan di dekat kursor saat mendikte",
           "options": {
             "none": "Tidak Ada",
             "minimal": "Minimal",
             "live": "Waktu Nyata"
-          }
+          },
+          "noneConsequence": "Tanpa indikator, kegagalan tidak ditampilkan: teks yang tidak tertempel ada di Riwayat"
         },
         "position": {
-          "title": "Posisi Overlay",
-          "description": "Lokasi overlay muncul di layar selama perekaman dan transkripsi.",
+          "title": "Posisi indikator",
+          "description": "Atas atau bawah layar",
           "options": {
             "bottom": "Bawah",
             "top": "Atas"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Metode Tempel",
-        "description": "Pilih cara teks dimasukkan. Langsung: mensimulasikan pengetikan melalui masukan sistem. Tidak Ada: melewati proses tempel dan hanya memperbarui riwayat/papan klip.",
+        "description": "Cara teks masuk ke jendela aktif",
         "options": {
           "clipboard": "Papan klip ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Papan klip (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Penanganan Papan Klip",
-        "description": "Jangan Ubah Papan Klip akan mempertahankan isi papan klip saat ini setelah transkripsi. Salin ke Papan Klip akan membiarkan hasil transkripsi tetap berada di papan klip setelah ditempel.",
+        "title": "Papan klip",
+        "description": "Pertahankan isi papan klip sebelumnya, atau biarkan teks dikte di sana",
         "options": {
           "dontModify": "Jangan Ubah Papan Klip",
           "copyToClipboard": "Salin ke Papan Klip"
         }
       },
       "autoSubmit": {
-        "title": "Kirim Otomatis",
-        "description": "Kirim kombinasi tombol yang dipilih secara otomatis setelah teks dimasukkan. Cmd+Enter berlaku di macOS, sedangkan Windows/Linux menggunakan Super+Enter.",
+        "title": "Kirim setelah menempel",
+        "description": "Tekan tombol yang dipilih tepat setelah menempel, misalnya Enter di obrolan",
         "options": {
           "off": "Nonaktif",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Terjemahkan ke Bahasa Inggris",
-        "description": "Terjemahkan ucapan dari bahasa lain ke bahasa Inggris secara otomatis selama transkripsi."
+        "description": "Ucapan dalam bahasa apa pun menjadi teks bahasa Inggris"
       },
       "modelUnload": {
-        "title": "Keluarkan Model dari Memori",
-        "description": "Bebaskan memori GPU/CPU secara otomatis jika model tidak digunakan selama waktu yang ditentukan",
+        "title": "Keluarkan model dari memori setelah…",
+        "description": "Membebaskan memori saat model tidak dibutuhkan untuk sementara",
         "options": {
           "never": "Tidak Pernah",
           "immediately": "Segera",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Kata Khusus",
-        "description": "Bantu model yang didukung mengenali nama dan istilah khusus. Koreksi fuzzy saat ini terbatas pada kata yang menggunakan huruf A–Z dan angka.",
+        "title": "Kata Anda sendiri",
+        "description": "Petunjuk untuk model Whisper; model lain hanya mendapat koreksi, itu pun hanya untuk kata berhuruf A–Z",
         "placeholder": "Tambahkan kata",
         "add": "Tambah",
         "remove": "Hapus {{word}}",
-        "duplicate": "\"{{word}}\" sudah ada"
+        "duplicate": "\"{{word}}\" sudah ada",
+        "removed": "“{{word}}” dihapus"
       },
       "voiceActivityDetection": {
-        "title": "Deteksi Aktivitas Suara",
-        "description": "Saring keheningan dari rekaman. Model yang mendukung streaming menggunakan ekor VAD yang lebih panjang; menonaktifkan VAD akan merekam audio mentah."
+        "title": "Buang keheningan",
+        "description": "Hanya ucapan yang masuk ke pengenalan"
       },
       "vadBackend": {
         "title": "Backend Deteksi Aktivitas Suara",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Hapus Kata Pengisi",
-        "description": "Menghapus kata pengisi umum dari transkripsi. Nonaktifkan untuk mempertahankannya."
+        "description": "“uh”, “hmm” dalam teks yang ditempel"
       },
       "chineseScript": {
         "title": "Aksara Tionghoa",
-        "description": "Menulis transkripsi Mandarin dan Kanton dengan aksara Sederhana atau Tradisional. Bahasa lain tidak diubah.",
+        "description": "Aksara Sederhana atau Tradisional",
         "options": {
           "asTranscribed": "Sesuai transkripsi",
           "simplified": "Sederhana",
@@ -434,20 +589,21 @@
           "title": "URL Dasar",
           "description": "URL dasar API untuk penyedia yang dipilih. Hanya penyedia kustom yang dapat diedit.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Alamat ditentukan oleh penyedia yang dipilih",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "Kunci API",
-          "description": "Kunci API untuk penyedia yang dipilih.",
+          "description": "Disimpan hanya di komputer ini",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Masukkan pengenal model yang diharapkan oleh endpoint kustom Anda.",
-          "descriptionDefault": "Pilih model yang disediakan oleh penyedia yang dipilih.",
+          "descriptionCustom": "Nama model di server Anda",
+          "descriptionDefault": "Tombol di kanan memperbarui daftar",
           "placeholderWithOptions": "Cari atau pilih model",
           "placeholderNoOptions": "Ketik nama model",
-          "refreshModels": "Segarkan model"
+          "refreshModels": "Perbarui daftar model"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Prompt Terpilih",
           "description": "Pilih templat untuk menyempurnakan transkripsi atau buat yang baru. Gunakan ${output} dalam teks prompt untuk merujuk ke hasil transkripsi."
         },
-        "noPrompts": "Tidak ada prompt yang tersedia",
-        "selectPrompt": "Pilih prompt",
+        "noPrompts": "Tidak ada instruksi",
+        "selectPrompt": "Pilih instruksi",
         "createNew": "Buat Prompt Baru",
-        "promptLabel": "Label Prompt",
+        "promptLabel": "Nama",
         "promptLabelPlaceholder": "Masukkan nama prompt",
-        "promptInstructions": "Instruksi Prompt",
+        "promptInstructions": "Teks instruksi",
         "promptInstructionsPlaceholder": "Tulis instruksi yang dijalankan setelah transkripsi. Contoh: Perbaiki tata bahasa dan kejelasan teks berikut: ${output}",
         "promptTip": "Tips: Gunakan <code>${output}</code> untuk menyisipkan teks hasil transkripsi ke prompt Anda.",
         "updatePrompt": "Perbarui Prompt",
-        "deletePrompt": "Hapus Prompt",
-        "createPrompt": "Buat Prompt",
+        "deletePrompt": "Hapus",
+        "createPrompt": "Buat",
         "cancel": "Batal",
-        "selectToEdit": "Pilih prompt di atas untuk melihat dan mengedit detailnya.",
-        "createFirst": "Klik 'Buat Prompt Baru' di atas untuk membuat prompt pascaproses pertama Anda."
+        "selectToEdit": "Pilih instruksi untuk menyuntingnya.",
+        "createFirst": "Klik “Buat” untuk menambahkan instruksi pertama."
+      },
+      "local": {
+        "intro": "Model berjalan langsung di komputer ini: tanpa internet, tanpa kunci, teks Anda tidak pernah keluar dari perangkat. Unduh satu model jika mau. Model menyala sendiri saat dibutuhkan dan dikeluarkan dari memori saat menganggur. Model berjalan di prosesor, jadi lebih lambat daripada layanan cloud. Semua model muat di laptop dengan RAM 16 GB.",
+        "runtimeMissing": "Mesin AI bawaan tidak ditemukan. Silakan instal ulang Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Seimbang",
+            "model": "Qwen3.5 4B",
+            "description": "Versi biasa Qwen 4B. Teliti dalam tanda baca, tetapi hanya memperbaiki sedikit kesalahan pengenalan dalam percakapan nyata (uji kami, 06-10-2026). Versi dengan akselerasi lebih akurat dan lebih cepat."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Model dari Google, setia pada aslinya. Menyunting seperti Gemma di versi Google dengan akselerasi, tetapi sekitar 1,25 kali lebih lambat."
+          },
+          "gigachat31": {
+            "title": "Untuk bahasa Rusia",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Dilatih dalam bahasa Rusia sejak awal. Hanya 1,8B dari 10B parameternya yang aktif per token, jadi lebih cepat daripada kesan ukurannya. Butuh lebih banyak memori."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen untuk bahasa Rusia",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) dengan kosakata Rusia dan pelatihan tambahan pada teks Rusia. Dalam uji, model ini memperbaiki lebih sedikit daripada Gemma E2B dan setengah lebih lambat (sekitar 27 menit per jam rekaman)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Model kecil dari NVIDIA, resminya hanya bahasa Inggris. Dalam uji, teks hampir tidak diubah, baik bahasa Rusia maupun Inggris, dan lebih lambat daripada Gemma (sekitar 35 menit per jam rekaman)."
+          },
+          "qwen35_9b": {
+            "title": "Maksimum",
+            "model": "Qwen3.5 9B",
+            "description": "Model lokal paling cerdas: terbaik untuk konteks dan koreksi sulit. Paling lambat."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Seimbang",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B dalam versi lebih baru dengan akselerasi bawaan. Lebih akurat dan sekitar 1,2 kali lebih cepat dari Qwen 4B biasa, tetapi dalam uji kami hanya memperbaiki separuh kesalahan dibanding Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma ringan",
+            "model": "Gemma 4 E2B · versi Google",
+            "description": "Gemma yang lebih kecil dalam versi resmi Google, plus akselerasi (+98 MB). Dua kali lebih cepat dari Gemma E4B (sekitar 14 mnt per jam rekaman) dengan sekitar 2/3 perbaikannya."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · versi Google",
+            "description": "Kualitas terbaik dalam uji kami (06-10-2026). Versi resmi Google plus akselerasi (+99 MB): menyunting seperti Gemma E4B biasa, sekitar 1,25 kali lebih cepat. Sekitar 26 mnt per jam rekaman."
+          }
+        },
+        "speedupBadge": "akselerasi",
+        "speedupHint": "Model bantu kecil menebak beberapa kata ke depan dan model utama memeriksanya. Di prosesor hasilnya sekitar 1,2–1,3 kali lebih cepat.",
+        "untested": "belum diuji",
+        "delete": "Hapus model",
+        "state": {
+          "stopped": "Tidak dimuat di memori",
+          "loading": "Memuat ke memori…",
+          "ready": "Dimuat di memori"
+        },
+        "unloadNow": "Keluarkan sekarang",
+        "unload": {
+          "title": "Keluarkan dari memori",
+          "description": "Berapa lama model boleh menganggur sebelum dikeluarkan dari memori, membebaskan sekitar 2–3 GB.",
+          "immediately": "Tepat setelah pemrosesan",
+          "min2": "Setelah 2 menit",
+          "min5": "Setelah 5 menit",
+          "min15": "Setelah 15 menit",
+          "never": "Tidak pernah"
+        },
+        "recommended": "Disarankan"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Buka Folder Rekaman",
       "loading": "Memuat riwayat...",
       "empty": "Belum ada transkripsi. Mulai merekam untuk mengisi riwayat Anda!",
-      "copyToClipboard": "Salin transkripsi ke papan klip",
+      "copyToClipboard": "Salin teks",
       "copyError": "Gagal menyalin transkripsi ke papan klip.",
       "save": "Simpan transkripsi",
       "unsave": "Hapus dari daftar tersimpan",
       "delete": "Hapus entri",
       "deleteError": "Gagal menghapus entri. Silakan coba lagi.",
-      "retranscribe": "Transkripsikan ulang",
+      "retranscribe": "Kenali lagi",
       "retranscribeError": "Gagal mentranskripsikan ulang. Silakan coba lagi.",
-      "transcribing": "Mentranskripsikan...",
+      "transcribing": "Mengenali…",
       "transcriptionFailed": "Transkripsi gagal. Anda dapat mentranskripsikan ulang menggunakan ikon coba lagi."
     },
     "debug": {
       "title": "Debug",
       "logDirectory": {
-        "title": "Direktori Log",
-        "description": "Lokasi penyimpanan file log"
+        "title": "Folder log",
+        "description": "Lampirkan log ke laporan bug"
       },
       "logLevel": {
         "title": "Tingkat Log",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Periksa Pembaruan",
-        "description": "Periksa versi baru Handy secara otomatis",
-        "lockedDescription": "Dinonaktifkan oleh konfigurasi sistem (HANDY_DISABLE_UPDATER)"
+        "description": "Sekali setiap dijalankan, tanyakan ke GitHub apakah versi baru Tishe sudah keluar. Rekaman dan teks tidak dikirim",
+        "lockedDescription": "Pemeriksaan pembaruan dimatikan di versi ini"
       },
       "whatsNewPreview": {
         "title": "Pratinjau Yang Baru",
@@ -534,16 +761,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Ambang Koreksi Kata",
-        "description": "Sensitivitas untuk koreksi kata khusus"
+        "description": "Seberapa mirip sebuah kata dengan salah satu kata Anda agar diganti"
       },
       "historyLimit": {
-        "title": "Batas Riwayat",
-        "description": "Jumlah maksimum entri riwayat yang disimpan",
+        "title": "Berapa banyak dikte yang disimpan",
+        "description": "Dikte yang disimpan tidak dihitung",
         "entries": "entri"
       },
       "recordingRetention": {
-        "title": "Hapus Rekaman Secara Otomatis",
-        "description": "Hapus rekaman lama secara otomatis untuk menghemat ruang",
+        "title": "Hapus dikte lama",
+        "description": "Audio dihapus bersama teksnya",
         "never": "Tidak Pernah",
         "preserveLimit": "Simpan {{count}} terbaru",
         "days3": "Setelah 3 hari",
@@ -552,24 +779,24 @@
         "placeholder": "Pilih masa penyimpanan..."
       },
       "alwaysOnMicrophone": {
-        "label": "Mikrofon Selalu Aktif",
-        "description": "Biarkan mikrofon aktif agar respons lebih cepat"
+        "label": "Biarkan mikrofon menyala",
+        "description": "Perekaman mulai lebih cepat, tetapi mikrofon terus terpakai"
       },
       "clamshellMicrophone": {
-        "title": "Mikrofon Saat Laptop Ditutup",
-        "description": "Mikrofon yang digunakan saat laptop ditutup"
+        "title": "Mikrofon saat penutup laptop tertutup",
+        "description": "Mikrofon mana yang dipakai saat laptop tertutup"
       },
       "postProcessingToggle": {
         "label": "Pascaproses",
         "description": "Aktifkan penyempurnaan teks berbasis AI setelah transkripsi"
       },
       "muteWhileRecording": {
-        "label": "Bisukan Saat Merekam",
-        "description": "Bisukan audio sistem selama perekaman"
+        "label": "Bisukan komputer saat merekam",
+        "description": "Musik dan video tidak akan ikut terekam"
       },
       "appendTrailingSpace": {
-        "label": "Tambahkan Spasi di Akhir",
-        "description": "Tambahkan spasi setelah transkripsi ditempel"
+        "label": "Tambahkan spasi di akhir",
+        "description": "Kalimat berikutnya tidak menempel pada yang sebelumnya"
       },
       "keyboardImplementation": {
         "title": "Implementasi Keyboard",
@@ -582,28 +809,28 @@
         "settings": "Pengaturan:"
       },
       "pasteDelay": {
-        "title": "Jeda Tempel (Sebelum)",
-        "description": "Jeda (dalam milidetik) setelah menyalin teks sebelum mengirim perintah tempel. Tingkatkan jika tidak ada yang ditempel."
+        "title": "Jeda sebelum menempel",
+        "description": "Naikkan jika tidak ada yang tertempel"
       },
       "pasteDelayAfter": {
-        "title": "Jeda Tempel (Sesudah)",
-        "description": "Jeda (dalam milidetik) setelah perintah tempel dikirim sebelum mengembalikan isi papan klip sebelumnya. Tingkatkan jika isi papan klip lama yang ditempel alih-alih transkripsi."
+        "title": "Jeda setelah menempel",
+        "description": "Naikkan jika teks lama dari papan klip yang tertempel"
       },
       "holdThreshold": {
         "title": "Ambang Waktu Tahan",
-        "description": "Hanya mode Otomatis: berapa lama (dalam milidetik) pintasan harus ditahan agar dianggap ditahan, bukan ditekan singkat. Turunkan jika penahanan singkat membuat perekaman tetap aktif; naikkan jika ketukan yang disengaja dianggap sebagai penahanan."
+        "description": "Tekan lebih singkat untuk beralih, lebih lama untuk menahan"
       },
       "reliablePaste": {
         "title": "Tempel Lebih Andal (Beta)",
-        "description": "Kembalikan papan klip hanya setelah aplikasi target benar-benar membaca transkripsi, bukan setelah jeda tetap. Ditujukan untuk memperbaiki kasus isi papan klip lama yang tertempel saat sistem sedang terbebani. Memerlukan metode tempel papan klip; hanya macOS dan Windows."
+        "description": "Tunggu sampai program membaca teks, bukan waktu tetap"
       },
       "recordingBuffer": {
-        "title": "Buffer Perekaman Tambahan",
-        "description": "Waktu tambahan (dalam milidetik) untuk terus merekam setelah Anda melepas tombol agar audio di bagian akhir tetap tertangkap. 0 = tanpa buffer tambahan."
+        "title": "Tetap merekam setelah dilepas",
+        "description": "Berapa lama lagi merekam setelah tombol dilepas"
       },
       "keyboardDiagnostic": {
         "title": "Diagnostik Keyboard",
-        "description": "Memeriksa apakah peristiwa keyboard mencapai Handy. Hanya jumlah peristiwa yang dicatat — bukan tombol yang Anda tekan.",
+        "description": "Memeriksa apakah peristiwa keyboard sampai ke Tishe. Hanya jumlah peristiwa yang dicatat – tidak pernah tombol mana yang Anda tekan.",
         "run": "Jalankan diagnostik 10 dtk",
         "running": "Mendengarkan… tekan pintasan Anda beberapa kali (mis. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -617,7 +844,7 @@
         "mouse": "Mouse",
         "verdictBlocked": "Secure Input memblokir peristiwa tombol — pintasan keyboard tidak dapat berfungsi sampai masalah ini diselesaikan.",
         "verdictSuspicious": "Peristiwa tombol pengubah diterima, tetapi tidak ada peristiwa tombol — sesuatu memblokir input tombol meskipun Secure Input dilaporkan nonaktif. Harap laporkan ini di GitHub.",
-        "verdictOk": "Peristiwa tombol mencapai Handy secara normal.",
+        "verdictOk": "Peristiwa tombol sampai ke Tishe dengan normal.",
         "verdictNoEvents": "Tidak ada peristiwa yang tertangkap — apakah Anda menekan tombol selama pengujian?",
         "failed": "Diagnostik gagal: {{error}}"
       }
@@ -626,15 +853,15 @@
       "title": "Tentang",
       "version": {
         "title": "Versi",
-        "description": "Versi Handy saat ini"
+        "description": "Versi Tishe saat ini"
       },
       "whatsNewUpdates": {
-        "label": "Tampilkan Yang Baru",
-        "description": "Tampilkan catatan rilis setelah Handy diperbarui"
+        "label": "Tampilkan “Yang baru” setelah pembaruan",
+        "description": "Daftar singkat perubahan saat versi baru pertama kali dibuka"
       },
       "appDataDirectory": {
-        "title": "Direktori Data Aplikasi",
-        "description": "Lokasi Handy menyimpan datanya"
+        "title": "Folder data",
+        "description": "Pengaturan, model, dan riwayat"
       },
       "sourceCode": {
         "title": "Kode Sumber",
@@ -643,7 +870,7 @@
       },
       "supportDevelopment": {
         "title": "Dukung Pengembangan",
-        "description": "Bantu kami terus mengembangkan Handy",
+        "description": "Tishe dibangun di atas program mereka",
         "button": "Donasi"
       },
       "acknowledgments": {
@@ -651,7 +878,7 @@
         "ggml": {
           "title": "ggml",
           "description": "Pustaka tensor berkinerja tinggi untuk inferensi pembelajaran mesin di perangkat",
-          "details": "Fitur ucapan-ke-teks lokal Handy dibangun menggunakan transcribe.cpp dan ggml. Terima kasih kepada Georgi Gerganov dan para kontributor atas karya luar biasa mereka."
+          "details": "Pengenalan suara cepat di komputer. Terima kasih kepada Georgi Gerganov dan para kontributor proyek."
         }
       }
     }
@@ -672,7 +899,7 @@
     "portableUpdateBrowseButton": "Buka GitHub Releases"
   },
   "whatsNew": {
-    "title": "Baru di Handy v{{version}}"
+    "title": "Yang baru di Tishe"
   },
   "common": {
     "loading": "Memuat...",
@@ -681,10 +908,14 @@
     "open": "Buka",
     "copy": "Salin",
     "clear": "Bersihkan",
-    "noOptionsFound": "Tidak ada opsi yang ditemukan"
+    "noOptionsFound": "Tidak ada opsi yang ditemukan",
+    "cancel": "Batal",
+    "choose": "Pilih…",
+    "reset": "Kembalikan ke bawaan",
+    "search": "Cari"
   },
   "accessibility": {
-    "permissionsDescription": "Handy memerlukan izin aksesibilitas untuk mengetik teks hasil transkripsi.",
+    "permissionsDescription": "Untuk menempelkan teks, program memerlukan izin “Aksesibilitas”.",
     "openSettings": "Buka Pengaturan Sistem"
   },
   "errors": {
@@ -703,17 +934,17 @@
     "modelLoadFailedUnknown": "model tidak dikenal",
     "pasteFailedTitle": "Gagal Menempelkan Teks",
     "pasteFailed": "Teks tidak dapat ditempelkan ke aplikasi aktif.",
-    "transcriptionFailedTitle": "Transkripsi Gagal"
+    "transcriptionFailedTitle": "Gagal dikenali"
   },
   "appLanguage": {
-    "title": "Bahasa Aplikasi",
-    "description": "Ubah bahasa antarmuka Handy"
+    "title": "Bahasa antarmuka",
+    "description": "Bahasa teks di dalam program"
   },
   "theme": {
-    "title": "Tema Aplikasi",
-    "description": "Pilih apakah Handy mengikuti tema sistem atau selalu menggunakan tema terang atau gelap",
+    "title": "Tema",
+    "description": "Pilih apakah Tishe mengikuti tema sistem atau tetap terang atau gelap",
     "options": {
-      "system": "Sistem",
+      "system": "Seperti sistem",
       "light": "Terang",
       "dark": "Gelap"
     }
@@ -721,6 +952,14 @@
   "overlay": {
     "transcribing": "Mentranskripsikan...",
     "processing": "Memproses...",
+    "waiting": "Model sedang sibuk dengan file – dikte akan terlambat",
+    "message": {
+      "paste_failed": "Gagal menempel. Teks disimpan di Riwayat",
+      "editing_skipped": "Ditempel tanpa penyuntingan: AI belum siap",
+      "no_microphone": "Mikrofon tidak ditemukan",
+      "microphone_denied": "Tidak ada akses ke mikrofon",
+      "help": "Apa yang harus dilakukan"
+    },
     "loadingModel": "Memuat model..."
   },
   "secureInput": {
@@ -733,5 +972,696 @@
     "learnMore": "Cara memperbaiki",
     "recorderBlocked": "Pintasan tidak dapat direkam saat ini — macOS Secure Input memblokir peristiwa tombol. Selesaikan peringatan Secure Input terlebih dahulu.",
     "dismiss": "Tutup"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg tidak ditemukan. Diperlukan untuk membaca file audio dan video dan sudah termasuk dalam penginstal Tishe: instal ulang Tishe. Atau instal dengan perintah: winget install Gyan.FFmpeg — lalu mulai ulang Tishe.",
+    "input": {
+      "choose": "Tambahkan file…",
+      "filterName": "Audio dan video"
+    },
+    "maxPart": {
+      "title": "Panjang maksimum bagian",
+      "unit": "mnt"
+    },
+    "cloud": {
+      "provider": "Penyedia",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Kustom (kompatibel dengan OpenAI)"
+      },
+      "baseUrl": "URL API",
+      "baseUrlDescription": "URL dasar yang diakhiri /v1.",
+      "apiKey": "Kunci API",
+      "apiKeyDescription": "Disimpan secara lokal di komputer ini.",
+      "model": "Model",
+      "modelDescription": "Model gpt-4o-transcribe menerima paling banyak ~23 mnt per permintaan; bagian dipendekkan otomatis.",
+      "language": "Bahasa",
+      "languageDescription": "Kode bahasa, misalnya id atau en. Biarkan kosong untuk deteksi otomatis.",
+      "languagePlaceholder": "otomatis"
+    },
+    "diarization": {
+      "count": "Orang dalam rekaman",
+      "auto": "Deteksi otomatis",
+      "model": "Model pembicara",
+      "modelDescription": "Diunduh sekali; membedakan suara. Keduanya kecil dan cepat.",
+      "recommended": "Disarankan",
+      "cloudUntimed": "Model {{model}} tidak mengembalikan stempel waktu, jadi pembicara tidak bisa ditandai. Pilih whisper-1, model whisper di Groq, atau pengenalan lokal.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Dilatih dengan ribuan suara; membedakan suara dengan andal pada rekaman nyata. Pilihan bawaan yang baik."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Model alternatif: coba jika model pertama tertukar suara pada rekaman Anda."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Sertakan juga transkrip mentah",
+      "includeRawDescription": "Tambahkan hasil pengenalan yang belum disunting di akhir dokumen.",
+      "promptPlaceholder": "Instruksi bawaan untuk bahasa rekaman (Rusia atau Inggris)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Stempel waktu",
+      "location": "Simpan ke",
+      "choose": "Pilih folder…",
+      "nextToSource": "Di samping file sumber",
+      "notes": "Catatan pemrosesan",
+      "removeFillers": "Hapus suara ragu",
+      "saveDebug": "Simpan file antara",
+      "saveDebugDescription": "Membuat folder “<name>.debug” di samping dokumen berisi teks setelah setiap langkah: pengenalan, pembersihan, setiap permintaan ke model bahasa beserta jawabannya, hasil akhir. Untuk melacak kesalahan dan untuk perbandingan model."
+    },
+    "actions": {
+      "start": "Transkripsikan",
+      "cancel": "Batal"
+    },
+    "progress": {
+      "starting": "Memulai…",
+      "elapsed": "Berlalu {{time}}",
+      "extracting": "Mengekstrak audio…",
+      "extractingPart": "Mengekstrak audio…",
+      "diarizing": "Mendeteksi pembicara…",
+      "diarizingPart": "Mendeteksi pembicara…",
+      "splitting": "Membagi menjadi bagian…",
+      "splittingPart": "Membagi menjadi bagian…",
+      "transcribing": "Mentranskripsi…",
+      "transcribingPart": "Mentranskripsi bagian {{part}} dari {{total}}…",
+      "post_processing": "Membersihkan dengan LLM…",
+      "post_processingPart": "Membersihkan bagian {{part}} dari {{total}} dengan LLM…",
+      "writing": "Menulis dokumen…",
+      "writingPart": "Menulis dokumen…"
+    },
+    "result": {
+      "open": "Buka",
+      "reveal": "Tampilkan di folder"
+    },
+    "document": {
+      "title": "Transkrip",
+      "sourceFile": "File",
+      "duration": "Durasi",
+      "parts": "Bagian",
+      "engine": "Pengenalan",
+      "llm": "Pascapemrosesan LLM",
+      "created": "Dibuat",
+      "part": "Bagian",
+      "rawTranscript": "Transkrip mentah",
+      "speaker": "Pembicara",
+      "notes": "Catatan pemrosesan",
+      "notesTotal": "Waktu pemrosesan",
+      "notesExtracting": "Ekstraksi audio",
+      "notesDiarizing": "Deteksi pembicara",
+      "notesTranscribing": "Pengenalan",
+      "notesLlm": "Pemrosesan LLM",
+      "notesWarnings": "Peringatan",
+      "notesNone": "tidak ada",
+      "notesLanguage": "Bahasa teks",
+      "llmLocal": "{{model}}, di komputer ini",
+      "warnings": {
+        "noTimestampsModel": "pembicara tidak ditandai: model ucapan ini tidak mengembalikan stempel waktu; gunakan model whisper atau pengenalan lokal",
+        "noTimestampsPart": "bagian {{part}}: layanan ucapan tidak mengembalikan stempel waktu, jadi pembicara tidak bisa ditandai",
+        "llmEmpty": "bagian {{part}}, fragmen {{fragment}}: LLM memberi jawaban kosong, teks mentah dipertahankan",
+        "llmError": "bagian {{part}}, fragmen {{fragment}}: galat LLM, teks mentah dipertahankan ({{error}})",
+        "numbersBack": "bagian {{part}}, fragmen {{fragment}}: angka dikembalikan di {{lines}} baris (LLM menuliskannya dengan huruf atau menghapusnya)",
+        "linesLost": "bagian {{part}}, fragmen {{fragment}}: jawaban LLM tidak mempertahankan baris bernomor, teks mentah dipertahankan",
+        "linesKept": "bagian {{part}}, fragmen {{fragment}}: {{kept}} dari {{total}} baris mempertahankan teks mentahnya ({{reasons}})",
+        "kept": {
+          "missing": "hilang",
+          "duplicate": "duplikat",
+          "empty": "kosong",
+          "tooLong": "terlalu panjang",
+          "translated": "diterjemahkan",
+          "tooShort": "terlalu pendek",
+          "cutOff": "terpotong"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Bersihkan yang selesai"
+    },
+    "events": {
+      "title": "Skrip peristiwa",
+      "choose": "Pilih…",
+      "none": "Belum diatur – peristiwa tidak dikirim ke mana pun",
+      "filterName": "Program dan skrip",
+      "test": "Uji",
+      "testOk": "Skrip menerima peristiwa uji",
+      "testFailed": "Gagal: {{error}}",
+      "testMessage": "Tishe: peristiwa uji",
+      "remaining": "sisa ~{{minutes}} mnt",
+      "started": "Transkripsi dimulai",
+      "finished": "Selesai",
+      "cancelled": "Dibatalkan",
+      "interval": {
+        "title": "Interval pemberitahuan kemajuan",
+        "description": "Paling sering sekali per sekian detik ini. Tahap atau bagian baru, awal, dan akhir dikirim langsung.",
+        "unit": "dtk"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Ubah",
+    "choose": "Pilih",
+    "open": "Buka",
+    "hide": "Sembunyikan",
+    "save": "Simpan",
+    "saved": "Tersimpan",
+    "copied": "Tersalin",
+    "undo": "Urungkan",
+    "download": "Unduh",
+    "downloadSize": "Unduh {{size}}",
+    "downloadingPercent": "Mengunduh · {{percent}}%",
+    "cancelDownload": "Batal",
+    "deleteNamed": "Hapus {{name}}",
+    "percent": "{{n}}%",
+    "useValue": "Gunakan “{{value}}”",
+    "fold": {
+      "more": "Lainnya",
+      "changed_other": "diubah: {{count}}",
+      "changedA11y_other": "{{count}} pengaturan diubah"
+    },
+    "number": {
+      "hint": "Dari {{min}} sampai {{max}}",
+      "hintDefault": "Bawaan {{value}}; dari {{min}} sampai {{max}}",
+      "notNumber": "Masukkan angka",
+      "range": "Masukkan angka dari {{min}} sampai {{max}}"
+    },
+    "units": {
+      "ms": "md",
+      "sec": "{{n}} dtk",
+      "min": "{{n}} mnt",
+      "hour": "{{n}} jam",
+      "hourMin": "{{h}} jam {{m}} mnt",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "hari ini {{time}}",
+      "yesterday": "kemarin {{time}}",
+      "todayTitle": "Hari ini",
+      "yesterdayTitle": "Kemarin"
+    },
+    "player": {
+      "play": "Putar",
+      "pause": "Jeda",
+      "position": "Posisi pemutaran"
+    },
+    "shortcut": {
+      "change": "Ubah tombol untuk “{{name}}”",
+      "reset": "Kembalikan tombol ke bawaan"
+    },
+    "echo": {
+      "recognition": "Pengenalan: {{model}}",
+      "language": "bahasa: {{language}}",
+      "sharedWithDictation": "dipakai bersama dikte",
+      "sharedWithFiles": "dipakai bersama transkripsi file",
+      "noModel": "Tidak ada model pengenalan suara"
+    },
+    "llm": {
+      "ready": "Siap · {{model}} di komputer ini",
+      "needed": "Memerlukan AI · {{model}}",
+      "downloading": "Mengunduh AI · {{percent}}%",
+      "runtimeMissing": "Mesin AI bawaan tidak ada",
+      "otherOptions": "Pilihan lain",
+      "noKey": "Memerlukan kunci {{provider}}",
+      "noUrl": "Memerlukan alamat server",
+      "noServerModel": "Memerlukan nama model",
+      "localServer": "Server Anda di komputer ini · {{model}}",
+      "textToServer": "Teks dikirim ke {{address}}",
+      "textToService": "Teks dikirim ke {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Hapus model {{name}}?",
+      "deleteModel": "Hapus model",
+      "deleteModelBody": "{{size}} akan dibebaskan. Untuk memakai model ini lagi, Anda harus mengunduhnya.",
+      "deleteActiveTitle": "Hapus {{name}}? Ini model yang sedang dipakai",
+      "deleteActiveBody": "Dikte dan transkripsi tidak akan berfungsi sampai Anda memilih model lain. {{size}} akan dibebaskan.",
+      "deleteLlmTitle": "Hapus model AI {{name}}?",
+      "deleteLlm": "Hapus model AI",
+      "deleteLlmBody": "{{size}} akan dibebaskan. Penyuntingan tidak akan berfungsi sampai Anda mengunduhnya lagi atau memilih yang lain.",
+      "deleteSpeakerModelBody": "Pemisahan per pembicara tidak akan berfungsi sampai Anda mengunduh model suara lagi."
+    },
+    "back": {
+      "transcription": "Kembali ke Transkripsi",
+      "dictation": "Kembali ke Dikte",
+      "meetings": "Kembali ke Rapat",
+      "history": "Kembali ke Riwayat",
+      "models": "Kembali ke Suara ke teks",
+      "llm": "Kembali ke Penyuntingan AI",
+      "app": "Kembali ke Aplikasi",
+      "about": "Kembali ke Tentang",
+      "debug": "Kembali ke Debug",
+      "next": "Kembali ke Selanjutnya"
+    },
+    "changed": "diubah"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "dimuat",
+      "loading": "memuat…",
+      "error": "gagal dimuat",
+      "unloaded": "tidak di memori",
+      "none": "Tidak ada model",
+      "a11y": "Model {{model}}, {{state}}. Ganti model",
+      "menu": "Model yang diunduh",
+      "all": "Semua model…",
+      "locked": "Transkripsi sedang berjalan – ganti setelah selesai"
+    },
+    "task": "Transkripsi: file {{current}} dari {{total}} · {{percent}}%",
+    "downloading": "Mengunduh: {{name}} · {{percent}}%",
+    "downloadingMany": "Mengunduh: {{count}} · {{percent}}%"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transkripsi memerlukan ffmpeg"
+    },
+    "drop": {
+      "title": "Letakkan rekaman di sini",
+      "text": "Audio atau video: mp3, m4a, wav, mp4, mkv, dan lainnya. Setiap file menjadi dokumen tersendiri.",
+      "more": "Letakkan rekaman lain atau",
+      "release": "Lepaskan untuk menambahkan",
+      "rejected": "{{names}} – bukan audio atau video",
+      "oneText": "“{{name}}” akan masuk antrean transkripsi",
+      "manyText_other": "{{count}} rekaman akan masuk antrean transkripsi",
+      "anyText": "File audio dan video akan masuk antrean transkripsi",
+      "noneTitle": "File ini tidak bisa dipakai",
+      "noneText": "Hanya audio dan video yang bisa ditranskripsi: mp3, m4a, wav, mp4, mkv, dan lainnya.",
+      "otherNote_other": "{{count}} file lagi akan dilewati: bukan audio atau video",
+      "alreadyOne": "“{{name}}” sudah ada di antrean",
+      "alreadyMany": "Rekaman ini sudah ada di antrean"
+    },
+    "list": {
+      "label": "Rekaman",
+      "waiting": "Menunggu",
+      "cancelled": "Dibatalkan",
+      "remaining": "sisa sekitar {{time}}",
+      "remove": "Hapus",
+      "removeFile": "Hapus {{name}}",
+      "removeFromList": "Hapus dari daftar",
+      "more": "Lainnya: {{name}}",
+      "recipeSpeakers": "pembicara",
+      "recipeEditing": "penyuntingan",
+      "recipeCloud": "di cloud",
+      "parts_other": "{{count}} bagian",
+      "notes_other": "{{count}} catatan pemrosesan",
+      "showAll": "Tampilkan semua ({{count}})",
+      "showFewer": "Tampilkan lebih sedikit",
+      "removedOne": "Dihapus dari daftar",
+      "removedMany_other": "{{count}} baris dihapus dari daftar",
+      "chars_other": "{{n}} karakter",
+      "keptNote": "{{count}} hasil terakhir disimpan. Dokumen di disk tidak pernah dihapus.",
+      "missing": "Dokumen tidak ditemukan: sudah dipindahkan atau dihapus, atau drive-nya terputus",
+      "openDocument": "Buka dokumen {{name}}"
+    },
+    "recipe": {
+      "title": "Resep",
+      "locked": "Pengaturan tidak berubah selama transkripsi berjalan. File baru memakai pengaturan yang sama.",
+      "where": "Tempat pengenalan",
+      "local": "Di komputer ini",
+      "cloud": "Di cloud",
+      "audioToService": "Audio dikirim ke {{provider}}",
+      "cloudEcho": "Pengenalan: {{model}} di {{provider}}",
+      "speakers": "Pembicara",
+      "speakersDescription": "Dokumen menjadi transkrip percakapan: “Pembicara 1: …”, “Pembicara 2: …”",
+      "speakersMissing": "Memerlukan model suara · {{size}}",
+      "speakersDownloading": "Mengunduh model suara · {{percent}}%",
+      "speakersReady": "Model suara siap",
+      "countDescription": "Jika Anda tahu, pemisahannya lebih akurat",
+      "editing": "Penyuntingan dengan AI",
+      "editingDescription": "Memperbaiki kesalahan pengenalan dan tanda baca. Jauh lebih lama: sekitar 15–35 mnt per jam rekaman",
+      "result": "Hasil",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "di samping rekaman"
+    },
+    "more": {
+      "recognition": "Pengenalan",
+      "maxPartDescription": "Rekaman panjang dipotong di jeda menjadi bagian yang tidak lebih panjang dari ini",
+      "speakers": "Pembicara",
+      "editing": "Penyuntingan",
+      "prompt": "Instruksi untuk file",
+      "promptDescription": "Kosong – instruksi bawaan dalam bahasa rekaman. Urutan: kolom ini, lalu ⚙ model, lalu yang bawaan",
+      "document": "Dokumen",
+      "locationDescription": "Nama diambil dari rekaman; tidak ada yang ditimpa, sebagai gantinya ditambahkan (2)",
+      "timestampsDescription": "Waktu rekaman sebelum setiap paragraf",
+      "removeFillersDescription": "Menghapus “uh”, “um”, “hmm” pada rekaman bahasa Inggris dan Rusia. Kata-kata tetap ada",
+      "globalFillers": "Transkrip sumber tetap kata demi kata. Dikte punya pengaturan kata pengisi sendiri",
+      "notesDescription": "Di akhir: waktu setiap tahap dan peringatan",
+      "integrations": "Integrasi",
+      "eventsDescription": "Program yang diberi tahu tentang awal, kemajuan, dan akhir (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Tambahkan file untuk memulai",
+      "noFfmpeg": "Memerlukan ffmpeg",
+      "noModel": "Unduh dulu model pengenalan suara",
+      "cloudIncomplete": "Memerlukan kunci {{provider}}",
+      "cloudIncompleteCustom": "Memerlukan alamat API, kunci, dan model",
+      "noSpeakerModel": "Memerlukan model suara",
+      "running": "File {{current}} dari {{total}} · berlalu {{time}}",
+      "start_other": "Transkripsikan {{count}} file",
+      "done_other": "Selesai: {{count}} file",
+      "errors_other": "{{count}} file dengan galat",
+      "summary_other": "{{count}} rekaman",
+      "modelDownloading": "Mengunduh model pengenalan suara · {{percent}}%",
+      "llmDownloading": "Mengunduh AI untuk penyuntingan · {{percent}}%",
+      "llmMissing": "Penyuntingan memerlukan AI",
+      "llmNotSetUp": "AI untuk penyuntingan belum diatur",
+      "withoutEditing": "Tanpa penyuntingan",
+      "modelNotActive": "Model pengenalan suara belum diaktifkan"
+    },
+    "stop": {
+      "title": "Hentikan transkripsi?",
+      "body": "File yang selesai ({{done}}) sudah disimpan. File saat ini ({{percent}}%) dan yang menunggu ({{waiting}}) harus dimulai lagi.",
+      "confirm": "Hentikan",
+      "keep": "Lanjutkan"
+    },
+    "tray": {
+      "running": "Transkripsi: file {{current}} dari {{total}} · {{pct}}%",
+      "ready_other": "Transkripsi siap: {{count}} file"
+    },
+    "notify": {
+      "readyOne": "Transkripsi siap",
+      "readyMany_other": "Transkripsi siap: {{count}} file",
+      "failedOne": "Transkripsi gagal",
+      "failedMany_other": "Transkripsi gagal: {{count}} file",
+      "partial": "Selesai {{ok}} dari {{total}} · {{errors}}",
+      "errors_other": "{{count}} gagal",
+      "failedFile": "Gagal: {{name}} · {{reason}}",
+      "open": "Buka"
+    },
+    "try": {
+      "before": "Buka editor apa saja, letakkan kursor di dalamnya, lalu tahan",
+      "after": "sambil berbicara. Lepaskan, dan teks muncul di sana.",
+      "changeKey": "Ganti tombol"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Dikte siap ·",
+      "anyWindow": "di jendela mana pun",
+      "keyBusy": "Dikte tidak mulai: tombol sedang dipakai",
+      "keyBusyDetail": "Program lain memakai {{key}}. Pilih tombol lain.",
+      "changeKey": "Ganti tombol"
+    },
+    "keys": {
+      "title": "Tombol",
+      "second": "Dikte dengan penyuntingan – tombol kedua",
+      "secondDescription": "Tombol biasa menempelkan teks apa adanya. Tombol ini menempelkannya setelah disunting AI",
+      "instruction": "Instruksi",
+      "manage": "Kelola…",
+      "secondBusy": "Program lain memakai tombol ini: pilih tombol lain"
+    },
+    "more": {
+      "paste": "Menempel teks",
+      "indicator": "Indikator perekaman",
+      "microphone": "Mikrofon dan perekaman",
+      "prompts": "Instruksi untuk dikte dengan penyuntingan",
+      "promptsDescription_other": "{{count}} instruksi",
+      "promptsRow": "Buat dan sunting instruksi",
+      "text": "Teks dikte",
+      "fillersDocuments": "Hanya untuk dikte. Pada dokumen, ini dilakukan oleh “Hapus suara ragu” di halaman Transkripsi"
+    },
+    "fix": {
+      "title": "Jika ada yang tidak berfungsi",
+      "paste": "Teks tidak tertempel",
+      "pasteHelp": "Jika Anda mendikte ke program yang dijalankan sebagai administrator, Windows tidak mengizinkan penempelan ke sana. Jika bukan itu, naikkan jeda di bawah.",
+      "cutOff": "Akhir kalimat terpotong",
+      "hold": "Tekan singkat dianggap menahan"
+    },
+    "prompts": {
+      "title": "Instruksi untuk dikte dengan penyuntingan",
+      "intro": "Instruksi memberi tahu AI apa yang harus dilakukan dengan teks yang didiktekan. ${output} adalah teks yang didiktekan.",
+      "current": "Instruksi saat ini",
+      "create": "Buat",
+      "deleted": "Instruksi “{{name}}” dihapus"
+    }
+  },
+  "meetings": {
+    "what": "Tishe akan merekam rapat dan panggilan di komputer ini: mikrofon Anda dan lawan bicara, lalu membuat transkrip yang dipisah per pembicara.",
+    "how": "Rekaman tetap di komputer, seperti semua hal lain di Tishe.",
+    "nowTitle": "Sudah bisa sekarang",
+    "nowText": "Jika rapat sudah direkam – dengan Zoom, Teams, atau perekam suara – tambahkan filenya di “Transkripsi”.",
+    "goTranscription": "Ke Transkripsi"
+  },
+  "history": {
+    "storage": {
+      "title": "Penyimpanan",
+      "limit_other": "{{count}} dikte terakhir disimpan",
+      "never": "Dikte tidak dihapus otomatis",
+      "days_3": "Dikte dihapus setelah 3 hari",
+      "weeks_2": "Dikte dihapus setelah 2 minggu",
+      "months_3": "Dikte dihapus setelah 3 bulan"
+    },
+    "empty": {
+      "title": "Dikte Anda akan muncul di sini",
+      "textBefore": "Tahan",
+      "textAfter": "di jendela mana pun lalu berbicaralah.",
+      "textNoKey": "Atur tombol dikte di “Dikte”."
+    },
+    "copy": "Salin teks",
+    "more": "Tindakan lain",
+    "keep": "Simpan",
+    "keepDescription": "Tidak dihapus otomatis",
+    "retry": "Kenali lagi",
+    "delete": "Hapus",
+    "deleted": "Dikte dihapus",
+    "failed": "Gagal dikenali",
+    "savedTag": "disimpan",
+    "editingSkipped": "tanpa penyuntingan",
+    "showMore": "Tampilkan lengkap",
+    "showLess": "Ciutkan",
+    "version": "Versi teks",
+    "versionEdited": "Setelah disunting",
+    "versionRaw": "Asli"
+  },
+  "models": {
+    "purpose": "Model yang mengubah ucapan menjadi teks, untuk dikte dan transkripsi file. Penyuntingan teks dengan AI ada di bagian",
+    "active": {
+      "title": "Model aktif",
+      "change": "Ganti model",
+      "none": "Belum ada model yang dipilih",
+      "noneHint": "Unduh model yang disarankan untuk bahasa Anda – atau model apa pun dari katalog di bawah"
+    },
+    "lockedByTranscription": "Transkripsi sedang berjalan – ganti setelah selesai",
+    "language": {
+      "title": "Bahasa dan terjemahan",
+      "scope": "Berlaku untuk dikte dan transkripsi file"
+    },
+    "cleanup": {
+      "title": "Pembersihan teks",
+      "scope": "Bekerja di dalam model pengenalan, untuk dikte dan file"
+    },
+    "memory": {
+      "title": "Memori"
+    },
+    "onlyLanguage": "hanya {{language}}",
+    "languageCount_other": "{{count}} bahasa",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Model Anda",
+      "yoursCount": "Model Anda ({{count}})",
+      "recommended": "Disarankan",
+      "all": "Semua model",
+      "languageFilter": "Bahasa",
+      "streaming": "Streaming",
+      "translation": "Terjemahan",
+      "showAll": "Tampilkan semua model ({{count}})",
+      "showFewer": "Tampilkan lebih sedikit"
+    },
+    "row": {
+      "use": "Gunakan",
+      "inUse": "dipakai",
+      "more": "Lainnya: {{name}}",
+      "delete": "Hapus model",
+      "translate": "menerjemahkan ke bahasa Inggris",
+      "streaming": "streaming",
+      "accuracy": "akurasi {{n}}/10",
+      "speed": "kecepatan {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Di mana dan dengan AI apa teks disunting",
+    "status": {
+      "usedFor": "Dipakai untuk",
+      "files": "penyuntingan file ({{state}})",
+      "dictation": "dikte dengan penyuntingan ({{state}})",
+      "on": "aktif",
+      "off": "nonaktif"
+    },
+    "where": {
+      "title": "Tempat AI berjalan",
+      "local": "Di komputer ini",
+      "localText": "Teks tetap di komputer",
+      "localUnavailable": "Tidak tersedia di versi ini",
+      "server": "Server sendiri",
+      "serverText": "Ollama, LM Studio, atau alamat Anda · teks dikirim ke server Anda",
+      "cloud": "Layanan cloud",
+      "cloudText": "OpenAI dan lainnya · teks dikirim ke layanan"
+    },
+    "variant": {
+      "local": "AI bawaan",
+      "server": "Server",
+      "cloud": "Layanan"
+    },
+    "local": {
+      "speed": "kecepatan {{n}} dari 5",
+      "quality": "kualitas {{n}} dari 5",
+      "footprint": "disk {{disk}} · memori ~{{ram}} GB",
+      "showAll": "Tampilkan semua model ({{count}})",
+      "showFewer": "Tampilkan lebih sedikit"
+    },
+    "server": {
+      "urlDescription": "Alamat kompatibel OpenAI yang diakhiri /v1",
+      "keyDescription": "Hanya jika server Anda memintanya"
+    }
+  },
+  "app": {
+    "purpose": "Perilaku program secara keseluruhan",
+    "launch": "Peluncuran dan baki sistem",
+    "look": "Tampilan",
+    "updates": "Pembaruan",
+    "checkNow": "Periksa versi baru",
+    "checkNowButton": "Periksa sekarang",
+    "experimental": "Fitur eksperimental",
+    "quit": {
+      "title": "Keluar dari Tishe?",
+      "body": "“{{name}}” sedang ditranskripsi ({{pct}}%). Proses ini akan berhenti; dokumen yang selesai sudah disimpan.",
+      "bodyIdle": "Transkripsi akan berhenti; dokumen yang selesai sudah disimpan.",
+      "confirm": "Keluar",
+      "stay": "Tetap di sini"
+    },
+    "notifications": "Notifikasi",
+    "notifyLabel": "Beri tahu saat transkripsi siap",
+    "notifyDescription": "Notifikasi Windows, hanya saat jendela tersembunyi atau tidak fokus. Klik untuk membuka hasilnya.",
+    "trayHint": "Windows menyembunyikan ikon baru. Agar tetap terlihat, seret dari ikon tersembunyi ke bilah tugas."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Yang baru",
+    "project": {
+      "title": "Tentang proyek",
+      "basedOn": "Berbasis Handy",
+      "basedOnText": "Sumber terbuka, lisensi MIT",
+      "tishe": "Tishe",
+      "tisheText": "Sumber terbuka, lisensi MIT. Rilis dan laporan bug ada di GitHub",
+      "licenses": "Lisensi",
+      "licensesText": "Pustaka dan model pihak ketiga yang digunakan Tishe",
+      "licensesOpen": "Buka",
+      "licensesError": "Tidak dapat membuka file lisensi",
+      "author": "Pengembang",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "Profil GitHub"
+    },
+    "supportHandy": "Dukung pembuat Handy",
+    "folders": "Folder",
+    "versionRelease": "Tishe {{version}}, rilis {{release}}"
+  },
+  "debug": {
+    "onBefore": "Mode debug aktif dan tetap aktif di antara peluncuran.",
+    "onAfter": "menyembunyikannya.",
+    "log": "Log",
+    "previews": "Pratinjau",
+    "keyboard": "Keyboard",
+    "transcription": "Transkripsi"
+  },
+  "release": {
+    "available": "Versi {{release}} sudah keluar",
+    "openPage": "Buka halaman rilis di GitHub",
+    "upToDate": "Ini versi terbaru",
+    "checkFailed": "Tidak dapat memeriksa pembaruan"
+  },
+  "next": {
+    "lead": "Tishe adalah bagian pertama dari Private Memory: memori pribadi percakapan Anda yang sepenuhnya tersimpan di komputer Anda.",
+    "now": "Saat ini Tishe sudah mengetik dikte Anda di aplikasi apa pun dan mentranskripsikan rekaman panjang dengan pemisahan pembicara. Tanpa internet dan tanpa akun.",
+    "planTitle": "Di versi berikutnya",
+    "plan": {
+      "meetings": {
+        "title": "Perekaman rapat",
+        "text": "mikrofon Anda dan peserta lain sebagai dua trek, dengan teks muncul selama percakapan."
+      },
+      "summaries": {
+        "title": "Ringkasan rapat",
+        "text": "keputusan dan tugas segera setelah berhenti merekam, dalam bahasa rapat, ditulis oleh model bahasa bawaan."
+      },
+      "search": {
+        "title": "Pencarian di rapat",
+        "text": "pertama berdasarkan kata, lalu berdasarkan makna."
+      },
+      "agents": {
+        "title": "Catatan dan asisten",
+        "text": "folder rapat untuk Obsidian dan akses asisten AI ke rapat Anda melalui MCP, tetap tanpa cloud."
+      }
+    },
+    "order": "Tanpa tanggal: urutan bisa berubah sesuai masukan.",
+    "freeTitle": "Gratis dan sumber terbuka",
+    "freeText": "Inti Tishe gratis dan akan tetap gratis. Ikuti rilisnya dan beri tahu kami di GitHub apa yang kurang.",
+    "follow": "Ikuti di GitHub",
+    "feedback": "Laporkan masalah atau ide"
+  },
+  "fileErrors": {
+    "notFound": "File tidak ditemukan: file dipindahkan atau dihapus.",
+    "noAudio": "File tidak berisi suara, atau tidak dapat dibaca.",
+    "unreadable": "Suara dari file tidak dapat dibaca. File mungkin rusak.",
+    "noModel": "Belum ada model pengenalan suara yang dipilih: pilih satu di «$t(sidebar.models)».",
+    "noSpeakerModel": "Model suara belum diunduh: unduh di «$t(transcription.more.speakers)».",
+    "noLlmModel": "Model bahasa belum diunduh: unduh di «$t(sidebar.llm)».",
+    "noLlmRuntime": "Mesin model bahasa bawaan tidak ada. Instal ulang Tishe.",
+    "cloudKey": "Pengenalan di cloud memerlukan kunci API.",
+    "cloudConfig": "Pengenalan di cloud belum diatur: isi alamat dan model.",
+    "busy": "File lain sedang ditranskripsikan.",
+    "noSpace": "Disk penuh.",
+    "fileInUse": "Dokumen terbuka di program lain (misalnya Word). Tutup lalu coba lagi.",
+    "accessDenied": "Tidak ada akses ke folder dokumen. Pilih folder lain: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Unduh model pengenalan suara",
+      "text": "Model ini mengubah ucapan menjadi teks – untuk rekaman maupun dikte. Berjalan di komputer ini, tanpa internet. Cukup diunduh sekali.",
+      "language": "Bahasa rekaman",
+      "allModels": "Semua model",
+      "onDisk": "Model {{name}} sudah ada di komputer – tinggal diaktifkan.",
+      "whileDownloading": "Selama mengunduh, Anda sudah bisa menambahkan rekaman: transkripsi dimulai setelah model siap."
+    },
+    "llm": {
+      "title": "Penyuntingan memerlukan AI",
+      "what": "AI memperbaiki kesalahan pengenalan dan tanda baca. Kami menyarankan AI bawaan: berjalan di komputer ini, dan teks tidak keluar dari komputer.",
+      "recommended": "{{size}} di disk · memerlukan sekitar {{ram}} GB memori · diunduh sekali",
+      "otherWays": "Server sendiri atau cloud",
+      "downloadOn": "Unduh {{size}} dan aktifkan",
+      "runtimeTitle": "AI bawaan tidak tersedia",
+      "runtime": "Versi ini tidak memiliki mesin AI bawaan. Anda bisa menghubungkan server sendiri (Ollama, LM Studio) atau layanan cloud di bagian “$t(sidebar.llm)”.",
+      "openPage": "Buka “$t(sidebar.llm)”",
+      "notSetUp": "{{reason}} – tanpa ini AI tidak akan berfungsi. Aktifkan penyuntingan dan selesaikan pengaturan di bagian “$t(sidebar.llm)”.",
+      "onAndSetUp": "Aktifkan dan atur",
+      "onDisk": "Sudah ada di komputer ini — tidak perlu mengunduh apa pun.",
+      "turnOn": "Aktifkan penyuntingan"
+    },
+    "quick": {
+      "title": "Mulai cepat",
+      "progress": "{{done}} dari {{total}}",
+      "hide": "Sembunyikan",
+      "hideHint": "Sembunyikan “Mulai cepat” – semua pengaturan tetap ada di bagian sebelah kiri",
+      "model": "Unduh model pengenalan suara",
+      "modelDone": "Model pengenalan suara siap · {{name}}",
+      "dictation": "Coba dikte",
+      "dictationDone": "Dikte berfungsi · hasil dikte disimpan di “Riwayat”",
+      "file": "Transkripsikan rekaman",
+      "fileDone": "Rekaman pertama sudah ditranskripsi",
+      "fileHint": "Seret file audio atau video ke jendela ini atau pilih file – dokumen Word akan muncul di samping rekaman.",
+      "llm": "Penyuntingan dengan AI",
+      "optional": "opsional",
+      "llmHint": "Memperbaiki kesalahan pengenalan dan tanda baca dalam dokumen. {{model}}: {{size}}, berjalan di komputer ini.",
+      "llmReady": "AI siap · {{model}}",
+      "doneTitle": "Semua siap",
+      "doneText": "Tishe sudah siap. Hasil dikte ada di “Riwayat”, dokumen di daftar di bawah, pengaturan di bagian sebelah kiri.",
+      "close": "Tutup"
+    }
   }
 }

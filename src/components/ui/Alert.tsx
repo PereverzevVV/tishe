@@ -1,64 +1,65 @@
 import React from "react";
-import { AlertCircle, AlertTriangle, Info, CheckCircle } from "lucide-react";
+import { AlertTriangle, Check, CircleAlert, Info } from "lucide-react";
 
+/**
+ * Inline warning (VISUAL_DESIGN_SYSTEM §12.21): neutral group surface, the
+ * colour lives only in the 16 px icon — red when work is impossible, amber
+ * when it is possible with a caveat. Text is always primary/secondary.
+ */
 type AlertVariant = "error" | "warning" | "info" | "success";
 
 interface AlertProps {
   variant?: AlertVariant;
-  /** When true, removes rounded corners for use inside containers */
+  /** Drawn inside another container (a group row, a dialog): no surface. */
   contained?: boolean;
-  children: React.ReactNode;
+  /** Bold first line; children become the secondary text under it. */
+  title?: React.ReactNode;
+  children?: React.ReactNode;
+  /** Buttons or links under the text. */
+  actions?: React.ReactNode;
   className?: string;
 }
 
-const variantStyles: Record<
-  AlertVariant,
-  { container: string; icon: string; text: string }
-> = {
-  error: {
-    container: "bg-red-500/10",
-    icon: "text-red-500",
-    text: "text-red-400",
-  },
-  warning: {
-    container: "bg-yellow-500/10",
-    icon: "text-yellow-500",
-    text: "text-yellow-400",
-  },
-  info: {
-    container: "bg-blue-500/10",
-    icon: "text-blue-500",
-    text: "text-blue-400",
-  },
-  success: {
-    container: "bg-green-500/10",
-    icon: "text-green-500",
-    text: "text-green-400",
-  },
-};
-
-const variantIcons: Record<AlertVariant, React.ElementType> = {
-  error: AlertCircle,
+const ICON: Record<AlertVariant, React.ElementType> = {
+  error: CircleAlert,
   warning: AlertTriangle,
   info: Info,
-  success: CheckCircle,
+  success: Check,
+};
+
+const ICON_CLASS: Record<AlertVariant, string> = {
+  error: "t-icon-danger",
+  warning: "t-icon-warning",
+  info: "t-icon-secondary",
+  success: "t-icon-secondary",
 };
 
 export const Alert: React.FC<AlertProps> = ({
   variant = "error",
   contained = false,
+  title,
   children,
+  actions,
   className = "",
 }) => {
-  const styles = variantStyles[variant];
-  const Icon = variantIcons[variant];
-
+  const Icon = ICON[variant];
   return (
     <div
-      className={`flex items-start gap-3 p-4 ${styles.container} ${contained ? "" : "rounded-lg"} ${className}`}
+      className={`t-alert ${contained ? "t-alert-inset" : ""} ${className}`}
+      role={variant === "error" ? "alert" : "status"}
     >
-      <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${styles.icon}`} />
-      <p className={`text-sm ${styles.text}`}>{children}</p>
+      <Icon className={ICON_CLASS[variant]} aria-hidden="true" />
+      <div className="t-alert-body">
+        {title ? (
+          <>
+            <div className={children ? "t-alert-title" : ""}>{title}</div>
+            {children && <div className="t-alert-text">{children}</div>}
+          </>
+        ) : (
+          <div>{children}</div>
+        )}
+        {actions && <div className="t-alert-actions">{actions}</div>}
+      </div>
     </div>
   );
 };

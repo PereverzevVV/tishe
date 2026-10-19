@@ -1,0 +1,2089 @@
+/*
+ * Tishe components (VISUAL_DESIGN_SYSTEM §7–§12, version 3).
+ * Geometry is taken one to one from the v3 specimen (rules v3).
+ * Only --t-* tokens; every spacing value is on the 4 px scale (§7.1), except
+ * the derived control geometry allowed by VD-78.
+ */
+
+@layer base {
+  *:focus-visible {
+    outline: 2px solid var(--t-accent);
+    outline-offset: 2px;
+  }
+
+  /* Lucide icons: 1.75 stroke in a 24 grid (§9). */
+  svg.lucide {
+    stroke-width: 1.75;
+    flex: none;
+  }
+
+  /* Theme switch: no transitions while the palette changes (§4, rule 4). */
+  .t-no-transition,
+  .t-no-transition * {
+    transition: none !important;
+  }
+
+  @media (forced-colors: active) {
+    *:focus-visible {
+      outline-color: Highlight;
+    }
+  }
+}
+
+@layer components {
+  /* ---------- typography (§6.2) ---------- */
+  .t-type-display {
+    font: 600 24px/30px var(--t-font-display);
+  }
+  .t-type-title {
+    font: 600 20px/26px var(--t-font-display);
+  }
+  .t-type-headline {
+    font: 600 17px/24px var(--t-font-ui);
+  }
+  .t-type-body {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .t-type-prose {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .t-type-caption {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .t-text-secondary {
+    color: var(--t-text-secondary);
+  }
+  .t-text-tertiary {
+    color: var(--t-text-tertiary);
+  }
+  .t-selectable {
+    user-select: text;
+    cursor: text;
+  }
+
+  /* ---------- window shell (§7.4) ---------- */
+  .t-window {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: var(--t-sidebar-w) 1fr;
+    grid-template-rows: minmax(0, 1fr) var(--t-statusbar-h);
+    background: var(--t-bg-app);
+    color: var(--t-text-primary);
+    cursor: default;
+    user-select: none;
+  }
+
+  .t-side {
+    background: var(--t-bg-sidebar);
+    padding: 16px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .t-mark {
+    font: 600 17px/24px var(--t-font-ui);
+    padding: 0 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t-mark-logo {
+    width: 22px;
+    height: 22px;
+    flex: none;
+  }
+  .t-nav {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: var(--t-radius-sm);
+    color: var(--t-text-primary);
+    text-align: start;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+    user-select: none;
+  }
+  .t-nav:focus-visible {
+    outline-offset: -2px;
+  }
+  .t-nav > svg {
+    color: var(--t-text-secondary);
+  }
+  .t-nav:hover {
+    background: var(--t-overlay-hover);
+  }
+  .t-nav:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-nav[aria-current="page"] {
+    background: var(--t-overlay-selected);
+    font-weight: 600;
+  }
+  .t-nav[aria-current="page"] > svg {
+    color: var(--t-text-primary);
+  }
+  .t-nav .t-nav-label {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .t-nav .t-nav-soon {
+    color: var(--t-text-secondary);
+  }
+  .t-nav .t-nav-end {
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    color: var(--t-text-tertiary);
+  }
+  .t-nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-accent);
+  }
+  .t-nav-sep {
+    height: 1px;
+    background: var(--t-separator);
+    margin: 8px;
+    flex: none;
+  }
+
+  .t-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    position: relative;
+  }
+  .t-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .t-col {
+    max-width: var(--t-content-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 24px 32px;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .t-col > :last-child,
+  .t-col > .t-work:last-child > :last-child > :last-child {
+    margin-bottom: 0;
+  }
+  /* Two-column work area and wide lists exist only on a wide window (see the
+     media query at the end); otherwise the wrappers do not take part in the
+     layout and the page is the single 640 column. */
+  .t-work,
+  .t-work-main,
+  .t-work-side {
+    display: contents;
+  }
+  .t-next-free {
+    margin-top: 32px;
+  }
+  .t-page-title {
+    font: 600 20px/26px var(--t-font-display);
+    margin: 0;
+  }
+  .t-page-head {
+    margin-bottom: 20px;
+  }
+  .t-page-purpose {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    margin-top: 4px;
+  }
+  .t-section {
+    margin-bottom: 32px;
+  }
+
+  /* The panel and the status bar draw their separator inside their height. */
+  .t-panel {
+    position: relative;
+    z-index: var(--t-z-sticky);
+    height: var(--t-panel-h);
+    flex: none;
+    display: flex;
+    background: var(--t-bg-app);
+  }
+  /* The panel's content lines up with the page column, so on a wide window
+     the main button stays under the content, not at the far window edge. */
+  .t-panel-inner {
+    width: 100%;
+    max-width: var(--t-content-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 24px;
+  }
+  .t-panel::before,
+  .t-status::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: var(--t-separator);
+  }
+  .t-panel-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .t-status {
+    position: relative;
+    grid-column: 1 / 3;
+    background: var(--t-bg-sidebar);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-tertiary);
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .t-status-part {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: var(--t-radius-sm);
+    color: var(--t-text-secondary);
+    background: transparent;
+    border: 0;
+    font: inherit;
+    min-width: 0;
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  button.t-status-part:hover {
+    background: var(--t-overlay-hover);
+  }
+  button.t-status-part:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-status-part:focus-visible {
+    outline-offset: -2px;
+  }
+  .t-status-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .t-status-end {
+    margin-inline-start: auto;
+    padding-inline-end: 8px;
+  }
+  .t-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-text-secondary);
+    display: inline-block;
+    flex: none;
+  }
+  .t-dot-empty {
+    background: transparent;
+    border: 1px solid var(--t-text-tertiary);
+  }
+
+  /* ---------- back row and deep-link highlight (§12.12) ---------- */
+  .t-back {
+    align-self: flex-start;
+    margin-bottom: 8px;
+    margin-inline-start: -8px;
+  }
+  .t-highlight {
+    animation: t-highlight var(--t-dur-highlight) linear forwards;
+  }
+  @keyframes t-highlight {
+    0% {
+      box-shadow: inset 0 0 0 999px var(--t-overlay-selected);
+    }
+    100% {
+      box-shadow: inset 0 0 0 999px transparent;
+    }
+  }
+
+  /* ---------- buttons (§12.1) ---------- */
+  .t-btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: var(--t-radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 72px;
+    border: 0;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    color: var(--t-text-primary);
+    background: transparent;
+    user-select: none;
+    flex: none;
+    transition:
+      background-color var(--t-dur-feedback) var(--t-ease-enter),
+      color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-btn > svg {
+    width: 16px;
+    height: 16px;
+  }
+  .t-btn-sm {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 16px;
+    min-width: 0;
+  }
+  .t-btn-sm > svg {
+    width: 14px;
+    height: 14px;
+  }
+  .t-btn-lg {
+    height: 40px;
+    padding: 0 16px;
+    min-width: 120px;
+  }
+  .t-btn-primary {
+    background: var(--t-inverse);
+    color: var(--t-text-inverse);
+  }
+  .t-btn-primary:hover {
+    background: var(--t-inverse-hover);
+  }
+  .t-btn-primary:active {
+    background: var(--t-inverse-pressed);
+  }
+  .t-btn-secondary {
+    background: var(--t-fill-secondary);
+  }
+  .t-btn-secondary:hover {
+    background: var(--t-fill-secondary-hover);
+  }
+  .t-btn-secondary:active {
+    background: var(--t-fill-secondary-pressed);
+  }
+  .t-btn-quiet {
+    min-width: 0;
+  }
+  .t-btn-quiet:hover {
+    background: var(--t-overlay-hover);
+  }
+  .t-btn-quiet:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-btn-danger {
+    background: var(--t-danger-fill);
+    color: var(--t-text-on-danger);
+  }
+  .t-btn-danger:hover {
+    background: var(--t-danger-fill-hover);
+  }
+  .t-btn-danger:active {
+    background: var(--t-danger-fill-pressed);
+  }
+  .t-btn-icon {
+    width: 32px;
+    padding: 0;
+    min-width: 0;
+  }
+  .t-btn-icon.t-btn-sm {
+    width: 24px;
+  }
+  .t-btn-icon > svg,
+  .t-btn-icon.t-btn-sm > svg {
+    width: 16px;
+    height: 16px;
+  }
+  .t-btn:disabled,
+  .t-btn[aria-disabled="true"] {
+    color: var(--t-text-disabled);
+    pointer-events: none;
+  }
+  .t-btn-primary:disabled,
+  .t-btn-danger:disabled {
+    background: var(--t-fill-secondary);
+  }
+  .t-btn-secondary:disabled {
+    background: var(--t-overlay-hover);
+  }
+
+  /* Navigation link: primary colour, always underlined (§3.3, VD-79). */
+  .t-link {
+    color: var(--t-text-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    display: inline;
+    white-space: nowrap;
+  }
+  .t-link:hover,
+  .t-link:active {
+    text-decoration-thickness: 2px;
+  }
+  .t-link:disabled {
+    color: var(--t-text-disabled);
+    cursor: default;
+  }
+
+  /* ---------- fields (§12.2) ---------- */
+  .t-field {
+    height: 32px;
+    border: 1px solid var(--t-border-control);
+    border-radius: var(--t-radius-sm);
+    background: var(--t-bg-field);
+    padding: 0 12px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--t-text-primary);
+    min-width: 0;
+    transition: border-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-field::placeholder {
+    color: var(--t-text-tertiary);
+  }
+  .t-field:hover {
+    border-color: var(--t-border-control-hover);
+  }
+  .t-field[aria-invalid="true"] {
+    border-color: var(--t-danger);
+  }
+  .t-field:disabled {
+    background: var(--t-overlay-hover);
+    border-color: var(--t-separator);
+    color: var(--t-text-disabled);
+  }
+  textarea.t-field {
+    height: auto;
+    min-height: 96px;
+    padding: 8px 12px;
+    line-height: 22px;
+    resize: vertical;
+  }
+  .t-field-sm {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .t-field-number {
+    width: 88px;
+  }
+  .t-field-unit {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-tertiary);
+  }
+  .t-field-hint {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+  }
+  .t-field-error {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-danger);
+  }
+
+  /* ---------- select and menu (§12.3, §12.9) ---------- */
+  .t-select {
+    height: 32px;
+    min-width: 160px;
+    max-width: min(240px, 100%);
+    border: 1px solid var(--t-border-control);
+    border-radius: var(--t-radius-sm);
+    background: var(--t-bg-field);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px 0 12px;
+    gap: 8px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--t-text-primary);
+    text-align: start;
+    transition: border-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-select > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .t-select > svg {
+    color: var(--t-text-tertiary);
+    width: 16px;
+    height: 16px;
+    transition: transform var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-select[aria-expanded="true"] > svg {
+    transform: rotate(180deg);
+  }
+  .t-select:hover {
+    border-color: var(--t-border-control-hover);
+  }
+  .t-select:disabled {
+    background: var(--t-overlay-hover);
+    border-color: var(--t-separator);
+    color: var(--t-text-disabled);
+  }
+  .t-select-wide {
+    max-width: none;
+    width: 100%;
+  }
+  .t-select .t-placeholder {
+    color: var(--t-text-tertiary);
+  }
+
+  .t-menu {
+    position: fixed;
+    z-index: var(--t-z-popover);
+    background: var(--t-bg-raised);
+    box-shadow: var(--t-shadow-e2);
+    border-radius: var(--t-radius-md);
+    padding: 4px;
+    min-width: 180px;
+    max-width: 320px;
+    max-height: 320px;
+    overflow-y: auto;
+    color: var(--t-text-primary);
+    animation: t-menu-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+  @keyframes t-menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  .t-menu-item {
+    min-height: 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: var(--t-radius-sm);
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--t-text-primary);
+    text-align: start;
+    user-select: none;
+  }
+  .t-menu-item:focus-visible {
+    outline-offset: -2px;
+  }
+  .t-menu-item:hover,
+  .t-menu-item[data-active="true"] {
+    background: var(--t-overlay-hover);
+  }
+  .t-menu-item:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-menu-item:disabled,
+  .t-menu-item[aria-disabled="true"] {
+    color: var(--t-text-disabled);
+    background: transparent;
+  }
+  .t-menu-item-danger {
+    color: var(--t-danger);
+  }
+  .t-menu-check {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--t-text-primary);
+  }
+  .t-menu-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .t-menu-desc {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+  }
+  .t-menu-sep {
+    height: 1px;
+    background: var(--t-separator);
+    margin: 4px 0;
+  }
+  .t-menu-group {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: var(--t-text-secondary);
+    padding: 8px 8px 4px;
+  }
+  .t-menu-search {
+    padding: 0 0 4px;
+  }
+  .t-menu-empty {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+  }
+
+  /* Shortcut field (§12.20): keycaps inside a field-like button. */
+  .t-shortcut {
+    min-width: 0;
+    max-width: none;
+    justify-content: flex-start;
+    padding: 0 8px;
+  }
+  .t-shortcut[data-recording="true"] {
+    outline: 2px solid var(--t-accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- switch (§12.4) ---------- */
+  .t-toggle {
+    width: 36px;
+    height: 20px;
+    border-radius: var(--t-radius-full);
+    position: relative;
+    flex: none;
+    padding: 0;
+    border: 1px solid var(--t-border-control);
+    background: transparent;
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-toggle::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--t-radius-full);
+    width: 12px;
+    height: 12px;
+    background: var(--t-border-control);
+    top: 3px;
+    left: 3px;
+    transition: transform var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-toggle:hover {
+    background: var(--t-overlay-hover);
+  }
+  .t-toggle:hover::after {
+    transform: scale(1.08);
+  }
+  .t-toggle:active::after {
+    transform: scaleX(1.15);
+  }
+  .t-toggle[aria-checked="true"] {
+    background: var(--t-control-on);
+    border-color: var(--t-control-on);
+  }
+  .t-toggle[aria-checked="true"]:hover {
+    background: var(--t-control-on-hover);
+    border-color: var(--t-control-on-hover);
+  }
+  .t-toggle[aria-checked="true"]:active {
+    background: var(--t-control-on-pressed);
+    border-color: var(--t-control-on-pressed);
+  }
+  .t-toggle[aria-checked="true"]::after {
+    width: 14px;
+    height: 14px;
+    background: var(--t-bg-app);
+    top: 2px;
+    left: auto;
+    right: 2px;
+  }
+  .t-toggle:disabled {
+    border-color: var(--t-separator);
+    background: transparent;
+  }
+  .t-toggle:disabled::after {
+    background: var(--t-text-disabled);
+    transform: none;
+  }
+  .t-toggle:disabled[aria-checked="true"] {
+    background: var(--t-fill-secondary);
+    border-color: transparent;
+  }
+  .t-toggle:disabled[aria-checked="true"]::after {
+    background: var(--t-bg-app);
+  }
+
+  /* ---------- radio (§12.6) ---------- */
+  .t-radio {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: var(--t-radius-full);
+    border: 1px solid var(--t-border-control);
+    background: var(--t-bg-field);
+    position: relative;
+  }
+  [aria-checked="true"] > .t-radio,
+  .t-radio[data-checked="true"] {
+    background: var(--t-control-on);
+    border-color: var(--t-control-on);
+  }
+  [aria-checked="true"] > .t-radio::after,
+  .t-radio[data-checked="true"]::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-bg-app);
+    top: 4px;
+    left: 4px;
+  }
+
+  /* ---------- segments (§12.7) ---------- */
+  .t-seg {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    max-width: 100%;
+    min-height: 32px;
+    padding: 2px;
+    border-radius: var(--t-radius-sm);
+    background: var(--t-fill-secondary);
+    flex: none;
+  }
+  .t-seg button {
+    min-height: 28px;
+    min-width: 0;
+    padding: 0 12px;
+    border-radius: var(--t-radius-xs);
+    border: 1px solid transparent;
+    background: transparent;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--t-text-secondary);
+    user-select: none;
+    transition: color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  /* Width reserved for the 600 weight so selection does not shift (VD-60). */
+  .t-seg button::after {
+    content: attr(data-l);
+    font-weight: 600;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  .t-seg button:hover {
+    color: var(--t-text-primary);
+  }
+  .t-seg button[aria-checked="true"],
+  .t-seg button[aria-pressed="true"] {
+    background: var(--t-segment-thumb);
+    border-color: var(--t-separator);
+    color: var(--t-text-primary);
+    font-weight: 600;
+  }
+  .t-seg button:disabled {
+    color: var(--t-text-disabled);
+  }
+  .t-seg button:focus-visible {
+    outline-offset: -2px;
+  }
+  .t-seg-sm {
+    min-height: 24px;
+  }
+  .t-seg-sm button {
+    min-height: 20px;
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .t-seg-wide {
+    display: grid;
+    width: 100%;
+  }
+
+  /* ---------- tag, keycap (§12.19, §12.20) ---------- */
+  .t-tag {
+    height: 20px;
+    padding: 0 8px;
+    border-radius: var(--t-radius-xs);
+    background: var(--t-fill-secondary);
+    color: var(--t-text-secondary);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    flex: none;
+    user-select: none;
+    vertical-align: middle;
+  }
+  .t-tag > svg {
+    width: 14px;
+    height: 14px;
+  }
+  .t-tag-remove {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    padding: 0;
+    border-radius: var(--t-radius-xs);
+    background: transparent;
+    color: var(--t-text-secondary);
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-tag-remove:hover {
+    background: var(--t-overlay-hover);
+  }
+  .t-tag-remove:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-keycap {
+    height: 20px;
+    padding: 0 8px;
+    border-radius: var(--t-radius-xs);
+    background: var(--t-fill-secondary);
+    box-shadow: inset 0 -1px 0 var(--t-separator);
+    font-size: 12px;
+    line-height: 16px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  /* ---------- settings groups and rows (§12.14) ---------- */
+  .t-group-title {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: var(--t-text-secondary);
+    margin: 0 0 8px;
+  }
+  .t-group-desc {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    margin: -4px 0 8px;
+    max-width: 480px;
+  }
+  .t-group {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+  }
+  .t-group-block {
+    margin-bottom: 24px;
+  }
+  .t-group-block:last-child {
+    margin-bottom: 0;
+  }
+  /* A fold or a section after a group keeps 32 px, not 24 + 32 (§7.2). */
+  .t-group-block:has(+ .t-fold),
+  .t-section:has(+ .t-fold) {
+    margin-bottom: 0;
+  }
+  /* In the normal window the two-column wrappers do not exist for the
+     layout, so a group that ends a wrapper keeps its gap to the next block,
+     and the fold rule above still holds across the wrappers. */
+  .t-work-main > .t-group-block:last-child,
+  .t-work-side > .t-group-block:last-child {
+    margin-bottom: 24px;
+  }
+  .t-work-main:has(+ .t-work-side > .t-fold:first-child) > :last-child {
+    margin-bottom: 0;
+  }
+  /* When the control does not fit beside the label (narrow window, large
+     text), it wraps under it (§7.6) instead of scrolling sideways. */
+  .t-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 12px 16px;
+    min-height: 44px;
+    position: relative;
+  }
+  .t-group > * + .t-row::before,
+  .t-group > * + .t-row-stacked::before,
+  .t-group > * + .t-block::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16px;
+    right: 0;
+    height: 1px;
+    background: var(--t-separator);
+  }
+  .t-group > .t-row-dependent::before,
+  .t-group > .t-row + .t-row-dependent::before {
+    display: none;
+  }
+  /* Rows nested in a wrapper (radio group) draw their own separator. */
+  .t-row-sep::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16px;
+    right: 0;
+    height: 1px;
+    background: var(--t-separator);
+  }
+  .t-row[role="radio"]:focus-visible {
+    outline-offset: -2px;
+    border-radius: var(--t-radius-md);
+  }
+  .t-row-dependent {
+    padding-inline-start: 32px;
+    padding-top: 0;
+  }
+  .t-row-text {
+    flex: 1 1 160px;
+    min-width: 0;
+  }
+  .t-row-label {
+    display: block;
+  }
+  /* Label and the «изменено» tag of a changed row inside a fold. */
+  .t-row-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+  }
+  .t-row-desc {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    margin-top: 2px;
+    max-width: 480px;
+  }
+  .t-row-control {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-width: 0;
+    margin-inline-start: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .t-row-stacked {
+    display: block;
+    padding: 12px 16px;
+    position: relative;
+  }
+  .t-row-stacked > .t-row-body {
+    margin-top: 8px;
+  }
+  .t-block {
+    padding: 12px 16px;
+    position: relative;
+  }
+  /* Disabled: the label fades, the reason stays readable (§13.7). */
+  .t-row-disabled .t-row-label {
+    color: var(--t-text-disabled);
+  }
+  .t-lock {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+  }
+  /* The lock line is not a row: no separator right under it. */
+  .t-group > .t-lock + .t-row::before,
+  .t-group > .t-lock + .t-row-stacked::before {
+    display: none;
+  }
+  .t-lock > svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Service lines: consequence, readiness, echo (§12.14). */
+  /* Icon at the start; text and action flow as one line of text beside it,
+     so a long reason wraps under itself, not under the icon. */
+  .t-svc {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 4px;
+    color: var(--t-text-secondary);
+  }
+  .t-svc > svg {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+  }
+  .t-svc-body {
+    min-width: 0;
+  }
+  .t-svc-strong {
+    color: var(--t-text-primary);
+  }
+  .t-svc .t-link {
+    margin-inline-start: 4px;
+  }
+  .t-svc .t-btn {
+    margin-inline-start: 4px;
+  }
+  .t-icon-warning {
+    color: var(--t-warning);
+  }
+  .t-icon-danger {
+    color: var(--t-danger);
+  }
+  .t-icon-secondary {
+    color: var(--t-text-secondary);
+  }
+  .t-icon-tertiary {
+    color: var(--t-text-tertiary);
+  }
+
+  /* ---------- fold (§12.17) ---------- */
+  .t-fold {
+    margin-top: 32px;
+  }
+  .t-fold-head {
+    height: 36px;
+    width: calc(100% + 16px);
+    margin-inline-start: -8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border-radius: var(--t-radius-sm);
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-weight: 600;
+    color: var(--t-text-primary);
+    text-align: start;
+    user-select: none;
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-fold-head:hover {
+    background: var(--t-overlay-hover);
+  }
+  .t-fold-head:active {
+    background: var(--t-overlay-pressed);
+  }
+  .t-fold-head > svg {
+    width: 16px;
+    height: 16px;
+    color: var(--t-text-secondary);
+    transition: transform var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-fold-head[aria-expanded="true"] > svg {
+    transform: rotate(90deg);
+  }
+  [dir="rtl"] .t-fold-head > svg {
+    transform: rotate(180deg);
+  }
+  [dir="rtl"] .t-fold-head[aria-expanded="true"] > svg {
+    transform: rotate(90deg);
+  }
+  .t-fold-count {
+    margin-inline-start: auto;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: var(--t-text-tertiary);
+  }
+  .t-fold-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--t-dur-enter) var(--t-ease-enter),
+      opacity var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-fold-body[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .t-fold-inner {
+    overflow: hidden;
+    min-height: 0;
+    min-width: 0;
+  }
+  .t-fold-body[data-open="true"] > .t-fold-inner {
+    overflow: visible;
+  }
+  .t-fold-content {
+    padding-top: 12px;
+  }
+
+  /* ---------- lists (§12.15) ---------- */
+  .t-list {
+    position: relative;
+  }
+  .t-list-title {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: var(--t-text-secondary);
+    margin: 16px 0 0;
+  }
+  .t-list-title:first-child {
+    margin-top: 0;
+  }
+  .t-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 8px;
+    padding: 12px 0;
+    position: relative;
+  }
+  .t-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--t-separator);
+  }
+  .t-item:last-child::after,
+  .t-item.t-item-last::after {
+    display: none;
+  }
+  .t-item-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: text;
+  }
+  .t-item-meta {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-tertiary);
+    user-select: text;
+    overflow-wrap: anywhere;
+  }
+  .t-item-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    user-select: text;
+  }
+  .t-item-status > svg {
+    width: 14px;
+    height: 14px;
+  }
+  .t-item-status-error {
+    color: var(--t-text-primary);
+    align-items: flex-start;
+  }
+  .t-item-status-error > svg {
+    margin-top: 1px;
+  }
+  .t-item-acts {
+    display: flex;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  .t-item-num {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-tertiary);
+    padding-top: 2px;
+  }
+  .t-item-notes {
+    margin-top: 4px;
+    margin-inline-start: -8px;
+    color: var(--t-text-secondary);
+  }
+  .t-list-more {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    margin-inline-start: -8px;
+  }
+
+  /* ---------- progress, spinner (§12.24) ---------- */
+  .t-progress {
+    height: 4px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-overlay-pressed);
+    margin-top: 4px;
+    overflow: hidden;
+  }
+  .t-progress > i {
+    display: block;
+    height: 100%;
+    background: var(--t-accent);
+    border-radius: var(--t-radius-full);
+    transition: width 300ms linear;
+  }
+  .t-progress-indeterminate > i {
+    width: 30%;
+    animation: t-indeterminate 1400ms linear infinite;
+  }
+  @keyframes t-indeterminate {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(333%);
+    }
+  }
+  .t-spinner {
+    color: var(--t-text-tertiary);
+    animation: t-spin 1000ms linear infinite;
+  }
+  svg.lucide.t-spinner {
+    stroke-width: 2;
+  }
+  @keyframes t-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Player position (History): a 4 px neutral track with a small knob. */
+  .t-player-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: var(--t-radius-full);
+    outline-offset: 4px;
+  }
+  .t-player-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-text-secondary);
+    border: 0;
+  }
+
+  /* ---------- drop zone (§12.25) ---------- */
+  .t-drop {
+    border: 1px dashed var(--t-border-control);
+    border-radius: var(--t-radius-md);
+    color: var(--t-text-secondary);
+  }
+  .t-drop-row {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+  .t-drop-empty {
+    flex: 1 0 auto;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .t-drop-empty > svg {
+    width: 24px;
+    height: 24px;
+    color: var(--t-text-tertiary);
+  }
+  .t-drop-empty-title {
+    font: 600 17px/24px var(--t-font-ui);
+    color: var(--t-text-primary);
+  }
+  .t-drop-empty-text {
+    max-width: 420px;
+    margin-bottom: 8px;
+  }
+  /* Files over the window: a veil of the window background over the whole
+     work area and a dashed target — the same "drop here" sign as the zone,
+     larger. Neutral, no accent frame (owner, 2026-10-09). */
+  .t-drop-over {
+    position: absolute;
+    inset: 0;
+    z-index: var(--t-z-popover);
+    display: flex;
+    padding: 16px;
+    background: color-mix(in srgb, var(--t-bg-app) 92%, transparent);
+    pointer-events: none;
+    animation: t-fade-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-drop-over-target {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 24px;
+    text-align: center;
+    border: 2px dashed var(--t-border-control);
+    border-radius: var(--t-radius-lg);
+    background: var(--t-bg-group);
+    animation: t-drop-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-drop-over-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 12px;
+    border-radius: var(--t-radius-full);
+    background: var(--t-bg-app);
+    box-shadow: var(--t-shadow-e2);
+    color: var(--t-text-primary);
+  }
+  .t-drop-over-icon > svg {
+    width: 24px;
+    height: 24px;
+  }
+  .t-drop-over[data-state="none"] .t-drop-over-icon {
+    color: var(--t-text-tertiary);
+    box-shadow: none;
+  }
+  .t-drop-over-title {
+    font: 600 20px/26px var(--t-font-display);
+    color: var(--t-text-primary);
+  }
+  .t-drop-over-text {
+    max-width: 420px;
+    color: var(--t-text-secondary);
+    overflow-wrap: anywhere;
+  }
+  .t-drop-over-note {
+    max-width: 420px;
+    font: 400 12px/16px var(--t-font-ui);
+    color: var(--t-text-tertiary);
+  }
+  @keyframes t-drop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+
+  /* ---------- inline warning (§12.21) ---------- */
+  .t-alert {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    color: var(--t-text-primary);
+  }
+  .t-alert > svg {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+  }
+  .t-alert-title {
+    font-weight: 600;
+  }
+  .t-alert-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+    margin-top: 2px;
+    user-select: text;
+  }
+  .t-alert-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    user-select: text;
+  }
+  .t-alert-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .t-alert-inset {
+    margin: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  /* ---------- empty state (§12.26) ---------- */
+  .t-empty {
+    padding-top: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .t-empty-title {
+    font: 600 17px/24px var(--t-font-ui);
+  }
+  .t-empty-text {
+    color: var(--t-text-secondary);
+    max-width: 420px;
+  }
+
+  /* ---------- choice card (§12.6) ---------- */
+  .t-card-choice {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+    padding: 16px;
+    position: relative;
+    transition: background-color var(--t-dur-feedback) var(--t-ease-enter);
+  }
+  .t-card-choice-clickable:hover {
+    background-image: linear-gradient(
+      var(--t-overlay-hover),
+      var(--t-overlay-hover)
+    );
+  }
+  .t-card-choice-selected {
+    box-shadow: inset 0 0 0 2px var(--t-text-primary);
+  }
+  .t-card-choice-disabled {
+    color: var(--t-text-disabled);
+  }
+
+  /* ---------- setup: speech model card, «Быстрый старт» (VD-87) ---------- */
+  .t-setup,
+  .t-quick {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* The one thing to do on the page: a ring, not a colour. */
+    box-shadow: inset 0 0 0 1px var(--t-separator);
+  }
+  .t-setup-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .t-setup-icon {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    margin-top: 2px;
+    color: var(--t-text-secondary);
+  }
+  .t-setup-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+  }
+  .t-setup-lang {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .t-setup-label {
+    font-weight: 600;
+  }
+  .t-quick-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+  .t-quick-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .t-quick-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .t-quick-mark {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    border-radius: var(--t-radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--t-border-control);
+    color: var(--t-text-secondary);
+  }
+  .t-quick-mark > svg {
+    width: 14px;
+    height: 14px;
+  }
+  .t-quick-step[data-state="current"] .t-quick-mark {
+    background: var(--t-control-on);
+    border-color: var(--t-control-on);
+    color: var(--t-bg-app);
+  }
+  .t-quick-step[data-state="done"] .t-quick-mark {
+    border-color: transparent;
+    background: var(--t-fill-secondary);
+  }
+  .t-quick-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 2px;
+  }
+  .t-quick-title {
+    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+  }
+  .t-quick-step[data-state="done"] .t-quick-title {
+    font-weight: 400;
+    color: var(--t-text-secondary);
+  }
+  .t-quick-step[data-state="next"] .t-quick-title {
+    color: var(--t-text-secondary);
+  }
+  .t-quick-hint {
+    color: var(--t-text-secondary);
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .t-quick-step[data-state="next"] .t-quick-hint {
+    color: var(--t-text-tertiary);
+  }
+  .t-quick-optional {
+    border-top: 1px solid var(--t-separator);
+    padding-top: 16px;
+    padding-inline-start: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* ---------- first-run screens (VD-87) ---------- */
+  /* The frame scrolls; `margin: auto` centres the content in both axes
+     without cutting its top off when the window is lower than it. */
+  .t-onb {
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    padding: 32px 24px;
+  }
+  .t-onb-inner {
+    margin: auto;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .t-onb-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .t-onb-brand img {
+    border-radius: var(--t-radius-sm);
+  }
+  .t-onb-count {
+    margin-inline-start: auto;
+  }
+  .t-onb-welcome {
+    display: none;
+  }
+  .t-onb-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .t-onb-choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .t-onb-choice > .t-radio {
+    margin-top: 2px;
+  }
+  .t-onb-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .t-onb-cta > .t-type-caption {
+    text-align: center;
+  }
+  .t-onb-cta-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .t-onb-tips ul,
+  .t-onb-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .t-onb-tips {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+    padding: 16px;
+  }
+  .t-onb-tips li,
+  .t-onb-features li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 22px;
+  }
+  .t-onb-tips li > svg,
+  .t-onb-features li > svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 2px;
+    color: var(--t-text-secondary);
+  }
+  .t-onb-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--t-text-tertiary);
+  }
+  .t-onb-steps li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .t-onb-steps li[data-state="current"] {
+    color: var(--t-text-primary);
+    font-weight: 600;
+  }
+  .t-onb-steps li[data-state="done"] {
+    color: var(--t-text-secondary);
+  }
+  .t-onb-step-mark {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    border-radius: var(--t-radius-full);
+    border: 1px solid currentColor;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  .t-onb-step-mark > svg {
+    width: 12px;
+    height: 12px;
+  }
+  .t-onb-steps li[data-state="current"] .t-onb-step-mark {
+    background: var(--t-control-on);
+    border-color: var(--t-control-on);
+    color: var(--t-bg-app);
+  }
+  /* Wide window: welcome on the left, the step on the right, the pair in the
+     middle of the window. */
+  @media (min-width: 900px) {
+    .t-onb {
+      padding: 48px;
+    }
+    .t-onb-inner {
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: minmax(0, 380px) minmax(0, 520px);
+      justify-content: center;
+      column-gap: 72px;
+      /* Tops in line: the logo beside the step's title. */
+      align-items: start;
+    }
+    .t-onb-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .t-onb-count {
+      display: none;
+    }
+    .t-onb-welcome {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .t-onb-steps {
+      padding-top: 8px;
+    }
+    .t-onb-credit {
+      padding-top: 8px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .t-onb-inner {
+      max-width: 1120px;
+      grid-template-columns: minmax(0, 420px) minmax(0, 560px);
+      column-gap: 96px;
+    }
+  }
+
+  /* ---------- callout (§12.16) ---------- */
+  .t-callout {
+    background: var(--t-bg-group);
+    border-radius: var(--t-radius-md);
+    padding: 16px;
+  }
+
+  /* ---------- dialog (§12.10) ---------- */
+  .t-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: var(--t-z-scrim);
+    background: var(--t-scrim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: t-fade-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-dialog {
+    position: relative;
+    z-index: var(--t-z-dialog);
+    background: var(--t-bg-raised);
+    box-shadow: var(--t-shadow-e3);
+    border-radius: var(--t-radius-lg);
+    width: 400px;
+    max-width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--t-text-primary);
+    outline: none;
+    animation: t-dialog-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+  .t-dialog-wide {
+    width: 560px;
+  }
+  .t-dialog-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 24px 0;
+  }
+  .t-dialog-title {
+    font: 600 17px/24px var(--t-font-ui);
+    margin: 0;
+  }
+  .t-dialog-desc {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--t-text-secondary);
+    margin-top: 8px;
+  }
+  .t-dialog-body {
+    padding: 8px 24px 0;
+    overflow-y: auto;
+    min-height: 0;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .t-dialog-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 24px;
+  }
+  .t-dialog-foot-start {
+    margin-inline-end: auto;
+  }
+  @keyframes t-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes t-dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+
+  /* ---------- tooltip (§12.18) ---------- */
+  .t-tooltip {
+    position: fixed;
+    z-index: var(--t-z-tooltip);
+    background: var(--t-inverse);
+    color: var(--t-text-inverse);
+    font-size: 12px;
+    line-height: 16px;
+    padding: 4px 8px;
+    border-radius: var(--t-radius-sm);
+    max-width: 280px;
+    pointer-events: none;
+    animation: t-fade-in var(--t-dur-enter) var(--t-ease-enter);
+  }
+
+  /* ---------- toasts (§12.22) ---------- */
+  .t-toast {
+    background: var(--t-bg-raised);
+    box-shadow: var(--t-shadow-e3);
+    border-radius: var(--t-radius-md);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 360px;
+    max-width: calc(100vw - 200px);
+    color: var(--t-text-primary);
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .t-toast [data-icon] {
+    width: 16px;
+    height: 16px;
+    color: var(--t-text-secondary);
+    flex: none;
+  }
+  .t-toast[data-type="error"] [data-icon] {
+    color: var(--t-danger);
+  }
+  .t-toast[data-type="warning"] [data-icon] {
+    color: var(--t-warning);
+  }
+  .t-toast-desc {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--t-text-secondary);
+  }
+
+  /* Narrow work area (zoom 135 % and more at the minimum window, or a small
+     window): the sidebar becomes a rail of icons, names go to tooltips, the
+     column and the panel lose 8 px of side padding. Same width as RAIL_QUERY
+     in useMediaQuery.ts. */
+  @media (max-width: 519px) {
+    .t-window {
+      grid-template-columns: var(--t-rail-w) 1fr;
+    }
+    .t-side {
+      padding: 8px;
+      scrollbar-width: none;
+    }
+    .t-mark .t-mark-text,
+    .t-nav .t-nav-label,
+    .t-nav .t-tag {
+      display: none;
+    }
+    .t-nav {
+      position: relative;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0;
+    }
+    .t-nav .t-nav-end {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+    }
+    .t-nav-sep {
+      margin: 8px 4px;
+    }
+    .t-col {
+      padding: 16px 16px 24px;
+    }
+    .t-panel-inner {
+      padding: 0 16px;
+      gap: 8px;
+    }
+    .t-status {
+      gap: 4px;
+      padding: 0 4px;
+    }
+  }
+
+  /* Wide window (VD-86): from 1280 px. The page grows to --t-page-wide with
+     one left edge for every section. Every page follows one rule: the main
+     content on the left (text and forms keep the 640 column, VD-15), the
+     secondary blocks on the right (--t-side-w). The shorter column stays in
+     view while the page scrolls, if it fits (`t-sticky`, set in Page.tsx).
+     «Модели» shows the catalog in two columns under both. */
+  @media (min-width: 1280px) {
+    .t-col,
+    .t-panel-inner {
+      max-width: var(--t-page-wide);
+    }
+    /* Only a cap: blocks that stretch (groups, alerts) fill 592 px as on a
+       normal window; small ones (the back row) keep their own width. */
+    .t-col > :not(.t-wide) {
+      max-width: calc(var(--t-content-max) - 48px);
+    }
+    .t-work {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--t-side-w);
+      gap: 0 32px;
+      margin-bottom: 24px;
+    }
+    .t-work:last-child {
+      margin-bottom: 0;
+    }
+    /* Columns are placed explicitly, so a page may put its side block first
+       in the DOM (the order a normal window shows) and still get it on the
+       right. */
+    .t-work-main,
+    .t-work-side {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      grid-row: 1;
+    }
+    .t-work-main {
+      grid-column: 1;
+      align-self: start;
+      /* As tall as the side column, but no taller than the window: an empty
+         drop zone fills the height beside the recipe and its text stays in
+         view when the recipe is long (--t-work-fill is set in Page.tsx). */
+      min-height: var(--t-work-fill, 0px);
+    }
+    .t-work-side {
+      grid-column: 2;
+      align-self: start;
+    }
+    /* The shorter column stays in view while the page scrolls, if it fits
+       the window (`t-sticky`, set in Page.tsx). */
+    .t-work > .t-sticky {
+      position: sticky;
+      top: 24px;
+    }
+    .t-work > .t-work-main > :last-child,
+    .t-work > .t-work-side > :last-child {
+      margin-bottom: 0;
+    }
+    /* Both columns start at the same line. */
+    .t-work-main > :first-child,
+    .t-work-side > :first-child {
+      margin-top: 0;
+    }
+    /* A fold head is 36 px tall for the click target; pull it up so its
+       text sits on the line of the group title beside it. */
+    .t-work-side > .t-fold:first-child {
+      margin-top: -10px;
+    }
+    .t-list-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 32px;
+    }
+    .t-list-grid > .t-list-title {
+      grid-column: 1 / -1;
+    }
+    /* The last row's left item must not keep its separator either (the
+       title is the first child, so left items are the even children). */
+    .t-list-grid > .t-item:nth-last-child(2):nth-child(even)::after {
+      display: none;
+    }
+  }
+
+  /* ---------- reduced motion (§10, rule 10) ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .t-menu,
+    .t-dialog,
+    .t-scrim,
+    .t-tooltip,
+    .t-drop-over,
+    .t-drop-over-target {
+      animation-duration: 100ms;
+    }
+    .t-dialog,
+    .t-drop-over-target {
+      animation-name: t-fade-in;
+    }
+    .t-menu {
+      animation-name: t-fade-in;
+    }
+    .t-fold-body,
+    .t-fold-head > svg,
+    .t-select > svg {
+      transition-duration: 0ms;
+    }
+    .t-highlight {
+      animation-timing-function: steps(1, end);
+    }
+  }
+}

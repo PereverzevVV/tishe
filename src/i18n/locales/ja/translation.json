@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "設定…",
+    "settings": "Tishe を開く…",
     "checkUpdates": "アップデートを確認…",
-    "copyLastTranscript": "最新の文字起こしをコピー",
+    "copyLastTranscript": "最後の音声入力をコピー",
     "unloadModel": "モデルをアンロード",
     "model": "モデル",
     "quit": "終了",
     "cancel": "キャンセル",
-    "secureInputWarning": "⚠ Secure Input でショートカットがブロック中"
+    "secureInputWarning": "⚠ Secure Input でショートカットがブロック中",
+    "modelLocked": "文字起こし中はモデルを変更できません",
+    "tooltipDictation": "音声入力: {{shortcut}}",
+    "backgroundTitle": "Tishe はバックグラウンドで動作を続けています",
+    "backgroundBody": "文字起こしは続いています。完了すると通知が届きます。"
   },
   "sidebar": {
     "general": "一般",
-    "models": "モデル",
+    "models": "音声認識",
     "advanced": "詳細設定",
     "postProcessing": "後処理",
     "history": "履歴",
     "debug": "デバッグ",
-    "about": "概要"
+    "about": "概要",
+    "label": "セクション",
+    "transcription": "文字起こし",
+    "dictation": "音声入力",
+    "meetings": "会議",
+    "llm": "AI 編集",
+    "app": "アプリ",
+    "soon": "近日公開",
+    "state": {
+      "running": "実行中",
+      "new": "完了・未確認",
+      "downloading": "ダウンロード中"
+    },
+    "next": "今後の予定"
   },
   "onboarding": {
     "subtitle": "開始するには、文字起こしのモデルを選択してください",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "権限が必要です",
-      "description": "Handy が正常に動作するにはいくつかの権限が必要です。",
+      "description": "Tishe が正しく動作するには、いくつかの権限が必要です。",
       "microphone": {
         "title": "マイクへのアクセス",
         "description": "文字起こしのためにあなたの声を聞くために必要です。"
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "権限の確認に失敗しました。もう一度お試しください。",
         "requestFailed": "権限のリクエストに失敗しました。もう一度お試しください。"
-      }
+      },
+      "skip": "マイクなしで続ける",
+      "skipHint": "マイクが必要なのは音声入力だけです。ファイルの文字起こしはマイクなしでも使えます。あとから Windows の設定で許可できます。"
+    },
+    "step": "ステップ {{n}} / {{total}}",
+    "language": {
+      "title": "録音は何語ですか?",
+      "description": "この言語用の音声認識モデルをダウンロードします。モデルはこのコンピューター上で動作します。",
+      "ru": {
+        "title": "ロシア語",
+        "limit": "ロシア語のみ: 英語の音声は認識しません"
+      },
+      "en": {
+        "title": "英語",
+        "limit": "英語のみ"
+      },
+      "eu": {
+        "title": "その他のヨーロッパ言語",
+        "limit": "ヨーロッパの25言語、言語を自動で判別"
+      },
+      "other": {
+        "title": "日本語またはその他の言語",
+        "limit": "30言語: 中国語、日本語、韓国語、アラビア語、トルコ語、ヒンディー語など",
+        "limitWhisper": "多言語対応、プロセッサーでは低速"
+      },
+      "onDisk": "このコンピューターにあります",
+      "shared": "このモデルは音声入力とファイルの文字起こしの両方に使われます。あとから「$t(sidebar.models)」で変更できます。",
+      "otherModel": "別のモデルを選ぶ",
+      "hideCatalog": "モデル一覧を閉じる",
+      "download": "ダウンロード ({{size}})",
+      "use": "{{name}} を使う",
+      "downloadNamed": "{{name}} をダウンロード · {{size}}",
+      "once": "ダウンロードは一度だけ。その後はオフラインで動作します"
+    },
+    "download": {
+      "title": "{{name}} をダウンロード中",
+      "description": "その間に他の作業をしていても大丈夫です。ウィンドウを閉じてもダウンロードは止まりません。",
+      "starting": "接続中…",
+      "amount": "{{done}} / {{total}}",
+      "speed": "{{n}} MB/秒",
+      "preparing": "モデルを準備中…",
+      "cancel": "キャンセル",
+      "failed": "モデルはダウンロードされませんでした",
+      "failedTitle": "モデルをダウンロードできませんでした",
+      "failedHint": "サーバーに接続できません。インターネット接続を確認して「再試行」を押してください。",
+      "retry": "再試行",
+      "continue": "待たずに Tishe を開く"
+    },
+    "welcome": {
+      "title": "Tishe へようこそ",
+      "lead": "Tishe はお使いのコンピューター上で音声をテキストに変換します。インターネットもアカウントも不要です。",
+      "files": "録音（会議、講義、インタビュー）を Word 文書に文字起こし",
+      "dictation": "どのアプリでも音声入力: キーを押したまま話すと、テキストが入力されます",
+      "private": "録音とテキストはコンピューターの外に出ません",
+      "stepsLabel": "セットアップの手順",
+      "steps": {
+        "permissions": "権限",
+        "language": "録音の言語",
+        "download": "モデルのダウンロード"
+      },
+      "credit": "Viktor Pereverzev · Handy がベース"
+    },
+    "tips": {
+      "title": "ダウンロードの間に、使い方をご紹介します",
+      "dictationBefore": "音声入力: どのアプリでも",
+      "dictationAfter": "を押したまま話してください。離すと、カーソルの位置にテキストが入ります。",
+      "files": "文字起こし: 音声や動画のファイルを Tishe のウィンドウにドロップすると、Word 文書ができあがります。",
+      "editing": "AI による編集で誤りや句読点を直せます。文字起こしのレシピでオンにできます。"
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "英語への翻訳に対応するモデルを絞り込む"
       },
       "noModelsMatch": "このフィルターに一致するモデルがありません。",
+      "params": {
+        "button": "パラメーター",
+        "open": "モデルのパラメーター",
+        "title": "パラメーター: {{name}}",
+        "savedAtOnce": "変更はすぐに保存されます。各欄には使用中の値が表示され、変更した値にはリセットボタンが付きます。",
+        "resetAll": "既定値に戻す",
+        "done": "完了",
+        "resetField": "既定値に戻す",
+        "defaultRange": "既定値 {{value}}、範囲 {{min}}–{{max}}。",
+        "prompt": {
+          "builtIn": "組み込みの指示です。テキストを編集すると独自の指示になり、空にすると組み込みに戻ります。",
+          "own": "あなたの指示です。リセットボタンで組み込みの指示に戻ります。"
+        },
+        "asr": {
+          "segment": {
+            "label": "ファイルの区切りの長さ (秒)",
+            "description": "ファイルは無音部分で区切った、この長さ以下の断片ごとに認識されます。最短の断片も比例して短くなります (25秒なら12秒)。実測では、12–25秒のほうが60–120秒より句読点がよく保たれます。"
+          },
+          "device": {
+            "label": "デバイス",
+            "description": "「プロセッサーのみ」はグラフィックチップを空けますが、通常は遅くなります。音声入力にも適用され、次の認識から有効になります。",
+            "general": "アクセラレーション設定に従う",
+            "cpu": "プロセッサーのみ",
+            "notHere": "このモデルのデバイスは全体のアクセラレーション設定に従います。"
+          }
+        },
+        "llm": {
+          "promptNote": "ロシア語と英語のテキスト用の指示です。その他の言語には、言語名を添えた組み込みの英語の指示が使われます。「文字起こし」で独自の指示を設定すると、すべての言語でそちらが優先されます。",
+          "promptRu": "ロシア語テキスト用の指示",
+          "promptEn": "英語テキスト用の指示",
+          "temperature": {
+            "label": "温度",
+            "description": "低いほど慎重になります。0.8 ではモデルが単語を作り出しました。0.2 は編集用に計測した値です。"
+          },
+          "chunk": {
+            "label": "チャンクサイズ (文字)",
+            "description": "モデルが一度に編集するテキスト量。小さなモデルは短いチャンクのほうが原文に忠実です。"
+          },
+          "context": {
+            "label": "コンテキスト (トークン)",
+            "description": "指示、チャンク、回答を収める領域。大きいほどメモリを使います。"
+          },
+          "answer": {
+            "label": "回答の上限 (トークン)",
+            "description": "同じことを繰り返し始めたモデルを止めます。3000文字のチャンクは約1100トークンです。"
+          },
+          "threads": {
+            "label": "回答に使うプロセッサースレッド",
+            "description": "テキストの読み込みには常にすべてのハードウェアスレッドを使います。",
+            "auto": "自動 – コアごとに1つ"
+          },
+          "restartNote": "温度、コンテキスト、回答の上限、スレッド数は、モデルの次回起動時に適用されます。実行中のモデルは次の処理の前に再起動されます。",
+          "invalid": "保存されませんでした: {{detail}}",
+          "contextTooSmall": "保存されませんでした: コンテキストにはチャンクと回答が収まる必要があります。現在のチャンクサイズと回答の上限では最低 {{min}} トークンです。"
+        }
+      },
       "yourModels": "ダウンロード済みモデル",
       "availableModels": "ダウンロード可能",
-      "searchPlaceholder": "モデルを名前で検索…",
+      "searchPlaceholder": "名前で検索",
       "rescan": {
         "label": "再スキャン",
-        "tooltip": "Handy を使わずに models フォルダーまたは Hugging Face キャッシュに追加されたモデルを再スキャンします"
+        "tooltip": "フォルダーに手動で追加したモデルを探す"
       }
     },
     "general": {
       "title": "一般",
       "shortcut": {
-        "title": "Handy ショートカット",
+        "title": "Tishe のショートカット",
         "description": "音声録音を開始するキーボードショートカットを設定",
         "loading": "ショートカットを読み込み中…",
         "none": "ショートカットが設定されていません",
         "notFound": "ショートカットが見つかりません",
-        "pressKeys": "キーを押してください…",
+        "pressKeys": "キーの組み合わせを押してください… (Esc でキャンセル)",
         "bindings": {
           "transcribe": {
-            "name": "文字起こしのショートカット",
-            "description": "音声を録音して文字起こしするためのキーボードショートカット。"
+            "name": "音声入力",
+            "description": "押したまま話すと、テキストがアクティブなウィンドウに貼り付けられます"
           },
           "cancel": {
-            "name": "キャンセルのショートカット",
-            "description": "現在の録音をキャンセルするためのキーボードショートカット。"
+            "name": "キャンセル",
+            "description": "進行中の録音を中止します"
           },
           "transcribe_with_post_process": {
-            "name": "後処理のショートカット",
-            "description": "文字起こしに常に AI 後処理を適用するキーボードショートカット。 (任意)"
+            "name": "編集付き音声入力のキー",
+            "description": "AI で編集してからテキストを貼り付けます"
           }
         },
         "errors": {
           "restore": "元のショートカットを復元できませんでした",
           "set": "ショートカットを設定できませんでした: {{error}}",
-          "reset": "ショートカットを元の値にリセットできませんでした"
+          "reset": "ショートカットを元の値にリセットできませんでした",
+          "taken": "このキーは別のプログラムが使用中です。別のキーを選んでください。",
+          "duplicate": "このキーはここで別の操作に使われています。"
         }
       },
       "language": {
-        "title": "言語",
-        "description": "音声認識の言語を選択してください。自動を選択すると言語を自動的に判定します。特定の言語を選択すると、その言語の精度が向上する場合があります。",
+        "title": "認識する言語",
+        "description": "「自動」は言語を自動で判別します。指定したほうが確実です",
         "searchPlaceholder": "言語を検索…",
         "noResults": "言語が見つかりません",
         "auto": "自動"
       },
       "shortcutActivation": {
-        "title": "ショートカットの動作",
-        "description": "文字起こしのショートカットで録音を開始・停止する方法を選択します。",
+        "title": "キーの動作",
+        "description": "キーで録音を開始・終了する方法",
         "options": {
           "holdOrToggle": "自動",
           "pushToTalk": "長押し",
@@ -233,29 +375,40 @@
       "title": "サウンド",
       "microphone": {
         "title": "マイク",
-        "description": "使用するマイクデバイスを選択",
+        "description": "声を録音する入力元",
         "placeholder": "マイクを選択…",
         "loading": "読み込み中…"
       },
       "channel": {
         "title": "入力チャンネル",
-        "description": "録音に使用する入力チャンネルを選択します。オーディオインターフェースに複数の入力がある場合に使用してください。",
+        "description": "入力が複数あるサウンドカード用",
         "average": "すべてのチャンネルの平均",
         "channel": "チャンネル{{n}}"
       },
       "audioFeedback": {
-        "label": "オーディオフィードバック",
-        "description": "録音の開始と停止時にサウンドを再生"
+        "label": "効果音",
+        "description": "録音の開始時と終了時に音を鳴らします"
       },
       "outputDevice": {
         "title": "出力デバイス",
-        "description": "フィードバック用の音声出力デバイスを選択",
+        "description": "効果音の出力先",
         "placeholder": "出力デバイスを選択…",
         "loading": "読み込み中…"
       },
       "volume": {
         "title": "音量",
-        "description": "オーディオフィードバックの音量を調整"
+        "description": "オーディオフィードバックの音量を調整",
+        "levels": {
+          "quiet": "小",
+          "medium": "中",
+          "loud": "大"
+        }
+      },
+      "theme": {
+        "marimba": "マリンバ",
+        "pop": "ポップ",
+        "custom": "カスタム",
+        "preview": "開始音と終了音を再生"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "実験的"
       },
       "experimentalToggle": {
-        "label": "実験的な機能",
-        "description": "まだ開発中の実験的な機能を有効にします。"
+        "label": "試験的な機能を表示",
+        "description": "開発中の機能です。不安定な場合があります"
       },
       "lazyStreamClose": {
         "label": "文字起こし間でマイクを有効にする",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "非表示で起動",
-        "description": "ウィンドウを開かずにシステムトレイに起動。"
+        "label": "起動時にウィンドウを隠す",
+        "description": "プログラムは通知領域で起動します"
       },
       "autostart": {
-        "label": "起動時に実行",
-        "description": "コンピューターにログインしたときに Handy を自動的に起動。"
+        "label": "Windows と一緒に起動",
+        "description": "サインインするとすぐに音声入力を使えます"
       },
       "showTrayIcon": {
-        "label": "トレイアイコンを表示",
-        "description": "システムトレイに Handy のアイコンを表示します。"
+        "label": "通知領域のアイコン",
+        "description": "アイコンがないと、閉じたウィンドウはプログラムを再起動しないと戻りません"
       },
       "overlay": {
         "style": {
-          "title": "オーバーレイ",
-          "description": "録音中のオーバーレイを選択します。「なし」は非表示、「ミニマル」はコンパクトなカプセル型表示、「ライブ」はリアルタイムで文字起こしを表示します(ストリーミング対応モデルのみ。モデル選択画面の「ストリーミング」表示を確認してください)。Linux では「なし」を推奨します。",
+          "title": "インジケーターの種類",
+          "description": "音声入力中にカーソルの近くに表示するもの",
           "options": {
             "none": "なし",
             "minimal": "ミニマル",
             "live": "ライブ"
-          }
+          },
+          "noneConsequence": "インジケーターがないと失敗が表示されません。貼り付けられなかったテキストは履歴にあります"
         },
         "position": {
-          "title": "オーバーレイの位置",
-          "description": "録音と文字起こし中に表示するオーバーレイが表示される位置を選択します。",
+          "title": "インジケーターの位置",
+          "description": "画面の上か下",
           "options": {
             "bottom": "下",
             "top": "上"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "貼り付け方法",
-        "description": "テキストの挿入方法を選択。「直接」はシステム入力でタイピングをシミュレート。「なし」は貼り付けをスキップし、履歴/クリップボードのみ更新。",
+        "description": "テキストをアクティブなウィンドウに入れる方法",
         "options": {
           "clipboard": "クリップボード ({{modifier}}+V)",
           "clipboardCtrlShiftV": "クリップボード (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "クリップボードの処理",
-        "description": "クリップボードを変更しないを選択すると、文字起こし後も現在のクリップボード内容が保持されます。クリップボードにコピーを選択すると、貼り付け後も文字起こし結果がクリップボードに残ります。",
+        "title": "クリップボード",
+        "description": "クリップボードに元の内容を残すか、音声入力したテキストを残すか",
         "options": {
           "dontModify": "クリップボードを変更しない",
           "copyToClipboard": "クリップボードにコピー"
         }
       },
       "autoSubmit": {
-        "title": "自動送信",
-        "description": "テキスト挿入後に選択したキーの組み合わせを自動的に送信します。macOS では Cmd+Enter、Windows/Linux では Super+Enter が適用されます。",
+        "title": "貼り付け後に送信",
+        "description": "貼り付けの直後に選んだキーを押します (チャットの Enter など)",
         "options": {
           "off": "オフ",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "英語に翻訳",
-        "description": "文字起こし中に他の言語から英語に自動的に翻訳。"
+        "description": "どの言語の音声も英語のテキストになります"
       },
       "modelUnload": {
-        "title": "モデルのアンロード",
-        "description": "指定時間モデルが使用されていない場合、GPU/CPU メモリを自動的に解放",
+        "title": "モデルをメモリから解放するまでの時間…",
+        "description": "しばらく使われないモデルのメモリを解放します",
         "options": {
           "never": "しない",
           "immediately": "即座に",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "カスタム単語",
-        "description": "対応モデルが名前や専門用語を認識しやすくします。あいまい補正は現在、A～Zの英字と数字を使用する単語に限定されています。",
+        "title": "自分の単語",
+        "description": "Whisper モデルへのヒントです。ほかのモデルでは修正だけが行われ、それも A–Z の単語に限られます",
         "placeholder": "単語を追加",
         "add": "追加",
         "remove": "{{word}}を削除",
-        "duplicate": "「{{word}}」は既に存在します"
+        "duplicate": "「{{word}}」は既に存在します",
+        "removed": "「{{word}}」を削除しました"
       },
       "voiceActivityDetection": {
-        "title": "音声区間検出 (VAD)",
-        "description": "録音から無音部分を除去します。ストリーミング対応モデルはより長い音声検出区間を使用します。VAD を無効にすると音声をそのまま録音します。"
+        "title": "無音を除く",
+        "description": "音声認識には発話部分だけを送ります"
       },
       "vadBackend": {
         "title": "音声区間検出バックエンド",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "フィラー語を削除",
-        "description": "文字起こしから一般的なフィラー語を削除します。残すにはオフにしてください。"
+        "description": "貼り付けるテキスト中の「uh」「hmm」"
       },
       "chineseScript": {
         "title": "中国語の表記",
-        "description": "北京語と広東語の文字起こしを簡体字または繁体字で出力します。他の言語は変更されません。",
+        "description": "簡体字または繁体字",
         "options": {
           "asTranscribed": "文字起こしのまま",
           "simplified": "簡体字",
@@ -434,20 +589,21 @@
           "title": "ベース URL",
           "description": "選択したプロバイダーの API ベース URL。カスタムプロバイダーのみ編集可能。",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "アドレスは選択したプロバイダーによって決まります",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API キー",
-          "description": "選択したプロバイダーの API キー。",
+          "description": "このコンピューターにのみ保存されます",
           "placeholder": "sk-…"
         },
         "model": {
           "title": "モデル",
-          "descriptionCustom": "カスタムエンドポイントが期待するモデル識別子を指定。",
-          "descriptionDefault": "選択したプロバイダーが提供するモデルを選択。",
+          "descriptionCustom": "サーバー上のモデル名",
+          "descriptionDefault": "右のボタンで一覧を更新します",
           "placeholderWithOptions": "モデルを検索または選択",
           "placeholderNoOptions": "モデル名を入力",
-          "refreshModels": "モデルを更新"
+          "refreshModels": "モデル一覧を更新"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "選択したプロンプト",
           "description": "文字起こしを改善するテンプレートを選択するか、新しく作成します。プロンプトテキスト内で ${output} を使用して、キャプチャした文字起こしを参照します。"
         },
-        "noPrompts": "プロンプトがありません",
-        "selectPrompt": "プロンプトを選択",
+        "noPrompts": "指示がありません",
+        "selectPrompt": "指示を選択",
         "createNew": "新しいプロンプトを作成",
-        "promptLabel": "プロンプト名",
+        "promptLabel": "名前",
         "promptLabelPlaceholder": "プロンプト名を入力",
-        "promptInstructions": "プロンプトの指示",
+        "promptInstructions": "指示の本文",
         "promptInstructionsPlaceholder": "文字起こし後に実行する指示を記述します。例: 以下のテキストの文法と明瞭さを改善してください: ${output}",
         "promptTip": "ヒント: <code>${output}</code> を使用して、文字起こしテキストをプロンプトに挿入します。",
         "updatePrompt": "プロンプトを更新",
-        "deletePrompt": "プロンプトを削除",
-        "createPrompt": "プロンプトを作成",
+        "deletePrompt": "削除",
+        "createPrompt": "作成",
         "cancel": "キャンセル",
-        "selectToEdit": "上からプロンプトを選択して、詳細を表示・編集します。",
-        "createFirst": "上の「新しいプロンプトを作成」をクリックして、最初の後処理プロンプトを作成してください。"
+        "selectToEdit": "編集する指示を選んでください。",
+        "createFirst": "「作成」をクリックして最初の指示を追加してください。"
+      },
+      "local": {
+        "intro": "モデルはこのコンピューター上で直接動作します。インターネットもキーも不要で、テキストが外部に出ることはありません。必要なら1つダウンロードしてください。必要なときに自動で起動し、使われていないときはメモリから解放されます。プロセッサーで動作するため、クラウドサービスより遅くなります。どのモデルも RAM 16 GB のノートPCで動きます。",
+        "runtimeMissing": "組み込みの AI エンジンが見つかりません。Tishe を再インストールしてください。",
+        "models": {
+          "qwen35_4b": {
+            "title": "バランス",
+            "model": "Qwen3.5 4B",
+            "description": "Qwen 4B の通常版。句読点は丁寧ですが、実際の会話では認識ミスをあまり直せません (当方のテスト、2026-10-06)。高速化版のほうが正確で速いです。"
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Google のモデルで、原文に忠実です。高速化された Google 版 Gemma と同様に編集しますが、約1.25倍遅くなります。"
+          },
+          "gigachat31": {
+            "title": "ロシア語向け",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "最初からロシア語で学習されたモデルです。10B のパラメーターのうちトークンごとに動くのは 1.8B だけなので、サイズの割に高速です。より多くのメモリが必要です。"
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "ロシア語向け Qwen",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "ロシア語の語彙とロシア語テキストでの追加学習を施した Qwen3 4B (2507)。テストでは Gemma E2B より修正が少なく、速度は半分です（録音1時間あたり約27分）。"
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIA の小型モデルで、公式には英語のみ対応。テストではロシア語でも英語でもテキストをほとんど変えず、Gemma より遅いです（録音1時間あたり約35分）。"
+          },
+          "qwen35_9b": {
+            "title": "最大",
+            "model": "Qwen3.5 9B",
+            "description": "最も賢いローカルモデル。文脈の理解と難しい修正に最も強いですが、最も遅いです。"
+          },
+          "qwen35_4b_mtp": {
+            "title": "バランス",
+            "model": "Qwen3.5 4B MTP",
+            "description": "高速化を内蔵した新しい版の Qwen 4B。通常の Qwen 4B より正確で約1.2倍速いですが、当方のテストでは Gemma の半分ほどしかミスを直せません。"
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma 軽量",
+            "model": "Gemma 4 E2B · Google 版",
+            "description": "Google 公式版の小型 Gemma に高速化を加えたもの (+98 MB)。Gemma E4B の2倍速く (録音1時間あたり約14分)、修正量はその約2/3です。"
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google 版",
+            "description": "当方のテストで最高品質 (2026-10-06)。Google 公式版に高速化を加えたもの (+99 MB): 通常の Gemma E4B と同様に編集し、約1.25倍速くなります。録音1時間あたり約26分。"
+          }
+        },
+        "speedupBadge": "高速化",
+        "speedupHint": "小さな補助モデルが数語先を予測し、メインモデルがそれを確認します。プロセッサーでは約1.2–1.3倍速くなります。",
+        "untested": "未検証",
+        "delete": "モデルを削除",
+        "state": {
+          "stopped": "メモリに読み込まれていません",
+          "loading": "メモリに読み込み中…",
+          "ready": "メモリに読み込み済み"
+        },
+        "unloadNow": "今すぐ解放",
+        "unload": {
+          "title": "メモリからの解放",
+          "description": "使われていないモデルをメモリから解放するまでの時間。解放すると約2–3 GB 空きます。",
+          "immediately": "処理の直後",
+          "min2": "2分後",
+          "min5": "5分後",
+          "min15": "15分後",
+          "never": "しない"
+        },
+        "recommended": "おすすめ"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "録音フォルダを開く",
       "loading": "履歴を読み込み中…",
       "empty": "まだ文字起こしがありません。録音を開始して履歴を作成しましょう!",
-      "copyToClipboard": "文字起こしをクリップボードにコピー",
+      "copyToClipboard": "テキストをコピー",
       "copyError": "文字起こしをクリップボードにコピーできませんでした。",
       "save": "文字起こしを保存",
       "unsave": "保存から削除",
       "delete": "エントリーを削除",
       "deleteError": "エントリーの削除に失敗しました。もう一度お試しください。",
-      "retranscribe": "再文字起こし",
+      "retranscribe": "もう一度認識",
       "retranscribeError": "再文字起こしに失敗しました。もう一度お試しください。",
-      "transcribing": "文字起こし中…",
+      "transcribing": "認識中…",
       "transcriptionFailed": "文字起こしに失敗しました。リトライアイコンを使用して再文字起こしできます。"
     },
     "debug": {
       "title": "デバッグ",
       "logDirectory": {
-        "title": "ログディレクトリ",
-        "description": "ログファイルの保存場所"
+        "title": "ログフォルダー",
+        "description": "不具合の報告にはログを添付してください"
       },
       "logLevel": {
         "title": "ログレベル",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "アップデートを確認",
-        "description": "Handy の新しいバージョンを自動的にチェック",
-        "lockedDescription": "システム設定により無効化されています (HANDY_DISABLE_UPDATER)"
+        "description": "起動ごとに一度、Tishe の新しいバージョンが出ているか GitHub に確認します。録音やテキストは送信されません",
+        "lockedDescription": "このビルドではアップデートの確認が無効です"
       },
       "soundTheme": {
         "label": "サウンドテーマ",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "単語修正しきい値",
-        "description": "カスタム単語修正の感度"
+        "description": "自分の単語に置き換えるのに必要な類似度"
       },
       "historyLimit": {
-        "title": "履歴上限",
-        "description": "保持する履歴エントリーの最大数",
+        "title": "保持する音声入力の件数",
+        "description": "保持指定した音声入力は数えません",
         "entries": "件"
       },
       "recordingRetention": {
-        "title": "録音の自動削除",
-        "description": "古い録音を自動的に削除して容量を節約",
+        "title": "古い音声入力を削除",
+        "description": "テキストと一緒に音声も削除されます",
         "never": "しない",
         "preserveLimit": "最新{{count}}件を保持",
         "days3": "3日後",
@@ -538,24 +765,24 @@
         "placeholder": "保持期間を選択…"
       },
       "alwaysOnMicrophone": {
-        "label": "マイク常時オン",
-        "description": "より速い応答のためにマイクをアクティブに保つ"
+        "label": "マイクを常にオンにする",
+        "description": "録音がすぐに始まりますが、マイクは常に使用中になります"
       },
       "clamshellMicrophone": {
-        "title": "クラムシェルマイク",
-        "description": "ノートパソコンの蓋を閉じたときに使用するマイク"
+        "title": "ふたを閉じたときのマイク",
+        "description": "ノートPCを閉じているときに使うマイク"
       },
       "postProcessingToggle": {
         "label": "後処理",
         "description": "文字起こし後の AI によるテキスト改善を有効化"
       },
       "muteWhileRecording": {
-        "label": "録音中にミュート",
-        "description": "録音中にシステムオーディオをミュート"
+        "label": "録音中はコンピューターの音を消す",
+        "description": "音楽や動画の音が録音に入りません"
       },
       "appendTrailingSpace": {
         "label": "末尾にスペースを追加",
-        "description": "貼り付けた文字起こしの後にスペースを追加"
+        "description": "次の文が前の文とくっつきません"
       },
       "keyboardImplementation": {
         "title": "キーボード実装",
@@ -568,28 +795,28 @@
         "settings": "設定:"
       },
       "pasteDelay": {
-        "title": "貼り付け遅延(前)",
-        "description": "テキストをコピーした後、貼り付けキーを送信する前の遅延(ミリ秒)。何も貼り付けられない場合は増やしてください。"
+        "title": "貼り付け前の待ち時間",
+        "description": "何も貼り付けられない場合は増やしてください"
       },
       "pasteDelayAfter": {
-        "title": "貼り付け遅延(後)",
-        "description": "貼り付けキーを送信した後、以前のクリップボードを復元する前の遅延(ミリ秒)。文字起こしではなく古いクリップボードの内容が貼り付けられる場合は増やしてください。"
+        "title": "貼り付け後の待ち時間",
+        "description": "クリップボードの古いテキストが貼り付けられる場合は増やしてください"
       },
       "holdThreshold": {
         "title": "長押しのしきい値",
-        "description": "「自動」モードのみ: タップではなく長押しとみなすためにショートカットを押し続ける必要がある時間（ミリ秒）。短い長押しの後も録音が続いてしまう場合は下げ、意図したタップが長押しと判定される場合は上げてください。"
+        "description": "短く押すと切り替え、長く押すと長押しになります"
       },
       "reliablePaste": {
         "title": "確実な貼り付け(Beta)",
-        "description": "固定の遅延ではなく、対象アプリが実際に文字起こしを読み取った後にのみクリップボードを復元します。システム負荷が高いときに古いクリップボードの内容が貼り付けられる問題を解決するための設定です。クリップボードを使う貼り付け方法が必要です。macOS と Windows のみ。"
+        "description": "一定時間ではなく、プログラムがテキストを読み取るまで待ちます"
       },
       "recordingBuffer": {
-        "title": "追加録音バッファ",
-        "description": "キーを離した後に録音を続ける追加時間(ミリ秒)。末尾の音声を捕捉するため。0 = 追加バッファなし。"
+        "title": "キーを離した後も録音を続ける",
+        "description": "キーを離した後に録音を続ける時間"
       },
       "keyboardDiagnostic": {
         "title": "キーボード診断",
-        "description": "キーボードイベントが Handy に届いているかを確認します。記録されるのはイベント数のみで、押したキーの内容は記録されません。",
+        "description": "キーボードのイベントが Tishe に届いているかを確認します。記録するのはイベントの数だけで、どのキーを押したかは記録しません。",
         "run": "10 秒間の診断を実行",
         "running": "待機中… ショートカットを数回押してください (例: Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "マウス",
         "verdictBlocked": "Secure Input がキーイベントをブロックしています。解消されるまで、通常キーを含むショートカットは動作しません。",
         "verdictSuspicious": "修飾キーのイベントは届いていますが、キーイベントは届いていません。Secure Input は無効と報告されているのに、何かがキーを抑制しています。GitHub で報告してください。",
-        "verdictOk": "キーイベントは Handy に正常に届いています。",
+        "verdictOk": "キーイベントは Tishe に正常に届いています。",
         "verdictNoEvents": "イベントを検出できませんでした。テスト中にキーを押しましたか？",
         "failed": "診断に失敗しました: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "概要",
       "version": {
         "title": "バージョン",
-        "description": "Handy の現在のバージョン"
+        "description": "Tishe の現在のバージョン"
       },
       "appDataDirectory": {
-        "title": "アプリデータディレクトリ",
-        "description": "Handy がデータを保存する場所"
+        "title": "データフォルダー",
+        "description": "設定、モデル、履歴"
       },
       "sourceCode": {
         "title": "ソースコード",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "開発を支援",
-        "description": "Handy の開発を支援してください",
+        "description": "Tishe は彼らのプログラムをもとに作られています",
         "button": "寄付する"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "オンデバイス機械学習推論のための高性能テンソルライブラリ",
-          "details": "Handy のローカルの音声からテキストへの文字起こしは transcribe.cpp と ggml を基盤としています。Georgi Gerganov 氏と貢献者の皆様の素晴らしい仕事に感謝します。"
+          "details": "コンピューター上での高速な音声認識。Georgi Gerganov 氏とプロジェクトの貢献者に感謝します。"
         }
       },
       "whatsNewUpdates": {
-        "label": "新機能を表示",
-        "description": "Handy のアップデート後にリリースノートを表示"
+        "label": "アップデート後に「新機能」を表示",
+        "description": "新しいバージョンの初回起動時に変更点の短い一覧を表示"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "開く",
     "copy": "コピー",
     "clear": "クリア",
-    "noOptionsFound": "オプションが見つかりません"
+    "noOptionsFound": "オプションが見つかりません",
+    "cancel": "キャンセル",
+    "choose": "選択…",
+    "reset": "既定値に戻す",
+    "search": "検索"
   },
   "accessibility": {
-    "permissionsDescription": "Handy が文字起こしテキストを入力するには、アクセシビリティ権限が必要です。",
+    "permissionsDescription": "テキストを貼り付けるには「アクセシビリティ」の権限が必要です。",
     "openSettings": "システム設定を開く"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "不明なモデル",
     "pasteFailedTitle": "テキストの貼り付けに失敗しました",
     "pasteFailed": "アクティブなアプリにテキストを貼り付けられませんでした。",
-    "transcriptionFailedTitle": "文字起こしに失敗しました"
+    "transcriptionFailedTitle": "認識できませんでした"
   },
   "appLanguage": {
-    "title": "アプリの言語",
-    "description": "Handy インターフェースの言語を変更"
+    "title": "表示言語",
+    "description": "プログラムの表示言語"
   },
   "theme": {
-    "title": "アプリのテーマ",
-    "description": "Handy をシステムのテーマに合わせるか、ライトまたはダークで固定するかを選択します",
+    "title": "テーマ",
+    "description": "Tishe をシステムのテーマに合わせるか、常にライトまたはダークにするかを選択します",
     "options": {
-      "system": "システム",
+      "system": "システムに合わせる",
       "light": "ライト",
       "dark": "ダーク"
     }
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "文字起こし中…",
     "processing": "処理中…",
+    "waiting": "モデルがファイルを処理中のため、音声入力が遅れます",
+    "message": {
+      "paste_failed": "貼り付けできませんでした。テキストは履歴に保存されています",
+      "editing_skipped": "編集せずに貼り付けました: AI の準備ができていません",
+      "no_microphone": "マイクが見つかりません",
+      "microphone_denied": "マイクにアクセスできません",
+      "help": "対処方法"
+    },
     "loadingModel": "モデルを読み込み中…"
   },
   "whatsNew": {
-    "title": "Handy v{{version}} の新機能"
+    "title": "Tishe の新機能"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} が1個のショートカットをブロックしている可能性があります",
@@ -733,5 +972,696 @@
     "learnMore": "解決方法",
     "recorderBlocked": "現在ショートカットを記録できません。macOS の Secure Input がキーイベントをブロックしています。先に Secure Input の警告を解消してください。",
     "dismiss": "閉じる"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg が見つかりません。音声・動画ファイルの読み込みに必要で、Tishe のインストーラーに含まれています。Tishe を再インストールしてください。または次のコマンドでインストールし、Tishe を再起動してください: winget install Gyan.FFmpeg",
+    "input": {
+      "choose": "ファイルを追加…",
+      "filterName": "音声と動画"
+    },
+    "maxPart": {
+      "title": "パートの最大の長さ",
+      "unit": "分"
+    },
+    "cloud": {
+      "provider": "プロバイダー",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "カスタム (OpenAI 互換)"
+      },
+      "baseUrl": "API の URL",
+      "baseUrlDescription": "/v1 で終わるベース URL。",
+      "apiKey": "API キー",
+      "apiKeyDescription": "このコンピューターにローカル保存されます。",
+      "model": "モデル",
+      "modelDescription": "gpt-4o-transcribe 系のモデルは1リクエストあたり最大約23分まで受け付けます。パートは自動で短くなります。",
+      "language": "言語",
+      "languageDescription": "言語コード (例: ja、en)。空欄なら自動判別します。",
+      "languagePlaceholder": "自動"
+    },
+    "diarization": {
+      "count": "録音に含まれる人数",
+      "auto": "自動で判別",
+      "model": "話者モデル",
+      "modelDescription": "一度だけダウンロードし、声を聞き分けます。どちらも小さく高速です。",
+      "recommended": "おすすめ",
+      "cloudUntimed": "モデル {{model}} はタイムスタンプを返さないため、話者を付けられません。whisper-1、Groq の whisper モデル、またはローカル認識を選んでください。",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "数千人の声で学習済み。実際の録音で声を確実に聞き分けます。既定のおすすめです。"
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "代替モデル。最初のモデルが録音の声を取り違える場合に試してください。"
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "未編集の文字起こしも含める",
+      "includeRawDescription": "認識結果の未編集版を文書の末尾に追加します。",
+      "promptPlaceholder": "録音の言語に合わせた組み込みの指示 (ロシア語または英語)"
+    },
+    "output": {
+      "format": "形式",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "タイムスタンプ",
+      "location": "保存先",
+      "choose": "フォルダーを選択…",
+      "nextToSource": "元ファイルと同じ場所",
+      "notes": "処理メモ",
+      "removeFillers": "言いよどみを削除",
+      "saveDebug": "中間ファイルを保存",
+      "saveDebugDescription": "文書の隣に「<name>.debug」フォルダーを作成し、各段階のテキストを保存します: 認識、整形、言語モデルへの各リクエストとその回答、最終結果。エラーの追跡やモデル比較用です。"
+    },
+    "actions": {
+      "start": "文字起こし",
+      "cancel": "キャンセル"
+    },
+    "progress": {
+      "starting": "開始中…",
+      "elapsed": "経過 {{time}}",
+      "extracting": "音声を抽出中…",
+      "extractingPart": "音声を抽出中…",
+      "diarizing": "話者を判別中…",
+      "diarizingPart": "話者を判別中…",
+      "splitting": "パートに分割中…",
+      "splittingPart": "パートに分割中…",
+      "transcribing": "文字起こし中…",
+      "transcribingPart": "パート {{part}} / {{total}} を文字起こし中…",
+      "post_processing": "LLM で整形中…",
+      "post_processingPart": "パート {{part}} / {{total}} を LLM で整形中…",
+      "writing": "文書を書き出し中…",
+      "writingPart": "文書を書き出し中…"
+    },
+    "result": {
+      "open": "開く",
+      "reveal": "フォルダーに表示"
+    },
+    "document": {
+      "title": "文字起こし",
+      "sourceFile": "ファイル",
+      "duration": "長さ",
+      "parts": "パート数",
+      "engine": "音声認識",
+      "llm": "LLM による後処理",
+      "created": "作成日時",
+      "part": "パート",
+      "rawTranscript": "未編集の文字起こし",
+      "speaker": "話者",
+      "notes": "処理メモ",
+      "notesTotal": "処理時間",
+      "notesExtracting": "音声の抽出",
+      "notesDiarizing": "話者の判別",
+      "notesTranscribing": "音声認識",
+      "notesLlm": "LLM 処理",
+      "notesWarnings": "警告",
+      "notesNone": "なし",
+      "notesLanguage": "テキストの言語",
+      "llmLocal": "{{model}} (このコンピューター上)",
+      "warnings": {
+        "noTimestampsModel": "話者は付けられませんでした: この音声モデルはタイムスタンプを返しません。whisper モデルかローカル認識を使ってください",
+        "noTimestampsPart": "パート {{part}}: 音声サービスがタイムスタンプを返さなかったため、話者を付けられませんでした",
+        "llmEmpty": "パート {{part}}、断片 {{fragment}}: LLM の回答が空だったため、元のテキストを残しました",
+        "llmError": "パート {{part}}、断片 {{fragment}}: LLM のエラーのため、元のテキストを残しました ({{error}})",
+        "numbersBack": "パート {{part}}、断片 {{fragment}}: {{lines}} 行で数字を戻しました (LLM が文字で書いたか省略したため)",
+        "linesLost": "パート {{part}}、断片 {{fragment}}: LLM の回答で番号付きの行が崩れたため、元のテキストを残しました",
+        "linesKept": "パート {{part}}、断片 {{fragment}}: {{total}} 行中 {{kept}} 行は元のテキストのままです ({{reasons}})",
+        "kept": {
+          "missing": "欠落",
+          "duplicate": "重複",
+          "empty": "空",
+          "tooLong": "長すぎる",
+          "translated": "翻訳された",
+          "tooShort": "短すぎる",
+          "cutOff": "途切れた"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "完了分を消去"
+    },
+    "events": {
+      "title": "イベントスクリプト",
+      "choose": "選択…",
+      "none": "未設定 – イベントはどこにも送信されません",
+      "filterName": "プログラムとスクリプト",
+      "test": "テスト",
+      "testOk": "スクリプトがテストイベントを受け取りました",
+      "testFailed": "失敗: {{error}}",
+      "testMessage": "Tishe: テストイベント",
+      "remaining": "残り約 {{minutes}} 分",
+      "started": "文字起こしを開始しました",
+      "finished": "完了",
+      "cancelled": "キャンセルしました",
+      "interval": {
+        "title": "進捗通知の間隔",
+        "description": "この秒数に1回までに制限します。新しい段階やパート、開始と終了はすぐに送信されます。",
+        "unit": "秒"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "変更",
+    "choose": "選択",
+    "open": "開く",
+    "hide": "隠す",
+    "save": "保存",
+    "saved": "保存しました",
+    "copied": "コピーしました",
+    "undo": "元に戻す",
+    "download": "ダウンロード",
+    "downloadSize": "ダウンロード ({{size}})",
+    "downloadingPercent": "ダウンロード中 · {{percent}}%",
+    "cancelDownload": "キャンセル",
+    "deleteNamed": "{{name}} を削除",
+    "percent": "{{n}}%",
+    "useValue": "「{{value}}」を使う",
+    "fold": {
+      "more": "詳細",
+      "changed_other": "変更: {{count}}",
+      "changedA11y_other": "{{count}} 件の設定を変更済み"
+    },
+    "number": {
+      "hint": "{{min}}~{{max}}",
+      "hintDefault": "既定値 {{value}}、{{min}}~{{max}}",
+      "notNumber": "数値を入力してください",
+      "range": "{{min}}~{{max}} の数値を入力してください"
+    },
+    "units": {
+      "ms": "ミリ秒",
+      "sec": "{{n}} 秒",
+      "min": "{{n}} 分",
+      "hour": "{{n}} 時間",
+      "hourMin": "{{h}} 時間 {{m}} 分",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "今日 {{time}}",
+      "yesterday": "昨日 {{time}}",
+      "todayTitle": "今日",
+      "yesterdayTitle": "昨日"
+    },
+    "player": {
+      "play": "再生",
+      "pause": "一時停止",
+      "position": "再生位置"
+    },
+    "shortcut": {
+      "change": "「{{name}}」のキーを変更",
+      "reset": "キーを既定に戻す"
+    },
+    "echo": {
+      "recognition": "音声認識: {{model}}",
+      "language": "言語: {{language}}",
+      "sharedWithDictation": "音声入力と共通",
+      "sharedWithFiles": "ファイルの文字起こしと共通",
+      "noModel": "音声認識モデルがありません"
+    },
+    "llm": {
+      "ready": "準備完了 · {{model}} (このコンピューター上)",
+      "needed": "AI が必要 · {{model}}",
+      "downloading": "AI をダウンロード中 · {{percent}}%",
+      "runtimeMissing": "組み込みの AI エンジンがありません",
+      "otherOptions": "その他の方法",
+      "noKey": "{{provider}} のキーが必要です",
+      "noUrl": "サーバーのアドレスが必要です",
+      "noServerModel": "モデル名が必要です",
+      "localServer": "このコンピューター上のサーバー · {{model}}",
+      "textToServer": "テキストの送信先: {{address}}",
+      "textToService": "テキストの送信先: {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "モデル {{name}} を削除しますか?",
+      "deleteModel": "モデルを削除",
+      "deleteModelBody": "{{size}} が空きます。再び使うには、もう一度ダウンロードする必要があります。",
+      "deleteActiveTitle": "{{name}} を削除しますか? 現在使用中のモデルです",
+      "deleteActiveBody": "別のモデルを選ぶまで、音声入力と文字起こしは使えなくなります。{{size}} が空きます。",
+      "deleteLlmTitle": "AI モデル {{name}} を削除しますか?",
+      "deleteLlm": "AI モデルを削除",
+      "deleteLlmBody": "{{size}} が空きます。もう一度ダウンロードするか別のモデルを選ぶまで、編集は使えません。",
+      "deleteSpeakerModelBody": "声のモデルを再びダウンロードするまで、話者ごとの分割は使えません。"
+    },
+    "back": {
+      "transcription": "「文字起こし」に戻る",
+      "dictation": "「音声入力」に戻る",
+      "meetings": "「会議」に戻る",
+      "history": "「履歴」に戻る",
+      "models": "「音声認識」に戻る",
+      "llm": "「AI 編集」に戻る",
+      "app": "「アプリ」に戻る",
+      "about": "「概要」に戻る",
+      "debug": "「デバッグ」に戻る",
+      "next": "「今後の予定」に戻る"
+    },
+    "changed": "変更済み"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "読み込み済み",
+      "loading": "読み込み中…",
+      "error": "読み込みに失敗",
+      "unloaded": "メモリ外",
+      "none": "モデルなし",
+      "a11y": "モデル {{model}}、{{state}}。モデルを変更",
+      "menu": "ダウンロード済みのモデル",
+      "all": "すべてのモデル…",
+      "locked": "文字起こし中です。終わってから変更してください"
+    },
+    "task": "文字起こし: ファイル {{current}} / {{total}} · {{percent}}%",
+    "downloading": "ダウンロード中: {{name}} · {{percent}}%",
+    "downloadingMany": "ダウンロード中: {{count}} 件 · {{percent}}%"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "文字起こしには ffmpeg が必要です"
+    },
+    "drop": {
+      "title": "ここに録音をドロップ",
+      "text": "音声または動画: mp3、m4a、wav、mp4、mkv など。ファイルごとに別の文書になります。",
+      "more": "さらに録音をドロップするか",
+      "release": "離すと追加します",
+      "rejected": "{{names}} – 音声でも動画でもありません",
+      "oneText": "「{{name}}」を文字起こしの待ち行列に追加します",
+      "manyText_other": "{{count}} 件の録音を文字起こしの待ち行列に追加します",
+      "anyText": "音声と動画のファイルを文字起こしの待ち行列に追加します",
+      "noneTitle": "これらのファイルは使えません",
+      "noneText": "文字起こしできるのは音声と動画だけです: mp3、m4a、wav、mp4、mkv など。",
+      "otherNote_other": "ほかに {{count}} 件のファイルはスキップされます: 音声でも動画でもありません",
+      "alreadyOne": "「{{name}}」はすでに待ち行列にあります",
+      "alreadyMany": "これらの録音はすでに待ち行列にあります"
+    },
+    "list": {
+      "label": "録音",
+      "waiting": "待機中",
+      "cancelled": "キャンセル済み",
+      "remaining": "残り約 {{time}}",
+      "remove": "削除",
+      "removeFile": "{{name}} を削除",
+      "removeFromList": "一覧から削除",
+      "more": "詳細: {{name}}",
+      "recipeSpeakers": "話者",
+      "recipeEditing": "編集",
+      "recipeCloud": "クラウド",
+      "parts_other": "{{count}} パート",
+      "notes_other": "処理メモ {{count}} 件",
+      "showAll": "すべて表示 ({{count}})",
+      "showFewer": "表示を減らす",
+      "removedOne": "一覧から削除しました",
+      "removedMany_other": "{{count}} 行を一覧から削除しました",
+      "chars_other": "{{n}} 文字",
+      "keptNote": "直近 {{count}} 件の結果を保持します。ディスク上の文書が削除されることはありません。",
+      "missing": "文書が見つかりません: 移動か削除されたか、ドライブが接続されていません",
+      "openDocument": "文書 {{name}} を開く"
+    },
+    "recipe": {
+      "title": "レシピ",
+      "locked": "文字起こし中は設定が変わりません。新しいファイルにも同じ設定が使われます。",
+      "where": "認識する場所",
+      "local": "このコンピューター",
+      "cloud": "クラウド",
+      "audioToService": "音声の送信先: {{provider}}",
+      "cloudEcho": "音声認識: {{provider}} の {{model}}",
+      "speakers": "話者",
+      "speakersDescription": "文書は話者付きの記録になります:「話者 1: …」「話者 2: …」",
+      "speakersMissing": "声のモデルが必要 · {{size}}",
+      "speakersDownloading": "声のモデルをダウンロード中 · {{percent}}%",
+      "speakersReady": "声のモデルの準備完了",
+      "countDescription": "わかっていれば、より正確に分割できます",
+      "editing": "AI による編集",
+      "editingDescription": "認識ミスと句読点を直します。かなり時間がかかります: 録音1時間あたり約15–35分",
+      "result": "結果",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "録音と同じ場所"
+    },
+    "more": {
+      "recognition": "音声認識",
+      "maxPartDescription": "長い録音は、無音部分でこの長さ以下のパートに区切られます",
+      "speakers": "話者",
+      "editing": "編集",
+      "prompt": "ファイル用の指示",
+      "promptDescription": "空欄なら録音の言語に合わせた組み込みの指示。優先順位: この欄、モデルの ⚙、組み込みの指示",
+      "document": "文書",
+      "locationDescription": "名前は録音から付けられます。上書きはせず、代わりに (2) を付けます",
+      "timestampsDescription": "各段落の前に録音内の時刻",
+      "removeFillersDescription": "英語とロシア語の録音で「uh」「um」「hmm」を削除します。単語は残ります",
+      "globalFillers": "元の文字起こしは逐語のままです。音声入力にはフィラー語の設定が別にあります",
+      "notesDescription": "末尾に各段階の所要時間と警告",
+      "integrations": "連携",
+      "eventsDescription": "開始、進捗、終了を知らせるプログラム (.exe、.ps1、.bat、.cmd)"
+    },
+    "panel": {
+      "addFiles": "ファイルを追加して開始",
+      "noFfmpeg": "ffmpeg が必要です",
+      "noModel": "まず音声認識モデルをダウンロードしてください",
+      "cloudIncomplete": "{{provider}} のキーが必要です",
+      "cloudIncompleteCustom": "API のアドレス、キー、モデルが必要です",
+      "noSpeakerModel": "声のモデルが必要です",
+      "running": "ファイル {{current}} / {{total}} · 経過 {{time}}",
+      "start_other": "{{count}} 件のファイルを文字起こし",
+      "done_other": "完了: {{count}} 件のファイル",
+      "errors_other": "エラーのあるファイル {{count}} 件",
+      "summary_other": "録音 {{count}} 件",
+      "modelDownloading": "音声認識モデルをダウンロード中 · {{percent}}%",
+      "llmDownloading": "編集用の AI をダウンロード中 · {{percent}}%",
+      "llmMissing": "編集には AI が必要です",
+      "llmNotSetUp": "編集用の AI が設定されていません",
+      "withoutEditing": "編集なしで",
+      "modelNotActive": "音声認識モデルがオンになっていません"
+    },
+    "stop": {
+      "title": "文字起こしを停止しますか?",
+      "body": "完了したファイル ({{done}}) は保存されています。処理中のファイル ({{percent}}%) と待機中のファイル ({{waiting}}) は、やり直しが必要です。",
+      "confirm": "停止",
+      "keep": "続ける"
+    },
+    "tray": {
+      "running": "文字起こし: ファイル {{current}} / {{total}} · {{pct}}%",
+      "ready_other": "文字起こし完了: {{count}} 件のファイル"
+    },
+    "notify": {
+      "readyOne": "文字起こしが完了しました",
+      "readyMany_other": "文字起こし完了: {{count}} 件のファイル",
+      "failedOne": "文字起こしに失敗しました",
+      "failedMany_other": "文字起こしに失敗: {{count}} 件のファイル",
+      "partial": "{{total}} 件中 {{ok}} 件完了 · {{errors}}",
+      "errors_other": "{{count}} 件失敗",
+      "failedFile": "失敗: {{name}} · {{reason}}",
+      "open": "開く"
+    },
+    "try": {
+      "before": "任意のエディターを開いてカーソルを置き、話している間",
+      "after": "を押し続けてください。離すと、そこにテキストが入ります。",
+      "changeKey": "キーを変更"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "音声入力の準備完了 ·",
+      "anyWindow": "どのウィンドウでも",
+      "keyBusy": "音声入力が始まりません: キーが使用中です",
+      "keyBusyDetail": "{{key}} は別のプログラムが使用中です。別のキーを選んでください。",
+      "changeKey": "キーを変更"
+    },
+    "keys": {
+      "title": "キー",
+      "second": "編集付き音声入力 – 2つ目のキー",
+      "secondDescription": "通常のキーはテキストをそのまま貼り付けます。こちらは AI で編集してから貼り付けます",
+      "instruction": "指示",
+      "manage": "管理…",
+      "secondBusy": "このキーは別のプログラムが使用中です。別のキーを選んでください"
+    },
+    "more": {
+      "paste": "テキストの貼り付け",
+      "indicator": "録音インジケーター",
+      "microphone": "マイクと録音",
+      "prompts": "編集付き音声入力の指示",
+      "promptsDescription_other": "指示 {{count}} 件",
+      "promptsRow": "指示の作成と編集",
+      "text": "音声入力のテキスト",
+      "fillersDocuments": "音声入力専用です。文書では「文字起こし」ページの「言いよどみを削除」がこれを行います"
+    },
+    "fix": {
+      "title": "うまく動かないとき",
+      "paste": "テキストが貼り付けられない",
+      "pasteHelp": "管理者として実行中のプログラムに音声入力した場合、Windows はそこへの貼り付けを許可しません。それ以外の場合は、下の待ち時間を増やしてください。",
+      "cutOff": "文の終わりが切れる",
+      "hold": "短く押しただけで長押し扱いになる"
+    },
+    "prompts": {
+      "title": "編集付き音声入力の指示",
+      "intro": "指示は、音声入力したテキストをどう扱うかを AI に伝えます。${output} は音声入力したテキストです。",
+      "current": "現在の指示",
+      "create": "作成",
+      "deleted": "指示「{{name}}」を削除しました"
+    }
+  },
+  "meetings": {
+    "what": "Tishe はこのコンピューターで会議や通話を録音できるようになります。あなたのマイクと相手側の音声を録音し、話者ごとに分けた文字起こしを作ります。",
+    "how": "録音は Tishe のほかのデータと同じく、このコンピューターに残ります。",
+    "nowTitle": "今すぐできること",
+    "nowText": "会議がすでに Zoom、Teams、ボイスレコーダーなどで録音されているなら、そのファイルを「文字起こし」に追加してください。",
+    "goTranscription": "「文字起こし」へ"
+  },
+  "history": {
+    "storage": {
+      "title": "保存",
+      "limit_other": "直近 {{count}} 件の音声入力を保持します",
+      "never": "音声入力は自動で削除されません",
+      "days_3": "音声入力は3日後に削除されます",
+      "weeks_2": "音声入力は2週間後に削除されます",
+      "months_3": "音声入力は3か月後に削除されます"
+    },
+    "empty": {
+      "title": "ここに音声入力が表示されます",
+      "textBefore": "どのウィンドウでも",
+      "textAfter": "を押したまま話してください。",
+      "textNoKey": "「音声入力」で音声入力のキーを設定してください。"
+    },
+    "copy": "テキストをコピー",
+    "more": "その他の操作",
+    "keep": "保持",
+    "keepDescription": "自動では削除されません",
+    "retry": "もう一度認識",
+    "delete": "削除",
+    "deleted": "音声入力を削除しました",
+    "failed": "認識できませんでした",
+    "savedTag": "保持中",
+    "editingSkipped": "編集なし",
+    "showMore": "全文を表示",
+    "showLess": "折りたたむ",
+    "version": "テキストの版",
+    "versionEdited": "編集後",
+    "versionRaw": "元の文"
+  },
+  "models": {
+    "purpose": "音声をテキストに変換するモデルです。音声入力とファイルの文字起こしに使います。AI によるテキストの編集はこちら:",
+    "active": {
+      "title": "使用中のモデル",
+      "change": "モデルを変更",
+      "none": "モデルが選ばれていません",
+      "noneHint": "お使いの言語におすすめのモデルをダウンロードしてください。下のカタログから好きなモデルを選ぶこともできます"
+    },
+    "lockedByTranscription": "文字起こし中です。終わってから変更してください",
+    "language": {
+      "title": "言語と翻訳",
+      "scope": "音声入力とファイルの文字起こしに適用"
+    },
+    "cleanup": {
+      "title": "テキストの整形",
+      "scope": "音声認識モデル内で動作します (音声入力とファイル)"
+    },
+    "memory": {
+      "title": "メモリ"
+    },
+    "onlyLanguage": "{{language}} のみ",
+    "languageCount_other": "{{count}} 言語",
+    "catalog": {
+      "title": "カタログ",
+      "yours": "あなたのモデル",
+      "yoursCount": "あなたのモデル ({{count}})",
+      "recommended": "おすすめ",
+      "all": "すべてのモデル",
+      "languageFilter": "言語",
+      "streaming": "ストリーミング",
+      "translation": "翻訳",
+      "showAll": "すべてのモデルを表示 ({{count}})",
+      "showFewer": "表示を減らす"
+    },
+    "row": {
+      "use": "使う",
+      "inUse": "使用中",
+      "more": "詳細: {{name}}",
+      "delete": "モデルを削除",
+      "translate": "英語に翻訳",
+      "streaming": "ストリーミング",
+      "accuracy": "精度 {{n}}/10",
+      "speed": "速度 {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "テキストをどこで、どの AI で編集するか",
+    "status": {
+      "usedFor": "用途",
+      "files": "ファイルの編集 ({{state}})",
+      "dictation": "編集付き音声入力 ({{state}})",
+      "on": "オン",
+      "off": "オフ"
+    },
+    "where": {
+      "title": "AI を動かす場所",
+      "local": "このコンピューター",
+      "localText": "テキストはコンピューターの外に出ません",
+      "localUnavailable": "このビルドでは利用できません",
+      "server": "自分のサーバー",
+      "serverText": "Ollama、LM Studio、または任意のアドレス · テキストは自分のサーバーへ",
+      "cloud": "クラウドサービス",
+      "cloudText": "OpenAI など · テキストはサービスへ送信"
+    },
+    "variant": {
+      "local": "組み込みの AI",
+      "server": "サーバー",
+      "cloud": "サービス"
+    },
+    "local": {
+      "speed": "速度 {{n}}/5",
+      "quality": "品質 {{n}}/5",
+      "footprint": "ディスク {{disk}} · メモリ 約 {{ram}} GB",
+      "showAll": "すべてのモデルを表示 ({{count}})",
+      "showFewer": "表示を減らす"
+    },
+    "server": {
+      "urlDescription": "/v1 で終わる OpenAI 互換のアドレス",
+      "keyDescription": "サーバーが求める場合のみ"
+    }
+  },
+  "app": {
+    "purpose": "プログラム全体の動作",
+    "launch": "起動と通知領域",
+    "look": "外観",
+    "updates": "アップデート",
+    "checkNow": "新しいバージョンを確認",
+    "checkNowButton": "今すぐ確認",
+    "experimental": "試験的な機能",
+    "quit": {
+      "title": "Tishe を終了しますか?",
+      "body": "「{{name}}」を文字起こし中です ({{pct}}%)。処理は止まりますが、完了した文書は保存されています。",
+      "bodyIdle": "文字起こしは止まりますが、完了した文書は保存されています。",
+      "confirm": "終了",
+      "stay": "続ける"
+    },
+    "notifications": "通知",
+    "notifyLabel": "文字起こしが完了したら知らせる",
+    "notifyDescription": "ウィンドウが隠れているか前面にないときだけ、Windows の通知を表示します。クリックすると結果が開きます。",
+    "trayHint": "Windows は新しいアイコンを隠します。常に表示するには、隠れているアイコンからタスクバーへドラッグしてください。"
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "新機能",
+    "project": {
+      "title": "プロジェクトについて",
+      "basedOn": "Handy がベース",
+      "basedOnText": "オープンソース、MIT ライセンス",
+      "tishe": "Tishe",
+      "tisheText": "オープンソース、MIT ライセンス。リリースとバグ報告は GitHub で",
+      "licenses": "ライセンス",
+      "licensesText": "Tishe が使用しているサードパーティのライブラリとモデル",
+      "licensesOpen": "開く",
+      "licensesError": "ライセンスファイルを開けませんでした",
+      "author": "開発者",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub プロフィール"
+    },
+    "supportHandy": "Handy の作者を支援する",
+    "folders": "フォルダー",
+    "versionRelease": "Tishe {{version}}、リリース {{release}}"
+  },
+  "debug": {
+    "onBefore": "デバッグモードがオンになっています。再起動後もオンのままです。",
+    "onAfter": "で非表示にできます。",
+    "log": "ログ",
+    "previews": "プレビュー",
+    "keyboard": "キーボード",
+    "transcription": "文字起こし"
+  },
+  "release": {
+    "available": "バージョン {{release}} が公開されました",
+    "openPage": "GitHub でリリースページを開く",
+    "upToDate": "最新バージョンです",
+    "checkFailed": "アップデートを確認できませんでした"
+  },
+  "next": {
+    "lead": "Tishe は Private Memory の最初の一歩です。会話のプライベートな記憶を、すべてあなたのコンピューターの中に残します。",
+    "now": "Tishe は今でも、どのアプリにも音声入力でき、長い録音を話者ごとに分けて文字起こしできます。インターネットもアカウントも不要です。",
+    "planTitle": "次のバージョンで",
+    "plan": {
+      "meetings": {
+        "title": "会議の録音",
+        "text": "自分のマイクと相手の音声を 2 つのトラックで録音し、話しながらテキストが表示されます。"
+      },
+      "summaries": {
+        "title": "会議の要約",
+        "text": "録音を止めた直後に、決定事項とタスクを会議の言語で内蔵の言語モデルがまとめます。"
+      },
+      "search": {
+        "title": "会議の検索",
+        "text": "まずは単語で、次に意味で検索。"
+      },
+      "agents": {
+        "title": "メモとアシスタント",
+        "text": "Obsidian 用の会議フォルダーと、MCP 経由での AI アシスタントから会議へのアクセス。こちらもクラウド不要です。"
+      }
+    },
+    "order": "日付は約束しません。順番はフィードバックによって変わることがあります。",
+    "freeTitle": "無料でオープンソース",
+    "freeText": "Tishe の中核は無料で、これからも無料です。リリースをフォローし、足りないものを GitHub で教えてください。",
+    "follow": "GitHub でフォロー",
+    "feedback": "問題やアイデアを報告"
+  },
+  "fileErrors": {
+    "notFound": "ファイルが見つかりません。移動または削除されました。",
+    "noAudio": "ファイルに音声がないか、読み込めませんでした。",
+    "unreadable": "ファイルの音声を読み込めませんでした。ファイルが壊れている可能性があります。",
+    "noModel": "音声認識モデルが選択されていません。「$t(sidebar.models)」で選んでください。",
+    "noSpeakerModel": "声のモデルがダウンロードされていません。「$t(transcription.more.speakers)」でダウンロードしてください。",
+    "noLlmModel": "言語モデルがダウンロードされていません。「$t(sidebar.llm)」でダウンロードしてください。",
+    "noLlmRuntime": "内蔵の言語モデルエンジンが見つかりません。Tishe を再インストールしてください。",
+    "cloudKey": "クラウド認識には API キーが必要です。",
+    "cloudConfig": "クラウド認識が設定されていません。アドレスとモデルを入力してください。",
+    "busy": "別のファイルを文字起こし中です。",
+    "noSpace": "ディスクの空き容量がありません。",
+    "fileInUse": "文書が別のプログラム（Word など）で開かれています。閉じてからもう一度お試しください。",
+    "accessDenied": "文書の保存先フォルダーにアクセスできません。別のフォルダーを選んでください:「$t(ui.fold.more) → $t(transcription.more.document)」。"
+  },
+  "setup": {
+    "asr": {
+      "title": "音声認識モデルをダウンロードしてください",
+      "text": "音声をテキストに変換するモデルで、録音にも音声入力にも使われます。このコンピューター上でオフラインで動作します。ダウンロードは一度だけです。",
+      "language": "録音の言語",
+      "allModels": "すべてのモデル",
+      "onDisk": "{{name}} はすでにこのコンピューターにあります。オンにするだけです。",
+      "whileDownloading": "ダウンロード中でも録音を追加できます。モデルの準備ができると文字起こしが始まります。"
+    },
+    "llm": {
+      "title": "編集には AI が必要です",
+      "what": "AI が認識ミスと句読点を直します。おすすめは組み込みの AI です。このコンピューター上で動作し、テキストは外に出ません。",
+      "recommended": "ディスク {{size}} · メモリ約 {{ram}} GB が必要 · ダウンロードは一度だけ",
+      "otherWays": "自分のサーバーまたはクラウド",
+      "downloadOn": "{{size}} をダウンロードしてオンにする",
+      "runtimeTitle": "組み込みの AI は使えません",
+      "runtime": "このビルドには組み込みの AI のエンジンがありません。「$t(sidebar.llm)」で自分のサーバー（Ollama、LM Studio）やクラウドサービスに接続できます。",
+      "openPage": "「$t(sidebar.llm)」を開く",
+      "notSetUp": "{{reason}}: これがないと AI は動作しません。編集をオンにして、「$t(sidebar.llm)」で設定を完了してください。",
+      "onAndSetUp": "オンにして設定する",
+      "onDisk": "すでにこのコンピューターにあります。ダウンロードは不要です。",
+      "turnOn": "編集をオンにする"
+    },
+    "quick": {
+      "title": "クイックスタート",
+      "progress": "{{done}} / {{total}}",
+      "hide": "隠す",
+      "hideHint": "「クイックスタート」を隠します。設定はすべて左側のセクションに残ります",
+      "model": "音声認識モデルをダウンロード",
+      "modelDone": "音声認識モデルの準備完了 · {{name}}",
+      "dictation": "音声入力を試す",
+      "dictationDone": "音声入力は使えます · 音声入力の内容は「履歴」に保存されます",
+      "file": "録音を文字起こしする",
+      "fileDone": "最初の録音を文字起こししました",
+      "fileHint": "音声や動画のファイルをこのウィンドウにドロップするか、ファイルを選んでください。録音と同じ場所に Word 文書ができます。",
+      "llm": "AI による編集",
+      "optional": "任意",
+      "llmHint": "文書の認識ミスと句読点を直します。{{model}}: {{size}}、このコンピューター上で動作します。",
+      "llmReady": "AI の準備完了 · {{model}}",
+      "doneTitle": "準備完了",
+      "doneText": "Tishe の設定が完了しました。音声入力の内容は「履歴」に、文書は下のリストに、設定は左側のセクションにあります。",
+      "close": "閉じる"
+    }
   }
 }

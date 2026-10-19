@@ -423,6 +423,25 @@ async changeShowWhatsNewOnUpdateSetting(enabled: boolean) : Promise<Result<null,
     else return { status: "error", error: e  as any };
 }
 },
+/**
+ * Tishe: Windows notifications at the end of a file transcription
+ * («Приложение → Уведомления»).
+ */
+async changeTranscriptionNotificationsSetting(enabled: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_transcription_notifications_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Tishe: bindings whose key another program holds (S2). Empty with
+ * handy-keys, the default on Windows: it hears keys through a hook.
+ */
+async getShortcutConflicts() : Promise<string[]> {
+    return await TAURI_INVOKE("get_shortcut_conflicts");
+},
 async changeWhatsNewLastSeenVersionSetting(version: string) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("change_whats_new_last_seen_version_setting", { version }) };
@@ -924,14 +943,183 @@ async updateRecordingRetentionPeriod(period: string) : Promise<Result<null, stri
 }
 },
 /**
- * Checks if the Mac is a laptop by detecting battery presence
- * 
- * This uses pmset to check for battery information.
- * Returns true if a battery is detected (laptop), false otherwise (desktop)
+ * Stub implementation for non-macOS platforms
+ * Always returns false since laptop detection is macOS-specific
  */
 async isLaptop() : Promise<Result<boolean, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("is_laptop") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async transcribeMediaFile(request: FileTranscriptionRequest) : Promise<Result<FileTranscriptionResult, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("transcribe_media_file", { request }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async cancelMediaFileTranscription() : Promise<void> {
+    await TAURI_INVOKE("cancel_media_file_transcription");
+},
+async isFfmpegAvailable() : Promise<boolean> {
+    return await TAURI_INVOKE("is_ffmpeg_available");
+},
+/**
+ * Keep the local model loaded across a queue of files. Releasing the hold
+ * applies the "unload immediately" setting once the last job is done.
+ */
+async setFileQueueHold(hold: boolean) : Promise<void> {
+    await TAURI_INVOKE("set_file_queue_hold", { hold });
+},
+/**
+ * The transcription line of the tray tooltip, composed by the window
+ * («Расшифровка: файл 2 из 3 · 47 %»); `None` returns the tooltip to idle.
+ */
+async setFileQueueTooltip(text: string | null) : Promise<void> {
+    await TAURI_INVOKE("set_file_queue_tooltip", { text });
+},
+/**
+ * Which of the given paths exist: results kept between runs show «Файл не
+ * найден» for a document that was moved or deleted (CF7).
+ */
+async pathsExist(paths: string[]) : Promise<boolean[]> {
+    return await TAURI_INVOKE("paths_exist", { paths });
+},
+/**
+ * End of a transcription queue. The window composes the text (it knows the
+ * files and the language); here it is shown if the setting allows and the
+ * window is out of view. Returns whether a notification was shown.
+ */
+async notifyFileQueue(title: string, body: string, openPath: string | null, openLabel: string | null, target: string | null) : Promise<boolean> {
+    return await TAURI_INVOKE("notify_file_queue", { title, body, openPath, openLabel, target });
+},
+/**
+ * «Что делать» in an overlay message: show the window at the help for this
+ * kind of failure and put the overlay away.
+ */
+async overlayHelp(kind: OverlayMessageKind) : Promise<void> {
+    await TAURI_INVOKE("overlay_help", { kind });
+},
+/**
+ * Return `path`, or `name (2).ext`, `name (3).ext`… if it already exists, so
+ * queued transcripts never overwrite an earlier document.
+ */
+async uniqueOutputPath(path: string) : Promise<string> {
+    return await TAURI_INVOKE("unique_output_path", { path });
+},
+/**
+ * "Test" button on the File tab: sends one `test` event and reports whether
+ * the script ran.
+ */
+async sendTestFileEvent(script: string, message: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("send_test_file_event", { script, message }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async localLlmListModels() : Promise<LocalLlmModelInfo[]> {
+    return await TAURI_INVOKE("local_llm_list_models");
+},
+/**
+ * Download a model; resolves to false if the download was cancelled.
+ */
+async localLlmDownloadModel(id: string) : Promise<Result<boolean, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("local_llm_download_model", { id }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async localLlmCancelDownload(id: string) : Promise<void> {
+    await TAURI_INVOKE("local_llm_cancel_download", { id });
+},
+async localLlmDeleteModel(id: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("local_llm_delete_model", { id }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async localLlmStatus() : Promise<LocalLlmStatus> {
+    return await TAURI_INVOKE("local_llm_status");
+},
+/**
+ * Stop the local LLM now, freeing its memory.
+ */
+async localLlmStop() : Promise<void> {
+    await TAURI_INVOKE("local_llm_stop");
+},
+async setLocalLlmUnloadTimeout(timeout: ModelUnloadTimeout) : Promise<void> {
+    await TAURI_INVOKE("set_local_llm_unload_timeout", { timeout });
+},
+async getLlmModelSettings(modelId: string) : Promise<LlmModelSettingsView> {
+    return await TAURI_INVOKE("get_llm_model_settings", { modelId });
+},
+/**
+ * Save a model's parameters; `None` fields go back to the default. The
+ * built-in LLM picks up launch parameters at its next start (a running one
+ * is restarted before the next job that doesn't share it).
+ */
+async setLlmModelSettings(modelId: string, settings: LlmModelSettings) : Promise<Result<LlmModelSettingsView, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_llm_model_settings", { modelId, settings }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async getAsrModelSettings(modelId: string) : Promise<AsrModelSettingsView> {
+    return await TAURI_INVOKE("get_asr_model_settings", { modelId });
+},
+/**
+ * Save a speech model's parameters. A device change reloads the model the
+ * next time it is used.
+ */
+async setAsrModelSettings(modelId: string, settings: AsrModelSettings) : Promise<Result<AsrModelSettingsView, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("set_asr_model_settings", { modelId, settings }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Open a finished transcript with the system's default app, or show it in
+ * the file manager when `reveal` is set.
+ */
+async openTranscriptFile(path: string, reveal: boolean) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("open_transcript_file", { path, reveal }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async diarizationListModels() : Promise<DiarizationModelInfo[]> {
+    return await TAURI_INVOKE("diarization_list_models");
+},
+async diarizationDownloadModel(id: string) : Promise<Result<boolean, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("diarization_download_model", { id }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+async diarizationCancelDownload(id: string) : Promise<void> {
+    await TAURI_INVOKE("diarization_cancel_download", { id });
+},
+async diarizationDeleteModel(id: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("diarization_delete_model", { id }) };
 } catch (e) {
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
@@ -998,7 +1186,11 @@ whats_new_last_seen_version?: string; selected_model?: string; onboarding_comple
  * Which input channel to use on the selected microphone device.
  * None means "average all channels" (original behavior).
  */
-selected_channel?: number | null; clamshell_microphone?: string | null; selected_output_device?: string | null; translate_to_english?: boolean; selected_language?: string; overlay_position?: OverlayPosition; debug_mode?: boolean; log_level?: LogLevel; custom_words?: string[]; model_unload_timeout?: ModelUnloadTimeout; word_correction_threshold?: number; history_limit?: number; recording_retention_period?: RecordingRetentionPeriod; paste_method?: PasteMethod; clipboard_handling?: ClipboardHandling; auto_submit?: boolean; auto_submit_key?: AutoSubmitKey; post_process_enabled?: boolean; post_process_provider_id?: string; post_process_providers?: PostProcessProvider[]; post_process_api_keys?: SecretMap; post_process_models?: Partial<{ [key in string]: string }>; post_process_prompts?: LLMPrompt[]; post_process_selected_prompt_id?: string | null; mute_while_recording?: boolean; append_trailing_space?: boolean; app_language?: string; theme?: Theme; experimental_enabled?: boolean; lazy_stream_close?: boolean; keyboard_implementation?: KeyboardImplementation; show_tray_icon?: boolean; paste_delay_ms?: number; paste_delay_after_ms?: number; 
+selected_channel?: number | null; clamshell_microphone?: string | null; selected_output_device?: string | null; translate_to_english?: boolean; selected_language?: string; overlay_position?: OverlayPosition; debug_mode?: boolean; log_level?: LogLevel; custom_words?: string[]; model_unload_timeout?: ModelUnloadTimeout; 
+/**
+ * When the built-in local LLM process (`local_llm`) is stopped after use.
+ */
+local_llm_unload_timeout?: ModelUnloadTimeout; word_correction_threshold?: number; history_limit?: number; recording_retention_period?: RecordingRetentionPeriod; paste_method?: PasteMethod; clipboard_handling?: ClipboardHandling; auto_submit?: boolean; auto_submit_key?: AutoSubmitKey; post_process_enabled?: boolean; post_process_provider_id?: string; post_process_providers?: PostProcessProvider[]; post_process_api_keys?: SecretMap; post_process_models?: Partial<{ [key in string]: string }>; post_process_prompts?: LLMPrompt[]; post_process_selected_prompt_id?: string | null; mute_while_recording?: boolean; append_trailing_space?: boolean; app_language?: string; theme?: Theme; experimental_enabled?: boolean; lazy_stream_close?: boolean; keyboard_implementation?: KeyboardImplementation; show_tray_icon?: boolean; paste_delay_ms?: number; paste_delay_after_ms?: number; 
 /**
  * Debug-gated ("beta") receipt-sequenced paste: restore the clipboard only
  * after the target app actually reads the transcript, instead of after a
@@ -1025,7 +1217,36 @@ vad_backend?: VadBackend;
  * not gated on this — that follows model capability. Migrated from the old
  * `overlay_position` (position `none` → style `None`).
  */
-overlay_style?: OverlayStyle }
+overlay_style?: OverlayStyle; 
+/**
+ * Tishe: a Windows notification when a file transcription queue ends
+ * while the window is hidden or not in focus («Приложение → Уведомления»).
+ */
+transcription_notifications?: boolean; 
+/**
+ * Tishe: the one-time «работаю в фоне» notice (window closed during a
+ * transcription) has been shown.
+ */
+background_notice_shown?: boolean }
+export type AsrModelDefaults = { segment_max_secs: number }
+/**
+ * What the user changed for one speech recognition model.
+ */
+export type AsrModelSettings = { 
+/**
+ * Longest segment when recognizing files locally, seconds.
+ */
+segment_max_secs: number | null; 
+/**
+ * Run on the processor even when the general setting allows a GPU.
+ */
+cpu_only: boolean | null }
+export type AsrModelSettingsView = { settings: AsrModelSettings; defaults: AsrModelDefaults; 
+/**
+ * The engine can choose a device for this model (transcribe-cpp models;
+ * ONNX ones follow the general accelerator setting only).
+ */
+device_choice: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; ort: string[]; gpu_devices: GpuDeviceOption[] }
@@ -1040,7 +1261,67 @@ export type ChineseScript =
  */
 "as_transcribed" | "simplified" | "traditional"
 export type ClipboardHandling = "dont_modify" | "copy_to_clipboard"
+export type CloudSttConfig = { base_url: string; api_key: string; model: string; 
+/**
+ * ISO-639-1 code, or empty/"auto" to let the API detect it.
+ */
+language: string | null; 
+/**
+ * Optional vocabulary/style hint passed to the API.
+ */
+prompt: string | null }
 export type CustomSounds = { start: boolean; stop: boolean }
+export type DiarizationModelInfo = { id: string; 
+/**
+ * What is still left to download for this model (includes the shared
+ * segmentation model while it is missing).
+ */
+size_bytes: number; downloaded: boolean; downloading: boolean }
+/**
+ * Split the transcript by speaker with the built-in models.
+ */
+export type DiarizationRequest = { 
+/**
+ * Speaker (fingerprint) model id from `diarization_list_models`.
+ */
+model_id: string; 
+/**
+ * Exact number of people, when known; `None` lets it be estimated.
+ */
+num_speakers: number | null }
+/**
+ * Document captions, supplied by the UI so they follow the app language.
+ */
+export type DocumentLabels = { title: string; source_file: string; duration: string; parts: string; engine: string; llm: string; created: string; part: string; raw_transcript: string; 
+/**
+ * "Speaker", numbered in the document as "Speaker 1", "Speaker 2"…
+ */
+speaker: string; 
+/**
+ * Heading of the closing "processing notes" section.
+ */
+notes: string; 
+/**
+ * Captions of the lines in the notes section.
+ */
+notes_total: string; notes_extracting: string; notes_diarizing: string; notes_transcribing: string; notes_llm: string; notes_warnings: string; 
+/**
+ * Shown after `notes_warnings` when there were none.
+ */
+notes_none: string; 
+/**
+ * "Text language", followed by the codes found ("ru", "en").
+ */
+notes_language: string; 
+/**
+ * How the built-in LLM is named in the document ("Gemma 4 E4B, on this
+ * computer"); empty falls back to "provider / model id".
+ */
+llm_local?: string; 
+/**
+ * Warning texts for the document and the window.
+ */
+warnings?: WarningLabels }
 export type EngineType = 
 /**
  * Any GGML/GGUF model loaded through transcribe-cpp (Whisper, Parakeet,
@@ -1048,6 +1329,56 @@ export type EngineType =
  * the file, so this one variant covers the whole transcribe-cpp family.
  */
 "TranscribeCpp" | "Parakeet" | "Moonshine" | "MoonshineStreaming" | "SenseVoice" | "GigaAM" | "Canary" | "Cohere"
+/**
+ * Texts for the `message` field, supplied by the UI so they follow the app
+ * language. `{part}`, `{total}` and `{minutes}` are filled in here.
+ */
+export type EventLabels = { extracting: string; diarizing: string; splitting: string; transcribing: string; transcribing_part: string; post_processing: string; post_processing_part: string; writing: string; remaining: string; started: string; finished: string; cancelled: string }
+export type EventScriptOptions = { 
+/**
+ * Path to the program, `.ps1`, `.bat` or `.cmd` file.
+ */
+script: string; 
+/**
+ * Minimum seconds between progress events; clamped to 1..=600.
+ */
+progress_interval_secs: number; labels: EventLabels }
+export type FileTranscriptionRequest = { input_path: string; output_path: string; format: OutputFormat; max_part_minutes: number; engine: SttEngine; cloud: CloudSttConfig | null; 
+/**
+ * Run each part through the post-processing LLM configured in settings.
+ */
+llm_enabled: boolean; 
+/**
+ * The user's own LLM instruction; `None` uses the built-in one written
+ * in the language of each part's text.
+ */
+llm_prompt: string | null; 
+/**
+ * Remove hesitation sounds ("э-э", "uh") from the main text (Russian and
+ * English); the raw section keeps them.
+ */
+remove_fillers: boolean; include_raw: boolean; timestamps: boolean; 
+/**
+ * Close the document with how long each stage took and the warnings.
+ */
+include_notes: boolean; 
+/**
+ * Save the text after every step in a "<document>.debug" folder.
+ */
+save_debug: boolean; labels: DocumentLabels; 
+/**
+ * Optional program told about the job's progress (see events).
+ */
+events: EventScriptOptions | null; 
+/**
+ * Split the transcript by speaker.
+ */
+diarization: DiarizationRequest | null }
+export type FileTranscriptionResult = { output_path: string; duration_secs: number; parts: number; characters: number; 
+/**
+ * Non-fatal problems (e.g. an LLM chunk that fell back to the raw text).
+ */
+warnings: string[] }
 export type GpuDeviceOption = { id: string; name: string; total_vram_mb: number }
 export type HistoryEntry = { id: number; file_name: string; timestamp: number; saved: boolean; title: string; transcription_text: string; post_processed_text: string | null; post_process_prompt: string | null; post_process_requested: boolean }
 export type HistoryUpdatePayload = { action: "added"; entry: HistoryEntry } | { action: "updated"; entry: HistoryEntry } | { action: "deleted"; id: number } | { action: "toggled"; id: number }
@@ -1066,6 +1397,31 @@ export type KeyboardDiagnosticReport = { secure_input_enabled: boolean; culprit_
 key_down: number; key_up: number; flags_changed: number; mouse: number; duration_ms: number }
 export type KeyboardImplementation = "tauri" | "handy_keys"
 export type LLMPrompt = { id: string; name: string; prompt: string }
+/**
+ * The values a model gets when the user changed nothing. The window shows
+ * these instead of empty fields.
+ */
+export type LlmModelDefaults = { prompt_ru: string; prompt_en: string; temperature: number; chunk_chars: number; context_tokens: number; max_answer_tokens: number; 
+/**
+ * Hardware threads, the top of the thread choice.
+ */
+max_threads: number }
+/**
+ * What the user changed for one built-in LLM model; `None` is the default.
+ */
+export type LlmModelSettings = { prompt_ru: string | null; prompt_en: string | null; temperature: number | null; chunk_chars: number | null; context_tokens: number | null; max_answer_tokens: number | null; 
+/**
+ * Threads for writing the answer; `None` lets the server use one per core.
+ */
+threads: number | null }
+export type LlmModelSettingsView = { settings: LlmModelSettings; defaults: LlmModelDefaults }
+export type LocalLlmModelInfo = { id: string; size_bytes: number; downloaded: boolean; downloading: boolean }
+export type LocalLlmState = "stopped" | "loading" | "ready"
+export type LocalLlmStatus = { state: LocalLlmState; model_id: string | null; 
+/**
+ * Whether the bundled llama-server was found.
+ */
+runtime_available: boolean }
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error"
 export type ModelInfo = { id: string; name: string; description: string; filename: string; source: ModelSource; size_mb: number; is_downloaded: boolean; is_downloading: boolean; partial_size: number; is_directory: boolean; engine_type: EngineType; accuracy_score: number; speed_score: number; supports_translation: boolean; is_recommended: boolean; supported_languages: string[]; supports_language_selection: boolean; is_custom: boolean; supports_streaming: boolean; supports_language_detection: boolean }
 export type ModelLoadStatus = { is_loaded: boolean; current_model: string | null }
@@ -1095,6 +1451,29 @@ sha256: string | null } } |
 "Local"
 export type ModelUnloadTimeout = "never" | "immediately" | "min_2" | "min_5" | "min_10" | "min_15" | "hour_1" | "sec_15"
 export type OrtAcceleratorSetting = "auto" | "cpu" | "cuda" | "directml" | "rocm"
+export type OutputFormat = "markdown" | "docx"
+/**
+ * What went wrong in a dictation, shown in the overlay for a few seconds
+ * (UX_INTERACTION_ARCHITECTURE «Оверлей», S15). The window maps the kind to
+ * the text and, for «Что делать», to the place in «Если что-то не работает».
+ */
+export type OverlayMessageKind = 
+/**
+ * The text could not be pasted; it is in «История».
+ */
+"paste_failed" | 
+/**
+ * Dictation with editing pasted the text as is: the LLM was not ready.
+ */
+"editing_skipped" | 
+/**
+ * No microphone to record from.
+ */
+"no_microphone" | 
+/**
+ * The system denied access to the microphone.
+ */
+"microphone_denied"
 export type OverlayPosition = "top" | "bottom"
 /**
  * Which recording overlay to display. `Minimal` and `Live` share one base
@@ -1206,6 +1585,7 @@ export type StreamTextEvent = { committed: string; tentative: string }
  * Semantic kind of "working" phase, used to localize the spinner label.
  */
 export type StreamWorkKind = "transcribing" | "polishing"
+export type SttEngine = "local" | "cloud"
 /**
  * UI appearance mode. `System` follows the OS `prefers-color-scheme`; `Light`
  * and `Dark` force one of the two palettes Handy already ships.
@@ -1214,6 +1594,45 @@ export type Theme = "system" | "light" | "dark"
 export type TranscribeAcceleratorSetting = "auto" | "cpu" | "gpu"
 export type TypingTool = "auto" | "wtype" | "kwtype" | "dotool" | "ydotool" | "xdotool"
 export type VadBackend = "silero" | "earshot"
+/**
+ * Warning templates in the app language. The backend fills in `{part}`,
+ * `{fragment}`, `{count}`, `{kept}`, `{total}`, `{reasons}` and `{error}`.
+ * The defaults are the English texts, for callers that send none.
+ */
+export type WarningLabels = { 
+/**
+ * Speakers were requested, but the cloud model returns no timestamps.
+ */
+no_timestamps_model: string; 
+/**
+ * `{part}`: the cloud service returned no timestamps for this part.
+ */
+no_timestamps_part: string; 
+/**
+ * `{part}`, `{fragment}`: the LLM answered with nothing.
+ */
+llm_empty: string; 
+/**
+ * `{part}`, `{fragment}`, `{error}`: the LLM request failed.
+ */
+llm_error: string; 
+/**
+ * `{part}`, `{fragment}`, `{count}`: lines whose dropped numbers were put back.
+ */
+numbers_back: string; 
+/**
+ * `{part}`, `{fragment}`: the answer lost the numbered lines altogether.
+ */
+lines_lost: string; 
+/**
+ * `{part}`, `{fragment}`, `{kept}`, `{total}`, `{reasons}`: some lines
+ * kept their raw text.
+ */
+lines_kept: string; 
+/**
+ * Why a line kept its raw text, joined into `{reasons}`.
+ */
+kept_missing: string; kept_duplicate: string; kept_empty: string; kept_too_long: string; kept_translated: string; kept_too_short: string; kept_cut_off: string }
 export type WindowsMicrophonePermissionStatus = { supported: boolean; overall_access: PermissionAccess; device_access: PermissionAccess; app_access: PermissionAccess; desktop_app_access: PermissionAccess }
 
 /** tauri-specta globals **/

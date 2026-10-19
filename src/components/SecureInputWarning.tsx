@@ -1,8 +1,10 @@
+import { Alert } from "./ui/Alert";
+import { Button } from "./ui/Button";
+import { TextLink } from "./ui/TextLink";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { ExternalLink, TriangleAlert, X } from "lucide-react";
 import { commands, type SecureInputStatus } from "@/bindings";
 
 // Detailed remediation steps live in the docs rather than in the banner
@@ -89,32 +91,21 @@ const SecureInputWarning: React.FC = () => {
         : t("secureInput.recorderBlockedNoCulprit");
 
   return (
-    <div className="w-full rounded-lg border border-warning/40 bg-warning/10 px-3 py-2.5">
-      <div className="flex items-center gap-3">
-        <TriangleAlert className="h-5 w-5 shrink-0 text-warning" />
-        <p className="min-w-0 flex-1 text-sm font-medium leading-5">
-          {message}
-        </p>
-        <div className="flex shrink-0 items-center gap-1">
-          <button
-            onClick={() => openUrl(SECURE_INPUT_HELP_URL)}
-            className="cursor-pointer whitespace-nowrap rounded px-2 py-1.5 text-sm font-medium text-text hover:text-warning focus:outline-none focus:ring-1 focus:ring-warning"
-          >
-            <span className="flex items-center gap-1 border-b border-current leading-4">
-              {t("secureInput.learnMore")}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </span>
-          </button>
-          <button
-            onClick={() => setDismissed(true)}
-            aria-label={t("secureInput.dismiss")}
-            className="cursor-pointer rounded p-1.5 text-mid-gray hover:bg-warning/15 hover:text-warning focus:outline-none focus:ring-1 focus:ring-warning"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-    </div>
+    <Alert
+      variant="warning"
+      actions={
+        <>
+          <TextLink onClick={() => openUrl(SECURE_INPUT_HELP_URL)}>
+            {t("secureInput.learnMore")}
+          </TextLink>
+          <Button variant="quiet" size="sm" onClick={() => setDismissed(true)}>
+            {t("secureInput.dismiss")}
+          </Button>
+        </>
+      }
+    >
+      {message}
+    </Alert>
   );
 };
 

@@ -1,8 +1,8 @@
 [package]
 name = "handy"
 version = "0.9.8"
-description = "Handy"
-authors = ["cjpais"]
+description = "Tishe: offline dictation and transcription of long recordings (based on Handy)"
+authors = ["cjpais", "Viktor Pereverzev"]
 edition = "2021"
 license = "MIT"
 default-run = "handy"
@@ -48,13 +48,13 @@ anyhow = "1.0.95"
 hound = "3.5.1"
 log = "0.4.25"
 env_filter = "0.1.0"
-tokio = "1.43.0"
+tokio = { version = "1.43.0", features = ["macros", "time", "fs"] }
 earshot = "1.2.2"
 enigo = "0.6.1"
 # Feedback sounds. No `recording`: microphone capture is handy-recorder's.
 rodio = { version = "0.23.0", default-features = false, features = ["playback", "wav", "flac", "mp3", "vorbis"] }
 handy-recorder = "0.1"
-reqwest = { version = "0.12", features = ["json", "stream", "gzip", "brotli", "deflate"] }
+reqwest = { version = "0.12", features = ["json", "stream", "gzip", "brotli", "deflate", "multipart"] }
 futures-util = "0.3"
 rustfft = "6.4.0"
 strsim = "0.11.0"
@@ -81,6 +81,12 @@ transcribe-cpp = { version = "0.4.0", default-features = false, features = [
 handy-keys = "0.3.4"
 ferrous-opencc = "0.2.3"
 clap = { version = "4", features = ["derive"] }
+# Word export for file transcription
+docx-rs = "0.4"
+# Speaker diarization runs its ONNX models on the same ONNX Runtime that
+# transcribe-rs links (same pinned version, no extra features).
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["std", "ndarray"] }
+ndarray = "0.17"
 specta = "=2.0.0-rc.22"
 specta-typescript = "0.0.9"
 tauri-specta = { version = "=2.0.0-rc.21", features = ["derive", "typescript"] }
@@ -112,14 +118,20 @@ webview2-com = "0.38"
 # with proper runtime CPU dispatch. Base `transcribe-rs` (features = ["onnx"])
 # is inherited here, so Parakeet/Moonshine/etc. still run on CPU.
 windows = { version = "0.61.3", features = [
+  # Tishe: Windows notifications (WinRT toasts) for file transcription.
+  "Data_Xml_Dom",
+  "Foundation",
+  "UI_Notifications",
   "Win32_Media_Audio_Endpoints",
   "Win32_System_Com_StructuredStorage",
   "Win32_System_DataExchange",
   "Win32_System_LibraryLoader",
   "Win32_System_Ole",
   "Win32_System_Memory",
+  "Win32_System_JobObjects",
   "Win32_System_Threading",
   "Win32_System_Variant",
+  "Win32_Security",
   "Win32_Foundation",
   "Win32_Graphics_Gdi",
   "Win32_UI_WindowsAndMessaging",

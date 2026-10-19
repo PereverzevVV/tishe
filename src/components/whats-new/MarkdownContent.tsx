@@ -52,37 +52,21 @@ const isSafeImageSrc = (src: string) => {
 };
 
 const components: Components = {
-  h1: ({ children }) => (
-    <h3 className="text-base font-semibold leading-snug text-text">
-      {children}
-    </h3>
-  ),
-  h2: ({ children }) => (
-    <h3 className="text-[15px] font-semibold leading-snug text-text">
-      {children}
-    </h3>
-  ),
-  h3: ({ children }) => (
-    <h3 className="text-sm font-semibold leading-snug text-text">{children}</h3>
-  ),
-  p: ({ children }) => (
-    <p className="text-sm leading-relaxed text-text/80">{children}</p>
-  ),
+  h1: ({ children }) => <h3 className="font-semibold">{children}</h3>,
+  h2: ({ children }) => <h3 className="font-semibold">{children}</h3>,
+  h3: ({ children }) => <h3 className="font-semibold">{children}</h3>,
+  p: ({ children }) => <p className="t-type-prose">{children}</p>,
   ul: ({ children }) => (
-    <ul className="list-disc space-y-1 ps-5 text-sm leading-relaxed text-text/80">
-      {children}
-    </ul>
+    <ul className="list-disc space-y-1 ps-5 t-type-prose">{children}</ul>
   ),
   li: ({ children }) => (
-    <li className="pl-1 marker:text-text/50">{children}</li>
+    <li className="ps-1 marker:text-t-tertiary">{children}</li>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal space-y-1 ps-5 text-sm leading-relaxed text-text/80">
-      {children}
-    </ol>
+    <ol className="list-decimal space-y-1 ps-5 t-type-prose">{children}</ol>
   ),
   br: () => <br />,
-  hr: () => <hr className="border-mid-gray/20" />,
+  hr: () => <hr className="border-t-separator" />,
   img: ({ alt, src }) => {
     if (!src || !isSafeImageSrc(src)) return null;
 
@@ -97,7 +81,7 @@ const components: Components = {
     );
   },
   blockquote: ({ children }) => (
-    <blockquote className="border-s-2 border-logo-primary/50 ps-3 text-sm leading-relaxed text-text/70">
+    <blockquote className="ps-3 t-type-prose t-text-secondary">
       {children}
     </blockquote>
   ),
@@ -112,14 +96,10 @@ const components: Components = {
       );
     }
 
-    return (
-      <code className="rounded bg-mid-gray/10 px-1 py-0.5 font-mono text-[0.85em]">
-        {children}
-      </code>
-    );
+    return <code className="rounded bg-t-fill px-1 font-mono">{children}</code>;
   },
   pre: ({ children }) => (
-    <pre className="overflow-x-auto rounded-md bg-mid-gray/10 p-3 text-xs leading-relaxed text-text/80">
+    <pre className="overflow-x-auto rounded-md bg-t-fill p-3 font-mono t-type-caption">
       {children}
     </pre>
   ),
@@ -136,7 +116,7 @@ const components: Components = {
           event.preventDefault();
           void openSafeUrl(href);
         }}
-        className="text-logo-primary underline decoration-logo-primary/40 underline-offset-2 hover:decoration-logo-primary"
+        className="t-link"
       >
         {children}
       </a>

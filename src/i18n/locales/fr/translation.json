@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Paramètres...",
-    "checkUpdates": "Rechercher des mises à jour...",
-    "copyLastTranscript": "Copier la dernière transcription",
+    "settings": "Ouvrir Tishe…",
+    "checkUpdates": "Rechercher des mises à jour…",
+    "copyLastTranscript": "Copier la dernière dictée",
     "unloadModel": "Décharger le modèle",
     "model": "Modèle",
     "quit": "Quitter",
     "cancel": "Annuler",
-    "secureInputWarning": "⚠ Raccourcis bloqués par Secure Input"
+    "secureInputWarning": "⚠ Raccourcis bloqués par Secure Input",
+    "modelLocked": "Impossible de changer de modèle pendant une transcription",
+    "tooltipDictation": "Dictée : {{shortcut}}",
+    "backgroundTitle": "Tishe continue de fonctionner en arrière-plan",
+    "backgroundBody": "La transcription continue. Vous recevrez une notification quand elle sera prête."
   },
   "sidebar": {
     "general": "Général",
-    "models": "Modèles",
+    "models": "Reconnaissance",
     "advanced": "Avancé",
     "postProcessing": "Post-traitement",
     "history": "Historique",
     "debug": "Débogage",
-    "about": "À propos"
+    "about": "À propos",
+    "label": "Sections",
+    "transcription": "Transcription",
+    "dictation": "Dictée",
+    "meetings": "Réunions",
+    "llm": "Correction IA",
+    "app": "Application",
+    "soon": "bientôt",
+    "state": {
+      "running": "en cours",
+      "new": "prêt, pas encore consulté",
+      "downloading": "téléchargement"
+    },
+    "next": "La suite"
   },
   "onboarding": {
     "subtitle": "Pour commencer, choisissez un modèle de transcription",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Autorisations requises",
-      "description": "Handy a besoin de quelques autorisations pour fonctionner correctement.",
+      "description": "Tishe a besoin de quelques autorisations pour fonctionner correctement.",
       "microphone": {
         "title": "Accès au microphone",
         "description": "Nécessaire pour entendre votre voix pour la transcription."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Échec de la vérification des autorisations. Veuillez réessayer.",
         "requestFailed": "Échec de la demande d'autorisation. Veuillez réessayer."
-      }
+      },
+      "skip": "Continuer sans le microphone",
+      "skipHint": "Le microphone ne sert qu’à la dictée – la transcription de fichiers fonctionne sans lui. Vous pourrez l’autoriser plus tard dans les paramètres de Windows."
+    },
+    "step": "Étape {{n}} sur {{total}}",
+    "language": {
+      "title": "Dans quelle langue sont vos enregistrements ?",
+      "description": "Nous allons télécharger un modèle de reconnaissance vocale pour cette langue. Il fonctionne sur cet ordinateur.",
+      "ru": {
+        "title": "Russe",
+        "limit": "Russe uniquement : ne reconnaît pas l’anglais parlé"
+      },
+      "en": {
+        "title": "Anglais",
+        "limit": "Anglais uniquement"
+      },
+      "eu": {
+        "title": "Français ou une autre langue européenne",
+        "limit": "25 langues européennes, reconnaît la langue toute seule"
+      },
+      "other": {
+        "title": "Une autre langue",
+        "limit": "30 langues : chinois, japonais, coréen, arabe, turc, hindi et d’autres",
+        "limitWhisper": "de nombreuses langues, plus lent sur le processeur"
+      },
+      "onDisk": "déjà sur cet ordinateur",
+      "shared": "Le modèle servira à la fois pour la dictée et pour la transcription de fichiers. Vous pourrez le changer plus tard dans la section « $t(sidebar.models) ».",
+      "otherModel": "Choisir un autre modèle",
+      "hideCatalog": "Masquer la liste des modèles",
+      "download": "Télécharger {{size}}",
+      "use": "Utiliser {{name}}",
+      "downloadNamed": "Télécharger {{name}} · {{size}}",
+      "once": "Se télécharge une seule fois, puis fonctionne sans internet"
+    },
+    "download": {
+      "title": "Téléchargement de {{name}}",
+      "description": "Vous pouvez faire autre chose en attendant : fermer la fenêtre n’arrête pas le téléchargement.",
+      "starting": "Connexion…",
+      "amount": "{{done}} sur {{total}}",
+      "speed": "{{n}} Mo/s",
+      "preparing": "Préparation du modèle…",
+      "cancel": "Annuler",
+      "failed": "Le modèle n’a pas été téléchargé",
+      "failedTitle": "Impossible de télécharger le modèle",
+      "failedHint": "Pas de connexion au serveur. Vérifiez Internet et cliquez sur Réessayer.",
+      "retry": "Réessayer",
+      "continue": "Ouvrir Tishe sans attendre"
+    },
+    "welcome": {
+      "title": "Bienvenue dans Tishe",
+      "lead": "Tishe transforme la parole en texte directement sur votre ordinateur – sans internet ni compte.",
+      "files": "Transcription d’enregistrements – réunions, cours, entretiens – en document Word",
+      "dictation": "Dictée dans n’importe quelle application : maintenez une touche, parlez – le texte apparaît",
+      "private": "Vos enregistrements et vos textes ne quittent pas l’ordinateur",
+      "stepsLabel": "Étapes de configuration",
+      "steps": {
+        "permissions": "Autorisations",
+        "language": "Langue des enregistrements",
+        "download": "Téléchargement du modèle"
+      },
+      "credit": "Viktor Pereverzev · basé sur Handy"
+    },
+    "tips": {
+      "title": "Pendant le téléchargement – comment ça marche",
+      "dictationBefore": "Dictée : dans n’importe quelle application, maintenez",
+      "dictationAfter": "et parlez. Relâchez – le texte apparaît à l’emplacement du curseur.",
+      "files": "Transcription : déposez un fichier audio ou vidéo dans la fenêtre de Tishe – vous obtenez un document Word.",
+      "editing": "La correction par l’IA rectifie les erreurs et la ponctuation – elle s’active dans la recette de transcription."
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "Filtrer les modèles prenant en charge la traduction vers l'anglais"
       },
       "noModelsMatch": "Aucun modèle ne correspond à ce filtre.",
+      "params": {
+        "button": "Paramètres",
+        "open": "Paramètres du modèle",
+        "title": "Paramètres : {{name}}",
+        "savedAtOnce": "Les modifications sont enregistrées immédiatement. Les champs affichent les valeurs utilisées ; une valeur modifiée a un bouton de réinitialisation.",
+        "resetAll": "Rétablir les valeurs par défaut",
+        "done": "Terminé",
+        "resetField": "Revenir à la valeur par défaut",
+        "defaultRange": "Par défaut {{value}} ; autorisé {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Instruction intégrée. Modifiez le texte pour utiliser la vôtre ; videz-le pour revenir à l’instruction intégrée.",
+          "own": "Votre instruction. Le bouton de réinitialisation rétablit l’instruction intégrée."
+        },
+        "asr": {
+          "segment": {
+            "label": "Longueur des segments pour les fichiers, secondes",
+            "description": "Les fichiers sont reconnus par morceaux coupés aux pauses, au plus de cette longueur. Le morceau le plus court diminue avec elle (12 s pour 25 s). Mesuré : 12–25 s préservent mieux la ponctuation que 60–120 s."
+          },
+          "device": {
+            "label": "Appareil",
+            "description": "« Processeur uniquement » libère la puce graphique, mais est généralement plus lent. S’applique aussi à la dictée ; prend effet à la prochaine reconnaissance.",
+            "general": "Comme dans le réglage d’accélération",
+            "cpu": "Processeur uniquement",
+            "notHere": "L’appareil de ce modèle suit le réglage général d’accélération."
+          }
+        },
+        "llm": {
+          "promptNote": "Instructions pour le texte russe et anglais. Les autres langues reçoivent l’instruction anglaise intégrée avec le nom de la langue. Une instruction personnalisée dans la section Transcription les remplace pour toutes les langues.",
+          "promptRu": "Instruction pour le texte russe",
+          "promptEn": "Instruction pour le texte anglais",
+          "temperature": {
+            "label": "Température",
+            "description": "Plus bas, c’est plus prudent : à 0,8 le modèle inventait des mots, 0,2 est la valeur mesurée pour la correction."
+          },
+          "chunk": {
+            "label": "Taille des fragments, caractères",
+            "description": "Quantité de texte que le modèle corrige d’un coup. Les petits modèles restent plus fidèles sur des fragments courts."
+          },
+          "context": {
+            "label": "Contexte, jetons",
+            "description": "Place pour l’instruction, le fragment et la réponse. Plus de place demande plus de mémoire."
+          },
+          "answer": {
+            "label": "Limite de réponse, jetons",
+            "description": "Arrête un modèle qui commence à se répéter. Un fragment de 3000 caractères fait environ 1100 jetons."
+          },
+          "threads": {
+            "label": "Threads du processeur pour la réponse",
+            "description": "La lecture du texte utilise toujours tous les threads matériels.",
+            "auto": "Auto – un par cœur"
+          },
+          "restartNote": "La température, le contexte, la limite de réponse et les threads s’appliquent au prochain démarrage du modèle : un modèle en cours redémarre avant la tâche suivante.",
+          "invalid": "Non enregistré : {{detail}}",
+          "contextTooSmall": "Non enregistré : le contexte doit contenir le fragment et la réponse – au moins {{min}} jetons avec la taille de fragment et la limite de réponse actuelles."
+        }
+      },
       "yourModels": "Modèles téléchargés",
       "availableModels": "Disponibles au téléchargement",
-      "searchPlaceholder": "Rechercher des modèles par nom…",
+      "searchPlaceholder": "Rechercher par nom",
       "rescan": {
         "label": "Réanalyser",
-        "tooltip": "Réanalyser pour détecter les modèles ajoutés au dossier des modèles ou au cache Hugging Face en dehors de Handy"
+        "tooltip": "Trouver les modèles ajoutés à la main dans le dossier"
       }
     },
     "general": {
       "title": "Général",
       "shortcut": {
-        "title": "Raccourcis Handy",
+        "title": "Raccourcis de Tishe",
         "description": "Configurer les raccourcis clavier pour déclencher l'enregistrement de la reconnaissance vocale",
         "loading": "Chargement des raccourcis...",
         "none": "Aucun raccourci configuré",
         "notFound": "Raccourci non trouvé",
-        "pressKeys": "Appuyez sur les touches...",
+        "pressKeys": "Appuyez sur une combinaison… (Échap pour annuler)",
         "bindings": {
           "transcribe": {
-            "name": "Raccourci de Transcription",
-            "description": "Le raccourci clavier pour enregistrer et transcrire votre voix."
+            "name": "Dictée",
+            "description": "Maintenez et parlez – le texte est collé dans la fenêtre active"
           },
           "cancel": {
-            "name": "Raccourci d'Annulation",
-            "description": "Le raccourci clavier pour annuler l'enregistrement en cours."
+            "name": "Annuler",
+            "description": "Arrête l’enregistrement en cours"
           },
           "transcribe_with_post_process": {
-            "name": "Raccourci de post-traitement",
-            "description": "Facultatif : Un raccourci dédié qui applique toujours le post-traitement IA à votre transcription."
+            "name": "Touche de dictée avec correction",
+            "description": "Le texte est collé après correction par l’IA"
           }
         },
         "errors": {
           "restore": "Échec de la restauration du raccourci original",
           "set": "Échec de la définition du raccourci : {{error}}",
-          "reset": "Échec de la réinitialisation du raccourci à sa valeur d'origine"
+          "reset": "Échec de la réinitialisation du raccourci à sa valeur d'origine",
+          "taken": "Un autre programme utilise déjà cette touche. Choisissez-en une autre.",
+          "duplicate": "Cette touche est déjà utilisée pour une autre action ici."
         }
       },
       "language": {
-        "title": "Langue",
-        "description": "Sélectionnez la langue pour la reconnaissance vocale. Auto déterminera automatiquement la langue, tandis que sélectionner une langue spécifique peut améliorer la précision pour cette langue.",
+        "title": "Langue de reconnaissance",
+        "description": "« Auto » détecte la langue tout seul ; un choix précis est plus fiable",
         "searchPlaceholder": "Rechercher des langues...",
         "noResults": "Aucune langue trouvée",
         "auto": "Automatique"
       },
       "shortcutActivation": {
-        "title": "Comportement du raccourci",
-        "description": "Choisissez comment le raccourci de transcription démarre et arrête l’enregistrement.",
+        "title": "Comportement de la touche",
+        "description": "Comment la touche démarre et arrête l’enregistrement",
         "options": {
           "holdOrToggle": "Auto",
           "pushToTalk": "Maintenir",
@@ -233,29 +375,40 @@
       "title": "Son",
       "microphone": {
         "title": "Microphone",
-        "description": "Sélectionnez votre périphérique d'entrée audio",
+        "description": "D’où enregistrer votre voix",
         "placeholder": "Sélectionner un microphone...",
         "loading": "Chargement..."
       },
       "channel": {
         "title": "Canal d’entrée",
-        "description": "Sélectionnez le canal d’entrée à enregistrer. Utilisez cette option si votre interface audio possède plusieurs entrées.",
+        "description": "Pour les cartes son à plusieurs entrées",
         "average": "Moyenne de tous les canaux",
         "channel": "Canal {{n}}"
       },
       "audioFeedback": {
-        "label": "Signal sonore",
-        "description": "Jouer un son au début et à la fin de l'enregistrement"
+        "label": "Retour sonore",
+        "description": "Un son au début et à la fin de l’enregistrement"
       },
       "outputDevice": {
         "title": "Périphérique de sortie",
-        "description": "Sélectionnez votre périphérique de sortie audio pour le signal sonore",
+        "description": "Où jouer les sons de retour",
         "placeholder": "Sélectionner un périphérique de sortie...",
         "loading": "Chargement..."
       },
       "volume": {
         "title": "Volume",
-        "description": "Ajuster le volume du signal sonore"
+        "description": "Ajuster le volume du signal sonore",
+        "levels": {
+          "quiet": "Faible",
+          "medium": "Moyen",
+          "loud": "Fort"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Personnalisé",
+        "preview": "Écouter les sons de début et de fin"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Expérimental"
       },
       "experimentalToggle": {
-        "label": "Fonctionnalités Expérimentales",
-        "description": "Activer les fonctionnalités expérimentales encore en développement."
+        "label": "Afficher les fonctions expérimentales",
+        "description": "Fonctions en développement ; peuvent être instables"
       },
       "lazyStreamClose": {
         "label": "Garder le micro ouvert entre les transcriptions",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Démarrer masqué",
-        "description": "Lancer dans la barre système sans ouvrir la fenêtre."
+        "label": "Masquer la fenêtre au lancement",
+        "description": "Le programme démarre dans la zone de notification"
       },
       "autostart": {
-        "label": "Lancer au démarrage",
-        "description": "Démarrer automatiquement Handy lorsque vous vous connectez à votre ordinateur."
+        "label": "Démarrer avec Windows",
+        "description": "La dictée est prête dès l’ouverture de session"
       },
       "showTrayIcon": {
-        "label": "Afficher l'icône de la barre",
-        "description": "Afficher l'icône de Handy dans la barre système."
+        "label": "Icône dans la zone de notification",
+        "description": "Sans l’icône, une fenêtre fermée ne revient qu’en relançant le programme"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Choisissez l'overlay d'enregistrement : « Aucun » le masque, « Minimal » affiche une pilule compacte, « Live » affiche la transcription en temps réel pendant que vous parlez (uniquement pour les modèles compatibles avec le streaming — recherchez le badge Streaming dans le sélecteur de modèle). Sur Linux, « Aucun » est recommandé.",
+          "title": "Style de l’indicateur",
+          "description": "Ce qu’il faut afficher près du curseur pendant la dictée",
           "options": {
             "none": "Aucune",
             "minimal": "Minimal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Sans l’indicateur, les échecs ne sont pas signalés : un texte non collé se trouve dans l’Historique"
         },
         "position": {
-          "title": "Position de la fenêtre d'enregistrement",
-          "description": "Afficher un retour visuel pendant l'enregistrement et la transcription. Sur Linux, 'Aucune' est recommandé.",
+          "title": "Position de l’indicateur",
+          "description": "En haut ou en bas de l’écran",
           "options": {
             "bottom": "Bas",
             "top": "Haut"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Méthode de collage",
-        "description": "Choisissez comment le texte est inséré. Direct : simule la frappe via l'entrée système. Aucun : ignore le collage, met uniquement à jour l'historique/presse-papiers.",
+        "description": "Comment le texte arrive dans la fenêtre active",
         "options": {
           "clipboard": "Presse-papiers ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Presse-papiers (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Gestion du presse-papiers",
-        "description": "Ne pas modifier le presse-papiers préserve le contenu actuel de votre presse-papiers après la transcription. Copier dans le presse-papiers laisse le résultat de la transcription dans votre presse-papiers après le collage.",
+        "title": "Presse-papiers",
+        "description": "Garder le contenu précédent du presse-papiers ou y laisser le texte dicté",
         "options": {
           "dontModify": "Ne pas modifier le presse-papiers",
           "copyToClipboard": "Copier dans le presse-papiers"
         }
       },
       "autoSubmit": {
-        "title": "Envoi automatique",
-        "description": "Envoie automatiquement la combinaison de touches sélectionnée après l'insertion du texte. Cmd+Enter s'applique sur macOS, tandis que Windows/Linux utilisent Super+Enter.",
+        "title": "Envoyer après le collage",
+        "description": "Appuyer sur la touche choisie juste après le collage, par exemple Entrée dans une messagerie",
         "options": {
           "off": "Désactivé",
           "enter": "Entrée",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Traduire en anglais",
-        "description": "Traduire automatiquement la parole d'autres langues vers l'anglais pendant la transcription."
+        "description": "La parole dans n’importe quelle langue devient du texte anglais"
       },
       "modelUnload": {
-        "title": "Décharger le modèle",
-        "description": "Libérer automatiquement la mémoire GPU/CPU lorsque le modèle n'a pas été utilisé pendant le temps spécifié",
+        "title": "Décharger le modèle de la mémoire après…",
+        "description": "Libère la mémoire quand le modèle n’est pas utilisé pendant un moment",
         "options": {
           "never": "Jamais",
           "immediately": "Immédiatement",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Mots personnalisés",
-        "description": "Aidez les modèles compatibles à reconnaître les noms et les termes spécialisés. La correction approximative est actuellement limitée aux mots utilisant les lettres A à Z et des chiffres.",
+        "title": "Vos mots",
+        "description": "Une indication pour les modèles Whisper ; les autres modèles ne reçoivent que des corrections, et seulement pour les mots en A–Z",
         "placeholder": "Ajouter un mot",
         "add": "Ajouter",
         "remove": "Supprimer {{word}}",
-        "duplicate": "\"{{word}}\" existe déjà"
+        "duplicate": "\"{{word}}\" existe déjà",
+        "removed": "« {{word}} » supprimé"
       },
       "voiceActivityDetection": {
-        "title": "Détection d'activité vocale (VAD)",
-        "description": "Filtre le silence des enregistrements. Les modèles compatibles avec le streaming utilisent une marge de détection VAD plus longue ; désactiver le VAD enregistre l'audio brut."
+        "title": "Ignorer les silences",
+        "description": "Seule la parole est envoyée à la reconnaissance"
       },
       "vadBackend": {
         "title": "Backend de détection vocale",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Supprimer les mots de remplissage",
-        "description": "Supprime les hésitations courantes des transcriptions. Désactivez cette option pour les conserver."
+        "description": "« euh », « hmm » dans le texte collé"
       },
       "chineseScript": {
         "title": "Écriture chinoise",
-        "description": "Écrit les transcriptions en mandarin et en cantonais en caractères simplifiés ou traditionnels. Les autres langues ne sont pas modifiées.",
+        "description": "Caractères simplifiés ou traditionnels",
         "options": {
           "asTranscribed": "Tel que transcrit",
           "simplified": "Simplifié",
@@ -434,20 +589,21 @@
           "title": "URL de base",
           "description": "URL de base de l'API pour le fournisseur sélectionné. Seul le fournisseur personnalisé peut être modifié.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "L’adresse est fixée par le fournisseur choisi",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "Clé API",
-          "description": "Clé API pour le fournisseur sélectionné.",
+          "description": "Stockée uniquement sur cet ordinateur",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Modèle",
-          "descriptionCustom": "Fournissez l'identifiant du modèle attendu par votre point de terminaison personnalisé.",
-          "descriptionDefault": "Choisissez un modèle exposé par le fournisseur sélectionné.",
+          "descriptionCustom": "Le nom du modèle sur votre serveur",
+          "descriptionDefault": "Le bouton à droite actualise la liste",
           "placeholderWithOptions": "Rechercher ou sélectionner un modèle",
           "placeholderNoOptions": "Tapez un nom de modèle",
-          "refreshModels": "Actualiser les modèles"
+          "refreshModels": "Actualiser la liste des modèles"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Prompt sélectionné",
           "description": "Sélectionnez un modèle pour affiner les transcriptions ou créez-en un nouveau. Utilisez ${output} dans le texte du prompt pour référencer la transcription capturée."
         },
-        "noPrompts": "Aucun prompt disponible",
-        "selectPrompt": "Sélectionner un prompt",
+        "noPrompts": "Aucune instruction",
+        "selectPrompt": "Choisir une instruction",
         "createNew": "Créer un nouveau prompt",
-        "promptLabel": "Libellé du prompt",
+        "promptLabel": "Nom",
         "promptLabelPlaceholder": "Entrez le nom du prompt",
-        "promptInstructions": "Instructions du prompt",
+        "promptInstructions": "Texte de l’instruction",
         "promptInstructionsPlaceholder": "Écrivez les instructions à exécuter après la transcription. Exemple : Améliorer la grammaire et la clarté du texte suivant : ${output}",
         "promptTip": "Astuce : Utilisez <code>${output}</code> pour insérer le texte transcrit dans votre prompt.",
         "updatePrompt": "Mettre à jour le prompt",
-        "deletePrompt": "Supprimer le prompt",
-        "createPrompt": "Créer le prompt",
+        "deletePrompt": "Supprimer",
+        "createPrompt": "Créer",
         "cancel": "Annuler",
-        "selectToEdit": "Sélectionnez un prompt ci-dessus pour voir et modifier ses détails.",
-        "createFirst": "Cliquez sur 'Créer un nouveau prompt' ci-dessus pour créer votre premier prompt de post-traitement."
+        "selectToEdit": "Choisissez une instruction pour la modifier.",
+        "createFirst": "Cliquez sur « Créer » pour ajouter la première instruction."
+      },
+      "local": {
+        "intro": "Le modèle fonctionne directement sur cet ordinateur : pas d’Internet, pas de clés, votre texte ne quitte jamais la machine. Téléchargez un modèle si vous le souhaitez. Il démarre tout seul quand il le faut et se décharge de la mémoire quand il est inactif. Il fonctionne sur le processeur, il est donc plus lent que les services en ligne. Tous les modèles tiennent sur un portable avec 16 Go de RAM.",
+        "runtimeMissing": "Le moteur d’IA intégré est introuvable. Veuillez réinstaller Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Équilibré",
+            "model": "Qwen3.5 4B",
+            "description": "La version simple de Qwen 4B. Soigneux avec la ponctuation, mais corrige peu d’erreurs de reconnaissance dans de vraies conversations (nos tests, 06/10/2026). La version accélérée est plus précise et plus rapide."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Le modèle de Google, fidèle à l’original. Corrige comme la Gemma de la version Google accélérée, mais environ 1,25 fois plus lentement."
+          },
+          "gigachat31": {
+            "title": "Conçu pour le russe",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Entraîné sur le russe dès le départ. Seuls 1,8B de ses 10B paramètres sont actifs par jeton, il est donc plus rapide que sa taille ne le laisse penser. Demande plus de mémoire."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen pour le russe",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) avec un vocabulaire russe et un entraînement supplémentaire sur des textes russes. Au banc d'essai, il corrige moins que Gemma E2B et va deux fois moins vite (environ 27 min par heure d'enregistrement)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Petit modèle de NVIDIA, officiellement anglais uniquement. Au banc d'essai, il a laissé le texte presque inchangé en russe comme en anglais, et il est plus lent que Gemma (environ 35 min par heure d'enregistrement)."
+          },
+          "qwen35_9b": {
+            "title": "Maximum",
+            "model": "Qwen3.5 9B",
+            "description": "Le modèle local le plus intelligent : le meilleur pour le contexte et les corrections difficiles. Le plus lent."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Équilibré",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B dans une version plus récente avec accélération intégrée. Plus précis et environ 1,2 fois plus rapide que Qwen 4B simple, mais corrige deux fois moins d’erreurs que Gemma dans nos tests."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma légère",
+            "model": "Gemma 4 E2B · version Google",
+            "description": "La petite Gemma dans la version officielle de Google, avec accélération (+98 Mo). Deux fois plus rapide que Gemma E4B (environ 14 min par heure d’enregistrement) avec environ 2/3 de ses corrections."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · version Google",
+            "description": "La meilleure qualité dans nos tests (06/10/2026). Version officielle de Google avec accélération (+99 Mo) : corrige comme la Gemma E4B simple, environ 1,25 fois plus vite. Environ 26 min par heure d’enregistrement."
+          }
+        },
+        "speedupBadge": "accélération",
+        "speedupHint": "Un petit modèle auxiliaire devine plusieurs mots à l’avance et le modèle principal les vérifie. Sur un processeur, c’est environ 1,2–1,3 fois plus rapide.",
+        "untested": "non testé",
+        "delete": "Supprimer le modèle",
+        "state": {
+          "stopped": "Non chargé en mémoire",
+          "loading": "Chargement en mémoire…",
+          "ready": "Chargé en mémoire"
+        },
+        "unloadNow": "Décharger maintenant",
+        "unload": {
+          "title": "Décharger de la mémoire",
+          "description": "Durée d’inactivité avant que le modèle soit déchargé, ce qui libère environ 2–3 Go de mémoire.",
+          "immediately": "Juste après le traitement",
+          "min2": "Après 2 minutes",
+          "min5": "Après 5 minutes",
+          "min15": "Après 15 minutes",
+          "never": "Jamais"
+        },
+        "recommended": "Recommandé"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Ouvrir le dossier des enregistrements",
       "loading": "Chargement de l'historique...",
       "empty": "Pas encore de transcriptions. Commencez à enregistrer pour créer votre historique !",
-      "copyToClipboard": "Copier la transcription dans le presse-papiers",
+      "copyToClipboard": "Copier le texte",
       "copyError": "Impossible de copier la transcription dans le presse-papiers.",
       "save": "Enregistrer la transcription",
       "unsave": "Retirer des favoris",
       "delete": "Supprimer l'entrée",
       "deleteError": "Échec de la suppression de l'entrée. Veuillez réessayer.",
-      "retranscribe": "Re-transcrire",
+      "retranscribe": "Reconnaître à nouveau",
       "retranscribeError": "Impossible de re-transcrire. Veuillez réessayer.",
-      "transcribing": "Transcription en cours...",
+      "transcribing": "Reconnaissance…",
       "transcriptionFailed": "La transcription a échoué. Vous pouvez re-transcrire en utilisant l'icône de réessai."
     },
     "debug": {
       "title": "Débogage",
       "logDirectory": {
-        "title": "Répertoire des journaux",
-        "description": "Emplacement où les fichiers journaux sont stockés"
+        "title": "Dossier des journaux",
+        "description": "Joignez le journal à un rapport de bug"
       },
       "logLevel": {
         "title": "Niveau de journalisation",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Vérifier les mises à jour",
-        "description": "Vérifier automatiquement les nouvelles versions de Handy",
-        "lockedDescription": "Désactivé par la configuration système (HANDY_DISABLE_UPDATER)"
+        "description": "Une fois par lancement, demander à GitHub si une nouvelle version de Tishe est sortie. Aucun enregistrement ni texte n'est envoyé",
+        "lockedDescription": "La recherche de mises à jour est désactivée dans cette version"
       },
       "soundTheme": {
         "label": "Thème sonore",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Seuil de correction des mots",
-        "description": "Sensibilité pour les corrections de mots personnalisés"
+        "description": "À quel point un mot doit ressembler à l’un des vôtres pour être remplacé"
       },
       "historyLimit": {
-        "title": "Limite d'historique",
-        "description": "Nombre maximum d'entrées d'historique à conserver",
+        "title": "Nombre de dictées à conserver",
+        "description": "Les dictées conservées ne comptent pas",
         "entries": "entrées"
       },
       "recordingRetention": {
-        "title": "Suppression automatique des enregistrements",
-        "description": "Supprimer automatiquement les anciens enregistrements pour économiser de l'espace",
+        "title": "Supprimer les anciennes dictées",
+        "description": "L’audio est supprimé avec le texte",
         "never": "Jamais",
         "preserveLimit": "Conserver les {{count}} plus récents",
         "days3": "Après 3 jours",
@@ -538,24 +765,24 @@
         "placeholder": "Sélectionner la période de conservation..."
       },
       "alwaysOnMicrophone": {
-        "label": "Microphone toujours actif",
-        "description": "Garder le microphone actif pour une réponse plus rapide"
+        "label": "Garder le microphone allumé",
+        "description": "L’enregistrement démarre plus vite, mais le microphone reste occupé en permanence"
       },
       "clamshellMicrophone": {
-        "title": "Microphone en mode fermé",
-        "description": "Microphone à utiliser lorsque le couvercle du portable est fermé"
+        "title": "Microphone capot fermé",
+        "description": "Quel microphone utiliser quand le portable est fermé"
       },
       "postProcessingToggle": {
         "label": "Post-traitement",
         "description": "Activer l'affinage du texte par IA après la transcription"
       },
       "muteWhileRecording": {
-        "label": "Muet pendant l'enregistrement",
-        "description": "Couper le son du système pendant l'enregistrement"
+        "label": "Couper le son de l’ordinateur pendant l’enregistrement",
+        "description": "La musique et les vidéos n’entreront pas dans l’enregistrement"
       },
       "appendTrailingSpace": {
-        "label": "Ajouter une espace final",
-        "description": "Ajouter une espace après la transcription collée"
+        "label": "Ajouter une espace à la fin",
+        "description": "La phrase suivante ne se collera pas à la précédente"
       },
       "keyboardImplementation": {
         "title": "Gestion du clavier",
@@ -568,28 +795,28 @@
         "settings": "Paramètres :"
       },
       "pasteDelay": {
-        "title": "Délai de collage (avant)",
-        "description": "Délai (en millisecondes) après la copie du texte, avant l'envoi de la touche de collage. Augmentez si rien n'est collé."
+        "title": "Délai avant le collage",
+        "description": "Augmentez-le si rien n’est collé"
       },
       "pasteDelayAfter": {
-        "title": "Délai de collage (après)",
-        "description": "Délai (en millisecondes) après la touche de collage, avant la restauration de votre presse-papiers précédent. Augmentez si l'ancien contenu du presse-papiers est collé à la place de la transcription."
+        "title": "Délai après le collage",
+        "description": "Augmentez-le si un ancien texte du presse-papiers est collé"
       },
       "holdThreshold": {
         "title": "Seuil de maintien",
-        "description": "Mode Auto uniquement : durée (en millisecondes) pendant laquelle le raccourci doit rester enfoncé pour compter comme un maintien plutôt qu'une pression brève. Diminuez si l'enregistrement reste actif après un maintien court ; augmentez si des pressions brèves volontaires sont traitées comme un maintien."
+        "description": "Un appui plus court bascule, un appui plus long maintient"
       },
       "reliablePaste": {
         "title": "Collage fiable (Beta)",
-        "description": "Restaure le presse-papiers uniquement après que l'application cible a réellement lu la transcription, au lieu d'attendre un délai fixe. Vise à corriger le collage de l'ancien contenu du presse-papiers lorsque le système est chargé. Nécessite une méthode de collage par presse-papiers ; macOS et Windows uniquement."
+        "description": "Attendre que le programme lise le texte au lieu d’un délai fixe"
       },
       "recordingBuffer": {
-        "title": "Tampon d'enregistrement supplémentaire",
-        "description": "Temps supplémentaire (en millisecondes) pour continuer l'enregistrement après avoir relâché la touche, pour capturer l'audio restant. 0 = pas de tampon supplémentaire."
+        "title": "Continuer à enregistrer après le relâchement",
+        "description": "Combien de temps enregistrer encore après le relâchement de la touche"
       },
       "keyboardDiagnostic": {
         "title": "Diagnostic du clavier",
-        "description": "Vérifie si les événements clavier atteignent Handy. Seul le nombre d'événements est enregistré, jamais les touches sur lesquelles vous appuyez.",
+        "description": "Vérifie si les événements clavier atteignent Tishe. Seul le nombre d’événements est enregistré – jamais les touches que vous appuyez.",
         "run": "Lancer un diagnostic de 10 s",
         "running": "Écoute en cours… appuyez plusieurs fois sur votre raccourci (par ex. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Souris",
         "verdictBlocked": "Secure Input bloque les événements clavier : les raccourcis contenant une touche normale ne peuvent pas fonctionner tant que ce n'est pas résolu.",
         "verdictSuspicious": "Des événements de modificateurs sont arrivés, mais aucun événement de touche : quelque chose supprime les touches alors que Secure Input est signalé comme désactivé. Merci de le signaler sur GitHub.",
-        "verdictOk": "Les événements clavier atteignent Handy normalement.",
+        "verdictOk": "Les événements clavier atteignent Tishe normalement.",
         "verdictNoEvents": "Aucun événement capturé : avez-vous appuyé sur des touches pendant le test ?",
         "failed": "Échec du diagnostic : {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "À propos",
       "version": {
         "title": "Version",
-        "description": "Version actuelle de Handy"
+        "description": "Version actuelle de Tishe"
       },
       "appDataDirectory": {
-        "title": "Emplacement des données de l'application",
-        "description": "Emplacement où Handy stocke ses données"
+        "title": "Dossier des données",
+        "description": "Réglages, modèles et historique"
       },
       "sourceCode": {
         "title": "Code source",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Soutenir le développement",
-        "description": "Aidez-nous à continuer à construire Handy",
+        "description": "Tishe est basé sur leur programme",
         "button": "Faire un don"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Inférence haute performance du modèle de reconnaissance vocale automatique Whisper d'OpenAI",
-          "details": "Handy utilise ggml pour un traitement rapide et local de la parole en texte. Merci au travail incroyable de Georgi Gerganov et des contributeurs."
+          "details": "Reconnaissance vocale rapide sur l’ordinateur. Merci à Georgi Gerganov et aux contributeurs du projet."
         }
       },
       "whatsNewUpdates": {
-        "label": "Afficher les nouveautés",
-        "description": "Afficher les notes de version après les mises à jour de Handy"
+        "label": "Afficher « Nouveautés » après une mise à jour",
+        "description": "Une courte liste des changements au premier lancement d’une nouvelle version"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Ouvrir",
     "copy": "Copier",
     "clear": "Effacer",
-    "noOptionsFound": "Aucune option trouvée"
+    "noOptionsFound": "Aucune option trouvée",
+    "cancel": "Annuler",
+    "choose": "Choisir…",
+    "reset": "Revenir à la valeur par défaut",
+    "search": "Rechercher"
   },
   "accessibility": {
-    "permissionsDescription": "Handy a besoin des autorisations d'accessibilité pour taper le texte transcrit.",
+    "permissionsDescription": "Pour coller du texte, le programme a besoin de l’autorisation « Accessibilité ».",
     "openSettings": "Ouvrir les Préférences Système"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "modèle inconnu",
     "pasteFailedTitle": "Échec du collage du texte",
     "pasteFailed": "Le texte n'a pas pu être collé dans l'application active.",
-    "transcriptionFailedTitle": "Échec de la transcription"
+    "transcriptionFailedTitle": "Reconnaissance impossible"
   },
   "appLanguage": {
-    "title": "Langue de l'application",
-    "description": "Changer la langue de l'interface de Handy"
+    "title": "Langue de l’interface",
+    "description": "La langue des libellés du programme"
   },
   "theme": {
-    "title": "Thème de l'application",
-    "description": "Choisissez si Handy suit le thème du système ou reste clair ou sombre",
+    "title": "Thème",
+    "description": "Choisissez si Tishe suit le thème du système ou reste clair ou sombre",
     "options": {
-      "system": "Système",
+      "system": "Comme le système",
       "light": "Clair",
       "dark": "Sombre"
     }
@@ -718,20 +949,759 @@
   "overlay": {
     "transcribing": "Transcription...",
     "processing": "Traitement...",
+    "waiting": "Le modèle est occupé par un fichier – la dictée sera en retard",
+    "message": {
+      "paste_failed": "Impossible de coller. Le texte est enregistré dans l’Historique",
+      "editing_skipped": "Collé sans correction : l’IA n’est pas prête",
+      "no_microphone": "Aucun microphone trouvé",
+      "microphone_denied": "Pas d’accès au microphone",
+      "help": "Que faire"
+    },
     "loadingModel": "Chargement du modèle..."
   },
   "whatsNew": {
-    "title": "Nouveautés de Handy v{{version}}"
+    "title": "Nouveautés de Tishe"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} bloque peut-être 1 raccourci",
+    "blockedWithCulprit_many": "{{name}} bloque peut-être {{count}} raccourcis",
     "blockedWithCulprit_other": "{{name}} bloque peut-être {{count}} raccourcis",
     "blockedNoCulprit_one": "macOS bloque temporairement 1 raccourci",
+    "blockedNoCulprit_many": "macOS bloque temporairement {{count}} raccourcis",
     "blockedNoCulprit_other": "macOS bloque temporairement {{count}} raccourcis",
     "recorderBlockedWithCulprit": "{{name}} bloque peut-être la modification des raccourcis",
     "recorderBlockedNoCulprit": "macOS bloque temporairement la modification des raccourcis",
     "learnMore": "Comment résoudre ce problème",
     "recorderBlocked": "Impossible d'enregistrer un raccourci pour le moment : Secure Input de macOS bloque les événements clavier. Résolvez d'abord l'avertissement Secure Input.",
     "dismiss": "Ignorer"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg est introuvable. Il est nécessaire pour lire les fichiers audio et vidéo et fait partie du programme d'installation de Tishe : réinstallez Tishe. Ou installez-le avec la commande : winget install Gyan.FFmpeg — puis redémarrez Tishe.",
+    "input": {
+      "choose": "Ajouter des fichiers…",
+      "filterName": "Audio et vidéo"
+    },
+    "maxPart": {
+      "title": "Durée maximale d’une partie",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Fournisseur",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Personnalisé (compatible OpenAI)"
+      },
+      "baseUrl": "URL de l’API",
+      "baseUrlDescription": "URL de base se terminant par /v1.",
+      "apiKey": "Clé d’API",
+      "apiKeyDescription": "Stockée localement sur cet ordinateur.",
+      "model": "Modèle",
+      "modelDescription": "Les modèles gpt-4o-transcribe acceptent au plus ~23 min par requête ; les parties sont raccourcies automatiquement.",
+      "language": "Langue",
+      "languageDescription": "Code de langue, par exemple fr ou en. Laissez vide pour la détection automatique.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Personnes dans l’enregistrement",
+      "auto": "Détecter automatiquement",
+      "model": "Modèle de locuteurs",
+      "modelDescription": "Téléchargé une fois ; distingue les voix. Les deux sont petits et rapides.",
+      "recommended": "Recommandé",
+      "cloudUntimed": "Le modèle {{model}} ne renvoie pas d’horodatage, les locuteurs ne peuvent donc pas être indiqués. Choisissez whisper-1, un modèle whisper chez Groq ou la reconnaissance locale.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Entraîné sur des milliers de voix ; distingue les voix de façon fiable sur de vrais enregistrements. Bon choix par défaut."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Un modèle alternatif : essayez-le si le premier confond les voix dans vos enregistrements."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Inclure aussi la transcription brute",
+      "includeRawDescription": "Ajouter à la fin du document le résultat non corrigé de la reconnaissance.",
+      "promptPlaceholder": "Instruction intégrée pour la langue de l’enregistrement (russe ou anglais)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Horodatage",
+      "location": "Enregistrer dans",
+      "choose": "Choisir un dossier…",
+      "nextToSource": "À côté du fichier source",
+      "notes": "Notes de traitement",
+      "removeFillers": "Supprimer les hésitations",
+      "saveDebug": "Enregistrer les fichiers intermédiaires",
+      "saveDebugDescription": "Crée un dossier « <name>.debug » à côté du document avec le texte après chaque étape : reconnaissance, nettoyage, chaque requête au modèle de langage et sa réponse, résultat final. Pour retracer les erreurs et pour le comparatif des modèles."
+    },
+    "actions": {
+      "start": "Transcrire",
+      "cancel": "Annuler"
+    },
+    "progress": {
+      "starting": "Démarrage…",
+      "elapsed": "Écoulé : {{time}}",
+      "extracting": "Extraction de l’audio…",
+      "extractingPart": "Extraction de l’audio…",
+      "diarizing": "Détection des locuteurs…",
+      "diarizingPart": "Détection des locuteurs…",
+      "splitting": "Découpage en parties…",
+      "splittingPart": "Découpage en parties…",
+      "transcribing": "Transcription…",
+      "transcribingPart": "Transcription de la partie {{part}} sur {{total}}…",
+      "post_processing": "Nettoyage par le LLM…",
+      "post_processingPart": "Nettoyage de la partie {{part}} sur {{total}} par le LLM…",
+      "writing": "Écriture du document…",
+      "writingPart": "Écriture du document…"
+    },
+    "result": {
+      "open": "Ouvrir",
+      "reveal": "Afficher dans le dossier"
+    },
+    "document": {
+      "title": "Transcription",
+      "sourceFile": "Fichier",
+      "duration": "Durée",
+      "parts": "Parties",
+      "engine": "Reconnaissance",
+      "llm": "Post-traitement par LLM",
+      "created": "Créé le",
+      "part": "Partie",
+      "rawTranscript": "Transcription brute",
+      "speaker": "Locuteur",
+      "notes": "Notes de traitement",
+      "notesTotal": "Temps de traitement",
+      "notesExtracting": "Extraction de l’audio",
+      "notesDiarizing": "Détection des locuteurs",
+      "notesTranscribing": "Reconnaissance",
+      "notesLlm": "Traitement par LLM",
+      "notesWarnings": "Avertissements",
+      "notesNone": "aucun",
+      "notesLanguage": "Langue du texte",
+      "llmLocal": "{{model}}, sur cet ordinateur",
+      "warnings": {
+        "noTimestampsModel": "les locuteurs n’ont pas été indiqués : ce modèle vocal ne renvoie pas d’horodatage ; utilisez un modèle whisper ou la reconnaissance locale",
+        "noTimestampsPart": "partie {{part}} : le service vocal n’a pas renvoyé d’horodatage, les locuteurs n’ont donc pas pu être indiqués",
+        "llmEmpty": "partie {{part}}, fragment {{fragment}} : le LLM a renvoyé une réponse vide, texte brut conservé",
+        "llmError": "partie {{part}}, fragment {{fragment}} : erreur du LLM, texte brut conservé ({{error}})",
+        "numbersBack": "partie {{part}}, fragment {{fragment}} : chiffres rétablis dans {{lines}} lignes (le LLM les a écrits en lettres ou supprimés)",
+        "linesLost": "partie {{part}}, fragment {{fragment}} : la réponse du LLM n’a pas conservé les lignes numérotées, texte brut conservé",
+        "linesKept": "partie {{part}}, fragment {{fragment}} : {{kept}} lignes sur {{total}} ont gardé leur texte brut ({{reasons}})",
+        "kept": {
+          "missing": "manquante",
+          "duplicate": "en double",
+          "empty": "vide",
+          "tooLong": "trop longue",
+          "translated": "traduite",
+          "tooShort": "trop courte",
+          "cutOff": "coupée"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Effacer les terminés"
+    },
+    "events": {
+      "title": "Script d’événements",
+      "choose": "Choisir…",
+      "none": "Non défini – les événements ne sont envoyés nulle part",
+      "filterName": "Programmes et scripts",
+      "test": "Tester",
+      "testOk": "Le script a reçu un événement de test",
+      "testFailed": "Échec : {{error}}",
+      "testMessage": "Tishe : événement de test",
+      "remaining": "encore ~{{minutes}} min",
+      "started": "Transcription lancée",
+      "finished": "Terminé",
+      "cancelled": "Annulé",
+      "interval": {
+        "title": "Intervalle de mise à jour de la progression",
+        "description": "Au plus une fois par ce nombre de secondes. Une nouvelle étape ou partie, le début et la fin sont envoyés immédiatement.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Modifier",
+    "choose": "Choisir",
+    "open": "Ouvrir",
+    "hide": "Masquer",
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "copied": "Copié",
+    "undo": "Annuler",
+    "download": "Télécharger",
+    "downloadSize": "Télécharger {{size}}",
+    "downloadingPercent": "Téléchargement · {{percent}} %",
+    "cancelDownload": "Annuler",
+    "deleteNamed": "Supprimer {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Utiliser « {{value}} »",
+    "fold": {
+      "more": "Plus",
+      "changed_one": "modifié : {{count}}",
+      "changed_many": "modifiés : {{count}}",
+      "changed_other": "modifiés : {{count}}",
+      "changedA11y_one": "{{count}} réglage modifié",
+      "changedA11y_many": "{{count}} réglages modifiés",
+      "changedA11y_other": "{{count}} réglages modifiés"
+    },
+    "number": {
+      "hint": "De {{min}} à {{max}}",
+      "hintDefault": "Par défaut {{value}} ; de {{min}} à {{max}}",
+      "notNumber": "Saisissez un nombre",
+      "range": "Saisissez un nombre de {{min}} à {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} h",
+      "hourMin": "{{h}} h {{m}} min",
+      "mb": "{{n}} Mo",
+      "gb": "{{n}} Go"
+    },
+    "when": {
+      "today": "aujourd’hui {{time}}",
+      "yesterday": "hier {{time}}",
+      "todayTitle": "Aujourd’hui",
+      "yesterdayTitle": "Hier"
+    },
+    "player": {
+      "play": "Lire",
+      "pause": "Pause",
+      "position": "Position de lecture"
+    },
+    "shortcut": {
+      "change": "Changer la touche de « {{name}} »",
+      "reset": "Rétablir la touche par défaut"
+    },
+    "echo": {
+      "recognition": "Reconnaissance : {{model}}",
+      "language": "langue : {{language}}",
+      "sharedWithDictation": "partagé avec la dictée",
+      "sharedWithFiles": "partagé avec la transcription de fichiers",
+      "noModel": "Aucun modèle de reconnaissance vocale"
+    },
+    "llm": {
+      "ready": "Prêt · {{model}} sur cet ordinateur",
+      "needed": "Nécessite l’IA · {{model}}",
+      "downloading": "Téléchargement de l’IA · {{percent}} %",
+      "runtimeMissing": "Le moteur d’IA intégré est absent",
+      "otherOptions": "Autres options",
+      "noKey": "Nécessite une clé {{provider}}",
+      "noUrl": "Nécessite l’adresse du serveur",
+      "noServerModel": "Nécessite un nom de modèle",
+      "localServer": "Votre serveur sur cet ordinateur · {{model}}",
+      "textToServer": "Le texte est envoyé à {{address}}",
+      "textToService": "Le texte est envoyé à {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Supprimer le modèle {{name}} ?",
+      "deleteModel": "Supprimer le modèle",
+      "deleteModelBody": "{{size}} seront libérés. Pour réutiliser le modèle, il faudra le télécharger à nouveau.",
+      "deleteActiveTitle": "Supprimer {{name}} ? C’est le modèle actuel",
+      "deleteActiveBody": "La dictée et la transcription ne fonctionneront plus tant que vous n’aurez pas choisi un autre modèle. {{size}} seront libérés.",
+      "deleteLlmTitle": "Supprimer le modèle d’IA {{name}} ?",
+      "deleteLlm": "Supprimer le modèle d’IA",
+      "deleteLlmBody": "{{size}} seront libérés. La correction ne fonctionnera plus tant que vous ne l’aurez pas retéléchargé ou choisi un autre modèle.",
+      "deleteSpeakerModelBody": "La séparation par locuteur ne fonctionnera plus tant que vous n’aurez pas retéléchargé un modèle de voix."
+    },
+    "back": {
+      "transcription": "Retour à Transcription",
+      "dictation": "Retour à Dictée",
+      "meetings": "Retour à Réunions",
+      "history": "Retour à Historique",
+      "models": "Retour à Reconnaissance",
+      "llm": "Retour à Correction IA",
+      "app": "Retour à Application",
+      "about": "Retour à À propos",
+      "debug": "Retour à Débogage",
+      "next": "Retour à La suite"
+    },
+    "changed": "modifié"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "chargé",
+      "loading": "chargement…",
+      "error": "échec du chargement",
+      "unloaded": "pas en mémoire",
+      "none": "Aucun modèle",
+      "a11y": "Modèle {{model}}, {{state}}. Changer de modèle",
+      "menu": "Modèles téléchargés",
+      "all": "Tous les modèles…",
+      "locked": "Transcription en cours – changez une fois terminée"
+    },
+    "task": "Transcription : fichier {{current}} sur {{total}} · {{percent}} %",
+    "downloading": "Téléchargement : {{name}} · {{percent}} %",
+    "downloadingMany": "Téléchargement : {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "La transcription nécessite ffmpeg"
+    },
+    "drop": {
+      "title": "Déposez un enregistrement ici",
+      "text": "Audio ou vidéo : mp3, m4a, wav, mp4, mkv et autres. Chaque fichier devient un document distinct.",
+      "more": "Déposez d’autres enregistrements ou",
+      "release": "Relâchez pour ajouter",
+      "rejected": "{{names}} – ni audio ni vidéo",
+      "oneText": "« {{name}} » rejoindra la file de transcription",
+      "manyText_one": "{{count}} enregistrement rejoindra la file de transcription",
+      "manyText_many": "{{count}} enregistrements rejoindront la file de transcription",
+      "manyText_other": "{{count}} enregistrements rejoindront la file de transcription",
+      "anyText": "Les fichiers audio et vidéo rejoindront la file de transcription",
+      "noneTitle": "Ces fichiers ne conviennent pas",
+      "noneText": "Seuls l’audio et la vidéo peuvent être transcrits : mp3, m4a, wav, mp4, mkv et autres.",
+      "otherNote_one": "{{count}} autre fichier sera ignoré : ce n’est ni de l’audio ni de la vidéo",
+      "otherNote_many": "{{count}} autres fichiers seront ignorés : ce n’est ni de l’audio ni de la vidéo",
+      "otherNote_other": "{{count}} autres fichiers seront ignorés : ce n’est ni de l’audio ni de la vidéo",
+      "alreadyOne": "« {{name}} » est déjà dans la file",
+      "alreadyMany": "Ces enregistrements sont déjà dans la file"
+    },
+    "list": {
+      "label": "Enregistrements",
+      "waiting": "En attente",
+      "cancelled": "Annulé",
+      "remaining": "encore environ {{time}}",
+      "remove": "Retirer",
+      "removeFile": "Retirer {{name}}",
+      "removeFromList": "Retirer de la liste",
+      "more": "Plus : {{name}}",
+      "recipeSpeakers": "locuteurs",
+      "recipeEditing": "correction",
+      "recipeCloud": "dans le cloud",
+      "parts_one": "{{count}} partie",
+      "parts_many": "{{count}} parties",
+      "parts_other": "{{count}} parties",
+      "notes_one": "{{count}} note de traitement",
+      "notes_many": "{{count}} notes de traitement",
+      "notes_other": "{{count}} notes de traitement",
+      "showAll": "Tout afficher ({{count}})",
+      "showFewer": "Afficher moins",
+      "removedOne": "Retiré de la liste",
+      "removedMany_one": "{{count}} ligne retirée de la liste",
+      "removedMany_many": "{{count}} lignes retirées de la liste",
+      "removedMany_other": "{{count}} lignes retirées de la liste",
+      "chars_one": "{{n}} caractère",
+      "chars_many": "{{n}} caractères",
+      "chars_other": "{{n}} caractères",
+      "keptNote": "Les {{count}} derniers résultats sont conservés. Les documents sur le disque ne sont jamais supprimés.",
+      "missing": "Document introuvable : il a été déplacé ou supprimé, ou son disque est déconnecté",
+      "openDocument": "Ouvrir le document {{name}}"
+    },
+    "recipe": {
+      "title": "Recette",
+      "locked": "Les réglages restent inchangés pendant la transcription. Les nouveaux fichiers utiliseront les mêmes réglages.",
+      "where": "Où reconnaître",
+      "local": "Sur cet ordinateur",
+      "cloud": "Dans le cloud",
+      "audioToService": "L’audio est envoyé à {{provider}}",
+      "cloudEcho": "Reconnaissance : {{model}} chez {{provider}}",
+      "speakers": "Locuteurs",
+      "speakersDescription": "Le document devient un compte rendu : « Locuteur 1 : … », « Locuteur 2 : … »",
+      "speakersMissing": "Nécessite un modèle de voix · {{size}}",
+      "speakersDownloading": "Téléchargement du modèle de voix · {{percent}} %",
+      "speakersReady": "Modèle de voix prêt",
+      "countDescription": "Si vous le savez, la séparation est plus précise",
+      "editing": "Correction par l’IA",
+      "editingDescription": "Corrige les erreurs de reconnaissance et la ponctuation. Nettement plus long : environ 15–35 min par heure d’enregistrement",
+      "result": "Résultat",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "à côté de l’enregistrement"
+    },
+    "more": {
+      "recognition": "Reconnaissance",
+      "maxPartDescription": "Un long enregistrement est coupé aux pauses en parties pas plus longues que cela",
+      "speakers": "Locuteurs",
+      "editing": "Correction",
+      "prompt": "Instruction pour les fichiers",
+      "promptDescription": "Vide – l’instruction intégrée dans la langue de l’enregistrement. Priorité : ce champ, puis ⚙ du modèle, puis l’instruction intégrée",
+      "document": "Document",
+      "locationDescription": "Le nom vient de l’enregistrement ; rien n’est écrasé, (2) est ajouté à la place",
+      "timestampsDescription": "Heure de l’enregistrement avant chaque paragraphe",
+      "removeFillersDescription": "Supprime « uh », « um », « hmm » dans les enregistrements anglais et russes. Les mots restent",
+      "globalFillers": "La transcription source reste mot pour mot. La dictée a son propre réglage pour les mots de remplissage",
+      "notesDescription": "À la fin : durée de chaque étape et avertissements",
+      "integrations": "Intégrations",
+      "eventsDescription": "Un programme informé du début, de la progression et de la fin (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Ajoutez des fichiers pour commencer",
+      "noFfmpeg": "Nécessite ffmpeg",
+      "noModel": "Téléchargez d’abord un modèle de reconnaissance",
+      "cloudIncomplete": "Nécessite une clé {{provider}}",
+      "cloudIncompleteCustom": "Nécessite l’adresse de l’API, la clé et le modèle",
+      "noSpeakerModel": "Nécessite un modèle de voix",
+      "running": "Fichier {{current}} sur {{total}} · {{time}} écoulé",
+      "start_one": "Transcrire {{count}} fichier",
+      "start_many": "Transcrire {{count}} fichiers",
+      "start_other": "Transcrire {{count}} fichiers",
+      "done_one": "Terminé : {{count}} fichier",
+      "done_many": "Terminé : {{count}} fichiers",
+      "done_other": "Terminé : {{count}} fichiers",
+      "errors_one": "{{count}} fichier en erreur",
+      "errors_many": "{{count}} fichiers en erreur",
+      "errors_other": "{{count}} fichiers en erreur",
+      "summary_one": "{{count}} enregistrement",
+      "summary_many": "{{count}} enregistrements",
+      "summary_other": "{{count}} enregistrements",
+      "modelDownloading": "Téléchargement du modèle de reconnaissance · {{percent}} %",
+      "llmDownloading": "Téléchargement de l’IA de correction · {{percent}} %",
+      "llmMissing": "La correction nécessite une IA",
+      "llmNotSetUp": "L’IA de correction n’est pas configurée",
+      "withoutEditing": "Sans correction",
+      "modelNotActive": "Le modèle de reconnaissance n’est pas activé"
+    },
+    "stop": {
+      "title": "Arrêter la transcription ?",
+      "body": "Les fichiers terminés ({{done}}) sont enregistrés. Le fichier en cours ({{percent}} %) et ceux en attente ({{waiting}}) devront être relancés.",
+      "confirm": "Arrêter",
+      "keep": "Continuer"
+    },
+    "tray": {
+      "running": "Transcription : fichier {{current}} sur {{total}} · {{pct}} %",
+      "ready_one": "Transcription prête : {{count}} fichier",
+      "ready_many": "Transcription prête : {{count}} fichiers",
+      "ready_other": "Transcription prête : {{count}} fichiers"
+    },
+    "notify": {
+      "readyOne": "Transcription prête",
+      "readyMany_one": "Transcription prête : {{count}} fichier",
+      "readyMany_many": "Transcription prête : {{count}} fichiers",
+      "readyMany_other": "Transcription prête : {{count}} fichiers",
+      "failedOne": "Échec de la transcription",
+      "failedMany_one": "Échec de la transcription : {{count}} fichier",
+      "failedMany_many": "Échec de la transcription : {{count}} fichiers",
+      "failedMany_other": "Échec de la transcription : {{count}} fichiers",
+      "partial": "{{ok}} sur {{total}} terminés · {{errors}}",
+      "errors_one": "{{count}} en échec",
+      "errors_many": "{{count}} en échec",
+      "errors_other": "{{count}} en échec",
+      "failedFile": "Échec : {{name}} · {{reason}}",
+      "open": "Ouvrir"
+    },
+    "try": {
+      "before": "Ouvrez n’importe quel éditeur, placez-y le curseur et maintenez",
+      "after": "pendant que vous parlez. Relâchez, et le texte y apparaît.",
+      "changeKey": "Changer la touche"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "La dictée est prête ·",
+      "anyWindow": "dans n’importe quelle fenêtre",
+      "keyBusy": "La dictée ne démarre pas : la touche est occupée",
+      "keyBusyDetail": "Un autre programme utilise {{key}}. Choisissez une autre touche.",
+      "changeKey": "Changer la touche"
+    },
+    "keys": {
+      "title": "Touches",
+      "second": "Dictée avec correction – deuxième touche",
+      "secondDescription": "La touche habituelle colle le texte tel quel. Celle-ci le colle après correction par l’IA",
+      "instruction": "Instruction",
+      "manage": "Gérer…",
+      "secondBusy": "Un autre programme utilise cette touche : choisissez-en une autre"
+    },
+    "more": {
+      "paste": "Collage du texte",
+      "indicator": "Indicateur d’enregistrement",
+      "microphone": "Microphone et enregistrement",
+      "prompts": "Instructions pour la dictée avec correction",
+      "promptsDescription_one": "{{count}} instruction",
+      "promptsDescription_many": "{{count}} instructions",
+      "promptsDescription_other": "{{count}} instructions",
+      "promptsRow": "Créer et modifier des instructions",
+      "text": "Texte de la dictée",
+      "fillersDocuments": "Uniquement pour la dictée. Dans les documents, c’est « Supprimer les hésitations » de la page Transcription qui s’en charge"
+    },
+    "fix": {
+      "title": "Si quelque chose ne fonctionne pas",
+      "paste": "Le texte n’est pas collé",
+      "pasteHelp": "Si vous dictiez dans un programme lancé en tant qu’administrateur, Windows n’autorise pas le collage. Sinon, augmentez les délais ci-dessous.",
+      "cutOff": "La fin d’une phrase est coupée",
+      "hold": "Un appui court compte comme un maintien"
+    },
+    "prompts": {
+      "title": "Instructions pour la dictée avec correction",
+      "intro": "L’instruction indique à l’IA quoi faire du texte dicté. ${output} est le texte dicté.",
+      "current": "Instruction actuelle",
+      "create": "Créer",
+      "deleted": "Instruction « {{name}} » supprimée"
+    }
+  },
+  "meetings": {
+    "what": "Tishe enregistrera les réunions et les appels sur cet ordinateur : votre microphone et l’autre côté, puis une transcription séparée par locuteur.",
+    "how": "Les enregistrements restent sur l’ordinateur, comme tout le reste dans Tishe.",
+    "nowTitle": "Dès maintenant",
+    "nowText": "Si une réunion est déjà enregistrée – par Zoom, Teams ou un dictaphone –, ajoutez le fichier dans « Transcription ».",
+    "goTranscription": "Aller à Transcription"
+  },
+  "history": {
+    "storage": {
+      "title": "Conservation",
+      "limit_one": "La dernière dictée est conservée",
+      "limit_many": "Les {{count}} dernières dictées sont conservées",
+      "limit_other": "Les {{count}} dernières dictées sont conservées",
+      "never": "Les dictées ne sont pas supprimées automatiquement",
+      "days_3": "Les dictées sont supprimées après 3 jours",
+      "weeks_2": "Les dictées sont supprimées après 2 semaines",
+      "months_3": "Les dictées sont supprimées après 3 mois"
+    },
+    "empty": {
+      "title": "Vos dictées apparaîtront ici",
+      "textBefore": "Maintenez",
+      "textAfter": "dans n’importe quelle fenêtre et parlez.",
+      "textNoKey": "Définissez une touche de dictée dans « Dictée »."
+    },
+    "copy": "Copier le texte",
+    "more": "Plus d’actions",
+    "keep": "Conserver",
+    "keepDescription": "Non supprimé automatiquement",
+    "retry": "Reconnaître à nouveau",
+    "delete": "Supprimer",
+    "deleted": "Dictée supprimée",
+    "failed": "Reconnaissance impossible",
+    "savedTag": "conservé",
+    "editingSkipped": "sans correction",
+    "showMore": "Afficher en entier",
+    "showLess": "Réduire",
+    "version": "Version du texte",
+    "versionEdited": "Après correction",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Modèles qui transforment la parole en texte, pour la dictée et la transcription de fichiers. La correction du texte par l’IA se trouve dans la section",
+    "active": {
+      "title": "Modèle actif",
+      "change": "Changer de modèle",
+      "none": "Aucun modèle choisi",
+      "noneHint": "Téléchargez celui recommandé pour votre langue – ou n’importe quel modèle du catalogue ci-dessous"
+    },
+    "lockedByTranscription": "Transcription en cours – changez une fois terminée",
+    "language": {
+      "title": "Langue et traduction",
+      "scope": "S’applique à la dictée et à la transcription de fichiers"
+    },
+    "cleanup": {
+      "title": "Nettoyage du texte",
+      "scope": "Fonctionne dans le modèle de reconnaissance, pour la dictée et les fichiers"
+    },
+    "memory": {
+      "title": "Mémoire"
+    },
+    "onlyLanguage": "{{language}} uniquement",
+    "languageCount_one": "{{count}} langue",
+    "languageCount_many": "{{count}} langues",
+    "languageCount_other": "{{count}} langues",
+    "catalog": {
+      "title": "Catalogue",
+      "yours": "Vos modèles",
+      "yoursCount": "Vos modèles ({{count}})",
+      "recommended": "Recommandés",
+      "all": "Tous les modèles",
+      "languageFilter": "Langue",
+      "streaming": "Streaming",
+      "translation": "Traduction",
+      "showAll": "Afficher tous les modèles ({{count}})",
+      "showFewer": "Afficher moins"
+    },
+    "row": {
+      "use": "Utiliser",
+      "inUse": "utilisé",
+      "more": "Plus : {{name}}",
+      "delete": "Supprimer le modèle",
+      "translate": "traduit en anglais",
+      "streaming": "streaming",
+      "accuracy": "précision {{n}}/10",
+      "speed": "vitesse {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Où et avec quelle IA le texte est corrigé",
+    "status": {
+      "usedFor": "Utilisée pour",
+      "files": "la correction des fichiers ({{state}})",
+      "dictation": "la dictée avec correction ({{state}})",
+      "on": "activée",
+      "off": "désactivée"
+    },
+    "where": {
+      "title": "Où fonctionne l’IA",
+      "local": "Sur cet ordinateur",
+      "localText": "Le texte reste sur l’ordinateur",
+      "localUnavailable": "Non disponible dans cette version",
+      "server": "Votre propre serveur",
+      "serverText": "Ollama, LM Studio ou votre adresse · le texte est envoyé à votre serveur",
+      "cloud": "Service en ligne",
+      "cloudText": "OpenAI et autres · le texte est envoyé au service"
+    },
+    "variant": {
+      "local": "IA intégrée",
+      "server": "Serveur",
+      "cloud": "Service"
+    },
+    "local": {
+      "speed": "vitesse {{n}} sur 5",
+      "quality": "qualité {{n}} sur 5",
+      "footprint": "disque {{disk}} · mémoire ~{{ram}} Go",
+      "showAll": "Afficher tous les modèles ({{count}})",
+      "showFewer": "Afficher moins"
+    },
+    "server": {
+      "urlDescription": "Adresse compatible OpenAI se terminant par /v1",
+      "keyDescription": "Seulement si votre serveur en demande une"
+    }
+  },
+  "app": {
+    "purpose": "Comportement général du programme",
+    "launch": "Démarrage et zone de notification",
+    "look": "Apparence",
+    "updates": "Mises à jour",
+    "checkNow": "Rechercher une nouvelle version",
+    "checkNowButton": "Rechercher",
+    "experimental": "Fonctions expérimentales",
+    "quit": {
+      "title": "Quitter Tishe ?",
+      "body": "« {{name}} » est en cours de transcription ({{pct}} %). Elle sera arrêtée ; les documents terminés sont enregistrés.",
+      "bodyIdle": "La transcription sera arrêtée ; les documents terminés sont enregistrés.",
+      "confirm": "Quitter",
+      "stay": "Rester"
+    },
+    "notifications": "Notifications",
+    "notifyLabel": "Me prévenir quand une transcription est prête",
+    "notifyDescription": "Une notification Windows, seulement quand la fenêtre est masquée ou n’a pas le focus. Un clic ouvre le résultat.",
+    "trayHint": "Windows masque les nouvelles icônes. Pour la garder visible, faites-la glisser des icônes masquées vers la barre des tâches."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Nouveautés",
+    "project": {
+      "title": "À propos du projet",
+      "basedOn": "Basé sur Handy",
+      "basedOnText": "Open source, licence MIT",
+      "tishe": "Tishe",
+      "tisheText": "Code source ouvert, licence MIT. Versions et signalements de bugs sur GitHub",
+      "licenses": "Licences",
+      "licensesText": "Bibliothèques et modèles tiers utilisés par Tishe",
+      "licensesOpen": "Ouvrir",
+      "licensesError": "Impossible d'ouvrir le fichier des licences",
+      "author": "Développeur",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "Profil GitHub"
+    },
+    "supportHandy": "Soutenir les auteurs de Handy",
+    "folders": "Dossiers",
+    "versionRelease": "Tishe {{version}}, version publiée le {{release}}"
+  },
+  "debug": {
+    "onBefore": "Le mode débogage est activé et le reste d’un lancement à l’autre.",
+    "onAfter": "le masque.",
+    "log": "Journal",
+    "previews": "Aperçus",
+    "keyboard": "Clavier",
+    "transcription": "Transcription"
+  },
+  "release": {
+    "available": "La version {{release}} est sortie",
+    "openPage": "Ouvrir la page de la version sur GitHub",
+    "upToDate": "C'est la dernière version",
+    "checkFailed": "Impossible de vérifier les mises à jour"
+  },
+  "next": {
+    "lead": "Tishe est la première partie de Private Memory : une mémoire privée de vos conversations, qui vit entièrement sur votre ordinateur.",
+    "now": "Dès aujourd'hui, Tishe écrit sous votre dictée dans n'importe quelle application et transcrit de longs enregistrements en distinguant les intervenants. Sans internet ni compte.",
+    "planTitle": "Dans les prochaines versions",
+    "plan": {
+      "meetings": {
+        "title": "Enregistrement des réunions",
+        "text": "votre micro et les autres participants sur deux pistes, le texte apparaissant pendant la conversation."
+      },
+      "summaries": {
+        "title": "Comptes rendus de réunion",
+        "text": "décisions et tâches juste après l'arrêt, dans la langue de la réunion, rédigées par le modèle de langage intégré."
+      },
+      "search": {
+        "title": "Recherche dans les réunions",
+        "text": "d'abord par mots, puis par sens."
+      },
+      "agents": {
+        "title": "Notes et assistants",
+        "text": "un dossier de réunion pour Obsidian et un accès des assistants IA à vos réunions via MCP, toujours sans cloud."
+      }
+    },
+    "order": "Pas de dates : l'ordre peut changer selon les retours.",
+    "freeTitle": "Gratuit et open source",
+    "freeText": "Le cœur de Tishe est gratuit et le restera. Suivez les versions et dites-nous sur GitHub ce qui manque.",
+    "follow": "Suivre sur GitHub",
+    "feedback": "Signaler un problème ou une idée"
+  },
+  "fileErrors": {
+    "notFound": "Fichier introuvable : il a été déplacé ou supprimé.",
+    "noAudio": "Le fichier n'a pas de son, ou il n'a pas pu être lu.",
+    "unreadable": "Impossible de lire le son du fichier. Il est peut-être endommagé.",
+    "noModel": "Aucun modèle de reconnaissance n'est choisi : choisissez-en un dans « $t(sidebar.models) ».",
+    "noSpeakerModel": "Le modèle de voix n'est pas téléchargé : téléchargez-le dans « $t(transcription.more.speakers) ».",
+    "noLlmModel": "Le modèle de langage n'est pas téléchargé : téléchargez-le dans « $t(sidebar.llm) ».",
+    "noLlmRuntime": "Le moteur du modèle de langage intégré est introuvable. Réinstallez Tishe.",
+    "cloudKey": "La reconnaissance dans le cloud nécessite une clé API.",
+    "cloudConfig": "La reconnaissance dans le cloud n'est pas configurée : indiquez l'adresse et le modèle.",
+    "busy": "Un autre fichier est déjà en cours de transcription.",
+    "noSpace": "Le disque est plein.",
+    "fileInUse": "Le document est ouvert dans un autre programme (par exemple Word). Fermez-le et réessayez.",
+    "accessDenied": "Pas d'accès au dossier du document. Choisissez un autre dossier : « $t(ui.fold.more) → $t(transcription.more.document) »."
+  },
+  "setup": {
+    "asr": {
+      "title": "Téléchargez un modèle de reconnaissance vocale",
+      "text": "Il transforme la parole en texte – pour les enregistrements comme pour la dictée. Il fonctionne sur cet ordinateur, sans internet. Il suffit de le télécharger une fois.",
+      "language": "Langue des enregistrements",
+      "allModels": "Tous les modèles",
+      "onDisk": "Le modèle {{name}} est déjà sur l’ordinateur – il ne reste plus qu’à l’activer.",
+      "whileDownloading": "Vous pouvez ajouter des enregistrements pendant le téléchargement : la transcription commencera dès que le modèle sera prêt."
+    },
+    "llm": {
+      "title": "La correction nécessite une IA",
+      "what": "L’IA corrige les erreurs de reconnaissance et la ponctuation. Nous recommandons l’IA intégrée : elle fonctionne sur cet ordinateur, et le texte n’en sort pas.",
+      "recommended": "{{size}} sur le disque · environ {{ram}} Go de mémoire nécessaires · téléchargement unique",
+      "otherWays": "Votre serveur ou un service en ligne",
+      "downloadOn": "Télécharger {{size}} et activer",
+      "runtimeTitle": "L’IA intégrée n’est pas disponible",
+      "runtime": "Cette version ne contient pas le moteur de l’IA intégrée. Vous pouvez connecter votre propre serveur (Ollama, LM Studio) ou un service en ligne dans la section « $t(sidebar.llm) ».",
+      "openPage": "Ouvrir « $t(sidebar.llm) »",
+      "notSetUp": "{{reason}} – sans cela, l’IA ne fonctionnera pas. Activez la correction et terminez la configuration dans la section « $t(sidebar.llm) ».",
+      "onAndSetUp": "Activer et configurer",
+      "onDisk": "Déjà sur cet ordinateur — rien à télécharger.",
+      "turnOn": "Activer la correction"
+    },
+    "quick": {
+      "title": "Démarrage rapide",
+      "progress": "{{done}} sur {{total}}",
+      "hide": "Masquer",
+      "hideHint": "Masquer « Démarrage rapide » – tous les paramètres restent dans les sections à gauche",
+      "model": "Téléchargez un modèle de reconnaissance",
+      "modelDone": "Modèle de reconnaissance prêt · {{name}}",
+      "dictation": "Essayez la dictée",
+      "dictationDone": "La dictée fonctionne · les dictées sont conservées dans « Historique »",
+      "file": "Transcrivez un enregistrement",
+      "fileDone": "Premier enregistrement transcrit",
+      "fileHint": "Déposez un fichier audio ou vidéo dans cette fenêtre ou choisissez des fichiers – un document Word apparaîtra à côté de l’enregistrement.",
+      "llm": "Correction par l’IA",
+      "optional": "facultatif",
+      "llmHint": "Corrige les erreurs de reconnaissance et la ponctuation dans les documents. {{model}} : {{size}}, fonctionne sur cet ordinateur.",
+      "llmReady": "IA prête · {{model}}",
+      "doneTitle": "Tout est prêt",
+      "doneText": "Tishe est configuré. Les dictées sont dans « Historique », les documents dans la liste ci-dessous, les paramètres dans les sections à gauche.",
+      "close": "Fermer"
+    }
   }
 }

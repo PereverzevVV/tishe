@@ -1,37 +1,35 @@
 ---
-name: Bug Report
-about: Create a report to help us improve Handy
-title: "[BUG] "
+name: Сообщить об ошибке / Bug report
+about: Что-то в Tishe работает не так / Something in Tishe does not work
+title: ""
 labels: ["bug"]
 assignees: ""
 ---
 
-## Before You Submit
+<!-- Можно писать по-русски или по-английски. You can write in Russian or English. -->
+<!-- Это Tishe, а не Handy: ошибки Handy сообщайте в https://github.com/cjpais/Handy -->
 
-**Please search [existing issues](https://github.com/cjpais/Handy/issues) to avoid duplicates.** Your bug may already be reported! Right now it's just me maintaining this project so many issues can be overwhelming! Help me out by checking first.
+## Что случилось / What happened
 
-## Bug Description
+## Как повторить / How to reproduce
 
-A clear and concise description of what the bug is.
+1.
+2.
 
-## System Information
+## Компьютер / Computer
 
-**App Version:**
+- Версия Tishe (О программе) / Tishe version (About):
+- Windows:
+- Процессор / CPU:
+- Видеокарта / GPU:
+- Память / RAM:
+- Модель распознавания и нейросеть / Speech model and LLM:
 
-<!-- You can find this in the app settings or about section -->
+## Журнал / Log
 
-**Operating System:**
-
-<!-- e.g., macOS 14.1, Windows 11, Ubuntu 22.04 -->
-
-**CPU:**
-
-<!-- e.g., Apple M2, Intel i7-12700K, AMD Ryzen 7 5800X -->
-
-**GPU:**
-
-<!-- e.g., Apple M2 GPU, NVIDIA RTX 4080, AMD RX 6800 XT, Intel UHD Graphics -->
-
-## Logs
-
-<!-- Please attach relevant logs to help us diagnose the issue. You can find the log directory by going to Settings > About in the app. -->
+<!--
+Приложите файл журнала: «О программе» → «Папки» → «Папка журналов», файл handy.log.
+Attach the log file: About → Folders → Logs folder, file handy.log.
+Если ошибка в расшифровке файла, не прикладывайте запись, если в ней личный разговор.
+If the problem is with a file, do not attach the recording if it is a private conversation.
+-->

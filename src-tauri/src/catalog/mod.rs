@@ -59,6 +59,10 @@ struct CatalogModel {
     /// from `recommended_rank`, which only orders the full list.
     #[serde(default)]
     recommended: bool,
+    /// SPDX-style license id from the HF card (Tishe: used to drop
+    /// non-commercial models, see `is_non_commercial`).
+    #[serde(default)]
+    license: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -115,9 +119,30 @@ impl From<&CatalogModel> for ModelDescriptor {
 /// The raw parsed catalog. Kept alive (not consumed) so mirror metadata that
 /// deliberately stays out of [`ModelDescriptor`] can be looked up separately.
 static ROOT: Lazy<CatalogRoot> = Lazy::new(|| {
-    serde_json::from_str(include_str!("catalog.json"))
-        .expect("bundled catalog.json is valid JSON matching the catalog schema")
+    let mut root: CatalogRoot = serde_json::from_str(include_str!("catalog.json"))
+        .expect("bundled catalog.json is valid JSON matching the catalog schema");
+    // Tishe: models Handy's catalog does not list yet (`tishe_catalog.json`);
+    // an entry is skipped once catalog.json has the same repo.
+    let extra: CatalogRoot = serde_json::from_str(include_str!("tishe_catalog.json"))
+        .expect("bundled tishe_catalog.json is valid JSON matching the catalog schema");
+    for model in extra.models {
+        if !root.models.iter().any(|m| m.id == model.id) {
+            root.models.push(model);
+        }
+    }
+    // Tishe: Tishe ships under MIT and may be used commercially, so models
+    // under non-commercial licenses (e.g. nvidia/canary-1b, CC BY-NC 4.0) are
+    // not offered. A rule instead of editing the generated catalog.json keeps
+    // upstream merges clean and also catches NC models Handy adds later.
+    root.models
+        .retain(|m| !is_non_commercial(m.license.as_deref()));
+    root
 });
+
+/// Tishe: true for licenses that forbid commercial use (`cc-by-nc-*`).
+fn is_non_commercial(license: Option<&str>) -> bool {
+    license.is_some_and(|l| l.to_ascii_lowercase().contains("-nc"))
+}
 
 /// The bundled catalog, parsed once and normalised into descriptors.
 pub static CATALOG: Lazy<Vec<ModelDescriptor>> =
@@ -282,5 +307,33 @@ mod tests {
             "catalog architecture(s) missing from KNOWN_ARCHES: {:?}",
             missing
         );
+    }
+
+    #[test]
+    fn non_commercial_models_are_not_offered() {
+        assert!(!CATALOG
+            .iter()
+            .any(|d| d.id.starts_with("handy-computer/canary-1b-gguf/")));
+        // canary-1b-flash and canary-1b-v2 are CC BY 4.0 and stay.
+        assert!(CATALOG
+            .iter()
+            .any(|d| d.id.starts_with("handy-computer/canary-1b-flash-gguf/")));
+        assert!(is_non_commercial(Some("cc-by-nc-4.0")));
+        assert!(!is_non_commercial(Some("cc-by-4.0")));
+        assert!(!is_non_commercial(None));
+    }
+
+    #[test]
+    fn tishe_catalog_adds_parakeet_ultra_once() {
+        let ultra: Vec<_> = CATALOG
+            .iter()
+            .filter(|d| d.id.starts_with("handy-computer/parakeet-ultra-gguf/"))
+            .collect();
+        assert_eq!(ultra.len(), 1);
+        assert_eq!(
+            ultra[0].id,
+            "handy-computer/parakeet-ultra-gguf/parakeet-ultra-Q8_0.gguf"
+        );
+        assert!(!mirror_fallbacks(&ultra[0].id).is_empty());
     }
 }

@@ -5,7 +5,8 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { listen } from "@tauri-apps/api/event";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { arch, platform } from "@tauri-apps/plugin-os";
-import { ProgressBar } from "../shared";
+import { Button } from "../ui/Button";
+import { Dialog } from "../ui/Dialog";
 import { useSettings } from "../../hooks/useSettings";
 import { commands } from "../../bindings";
 import {
@@ -190,88 +191,70 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
     return t("footer.checkForUpdates");
   };
 
-  const getUpdateStatusAction = () => {
-    if (!updateChecksEnabled) return undefined;
-    if (updateAvailable && !isInstalling) return installUpdate;
-    if (!isChecking && !isInstalling && !updateAvailable)
-      return handleManualUpdateCheck;
-    return undefined;
-  };
-
-  const isUpdateDisabled = !updateChecksEnabled || isChecking || isInstalling;
-  const isUpdateClickable =
-    !isUpdateDisabled && (updateAvailable || (!isChecking && !showUpToDate));
-
   // When no installer could be resolved for this target the button falls back to
   // the releases index, so the dialog has to say "browse" rather than "download".
   const hasDirectInstaller = portableInstallerUrl !== PORTABLE_RELEASES_URL;
 
+  // Status bar (VISUAL_DESIGN_SYSTEM §12.13): the part exists only when it
+  // says something true — a new version, an install in progress, or the
+  // answer to a manual check. No permanent «проверка отключена» text.
+  let part: React.ReactNode = null;
+  if (updateChecksEnabled) {
+    if (isInstalling) {
+      part = <span className="t-status-part">{getUpdateStatusText()}</span>;
+    } else if (updateAvailable) {
+      part = (
+        <button
+          type="button"
+          className="t-status-part"
+          onClick={() => void installUpdate()}
+        >
+          {t("footer.updateAvailableShort")}
+        </button>
+      );
+    } else if (isChecking || showUpToDate) {
+      part = <span className="t-status-part">{getUpdateStatusText()}</span>;
+    }
+  }
+
   return (
     <>
-      {showPortableUpdateDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-background border border-mid-gray/20 rounded-lg p-6 max-w-md w-full mx-4 space-y-4">
-            <h2 className="text-base font-semibold">
-              {t("footer.portableUpdateTitle")}
-            </h2>
-            <p className="text-sm text-text/70">
+      <Dialog
+        open={showPortableUpdateDialog}
+        size="narrow"
+        title={t("footer.portableUpdateTitle")}
+        closeLabel={t("common.close")}
+        onOpenChange={setShowPortableUpdateDialog}
+        showCloseButton={false}
+        footer={
+          <>
+            <Button
+              variant="secondary"
+              onClick={() => setShowPortableUpdateDialog(false)}
+            >
+              {t("common.close")}
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                openUrl(portableInstallerUrl);
+                setShowPortableUpdateDialog(false);
+              }}
+            >
               {hasDirectInstaller
-                ? t("footer.portableUpdateMessage")
-                : t("footer.portableUpdateBrowseMessage")}
-            </p>
-            <div className="flex gap-2 justify-end">
-              <button
-                className="px-3 py-1.5 text-sm rounded border border-mid-gray/20 hover:bg-mid-gray/10 transition-colors"
-                onClick={() => setShowPortableUpdateDialog(false)}
-              >
-                {t("common.close")}
-              </button>
-              <button
-                className="px-3 py-1.5 text-sm rounded bg-logo-primary text-white hover:bg-logo-primary/80 transition-colors"
-                onClick={() => {
-                  openUrl(portableInstallerUrl);
-                  setShowPortableUpdateDialog(false);
-                }}
-              >
-                {hasDirectInstaller
-                  ? t("footer.portableUpdateButton")
-                  : t("footer.portableUpdateBrowseButton")}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      <div className={`flex items-center gap-3 ${className}`}>
-        {isUpdateClickable ? (
-          <button
-            onClick={getUpdateStatusAction()}
-            disabled={isUpdateDisabled}
-            className={`transition-colors disabled:opacity-50 tabular-nums ${
-              updateAvailable
-                ? "text-logo-primary hover:text-logo-primary/80 font-medium"
-                : "text-text/60 hover:text-text/80"
-            }`}
-          >
-            {getUpdateStatusText()}
-          </button>
-        ) : (
-          <span className="text-text/60 tabular-nums">
-            {getUpdateStatusText()}
-          </span>
-        )}
-
-        {isInstalling && downloadProgress > 0 && downloadProgress < 100 && (
-          <ProgressBar
-            progress={[
-              {
-                id: "update",
-                percentage: downloadProgress,
-              },
-            ]}
-            size="large"
-          />
-        )}
-      </div>
+                ? t("footer.portableUpdateButton")
+                : t("footer.portableUpdateBrowseButton")}
+            </Button>
+          </>
+        }
+      >
+        <p className="t-text-secondary">
+          {hasDirectInstaller
+            ? t("footer.portableUpdateMessage")
+            : t("footer.portableUpdateBrowseMessage")}
+        </p>
+      </Dialog>
+      {part && <span className={className}>{part}</span>}
     </>
   );
 };

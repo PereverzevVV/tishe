@@ -6,16 +6,19 @@ import { useSettings } from "../../hooks/useSettings";
 interface FillerWordRemovalProps {
   descriptionMode?: "inline" | "tooltip";
   grouped?: boolean;
+  /** Service line under the switch. */
+  extra?: React.ReactNode;
 }
 
 export const FillerWordRemoval: React.FC<FillerWordRemovalProps> = React.memo(
-  ({ descriptionMode = "tooltip", grouped = false }) => {
+  ({ descriptionMode = "tooltip", grouped = false, extra }) => {
     const { t } = useTranslation();
     const { getSetting, updateSetting, isUpdating } = useSettings();
     const enabled = getSetting("filler_word_removal_enabled") ?? true;
 
     return (
       <ToggleSwitch
+        settingKey="filler_word_removal_enabled"
         checked={enabled}
         onChange={(nextEnabled) =>
           updateSetting("filler_word_removal_enabled", nextEnabled)
@@ -25,6 +28,7 @@ export const FillerWordRemoval: React.FC<FillerWordRemovalProps> = React.memo(
         description={t("settings.advanced.fillerWordRemoval.description")}
         descriptionMode={descriptionMode}
         grouped={grouped}
+        extra={extra}
       />
     );
   },

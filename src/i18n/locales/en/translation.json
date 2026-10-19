@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Settings...",
-    "checkUpdates": "Check for Updates...",
-    "copyLastTranscript": "Copy Last Transcript",
-    "unloadModel": "Unload Model",
+    "settings": "Open Tishe…",
+    "checkUpdates": "Check for updates…",
+    "copyLastTranscript": "Copy last dictation",
+    "unloadModel": "Unload model",
     "model": "Model",
     "quit": "Quit",
     "cancel": "Cancel",
-    "secureInputWarning": "⚠ Shortcuts blocked by Secure Input"
+    "secureInputWarning": "⚠ Shortcuts blocked by Secure Input",
+    "modelLocked": "The model can’t change while a transcription runs",
+    "tooltipDictation": "Dictation: {{shortcut}}",
+    "backgroundTitle": "Tishe keeps working in the background",
+    "backgroundBody": "The transcription goes on. You’ll get a notification when it’s ready."
   },
   "sidebar": {
     "general": "General",
-    "models": "Models",
+    "models": "Recognition",
     "advanced": "Advanced",
     "postProcessing": "Post Process",
     "history": "History",
     "debug": "Debug",
-    "about": "About"
+    "about": "About",
+    "label": "Sections",
+    "transcription": "Transcription",
+    "dictation": "Dictation",
+    "meetings": "Meetings",
+    "llm": "AI editing",
+    "app": "App",
+    "soon": "soon",
+    "state": {
+      "running": "in progress",
+      "new": "ready, not viewed",
+      "downloading": "downloading"
+    },
+    "next": "What's next"
   },
   "onboarding": {
     "subtitle": "To get started, choose a transcription model",
@@ -100,24 +117,91 @@
       "selectModel": "Failed to select model"
     },
     "permissions": {
-      "title": "Permissions Required",
-      "description": "Handy needs a couple of permissions to work properly.",
+      "title": "Permissions required",
+      "description": "Tishe needs a couple of permissions to work properly.",
       "microphone": {
-        "title": "Microphone Access",
+        "title": "Microphone access",
         "description": "Required to hear your voice for transcription."
       },
       "accessibility": {
-        "title": "Accessibility Access",
+        "title": "Accessibility access",
         "description": "Required to type transcribed text into your applications."
       },
-      "grant": "Grant Permission",
+      "grant": "Grant permission",
       "granted": "Granted",
       "waiting": "Waiting...",
       "allGranted": "All set!",
       "errors": {
         "checkFailed": "Failed to check permissions. Please try again.",
         "requestFailed": "Failed to request permission. Please try again."
-      }
+      },
+      "skip": "Continue without the microphone",
+      "skipHint": "The microphone is needed only for dictation — transcribing files works without it. You can allow it later in Windows settings."
+    },
+    "step": "Step {{n}} of {{total}}",
+    "language": {
+      "title": "What language are your recordings in?",
+      "description": "We’ll download a speech recognition model for this language. It runs on this computer.",
+      "ru": {
+        "title": "Russian",
+        "limit": "Russian only: does not recognize English speech"
+      },
+      "en": {
+        "title": "English",
+        "limit": "English only"
+      },
+      "eu": {
+        "title": "Another European language",
+        "limit": "25 European languages, recognizes the language itself"
+      },
+      "other": {
+        "title": "Another language",
+        "limit": "30 languages: Chinese, Japanese, Korean, Arabic, Turkish, Hindi and others",
+        "limitWhisper": "many languages, slower on the processor"
+      },
+      "onDisk": "already on this computer",
+      "shared": "The model will be used both for dictation and for transcribing files. You can change it later in $t(sidebar.models).",
+      "otherModel": "Choose another model",
+      "hideCatalog": "Hide the list of models",
+      "download": "Download {{size}}",
+      "use": "Use {{name}}",
+      "downloadNamed": "Download {{name}} · {{size}}",
+      "once": "Downloads once, then works offline"
+    },
+    "download": {
+      "title": "Downloading {{name}}",
+      "description": "You can do other things meanwhile: closing the window does not stop the download.",
+      "starting": "Connecting…",
+      "amount": "{{done}} of {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Preparing the model…",
+      "cancel": "Cancel",
+      "failed": "The model was not downloaded",
+      "failedTitle": "Couldn’t download the model",
+      "failedHint": "No connection to the server. Check the internet and press Retry.",
+      "retry": "Retry",
+      "continue": "Open Tishe now"
+    },
+    "welcome": {
+      "title": "Welcome to Tishe",
+      "lead": "Tishe turns speech into text right on your computer — no internet, no account.",
+      "files": "Transcribe recordings — meetings, lectures, interviews — into a Word document",
+      "dictation": "Dictate in any app: hold a key, speak, and the text appears",
+      "private": "Your recordings and texts never leave the computer",
+      "stepsLabel": "Setup steps",
+      "steps": {
+        "permissions": "Permissions",
+        "language": "Language of recordings",
+        "download": "Model download"
+      },
+      "credit": "Viktor Pereverzev · based on Handy"
+    },
+    "tips": {
+      "title": "While it downloads — how it works",
+      "dictationBefore": "Dictation: in any app, hold",
+      "dictationAfter": "and speak. Release it — the text appears at the cursor.",
+      "files": "Transcription: drop an audio or video file into the Tishe window and get a Word document.",
+      "editing": "AI editing fixes mistakes and punctuation — turn it on in the transcription recipe."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "General",
       "shortcut": {
-        "title": "Handy Shortcuts",
+        "title": "Tishe shortcuts",
         "description": "Configure keyboard shortcuts to trigger speech-to-text recording",
         "loading": "Loading shortcuts...",
         "none": "No shortcuts configured",
         "notFound": "Shortcut not found",
-        "pressKeys": "Press keys...",
+        "pressKeys": "Press a combination… (Esc cancels)",
         "bindings": {
           "transcribe": {
-            "name": "Transcribe Shortcut",
-            "description": "The keyboard shortcut to record and transcribe your voice."
+            "name": "Dictation",
+            "description": "Hold and speak — the text is pasted into the active window"
           },
           "cancel": {
-            "name": "Cancel Shortcut",
-            "description": "The keyboard shortcut to cancel the current recording."
+            "name": "Cancel",
+            "description": "Stops the recording in progress"
           },
           "transcribe_with_post_process": {
-            "name": "Post-Processing Hotkey",
-            "description": "Optional: A dedicated hotkey that always applies AI post-processing to your transcription."
+            "name": "Dictation with editing key",
+            "description": "The text is pasted after neural network editing"
           }
         },
         "errors": {
           "restore": "Failed to restore original shortcut",
           "set": "Failed to set shortcut: {{error}}",
-          "reset": "Failed to reset shortcut to original value"
+          "reset": "Failed to reset shortcut to original value",
+          "taken": "Another program already holds this key. Choose another one.",
+          "duplicate": "This key is already used for another action here."
         }
       },
       "language": {
-        "title": "Language",
-        "description": "Select the language for speech recognition. Auto will automatically determine the language, while selecting a specific language can improve accuracy for that language.",
+        "title": "Recognition language",
+        "description": "“Auto” detects the language itself; choosing it is more reliable",
         "searchPlaceholder": "Search languages...",
         "noResults": "No languages found",
         "auto": "Auto"
       },
       "shortcutActivation": {
-        "title": "Shortcut Behavior",
-        "description": "Choose how the transcribe shortcut starts and stops recording.",
+        "title": "Key behavior",
+        "description": "How the key starts and stops recording",
         "options": {
           "holdOrToggle": "Auto",
           "pushToTalk": "Hold",
@@ -212,50 +298,117 @@
     "models": {
       "title": "Transcription Models",
       "description": "Select a transcription model or download additional models. Different models offer varying levels of accuracy and speed.",
-      "searchPlaceholder": "Search models by name…",
+      "searchPlaceholder": "Search by name",
       "yourModels": "Downloaded Models",
       "availableModels": "Available to Download",
       "deleteConfirm": "Are you sure you want to delete {{modelName}}? You will need to download it again to use it.",
       "deleteActiveConfirm": "{{modelName}} is your active model. Deleting it will stop transcriptions until you select a new model. Are you sure?",
-      "deleteTitle": "Delete Model",
+      "deleteTitle": "Delete model",
       "filters": {
-        "allLanguages": "All Languages",
+        "allLanguages": "All languages",
         "streaming": "Filter models that support live streaming transcription",
         "translation": "Filter models that support translation to English"
       },
       "rescan": {
         "label": "Rescan",
-        "tooltip": "Rescan for models added to the models folder or Hugging Face cache outside Handy"
+        "tooltip": "Find models added to the folder by hand"
       },
-      "noModelsMatch": "No models match this filter."
+      "noModelsMatch": "No models match this filter.",
+      "params": {
+        "button": "Parameters",
+        "open": "Model parameters",
+        "title": "Parameters: {{name}}",
+        "savedAtOnce": "Changes are saved at once. Fields show the values in use; a changed value has a reset button.",
+        "resetAll": "Reset to defaults",
+        "done": "Done",
+        "resetField": "Back to default",
+        "defaultRange": "Default {{value}}; allowed {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Built-in instruction. Edit the text to use your own; clear it to return to the built-in one.",
+          "own": "Your instruction. The reset button returns the built-in one."
+        },
+        "asr": {
+          "segment": {
+            "label": "Segment length for files, seconds",
+            "description": "Files are recognized in pieces cut at pauses, at most this long. The shortest piece shrinks with it (12 s at 25 s). Measured: 12–25 s keep punctuation better than 60–120 s."
+          },
+          "device": {
+            "label": "Device",
+            "description": "Processor only frees the graphics chip, but is usually slower. Applies to dictation too; takes effect at the next recognition.",
+            "general": "As in the acceleration setting",
+            "cpu": "Processor only",
+            "notHere": "This model's device follows the general acceleration setting."
+          }
+        },
+        "llm": {
+          "promptNote": "Instructions for Russian and English text. Other languages get the built-in English instruction with the language name. A custom instruction on the File tab replaces these for every language.",
+          "promptRu": "Instruction for Russian text",
+          "promptEn": "Instruction for English text",
+          "temperature": {
+            "label": "Temperature",
+            "description": "Lower is more careful: at 0.8 the model invented words, 0.2 is the measured choice for editing."
+          },
+          "chunk": {
+            "label": "Chunk size, characters",
+            "description": "How much text the model edits at once. Small models stay more faithful on short chunks."
+          },
+          "context": {
+            "label": "Context, tokens",
+            "description": "Room for the instruction, the chunk and the answer. More takes more memory."
+          },
+          "answer": {
+            "label": "Answer limit, tokens",
+            "description": "Stops a model that starts repeating itself. A 3000-character chunk is about 1100 tokens."
+          },
+          "threads": {
+            "label": "Processor threads for the answer",
+            "description": "Reading the text always uses every hardware thread.",
+            "auto": "Auto — one per core"
+          },
+          "restartNote": "Temperature, context, answer limit and threads apply when the model next starts: a running one restarts before the next job.",
+          "invalid": "Not saved: {{detail}}",
+          "contextTooSmall": "Not saved: the context must hold the chunk and the answer — at least {{min}} tokens with the current chunk size and answer limit."
+        }
+      }
     },
     "sound": {
       "title": "Sound",
       "microphone": {
         "title": "Microphone",
-        "description": "Select your preferred microphone device",
+        "description": "Where to record your voice from",
         "placeholder": "Select microphone...",
         "loading": "Loading..."
       },
       "channel": {
-        "title": "Input Channel",
-        "description": "Select which input channel to record from. Use this if your audio interface has multiple inputs.",
+        "title": "Input channel",
+        "description": "For sound cards with several inputs",
         "average": "Average all channels",
         "channel": "Channel {{n}}"
       },
       "audioFeedback": {
-        "label": "Audio Feedback",
-        "description": "Play sound when recording starts and stops"
+        "label": "Sound feedback",
+        "description": "A sound at the start and end of recording"
       },
       "outputDevice": {
-        "title": "Output Device",
-        "description": "Select your preferred audio output device for feedback sounds",
+        "title": "Output device",
+        "description": "Where feedback sounds play",
         "placeholder": "Select output device...",
         "loading": "Loading..."
       },
       "volume": {
         "title": "Volume",
-        "description": "Adjust the volume of audio feedback sounds"
+        "description": "Adjust the volume of audio feedback sounds",
+        "levels": {
+          "quiet": "Quiet",
+          "medium": "Medium",
+          "loud": "Loud"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Your own",
+        "preview": "Play start and stop sounds"
       }
     },
     "advanced": {
@@ -267,11 +420,11 @@
         "experimental": "Experimental"
       },
       "experimentalToggle": {
-        "label": "Experimental Features",
-        "description": "Enable experimental features that are still in development."
+        "label": "Show experimental features",
+        "description": "Features in development; may be unstable"
       },
       "lazyStreamClose": {
-        "label": "Keep Mic Open Between Transcriptions",
+        "label": "Keep the microphone open between transcriptions",
         "description": "Keeps the microphone stream open for 30 seconds after recording stops, reducing latency for back-to-back transcriptions. May degrade Bluetooth audio quality while active."
       },
       "acceleration": {
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Start Hidden",
-        "description": "Launch to system tray without opening the window."
+        "label": "Hide the window at launch",
+        "description": "The program starts in the tray"
       },
       "autostart": {
-        "label": "Launch on Startup",
-        "description": "Automatically start Handy when you log in to your computer."
+        "label": "Start with Windows",
+        "description": "Dictation is ready right after you sign in"
       },
       "showTrayIcon": {
-        "label": "Show Tray Icon",
-        "description": "Display the Handy icon in the system tray."
+        "label": "Tray icon",
+        "description": "Without the icon, a closed window comes back only by launching the program again"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Choose the recording overlay: None hides it, Minimal shows a compact pill, Live shows transcription in real time as you speak (streaming-capable models only — look for the Streaming badge in the model picker). On Linux 'None' is recommended.",
+          "title": "Indicator style",
+          "description": "What to show near the cursor while dictating",
           "options": {
             "none": "None",
             "minimal": "Minimal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Without the indicator, failures are not shown: a text that wasn’t pasted is in History"
         },
         "position": {
-          "title": "Overlay Position",
-          "description": "Where the overlay appears on screen during recording and transcription.",
+          "title": "Indicator position",
+          "description": "Top or bottom of the screen",
           "options": {
             "bottom": "Bottom",
             "top": "Top"
@@ -319,36 +473,36 @@
         }
       },
       "pasteMethod": {
-        "title": "Paste Method",
-        "description": "Choose how text is inserted. Direct: simulates typing via system input. None: skips paste, only updates history/clipboard.",
+        "title": "Paste method",
+        "description": "How the text gets into the active window",
         "options": {
           "clipboard": "Clipboard ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Clipboard (Ctrl+Shift+V)",
           "clipboardShiftInsert": "Clipboard (Shift+Insert)",
           "direct": "Direct",
           "none": "None",
-          "externalScript": "External Script"
+          "externalScript": "External script"
         },
         "externalScriptPlaceholder": "/path/to/your/script.sh"
       },
       "typingTool": {
-        "title": "Typing Tool",
+        "title": "Typing tool",
         "description": "Choose which Linux typing tool to use for Direct paste method. Auto will automatically detect and use the best available tool for your system.",
         "options": {
           "auto": "Auto (Recommended)"
         }
       },
       "clipboardHandling": {
-        "title": "Clipboard Handling",
-        "description": "Don't Modify Clipboard preserves your current clipboard contents after transcription. Copy to Clipboard leaves the transcription result in your clipboard after pasting.",
+        "title": "Clipboard",
+        "description": "Keep what was in the clipboard, or leave the dictated text there",
         "options": {
           "dontModify": "Don't Modify Clipboard",
           "copyToClipboard": "Copy to Clipboard"
         }
       },
       "autoSubmit": {
-        "title": "Auto Submit",
-        "description": "Automatically send the selected key combination after text insertion. Cmd+Enter applies on macOS, while Windows/Linux use Super+Enter.",
+        "title": "Send after pasting",
+        "description": "Press the chosen key right after pasting, e.g. Enter in a chat",
         "options": {
           "off": "Off",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Translate to English",
-        "description": "Automatically translate speech from other languages to English during transcription."
+        "description": "Speech in any language becomes English text"
       },
       "modelUnload": {
-        "title": "Unload Model",
-        "description": "Automatically free GPU/CPU memory when the model hasn't been used for the specified time",
+        "title": "Unload the model from memory after…",
+        "description": "Frees memory when the model is not needed for a while",
         "options": {
           "never": "Never",
           "immediately": "Immediately",
@@ -376,19 +530,20 @@
         }
       },
       "customWords": {
-        "title": "Custom Words",
-        "description": "Help supported models recognize names and specialized terms. Fuzzy correction is currently limited to words using A–Z and numbers.",
+        "title": "Your words",
+        "description": "A hint for Whisper models; other models only get corrections, and only for words in A–Z",
         "placeholder": "Add a word",
         "add": "Add",
         "remove": "Remove {{word}}",
-        "duplicate": "\"{{word}}\" already exists"
+        "duplicate": "\"{{word}}\" already exists",
+        "removed": "«{{word}}» removed"
       },
       "voiceActivityDetection": {
-        "title": "Voice Activity Detection",
-        "description": "Filter silence from recordings. Streaming-capable models use a longer VAD tail; disabling VAD records raw audio."
+        "title": "Drop silence",
+        "description": "Only speech goes to recognition"
       },
       "vadBackend": {
-        "title": "Voice Activity Backend",
+        "title": "Voice activity backend",
         "description": "Choose the detector used to filter silence. Earshot is experimental; switch back to Silero if speech is clipped or noise is retained.",
         "options": {
           "silero": "Silero",
@@ -396,14 +551,14 @@
         }
       },
       "fillerWordRemoval": {
-        "title": "Remove Filler Words",
-        "description": "Removes common hesitation words from transcriptions. Turn off to keep them."
+        "title": "Remove filler words",
+        "description": "“uh”, “um”, “hmm” in the pasted text"
       },
       "chineseScript": {
-        "title": "Chinese Script",
-        "description": "Writes Mandarin and Cantonese transcriptions in Simplified or Traditional characters. Other languages are left unchanged.",
+        "title": "Chinese script",
+        "description": "Simplified or Traditional characters",
         "options": {
-          "asTranscribed": "As Transcribed",
+          "asTranscribed": "As transcribed",
           "simplified": "Simplified",
           "traditional": "Traditional"
         }
@@ -434,20 +589,21 @@
           "title": "Base URL",
           "description": "API base URL for the selected provider. Only the custom provider can be edited.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "The address is set by the chosen provider",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API Key",
-          "description": "API key for the selected provider.",
+          "description": "Stored only on this computer",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Provide the model identifier expected by your custom endpoint.",
-          "descriptionDefault": "Choose a model exposed by the selected provider.",
+          "descriptionCustom": "The model name on your server",
+          "descriptionDefault": "The button on the right refreshes the list",
           "placeholderWithOptions": "Search or select a model",
           "placeholderNoOptions": "Type a model name",
-          "refreshModels": "Refresh models"
+          "refreshModels": "Refresh the model list"
         }
       },
       "prompts": {
@@ -456,50 +612,121 @@
           "title": "Selected Prompt",
           "description": "Select a template for refining transcriptions or create a new one. Use ${output} inside the prompt text to reference the captured transcript."
         },
-        "noPrompts": "No prompts available",
-        "selectPrompt": "Select a prompt",
-        "createNew": "Create New Prompt",
-        "promptLabel": "Prompt Label",
+        "noPrompts": "No instructions",
+        "selectPrompt": "Choose an instruction",
+        "createNew": "Create new prompt",
+        "promptLabel": "Name",
         "promptLabelPlaceholder": "Enter prompt name",
-        "promptInstructions": "Prompt Instructions",
+        "promptInstructions": "Instruction text",
         "promptInstructionsPlaceholder": "Write the instructions to run after transcription. Example: Improve grammar and clarity for the following text: ${output}",
         "promptTip": "Tip: Use <code>${output}</code> to insert the transcribed text in your prompt.",
         "updatePrompt": "Update Prompt",
-        "deletePrompt": "Delete Prompt",
-        "createPrompt": "Create Prompt",
+        "deletePrompt": "Delete",
+        "createPrompt": "Create",
         "cancel": "Cancel",
-        "selectToEdit": "Select a prompt above to view and edit its details.",
-        "createFirst": "Click 'Create New Prompt' above to create your first post-processing prompt."
+        "selectToEdit": "Choose an instruction to edit it.",
+        "createFirst": "Click “Create” to add the first instruction."
+      },
+      "local": {
+        "intro": "The model runs right on this computer: no internet, no keys, your text never leaves the machine. Download one model if you want. It starts by itself when needed and is unloaded from memory when idle. It runs on the CPU, so it is slower than cloud services. All models fit a laptop with 16 GB of RAM.",
+        "runtimeMissing": "The built-in AI engine was not found. Please reinstall Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Balanced",
+            "model": "Qwen3.5 4B",
+            "description": "The plain Qwen 4B build. Careful with punctuation, but fixes few recognition errors in real conversations (our tests, 2026-10-06). The speedup build is more accurate and faster."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Google's model, faithful to the original. Edits like the Gemma in Google's build with a speedup, but about 1.25 times slower."
+          },
+          "gigachat31": {
+            "title": "Russian-native",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Trained on Russian from the start. Only 1.8B of its 10B parameters are active per token, so it is faster than its size suggests. Needs more memory."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen for Russian",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) with a Russian vocabulary and further training on Russian text. On the bench it fixes fewer errors than Gemma E2B and is half as fast (about 27 min per hour of recording)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIA's small model, officially English only. On the bench it left almost every line unchanged in both Russian and English, and is slower than Gemma (about 35 min per hour of recording)."
+          },
+          "qwen35_9b": {
+            "title": "Maximum",
+            "model": "Qwen3.5 9B",
+            "description": "The smartest local model: best at context and hard corrections. The slowest."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Balanced",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B in a newer build with a built-in speedup. More accurate and about 1.2 times faster than the plain Qwen 4B, but fixes half as many errors as Gemma in our tests."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma light",
+            "model": "Gemma 4 E2B · Google build",
+            "description": "The smaller Gemma in Google's official build, plus a speedup (+98 MB). Twice as fast as Gemma E4B (about 14 min per hour of recording) with about 2/3 of its fixes."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google build",
+            "description": "The best quality in our tests (2026-10-06). Google's official build plus a speedup (+99 MB): edits like the plain Gemma E4B, about 1.25 times faster. About 26 min per hour of recording."
+          }
+        },
+        "speedupBadge": "speedup",
+        "speedupHint": "A small helper model guesses several words ahead and the main model checks them. On a CPU this is about 1.2–1.3 times faster.",
+        "untested": "untested",
+        "delete": "Delete model",
+        "state": {
+          "stopped": "Not loaded in memory",
+          "loading": "Loading into memory…",
+          "ready": "Loaded in memory"
+        },
+        "unloadNow": "Unload now",
+        "unload": {
+          "title": "Unload from memory",
+          "description": "How long the model may sit idle before it is unloaded, freeing about 2–3 GB of memory.",
+          "immediately": "Right after processing",
+          "min2": "After 2 minutes",
+          "min5": "After 5 minutes",
+          "min15": "After 15 minutes",
+          "never": "Never"
+        },
+        "recommended": "Recommended"
       }
     },
     "history": {
       "title": "History",
-      "openFolder": "Open Recordings Folder",
+      "openFolder": "Open recordings folder",
       "loading": "Loading history...",
       "empty": "No transcriptions yet. Start recording to build your history!",
-      "copyToClipboard": "Copy transcription to clipboard",
+      "copyToClipboard": "Copy text",
       "copyError": "Failed to copy transcription to clipboard.",
       "save": "Save transcription",
       "unsave": "Remove from saved",
       "delete": "Delete entry",
       "deleteError": "Failed to delete entry. Please try again.",
-      "retranscribe": "Re-transcribe",
+      "retranscribe": "Recognize again",
       "retranscribeError": "Failed to re-transcribe. Please try again.",
-      "transcribing": "Transcribing...",
+      "transcribing": "Recognizing…",
       "transcriptionFailed": "Transcription failed. You can re-transcribe using the retry icon."
     },
     "debug": {
       "title": "Debug",
       "logDirectory": {
-        "title": "Log Directory",
-        "description": "Location where log files are stored"
+        "title": "Logs folder",
+        "description": "Attach the log to a bug report"
       },
       "logLevel": {
-        "title": "Log Level",
+        "title": "Log level",
         "description": "Set the verbosity of logging"
       },
       "liveLogs": {
-        "title": "Live Logs",
+        "title": "Live logs",
         "description": "Stream application logs in real time to diagnose issues without opening the log file. Only logs emitted while this panel is open are shown; respects the Log Level setting above.",
         "live": "Live",
         "paused": "Paused",
@@ -510,9 +737,9 @@
         "empty": "Waiting for logs… Entries appear here as the app emits them."
       },
       "updateChecks": {
-        "label": "Check for Updates",
-        "description": "Automatically check for new versions of Handy",
-        "lockedDescription": "Disabled by system configuration (HANDY_DISABLE_UPDATER)"
+        "label": "Check for updates",
+        "description": "Once per start, ask GitHub whether a new version of Tishe is out. No recordings or texts are sent",
+        "lockedDescription": "Update checks are turned off in this build"
       },
       "whatsNewPreview": {
         "title": "Preview What's New",
@@ -522,28 +749,28 @@
         "error": "Failed to preview release notes"
       },
       "onboardingPreview": {
-        "title": "Preview Onboarding",
+        "title": "Preview onboarding",
         "description": "Preview onboarding screens without changing permissions, models, or completion state",
         "permissionsButton": "Permissions",
-        "modelsButton": "Model Selection",
-        "exitButton": "Exit Preview"
+        "modelsButton": "Model selection",
+        "exitButton": "Exit preview"
       },
       "soundTheme": {
-        "label": "Sound Theme",
+        "label": "Sound theme",
         "description": "Choose a sound theme for recording start and stop feedback"
       },
       "wordCorrectionThreshold": {
-        "title": "Word Correction Threshold",
-        "description": "Sensitivity for custom word corrections"
+        "title": "Word correction threshold",
+        "description": "How similar a word must be to be replaced with one of yours"
       },
       "historyLimit": {
-        "title": "History Limit",
-        "description": "Maximum number of history entries to keep",
+        "title": "How many dictations to keep",
+        "description": "Kept dictations don't count",
         "entries": "entries"
       },
       "recordingRetention": {
-        "title": "Auto-Delete Recordings",
-        "description": "Automatically delete old recordings to save space",
+        "title": "Delete old dictations",
+        "description": "The audio is deleted together with the text",
         "never": "Never",
         "preserveLimit": "Keep latest {{count}}",
         "days3": "After 3 days",
@@ -552,27 +779,27 @@
         "placeholder": "Select retention period..."
       },
       "alwaysOnMicrophone": {
-        "label": "Always-On Microphone",
-        "description": "Keep microphone active for faster response"
+        "label": "Keep the microphone on",
+        "description": "Recording starts faster, but the microphone stays busy all the time"
       },
       "clamshellMicrophone": {
-        "title": "Clamshell Microphone",
-        "description": "Microphone to use when laptop lid is closed"
+        "title": "Microphone with the lid closed",
+        "description": "Which microphone to use when the laptop is closed"
       },
       "postProcessingToggle": {
         "label": "Post Processing",
         "description": "Enable AI-powered text refinement after transcription"
       },
       "muteWhileRecording": {
-        "label": "Mute While Recording",
-        "description": "Mute system audio during recording"
+        "label": "Mute the computer while recording",
+        "description": "Music and video won't get into the recording"
       },
       "appendTrailingSpace": {
-        "label": "Append Trailing Space",
-        "description": "Add a space after pasted transcription"
+        "label": "Add a space at the end",
+        "description": "The next phrase won't stick to the previous one"
       },
       "keyboardImplementation": {
-        "title": "Keyboard Implementation",
+        "title": "Keyboard implementation",
         "description": "Choose the keyboard shortcut backend.",
         "bindingsReset": "Keyboard shortcuts were incompatible and reset to defaults"
       },
@@ -582,28 +809,28 @@
         "settings": "Settings:"
       },
       "pasteDelay": {
-        "title": "Paste Delay (Before)",
-        "description": "Delay (in milliseconds) after copying text, before sending the paste keystroke. Increase if nothing gets pasted."
+        "title": "Delay before pasting",
+        "description": "Increase if nothing gets pasted"
       },
       "pasteDelayAfter": {
-        "title": "Paste Delay (After)",
-        "description": "Delay (in milliseconds) after the paste keystroke, before restoring your previous clipboard. Increase if your old clipboard content is being pasted instead of the transcription."
+        "title": "Delay after pasting",
+        "description": "Increase if old clipboard text gets pasted"
       },
       "holdThreshold": {
-        "title": "Hold Threshold",
-        "description": "Auto mode only: how long (in milliseconds) the shortcut must be held before it counts as a hold instead of a tap. Lower if short holds keep leaving recording on; raise if deliberate taps get treated as holds."
+        "title": "Hold threshold",
+        "description": "A shorter press toggles, a longer one holds"
       },
       "reliablePaste": {
         "title": "Reliable Paste (Beta)",
-        "description": "Restore the clipboard only after the target app actually reads the transcription, instead of after a fixed delay. Intended to fix old clipboard content being pasted under system load. Requires a clipboard paste method; macOS and Windows only."
+        "description": "Wait until the program reads the text instead of a fixed time"
       },
       "recordingBuffer": {
-        "title": "Extra Recording Buffer",
-        "description": "Extra time (in milliseconds) to keep recording after you release the key, to capture trailing audio. 0 = no extra buffer."
+        "title": "Keep recording after release",
+        "description": "How much longer to record after the key is released"
       },
       "keyboardDiagnostic": {
-        "title": "Keyboard Diagnostic",
-        "description": "Checks whether keyboard events reach Handy. Only event counts are recorded — never which keys you press.",
+        "title": "Keyboard diagnostic",
+        "description": "Checks whether keyboard events reach Tishe. Only event counts are recorded — never which keys you press.",
         "run": "Run 10s diagnostic",
         "running": "Listening… press your shortcut a few times (e.g. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -617,7 +844,7 @@
         "mouse": "Mouse",
         "verdictBlocked": "Secure Input is blocking key events — keyed shortcuts cannot work until it is resolved.",
         "verdictSuspicious": "Modifier events arrived but no key events — something is suppressing keys even though Secure Input reports disabled. Please report this on GitHub.",
-        "verdictOk": "Key events are reaching Handy normally.",
+        "verdictOk": "Key events are reaching Tishe normally.",
         "verdictNoEvents": "No events captured — did you press any keys during the test?",
         "failed": "Diagnostic failed: {{error}}"
       }
@@ -626,24 +853,24 @@
       "title": "About",
       "version": {
         "title": "Version",
-        "description": "Current version of Handy"
+        "description": "Current version of Tishe"
       },
       "whatsNewUpdates": {
-        "label": "Show What's New",
-        "description": "Show release notes after Handy updates"
+        "label": "Show “What's new” after an update",
+        "description": "A short list of changes on the first launch of a new version"
       },
       "appDataDirectory": {
-        "title": "App Data Directory",
-        "description": "Location where Handy stores its data"
+        "title": "Data folder",
+        "description": "Settings, models and history"
       },
       "sourceCode": {
-        "title": "Source Code",
+        "title": "Source code",
         "description": "View source code and contribute",
         "button": "View on GitHub"
       },
       "supportDevelopment": {
-        "title": "Support Development",
-        "description": "Help us continue building Handy",
+        "title": "Support development",
+        "description": "Tishe is built on their program",
         "button": "Donate"
       },
       "acknowledgments": {
@@ -651,7 +878,7 @@
         "ggml": {
           "title": "ggml",
           "description": "High-performance tensor library for on-device machine learning inference",
-          "details": "Handy's local speech-to-text is built on transcribe.cpp and ggml. Thanks to the amazing work by Georgi Gerganov and contributors."
+          "details": "Fast speech recognition on the computer. Thanks to Georgi Gerganov and the project's contributors."
         }
       }
     }
@@ -660,7 +887,7 @@
     "checkingUpdates": "Checking for updates...",
     "updateAvailableShort": "Update available",
     "upToDate": "Up to date",
-    "updateCheckingDisabled": "Update Checking Disabled",
+    "updateCheckingDisabled": "Update checking disabled",
     "downloading": "Downloading... {{progress}}%",
     "installing": "Installing...",
     "preparing": "Preparing...",
@@ -672,7 +899,7 @@
     "portableUpdateBrowseButton": "Open GitHub Releases"
   },
   "whatsNew": {
-    "title": "New in Handy v{{version}}"
+    "title": "What's new in Tishe"
   },
   "common": {
     "loading": "Loading...",
@@ -681,39 +908,43 @@
     "open": "Open",
     "copy": "Copy",
     "clear": "Clear",
-    "noOptionsFound": "No options found"
+    "noOptionsFound": "No options found",
+    "cancel": "Cancel",
+    "choose": "Choose…",
+    "reset": "Reset to default",
+    "search": "Search"
   },
   "accessibility": {
-    "permissionsDescription": "Handy needs accessibility permissions to type transcribed text.",
-    "openSettings": "Open System Settings"
+    "permissionsDescription": "To paste text, the program needs the Accessibility permission.",
+    "openSettings": "Open system settings"
   },
   "errors": {
     "loadDirectory": "Error loading directory: {{error}}",
-    "micPermissionDeniedTitle": "Microphone Access Denied",
+    "micPermissionDeniedTitle": "Microphone access denied",
     "micPermissionDenied": {
       "generic": "Microphone access was denied by the operating system. Please grant microphone permission in your system settings.",
       "windows": "Enable microphone access in Settings → Privacy & security → Microphone (including desktop app access).",
       "macos": "Grant microphone access in System Settings → Privacy & Security → Microphone.",
       "linux": "Grant microphone access in your system's sound or privacy settings."
     },
-    "noInputDeviceTitle": "No Microphone Found",
+    "noInputDeviceTitle": "No microphone found",
     "noInputDevice": "No audio input device was detected. Please connect a microphone or headset and try again.",
     "recordingFailed": "Failed to start recording: {{error}}",
     "modelLoadFailed": "Failed to load model: {{model}}",
     "modelLoadFailedUnknown": "unknown model",
     "pasteFailedTitle": "Failed to Paste Text",
     "pasteFailed": "Text could not be pasted into the active application.",
-    "transcriptionFailedTitle": "Transcription Failed"
+    "transcriptionFailedTitle": "Couldn't recognize"
   },
   "appLanguage": {
-    "title": "Application Language",
-    "description": "Change the language of the Handy interface"
+    "title": "Interface language",
+    "description": "The language of the program's labels"
   },
   "theme": {
-    "title": "Application Theme",
-    "description": "Choose whether Handy follows your system theme or stays light or dark",
+    "title": "Theme",
+    "description": "Choose whether Tishe follows your system theme or stays light or dark",
     "options": {
-      "system": "System",
+      "system": "As in the system",
       "light": "Light",
       "dark": "Dark"
     }
@@ -721,6 +952,14 @@
   "overlay": {
     "transcribing": "Transcribing...",
     "processing": "Processing...",
+    "waiting": "The model is busy with a file — dictation will be late",
+    "message": {
+      "paste_failed": "Couldn’t paste. The text is saved in History",
+      "editing_skipped": "Pasted without editing: the neural network isn’t ready",
+      "no_microphone": "No microphone found",
+      "microphone_denied": "No access to the microphone",
+      "help": "What to do"
+    },
     "loadingModel": "Loading model..."
   },
   "secureInput": {
@@ -733,5 +972,737 @@
     "learnMore": "How to fix",
     "recorderBlocked": "Can't record shortcuts right now — macOS Secure Input is blocking key events. Resolve the Secure Input warning first.",
     "dismiss": "Dismiss"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg was not found. It is needed to read audio and video files and comes with the Tishe installer: reinstall Tishe. Or install it with the command: winget install Gyan.FFmpeg — then restart Tishe.",
+    "input": {
+      "choose": "Add files…",
+      "filterName": "Audio and video"
+    },
+    "maxPart": {
+      "title": "Maximum part length",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Provider",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Custom (OpenAI-compatible)"
+      },
+      "baseUrl": "API URL",
+      "baseUrlDescription": "Base URL ending in /v1.",
+      "apiKey": "API key",
+      "apiKeyDescription": "Stored locally on this computer.",
+      "model": "Model",
+      "modelDescription": "gpt-4o-transcribe models accept at most ~23 min per request; parts are shortened automatically.",
+      "language": "Language",
+      "languageDescription": "Language code such as en or de. Leave empty for auto-detection.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "People in the recording",
+      "auto": "Detect automatically",
+      "model": "Speaker model",
+      "modelDescription": "Downloaded once; tells voices apart. Both are small and fast.",
+      "recommended": "Recommended",
+      "cloudUntimed": "The model {{model}} returns no timestamps, so speakers cannot be marked. Choose whisper-1, a whisper model at Groq, or local recognition.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Trained on thousands of voices; tells voices apart reliably on real recordings. Good default choice."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "An alternative model: try it if the first one mixes up voices on your recordings."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Also include the raw transcript",
+      "includeRawDescription": "Append the unedited recognizer output at the end of the document.",
+      "promptPlaceholder": "Built-in instruction for the recording's language (Russian or English)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Timestamps",
+      "location": "Save to",
+      "choose": "Choose folder…",
+      "nextToSource": "Next to the source file",
+      "notes": "Processing notes",
+      "removeFillers": "Remove hesitations",
+      "saveDebug": "Save intermediate files",
+      "saveDebugDescription": "Creates a \"<name>.debug\" folder next to the document with the text after every step: recognition, cleanup, each request to the language model and its answer, final. For tracing errors and for comparing models."
+    },
+    "actions": {
+      "start": "Transcribe",
+      "cancel": "Cancel"
+    },
+    "progress": {
+      "starting": "Starting…",
+      "elapsed": "Elapsed {{time}}",
+      "extracting": "Extracting audio…",
+      "extractingPart": "Extracting audio…",
+      "diarizing": "Detecting speakers…",
+      "diarizingPart": "Detecting speakers…",
+      "splitting": "Splitting into parts…",
+      "splittingPart": "Splitting into parts…",
+      "transcribing": "Transcribing…",
+      "transcribingPart": "Transcribing part {{part}} of {{total}}…",
+      "post_processing": "Cleaning up with LLM…",
+      "post_processingPart": "Cleaning up part {{part}} of {{total}} with LLM…",
+      "writing": "Writing the document…",
+      "writingPart": "Writing the document…"
+    },
+    "result": {
+      "open": "Open",
+      "reveal": "Show in folder"
+    },
+    "document": {
+      "title": "Transcript",
+      "sourceFile": "File",
+      "duration": "Duration",
+      "parts": "Parts",
+      "engine": "Recognition",
+      "llm": "LLM post-processing",
+      "created": "Created",
+      "part": "Part",
+      "rawTranscript": "Raw transcript",
+      "speaker": "Speaker",
+      "notes": "Processing notes",
+      "notesTotal": "Processing time",
+      "notesExtracting": "Audio extraction",
+      "notesDiarizing": "Speaker detection",
+      "notesTranscribing": "Recognition",
+      "notesLlm": "LLM processing",
+      "notesWarnings": "Warnings",
+      "notesNone": "none",
+      "notesLanguage": "Text language",
+      "llmLocal": "{{model}}, on this computer",
+      "warnings": {
+        "noTimestampsModel": "speakers were not marked: this speech model returns no timestamps; use a whisper model or local recognition",
+        "noTimestampsPart": "part {{part}}: the speech service returned no timestamps, so speakers could not be marked",
+        "llmEmpty": "part {{part}}, fragment {{fragment}}: the LLM returned an empty answer, raw text kept",
+        "llmError": "part {{part}}, fragment {{fragment}}: LLM error, raw text kept ({{error}})",
+        "numbersBack": "part {{part}}, fragment {{fragment}}: numbers put back in {{lines}} lines (the LLM wrote them as words or dropped them)",
+        "linesLost": "part {{part}}, fragment {{fragment}}: the LLM answer did not keep the numbered lines, raw text kept",
+        "linesKept": "part {{part}}, fragment {{fragment}}: {{kept}} of {{total}} lines kept their raw text ({{reasons}})",
+        "kept": {
+          "missing": "missing",
+          "duplicate": "duplicate",
+          "empty": "empty",
+          "tooLong": "too long",
+          "translated": "translated",
+          "tooShort": "too short",
+          "cutOff": "cut off"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Clear finished"
+    },
+    "events": {
+      "title": "Event script",
+      "choose": "Choose…",
+      "none": "Not set — events are not sent anywhere",
+      "filterName": "Programs and scripts",
+      "test": "Test",
+      "testOk": "The script received a test event",
+      "testFailed": "Failed: {{error}}",
+      "testMessage": "Tishe: test event",
+      "remaining": "~{{minutes}} min left",
+      "started": "Transcription started",
+      "finished": "Done",
+      "cancelled": "Cancelled",
+      "interval": {
+        "title": "Progress update interval",
+        "description": "At most once per this many seconds. A new stage or part, the start and the end are sent at once.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Change",
+    "choose": "Choose",
+    "open": "Open",
+    "hide": "Hide",
+    "save": "Save",
+    "saved": "Saved",
+    "copied": "Copied",
+    "undo": "Undo",
+    "download": "Download",
+    "downloadSize": "Download {{size}}",
+    "downloadingPercent": "Downloading · {{percent}} %",
+    "cancelDownload": "Cancel",
+    "deleteNamed": "Delete {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Use «{{value}}»",
+    "fold": {
+      "more": "More",
+      "changed_one": "changed: {{count}}",
+      "changed_other": "changed: {{count}}",
+      "changedA11y_one": "{{count}} setting changed",
+      "changedA11y_few": "{{count}} settings changed",
+      "changedA11y_many": "{{count}} settings changed",
+      "changedA11y_other": "{{count}} settings changed"
+    },
+    "number": {
+      "hint": "From {{min}} to {{max}}",
+      "hintDefault": "Default {{value}}; from {{min}} to {{max}}",
+      "notNumber": "Enter a number",
+      "range": "Enter a number from {{min}} to {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} h",
+      "hourMin": "{{h}} h {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "today {{time}}",
+      "yesterday": "yesterday {{time}}",
+      "todayTitle": "Today",
+      "yesterdayTitle": "Yesterday"
+    },
+    "player": {
+      "play": "Play",
+      "pause": "Pause",
+      "position": "Playback position"
+    },
+    "shortcut": {
+      "change": "Change key for «{{name}}»",
+      "reset": "Reset the key to default"
+    },
+    "echo": {
+      "recognition": "Recognition: {{model}}",
+      "language": "language: {{language}}",
+      "sharedWithDictation": "shared with dictation",
+      "sharedWithFiles": "shared with file transcription",
+      "noModel": "No speech recognition model"
+    },
+    "llm": {
+      "ready": "Ready · {{model}} on this computer",
+      "needed": "Needs the neural network · {{model}}",
+      "downloading": "Downloading the neural network · {{percent}} %",
+      "runtimeMissing": "The built-in neural network engine is missing",
+      "otherOptions": "Other options",
+      "noKey": "Needs a {{provider}} key",
+      "noUrl": "Needs the server address",
+      "noServerModel": "Needs a model name",
+      "localServer": "Your server on this computer · {{model}}",
+      "textToServer": "Text goes to {{address}}",
+      "textToService": "Text goes to {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Delete model {{name}}?",
+      "deleteModel": "Delete model",
+      "deleteModelBody": "{{size}} will be freed. To use the model again you will have to download it.",
+      "deleteActiveTitle": "Delete {{name}}? It is the current model",
+      "deleteActiveBody": "Dictation and transcription will stop working until you choose another model. {{size}} will be freed.",
+      "deleteLlmTitle": "Delete neural network {{name}}?",
+      "deleteLlm": "Delete neural network",
+      "deleteLlmBody": "{{size}} will be freed. Editing will not work until you download it again or choose another.",
+      "deleteSpeakerModelBody": "Splitting by speaker will not work until you download a voice model again."
+    },
+    "back": {
+      "transcription": "Back to Transcription",
+      "dictation": "Back to Dictation",
+      "meetings": "Back to Meetings",
+      "history": "Back to History",
+      "models": "Back to Recognition",
+      "llm": "Back to AI editing",
+      "app": "Back to App",
+      "about": "Back to About",
+      "debug": "Back to Debug",
+      "next": "Back to What's next"
+    },
+    "changed": "changed"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "loaded",
+      "loading": "loading…",
+      "error": "failed to load",
+      "unloaded": "not in memory",
+      "none": "No model",
+      "a11y": "Model {{model}}, {{state}}. Change model",
+      "menu": "Downloaded models",
+      "all": "All models…",
+      "locked": "Transcription is running — change after it ends"
+    },
+    "task": "Transcription: file {{current}} of {{total}} · {{percent}} %",
+    "downloading": "Downloading: {{name}} · {{percent}} %",
+    "downloadingMany": "Downloading: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transcription needs ffmpeg"
+    },
+    "drop": {
+      "title": "Drop a recording here",
+      "text": "Audio or video: mp3, m4a, wav, mp4, mkv and others. Each file becomes a separate document.",
+      "more": "Drop more recordings or",
+      "release": "Release to add",
+      "rejected": "{{names}} — not audio or video",
+      "oneText": "“{{name}}” will join the transcription queue",
+      "manyText_one": "{{count}} recording will join the transcription queue",
+      "manyText_other": "{{count}} recordings will join the transcription queue",
+      "anyText": "Audio and video files will join the transcription queue",
+      "noneTitle": "These files won’t work",
+      "noneText": "Only audio and video can be transcribed: mp3, m4a, wav, mp4, mkv and others.",
+      "otherNote_one": "{{count}} more file will be skipped: it’s not audio or video",
+      "otherNote_other": "{{count}} more files will be skipped: they’re not audio or video",
+      "alreadyOne": "“{{name}}” is already in the queue",
+      "alreadyMany": "These recordings are already in the queue"
+    },
+    "list": {
+      "label": "Recordings",
+      "waiting": "Waiting",
+      "cancelled": "Cancelled",
+      "remaining": "about {{time}} left",
+      "remove": "Remove",
+      "removeFile": "Remove {{name}}",
+      "removeFromList": "Remove from list",
+      "more": "More: {{name}}",
+      "recipeSpeakers": "speakers",
+      "recipeEditing": "editing",
+      "recipeCloud": "in the cloud",
+      "parts_one": "{{count}} part",
+      "parts_few": "{{count}} parts",
+      "parts_many": "{{count}} parts",
+      "parts_other": "{{count}} parts",
+      "notes_one": "{{count}} processing note",
+      "notes_few": "{{count}} processing notes",
+      "notes_many": "{{count}} processing notes",
+      "notes_other": "{{count}} processing notes",
+      "showAll": "Show all ({{count}})",
+      "showFewer": "Show fewer",
+      "removedOne": "Removed from the list",
+      "removedMany_one": "{{count}} row removed from the list",
+      "removedMany_few": "{{count}} rows removed from the list",
+      "removedMany_many": "{{count}} rows removed from the list",
+      "removedMany_other": "{{count}} rows removed from the list",
+      "chars_one": "{{n}} character",
+      "chars_other": "{{n}} characters",
+      "keptNote": "The last {{count}} results are kept. Documents on disk are never deleted.",
+      "missing": "Document not found: it was moved or deleted, or its drive is disconnected",
+      "openDocument": "Open document {{name}}"
+    },
+    "recipe": {
+      "title": "Recipe",
+      "locked": "Settings stay as they are while transcription runs. New files will use the same settings.",
+      "where": "Where to recognize",
+      "local": "On this computer",
+      "cloud": "In the cloud",
+      "audioToService": "Audio goes to {{provider}}",
+      "cloudEcho": "Recognition: {{model}} in {{provider}}",
+      "speakers": "Speakers",
+      "speakersDescription": "The document becomes a transcript: «Speaker 1: …», «Speaker 2: …»",
+      "speakersMissing": "Needs a voice model · {{size}}",
+      "speakersDownloading": "Downloading the voice model · {{percent}} %",
+      "speakersReady": "Voice model ready",
+      "countDescription": "If you know, the split is more accurate",
+      "editing": "AI editing",
+      "editingDescription": "Fixes recognition errors and punctuation. Noticeably longer: about 15–35 min per hour of recording",
+      "result": "Result",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "next to the recording"
+    },
+    "more": {
+      "recognition": "Recognition",
+      "maxPartDescription": "A long recording is cut at pauses into parts no longer than this",
+      "speakers": "Speakers",
+      "editing": "Editing",
+      "prompt": "Instruction for files",
+      "promptDescription": "Empty — the built-in instruction in the language of the recording. Priority: this field, then ⚙ of the model, then the built-in one",
+      "document": "Document",
+      "locationDescription": "The name comes from the recording; nothing is overwritten, (2) is added instead",
+      "timestampsDescription": "Recording time before each paragraph",
+      "removeFillersDescription": "Drops “uh”, “um”, “hmm” in English and Russian recordings. Words stay",
+      "globalFillers": "The source transcript stays verbatim. Dictation has its own filler setting",
+      "notesDescription": "At the end: time of each stage and warnings",
+      "integrations": "Integrations",
+      "eventsDescription": "A program told about start, progress and end (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Add files to start",
+      "noFfmpeg": "Needs ffmpeg",
+      "noModel": "Download a speech model first",
+      "cloudIncomplete": "Needs a {{provider}} key",
+      "cloudIncompleteCustom": "Needs the API address, key and model",
+      "noSpeakerModel": "Needs a voice model",
+      "running": "File {{current}} of {{total}} · {{time}} elapsed",
+      "start_one": "Transcribe {{count}} file",
+      "start_few": "Transcribe {{count}} files",
+      "start_many": "Transcribe {{count}} files",
+      "start_other": "Transcribe {{count}} files",
+      "done_one": "Done: {{count}} file",
+      "done_few": "Done: {{count}} files",
+      "done_many": "Done: {{count}} files",
+      "done_other": "Done: {{count}} files",
+      "errors_one": "{{count}} file with an error",
+      "errors_few": "{{count}} files with errors",
+      "errors_many": "{{count}} files with errors",
+      "errors_other": "{{count}} files with errors",
+      "summary_one": "{{count}} recording",
+      "summary_few": "{{count}} recordings",
+      "summary_many": "{{count}} recordings",
+      "summary_other": "{{count}} recordings",
+      "modelDownloading": "Speech model downloading · {{percent}} %",
+      "llmDownloading": "Neural network for editing downloading · {{percent}} %",
+      "llmMissing": "Editing needs a neural network",
+      "llmNotSetUp": "The neural network for editing is not set up",
+      "withoutEditing": "Without editing",
+      "modelNotActive": "The speech model is not turned on"
+    },
+    "stop": {
+      "title": "Stop transcription?",
+      "body": "Finished files ({{done}}) are saved. The current file ({{percent}} %) and the waiting ones ({{waiting}}) will have to be started again.",
+      "confirm": "Stop",
+      "keep": "Continue"
+    },
+    "tray": {
+      "running": "Transcription: file {{current}} of {{total}} · {{pct}}%",
+      "ready_one": "Transcription ready: {{count}} file",
+      "ready_other": "Transcription ready: {{count}} files"
+    },
+    "notify": {
+      "readyOne": "Transcription ready",
+      "readyMany_one": "Transcription ready: {{count}} file",
+      "readyMany_other": "Transcription ready: {{count}} files",
+      "failedOne": "Transcription failed",
+      "failedMany_one": "Transcription failed: {{count}} file",
+      "failedMany_other": "Transcription failed: {{count}} files",
+      "partial": "Done {{ok}} of {{total}} · {{errors}}",
+      "errors_one": "{{count}} failed",
+      "errors_other": "{{count}} failed",
+      "failedFile": "Failed: {{name}} · {{reason}}",
+      "open": "Open"
+    },
+    "try": {
+      "before": "Open any editor, put the cursor in it and hold",
+      "after": "while you speak. Release it, and the text appears there.",
+      "changeKey": "Change the key"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Dictation is ready ·",
+      "anyWindow": "in any window",
+      "keyBusy": "Dictation does not start: the key is taken",
+      "keyBusyDetail": "Another program holds {{key}}. Choose another key.",
+      "changeKey": "Change the key"
+    },
+    "keys": {
+      "title": "Keys",
+      "second": "Dictation with editing — second key",
+      "secondDescription": "The usual key pastes text as is. This one pastes it after neural network editing",
+      "instruction": "Instruction",
+      "manage": "Manage…",
+      "secondBusy": "Another program holds this key: choose another one"
+    },
+    "more": {
+      "paste": "Pasting text",
+      "indicator": "Recording indicator",
+      "microphone": "Microphone and recording",
+      "prompts": "Instructions for dictation with editing",
+      "promptsDescription_one": "{{count}} instruction",
+      "promptsDescription_few": "{{count}} instructions",
+      "promptsDescription_many": "{{count}} instructions",
+      "promptsDescription_other": "{{count}} instructions",
+      "promptsRow": "Create and edit instructions",
+      "text": "Dictation text",
+      "fillersDocuments": "Only for dictation. In documents, «Remove hesitations» on the Transcription page does this"
+    },
+    "fix": {
+      "title": "If something does not work",
+      "paste": "Text is not pasted",
+      "pasteHelp": "If you dictated into a program run as administrator, Windows does not allow pasting into it. Otherwise increase the delays below.",
+      "cutOff": "The end of a phrase is cut off",
+      "hold": "A short press counts as holding"
+    },
+    "prompts": {
+      "title": "Instructions for dictation with editing",
+      "intro": "The instruction tells the neural network what to do with dictated text. ${output} is the dictated text.",
+      "current": "Current instruction",
+      "create": "Create",
+      "deleted": "Instruction «{{name}}» deleted"
+    }
+  },
+  "meetings": {
+    "what": "Tishe will record meetings and calls on this computer: your microphone and the other side, then a transcript split by speaker.",
+    "how": "Recordings stay on the computer, like everything else in Tishe.",
+    "nowTitle": "Already now",
+    "nowText": "If a meeting is already recorded — by Zoom, Teams or a voice recorder — add the file on «Transcription».",
+    "goTranscription": "Go to Transcription"
+  },
+  "history": {
+    "storage": {
+      "title": "Storage",
+      "limit_one": "The last {{count}} dictation is kept",
+      "limit_few": "The last {{count}} dictations are kept",
+      "limit_many": "The last {{count}} dictations are kept",
+      "limit_other": "The last {{count}} dictations are kept",
+      "never": "Dictations are not deleted automatically",
+      "days_3": "Dictations are deleted after 3 days",
+      "weeks_2": "Dictations are deleted after 2 weeks",
+      "months_3": "Dictations are deleted after 3 months"
+    },
+    "empty": {
+      "title": "Your dictations will appear here",
+      "textBefore": "Hold",
+      "textAfter": "in any window and speak.",
+      "textNoKey": "Set a dictation key on «Dictation»."
+    },
+    "copy": "Copy text",
+    "more": "More actions",
+    "keep": "Keep",
+    "keepDescription": "Not deleted automatically",
+    "retry": "Recognize again",
+    "delete": "Delete",
+    "deleted": "Dictation deleted",
+    "failed": "Could not recognize",
+    "savedTag": "kept",
+    "editingSkipped": "without editing",
+    "showMore": "Show in full",
+    "showLess": "Collapse",
+    "version": "Text version",
+    "versionEdited": "After editing",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Models that turn speech into text, for dictation and file transcription. Text editing with a neural network is in",
+    "active": {
+      "title": "Active model",
+      "change": "Change model",
+      "none": "No model chosen",
+      "noneHint": "Download the one recommended for your language — or any model from the catalog below"
+    },
+    "lockedByTranscription": "Transcription is running — change after it ends",
+    "language": {
+      "title": "Language and translation",
+      "scope": "Applies to dictation and file transcription"
+    },
+    "cleanup": {
+      "title": "Text cleanup",
+      "scope": "Works inside the recognition model, for dictation and files"
+    },
+    "memory": {
+      "title": "Memory"
+    },
+    "onlyLanguage": "only {{language}}",
+    "languageCount_one": "{{count}} language",
+    "languageCount_few": "{{count}} languages",
+    "languageCount_many": "{{count}} languages",
+    "languageCount_other": "{{count}} languages",
+    "catalog": {
+      "title": "Catalog",
+      "yours": "Your models",
+      "yoursCount": "Your models ({{count}})",
+      "recommended": "Recommended",
+      "all": "All models",
+      "languageFilter": "Language",
+      "streaming": "Streaming",
+      "translation": "Translation",
+      "showAll": "Show all models ({{count}})",
+      "showFewer": "Show fewer"
+    },
+    "row": {
+      "use": "Use",
+      "inUse": "in use",
+      "more": "More: {{name}}",
+      "delete": "Delete model",
+      "translate": "translates to English",
+      "streaming": "streaming",
+      "accuracy": "accuracy {{n}}/10",
+      "speed": "speed {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Where and with which neural network text is edited",
+    "status": {
+      "usedFor": "Used for",
+      "files": "file editing ({{state}})",
+      "dictation": "dictation with editing ({{state}})",
+      "on": "on",
+      "off": "off"
+    },
+    "where": {
+      "title": "Where the neural network runs",
+      "local": "On this computer",
+      "localText": "Text stays on the computer",
+      "localUnavailable": "Not available in this build",
+      "server": "Your own server",
+      "serverText": "Ollama, LM Studio or your address · text goes to your server",
+      "cloud": "Cloud service",
+      "cloudText": "OpenAI and others · text goes to the service"
+    },
+    "variant": {
+      "local": "Built-in neural network",
+      "server": "Server",
+      "cloud": "Service"
+    },
+    "local": {
+      "speed": "speed {{n}} of 5",
+      "quality": "quality {{n}} of 5",
+      "footprint": "disk {{disk}} · memory ~{{ram}} GB",
+      "showAll": "Show all models ({{count}})",
+      "showFewer": "Show fewer"
+    },
+    "server": {
+      "urlDescription": "OpenAI-compatible address ending in /v1",
+      "keyDescription": "Only if your server asks for one"
+    }
+  },
+  "app": {
+    "purpose": "How the program behaves as a whole",
+    "launch": "Launch and tray",
+    "look": "Look",
+    "updates": "Updates",
+    "checkNow": "Check for a new version",
+    "checkNowButton": "Check now",
+    "experimental": "Experimental features",
+    "quit": {
+      "title": "Quit Tishe?",
+      "body": "“{{name}}” is being transcribed ({{pct}}%). It will stop; finished documents are saved.",
+      "bodyIdle": "The transcription will stop; finished documents are saved.",
+      "confirm": "Quit",
+      "stay": "Stay"
+    },
+    "notifications": "Notifications",
+    "notifyLabel": "Tell me when a transcription is ready",
+    "notifyDescription": "A Windows notification, only while the window is hidden or not in focus. A click opens the result.",
+    "trayHint": "Windows hides new icons. To keep it in sight, drag it from the hidden icons onto the taskbar."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "What's new",
+    "project": {
+      "title": "About the project",
+      "basedOn": "Based on Handy",
+      "basedOnText": "Open source, MIT license",
+      "tishe": "Tishe",
+      "tisheText": "Open source, MIT license. Releases and bug reports are on GitHub",
+      "licenses": "Licenses",
+      "licensesText": "Third-party libraries and models that Tishe uses",
+      "licensesOpen": "Open",
+      "licensesError": "Could not open the license file",
+      "author": "Developed by",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub profile"
+    },
+    "supportHandy": "Support the Handy authors",
+    "folders": "Folders",
+    "versionRelease": "Tishe {{version}}, release {{release}}"
+  },
+  "debug": {
+    "onBefore": "Debug mode is on and stays on between launches.",
+    "onAfter": "hides it.",
+    "log": "Log",
+    "previews": "Previews",
+    "keyboard": "Keyboard",
+    "transcription": "Transcription"
+  },
+  "release": {
+    "available": "Version {{release}} is out",
+    "openPage": "Open the release page on GitHub",
+    "upToDate": "This is the latest version",
+    "checkFailed": "Could not check for updates"
+  },
+  "next": {
+    "lead": "Tishe is the first part of Private Memory: a private memory of your conversations that lives entirely on your computer.",
+    "now": "Today Tishe types what you dictate into any app and transcribes long recordings with speaker labels. No internet, no account.",
+    "planTitle": "Coming next",
+    "plan": {
+      "meetings": {
+        "title": "Meeting recording",
+        "text": "your microphone and the other participants as two tracks, with the text appearing as you talk."
+      },
+      "summaries": {
+        "title": "Meeting summaries",
+        "text": "decisions and tasks right after you stop, in the language of the meeting, written by the built-in language model."
+      },
+      "search": {
+        "title": "Search across meetings",
+        "text": "first by words, then by meaning."
+      },
+      "agents": {
+        "title": "Notes and assistants",
+        "text": "a meeting folder for Obsidian, and access for AI assistants to your meetings over MCP, still without the cloud."
+      }
+    },
+    "order": "No dates: the order may change based on feedback.",
+    "freeTitle": "Free and open source",
+    "freeText": "The core of Tishe is free and will stay free. Follow the releases and tell us what is missing on GitHub.",
+    "follow": "Follow on GitHub",
+    "feedback": "Report a problem or an idea"
+  },
+  "fileErrors": {
+    "notFound": "File not found: it was moved or deleted.",
+    "noAudio": "The file has no sound, or it could not be read.",
+    "unreadable": "Could not read the sound from the file. It may be damaged.",
+    "noModel": "No speech model is selected: choose one in «$t(sidebar.models)».",
+    "noSpeakerModel": "The voice model is not downloaded: download it in «$t(transcription.more.speakers)».",
+    "noLlmModel": "The language model is not downloaded: download it in «$t(sidebar.llm)».",
+    "noLlmRuntime": "The built-in language model engine is missing. Reinstall Tishe.",
+    "cloudKey": "Cloud transcription needs an API key.",
+    "cloudConfig": "Cloud transcription is not set up: enter the address and the model.",
+    "busy": "Another file is being transcribed right now.",
+    "noSpace": "The disk is full.",
+    "fileInUse": "The document is open in another program (for example, Word). Close it and try again.",
+    "accessDenied": "No access to the folder for the document. Choose another folder in «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Download a speech recognition model",
+      "text": "It turns speech into text — for recordings and for dictation. It runs on this computer, offline. You only download it once.",
+      "language": "Language of recordings",
+      "allModels": "All models",
+      "onDisk": "{{name}} is already on this computer — just turn it on.",
+      "whileDownloading": "You can add recordings while it downloads: transcription starts once the model is ready."
+    },
+    "llm": {
+      "title": "Editing needs a neural network",
+      "what": "The neural network fixes recognition mistakes and punctuation. We recommend the built-in one: it runs on this computer, and your text never leaves it.",
+      "recommended": "{{size}} on disk · needs about {{ram}} GB of memory · one-time download",
+      "otherWays": "Own server or cloud",
+      "downloadOn": "Download {{size}} and turn on",
+      "runtimeTitle": "The built-in neural network is not available",
+      "runtime": "This build has no engine for the built-in neural network. You can connect your own server (Ollama, LM Studio) or a cloud service in $t(sidebar.llm).",
+      "openPage": "Open $t(sidebar.llm)",
+      "notSetUp": "{{reason}} — the neural network cannot work without it. Turn editing on and finish the setup in $t(sidebar.llm).",
+      "onAndSetUp": "Turn on and set up",
+      "onDisk": "Already on this computer — nothing to download.",
+      "turnOn": "Turn on editing"
+    },
+    "quick": {
+      "title": "Quick start",
+      "progress": "{{done}} of {{total}}",
+      "hide": "Hide",
+      "hideHint": "Hide Quick start — every setting stays in the sections on the left",
+      "model": "Download a speech recognition model",
+      "modelDone": "Speech model ready · {{name}}",
+      "dictation": "Try dictation",
+      "dictationDone": "Dictation works · dictations are kept in History",
+      "file": "Transcribe a recording",
+      "fileDone": "First recording transcribed",
+      "fileHint": "Drop an audio or video file into this window or choose files — a Word document appears next to the recording.",
+      "llm": "AI editing",
+      "optional": "optional",
+      "llmHint": "Fixes recognition mistakes and punctuation in documents. {{model}}: {{size}}, runs on this computer.",
+      "llmReady": "Neural network ready · {{model}}",
+      "doneTitle": "All set",
+      "doneText": "Tishe is ready. Dictations are in History, documents in the list below, settings in the sections on the left.",
+      "close": "Close"
+    }
   }
 }

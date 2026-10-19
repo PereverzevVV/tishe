@@ -1,3 +1,5 @@
+import i18n from "@/i18n";
+
 export interface ReleaseNote {
   version: string;
   markdown: string;
@@ -6,6 +8,8 @@ export interface ReleaseNote {
 interface ReleaseNoteRecord {
   version: string;
   markdown: string;
+  /** Tishe: `<version>.<lang>.md` next to `<version>.md` (the English one). */
+  localized: Record<string, string>;
 }
 
 interface FindReleaseNoteOptions {
@@ -33,18 +37,35 @@ const parseVersion = (version: string): [number, number, number] | null => {
 };
 
 for (const [path, markdown] of Object.entries(releaseNoteModules)) {
-  const match = path.match(/release-notes\/([^/]+)\.md$/);
+  const match = path.match(
+    /release-notes\/(\d+\.\d+\.\d+)(?:\.([a-zA-Z-]+))?\.md$/,
+  );
   if (!match) continue;
 
   const version = match[1];
+  const lang = match[2];
 
   if (!parseVersion(version)) continue;
 
-  releaseNotesByVersion.set(version, {
+  const record = releaseNotesByVersion.get(version) ?? {
     version,
-    markdown,
-  });
+    markdown: "",
+    localized: {},
+  };
+  if (lang) record.localized[lang] = markdown;
+  else record.markdown = markdown;
+  releaseNotesByVersion.set(version, record);
 }
+
+/** The note in the program's language, else the default (English) one. */
+const inLanguage = (record: ReleaseNoteRecord): ReleaseNote => {
+  const lang = i18n.language ?? "";
+  const markdown =
+    record.localized[lang] ??
+    record.localized[lang.split("-")[0]] ??
+    (record.markdown || Object.values(record.localized)[0] || "");
+  return { version: record.version, markdown };
+};
 
 const compareVersions = (a: string, b: string) => {
   const parsedA = parseVersion(a);
@@ -79,7 +100,7 @@ export const findReleaseNoteToShow = ({
 
   if (!candidate) return null;
 
-  return candidate;
+  return inLanguage(candidate);
 };
 
 export const findLatestReleaseNote = (): ReleaseNote | null => {
@@ -89,5 +110,5 @@ export const findLatestReleaseNote = (): ReleaseNote | null => {
 
   if (!candidate) return null;
 
-  return candidate;
+  return inLanguage(candidate);
 };

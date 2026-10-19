@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from "../ui/Dropdown";
 import { SettingContainer } from "../ui/SettingContainer";
+import { ServiceLine } from "../ui/ServiceLine";
 import { useSettings } from "../../hooks/useSettings";
 import type { OverlayPosition, OverlayStyle } from "@/bindings";
 
@@ -51,10 +52,18 @@ export const ShowOverlay: React.FC<ShowOverlayProps> = React.memo(
     return (
       <>
         <SettingContainer
+          settingKey="overlay_style"
           title={t("settings.advanced.overlay.style.title")}
           description={t("settings.advanced.overlay.style.description")}
           descriptionMode={descriptionMode}
           grouped={grouped}
+          extra={
+            selectedStyle === "none" ? (
+              <ServiceLine>
+                {t("settings.advanced.overlay.style.noneConsequence")}
+              </ServiceLine>
+            ) : undefined
+          }
         >
           <Dropdown
             options={styleOptions}
@@ -68,10 +77,12 @@ export const ShowOverlay: React.FC<ShowOverlayProps> = React.memo(
 
         {selectedStyle !== "none" && (
           <SettingContainer
+            settingKey="overlay_position"
             title={t("settings.advanced.overlay.position.title")}
             description={t("settings.advanced.overlay.position.description")}
             descriptionMode={descriptionMode}
             grouped={grouped}
+            dependent
           >
             <Dropdown
               options={positionOptions}

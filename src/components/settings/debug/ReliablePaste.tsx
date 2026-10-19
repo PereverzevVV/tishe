@@ -24,6 +24,7 @@ export const ReliablePasteToggle: React.FC<ReliablePasteToggleProps> = ({
 
   return (
     <ToggleSwitch
+      settingKey="reliable_paste"
       checked={getSetting("reliable_paste") ?? false}
       onChange={(enabled) => updateSetting("reliable_paste", enabled)}
       isUpdating={isUpdating("reliable_paste")}

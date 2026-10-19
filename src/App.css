@@ -1,8 +1,11 @@
 @import "tailwindcss";
 @import "./styles/theme.css";
+@import "./styles/tishe.css";
 
-/* Register the shared color tokens (src/styles/theme.css) as Tailwind
-   utilities */
+/* Register the tokens as Tailwind utilities. The --color-* group keeps the
+   old Handy names working (they are aliases now, see theme.css); the --t-*
+   group gives layout code short names for the Tishe tokens, for example
+   `text-t-secondary`, `bg-t-group`, `border-t-separator`. */
 @theme inline {
   --color-text: var(--color-text);
   --color-background: var(--color-background);
@@ -13,52 +16,89 @@
   --color-mid-gray: var(--color-mid-gray);
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
+
+  --color-t-primary: var(--t-text-primary);
+  --color-t-secondary: var(--t-text-secondary);
+  --color-t-tertiary: var(--t-text-tertiary);
+  --color-t-disabled: var(--t-text-disabled);
+  --color-t-inverse: var(--t-text-inverse);
+  --color-t-app: var(--t-bg-app);
+  --color-t-sidebar: var(--t-bg-sidebar);
+  --color-t-group: var(--t-bg-group);
+  --color-t-raised: var(--t-bg-raised);
+  --color-t-field: var(--t-bg-field);
+  --color-t-hover: var(--t-overlay-hover);
+  --color-t-pressed: var(--t-overlay-pressed);
+  --color-t-selected: var(--t-overlay-selected);
+  --color-t-fill: var(--t-fill-secondary);
+  --color-t-separator: var(--t-separator);
+  --color-t-border: var(--t-border-control);
+  --color-t-accent: var(--t-accent);
+  --color-t-warning: var(--t-warning);
+  --color-t-danger: var(--t-danger);
+
+  --font-sans: var(--t-font-ui);
+  --font-mono: var(--t-font-mono);
+
+  /* Tailwind scales pinned to the Tishe scales in px. Without this they are
+     rem-based, and with the 14 px root `gap-2` would be 7 px, `text-sm`
+     12.25 px, `rounded-md` 5.25 px — all off the scales of §6–§8. */
+  --spacing: 4px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 14px;
+  --text-base--line-height: 20px;
+  --text-lg: 17px;
+  --text-lg--line-height: 24px;
+  --text-xl: 20px;
+  --text-xl--line-height: 26px;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 30px;
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 14px;
 }
 
 :root {
-  /* Typography */
-  font-size: 15px;
-  line-height: 24px;
+  /* VISUAL_DESIGN_SYSTEM §6: body 14/20 is the base, tabular figures once at
+     the root for every number. */
+  font-family: var(--t-font-ui);
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  font-optical-sizing: auto;
+  letter-spacing: 0;
 
-  /* Typography settings */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --scrollbar-thumb: color-mix(in srgb, var(--color-text), transparent 85%);
+  --scrollbar-thumb: color-mix(in srgb, var(--t-text-primary), transparent 80%);
   --scrollbar-thumb-hover: color-mix(
     in srgb,
-    var(--color-text),
-    transparent 70%
+    var(--t-text-primary),
+    transparent 65%
   );
 
-  /* Log console surface — a subtle shade off the app background so the live log
-     viewer reads as a distinct console. In light mode this is a faint gray code
-     block (matching other surfaces); the dark theme overrides it below. */
-  --color-log-surface: color-mix(in srgb, var(--color-background), black 6%);
+  /* Log console surface (Отладка): the group surface. */
+  --color-log-surface: var(--t-bg-group);
 
-  /* Apply colors */
-  color: var(--color-text);
-  background-color: var(--color-background);
+  color: var(--t-text-primary);
+  background-color: var(--t-bg-app);
 }
 
-.container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Just a bit darker than the (already dark) background, keeping its warm tint */
-    --color-log-surface: color-mix(in srgb, var(--color-background), black 15%);
-  }
+body {
+  background-color: var(--t-bg-app);
+  color: var(--t-text-primary);
 }
 
 /* Keep onboarding centered when classic scrollbars consume layout space.
@@ -72,7 +112,7 @@
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
-/* Custom Scrollbar */
+/* Scrollbars: a thin neutral thumb (WebView2 keeps a 15 px gutter). */
 ::-webkit-scrollbar {
   width: 14px;
   height: 14px;
@@ -82,10 +122,8 @@
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
-  border-radius: 20px;
-  border: 3px solid transparent;
-  border-right-width: 4px;
-  border-left-width: 3px;
+  border-radius: 999px;
+  border: 4px solid transparent;
   background-clip: content-box;
   min-height: 32px;
 }

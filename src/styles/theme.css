@@ -1,77 +1,202 @@
-/* Handy Colors */
+/*
+ * Tishe tokens (VISUAL_DESIGN_SYSTEM, version 3, §3.7–3.8, §5, §23).
+ *
+ * Every value lives here once as a light/dark pair. Components read only the
+ * --t-* tokens. The theme follows the OS through prefers-color-scheme, and the
+ * `data-theme` attribute (lib/utils/theme.ts) forces light or dark.
+ *
+ * The old Handy names (--color-*) are kept at the bottom as aliases of the
+ * neutral tokens, so code that is not converted yet stays neutral instead of
+ * pink. The recording overlay still reads them.
+ */
 
 :root {
-  /* Palette source of truth. Each themed color is defined once as a
-     light/dark pair; the active tokens below and the `data-theme` overrides
-     in App.css reference these, so a hex value lives in exactly one place. */
-  --light-color-text: #0f0f0f;
-  --light-color-background: #fbfbfb;
-  --light-color-logo-primary: #faa2ca;
-  --light-color-logo-stroke: #382731;
+  color-scheme: light;
 
-  --dark-color-text: #fbfbfb;
-  --dark-color-background: #2c2b29;
-  --dark-color-logo-primary: #f28cbb;
-  --dark-color-logo-stroke: #fad1ed;
+  --t-bg-app: #ffffff;
+  --t-bg-sidebar: #f5f5f6;
+  --t-bg-group: #f5f5f6;
+  --t-bg-raised: #ffffff;
+  --t-bg-field: #ffffff;
+  --t-overlay-hover: rgba(0, 0, 0, 0.04);
+  --t-overlay-pressed: rgba(0, 0, 0, 0.08);
+  --t-overlay-selected: rgba(0, 0, 0, 0.07);
+  --t-fill-secondary: rgba(0, 0, 0, 0.06);
+  --t-fill-secondary-hover: rgba(0, 0, 0, 0.09);
+  --t-fill-secondary-pressed: rgba(0, 0, 0, 0.12);
+  --t-segment-thumb: #ffffff;
+  --t-text-primary: #1c1c1e;
+  --t-text-secondary: #55555b;
+  --t-text-tertiary: #66666c;
+  --t-text-disabled: #a1a1a6;
+  --t-text-inverse: #ffffff;
+  --t-inverse: #1c1c1e;
+  --t-inverse-hover: #2e2e31;
+  --t-inverse-pressed: #3d3d41;
+  --t-control-on: #7a7a80;
+  --t-control-on-hover: #6b6b71;
+  --t-control-on-pressed: #5d5d63;
+  --t-separator: rgba(0, 0, 0, 0.08);
+  --t-border-control: #8a8a90;
+  --t-border-control-hover: #6e6e74;
+  --t-scrim: rgba(0, 0, 0, 0.32);
+  --t-accent: #2b5fd9;
+  --t-warning: #94570a;
+  --t-danger: #c42b2b;
+  --t-danger-fill: #c42b2b;
+  --t-danger-fill-hover: #b02727;
+  --t-danger-fill-pressed: #a12323;
+  --t-text-on-danger: #ffffff;
+  --t-shadow-e2:
+    0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  --t-shadow-e3:
+    0 2px 6px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
 
-  /* Semantic status colors. First used by SecureInputWarning; intended to
-     replace the ad-hoc yellow-500/red-500 usages (e.g. ui/Alert.tsx) over
-     time so status styling is themeable from one place. */
-  --light-color-warning: #d97706;
-  --light-color-error: #dc2626;
-  --dark-color-warning: #fbbf24;
-  --dark-color-error: #f87171;
+  /* Values that do not change between themes */
+  --t-font-ui:
+    "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "SF Pro Text", system-ui, "Noto Sans", "Ubuntu",
+    "Cantarell", sans-serif;
+  --t-font-display:
+    "Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, system-ui, "Noto Sans", sans-serif;
+  --t-font-mono:
+    "Cascadia Mono", Consolas, ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Tokens that do not change between light and dark */
-  --color-background-ui: #da5893;
-  --color-text-stroke: #f6f6f6;
-  --color-mid-gray: #808080;
+  --t-radius-xs: 4px;
+  --t-radius-sm: 6px;
+  --t-radius-md: 10px;
+  --t-radius-lg: 14px;
+  --t-radius-full: 999px;
 
-  /* Active palette — defaults to light, follows the OS via the media query
-     below, or is forced by `data-theme` (see the overrides below). */
-  --color-text: var(--light-color-text);
-  --color-background: var(--light-color-background);
-  --color-logo-primary: var(--light-color-logo-primary);
-  --color-logo-stroke: var(--light-color-logo-stroke);
-  --color-warning: var(--light-color-warning);
-  --color-error: var(--light-color-error);
+  --t-z-base: 0;
+  --t-z-sticky: 10;
+  --t-z-scrim: 100;
+  --t-z-dialog: 110;
+  --t-z-popover: 200;
+  --t-z-toast: 300;
+  --t-z-tooltip: 400;
+
+  --t-dur-feedback: 100ms;
+  --t-dur-enter: 180ms;
+  --t-dur-exit: 120ms;
+  --t-dur-highlight: 1500ms;
+  --t-ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --t-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --t-sidebar-w: 176px;
+  --t-rail-w: 56px;
+  --t-content-max: 640px;
+  /* Wide window (≥ 1280): the page grows for lists and side columns, text
+     blocks keep the 640 column (VD-15, VD-86). */
+  --t-page-wide: 1080px;
+  --t-side-w: 400px;
+  --t-panel-h: 56px;
+  --t-statusbar-h: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: var(--dark-color-text);
-    --color-background: var(--dark-color-background);
-    --color-logo-primary: var(--dark-color-logo-primary);
-    --color-logo-stroke: var(--dark-color-logo-stroke);
-    --color-warning: var(--dark-color-warning);
-    --color-error: var(--dark-color-error);
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --t-bg-app: #141416;
+    --t-bg-sidebar: #1a1a1d;
+    --t-bg-group: #1f1f23;
+    --t-bg-raised: #26262b;
+    --t-bg-field: #141416;
+    --t-overlay-hover: rgba(255, 255, 255, 0.05);
+    --t-overlay-pressed: rgba(255, 255, 255, 0.1);
+    --t-overlay-selected: rgba(255, 255, 255, 0.09);
+    --t-fill-secondary: rgba(255, 255, 255, 0.08);
+    --t-fill-secondary-hover: rgba(255, 255, 255, 0.11);
+    --t-fill-secondary-pressed: rgba(255, 255, 255, 0.14);
+    --t-segment-thumb: #434346;
+    --t-text-primary: #f2f2f4;
+    --t-text-secondary: #aeaeb4;
+    --t-text-tertiary: #93939a;
+    --t-text-disabled: #5c5c62;
+    --t-text-inverse: #141416;
+    --t-inverse: #f2f2f4;
+    --t-inverse-hover: #dcdcdf;
+    --t-inverse-pressed: #c8c8cc;
+    --t-control-on: #85858b;
+    --t-control-on-hover: #95959b;
+    --t-control-on-pressed: #a4a4aa;
+    --t-separator: rgba(255, 255, 255, 0.08);
+    --t-border-control: #75757c;
+    --t-border-control-hover: #8a8a90;
+    --t-scrim: rgba(0, 0, 0, 0.55);
+    --t-accent: #7ca8ff;
+    --t-warning: #e3a63e;
+    --t-danger: #ff7070;
+    --t-danger-fill: #cf3636;
+    --t-danger-fill-hover: #ba3131;
+    --t-danger-fill-pressed: #aa2c2c;
+    --t-shadow-e2:
+      0 0 0 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.45);
+    --t-shadow-e3:
+      0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 48px rgba(0, 0, 0, 0.55);
   }
 }
 
-/*
- * Explicit theme override, driven by the `theme` setting via
- * `document.documentElement.dataset.theme`. When set, the higher-specificity
- * attribute selectors win over the `prefers-color-scheme` media query above,
- * so a user can keep Handy light or dark regardless of the OS setting.
- * `system` (or no attribute) leaves the OS in charge.
- *
- * Lives here (not in App.css) so every window that imports the shared palette —
- * the settings window and the recording overlay alike — honours the override.
- */
-:root[data-theme="light"] {
-  --color-text: var(--light-color-text);
-  --color-background: var(--light-color-background);
-  --color-logo-primary: var(--light-color-logo-primary);
-  --color-logo-stroke: var(--light-color-logo-stroke);
-  --color-warning: var(--light-color-warning);
-  --color-error: var(--light-color-error);
+/* Forced dark: the same values as the media query above. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --t-bg-app: #141416;
+  --t-bg-sidebar: #1a1a1d;
+  --t-bg-group: #1f1f23;
+  --t-bg-raised: #26262b;
+  --t-bg-field: #141416;
+  --t-overlay-hover: rgba(255, 255, 255, 0.05);
+  --t-overlay-pressed: rgba(255, 255, 255, 0.1);
+  --t-overlay-selected: rgba(255, 255, 255, 0.09);
+  --t-fill-secondary: rgba(255, 255, 255, 0.08);
+  --t-fill-secondary-hover: rgba(255, 255, 255, 0.11);
+  --t-fill-secondary-pressed: rgba(255, 255, 255, 0.14);
+  --t-segment-thumb: #434346;
+  --t-text-primary: #f2f2f4;
+  --t-text-secondary: #aeaeb4;
+  --t-text-tertiary: #93939a;
+  --t-text-disabled: #5c5c62;
+  --t-text-inverse: #141416;
+  --t-inverse: #f2f2f4;
+  --t-inverse-hover: #dcdcdf;
+  --t-inverse-pressed: #c8c8cc;
+  --t-control-on: #85858b;
+  --t-control-on-hover: #95959b;
+  --t-control-on-pressed: #a4a4aa;
+  --t-separator: rgba(255, 255, 255, 0.08);
+  --t-border-control: #75757c;
+  --t-border-control-hover: #8a8a90;
+  --t-scrim: rgba(0, 0, 0, 0.55);
+  --t-accent: #7ca8ff;
+  --t-warning: #e3a63e;
+  --t-danger: #ff7070;
+  --t-danger-fill: #cf3636;
+  --t-danger-fill-hover: #ba3131;
+  --t-danger-fill-pressed: #aa2c2c;
+  --t-shadow-e2:
+    0 0 0 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.45);
+  --t-shadow-e3:
+    0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 48px rgba(0, 0, 0, 0.55);
 }
 
-:root[data-theme="dark"] {
-  --color-text: var(--dark-color-text);
-  --color-background: var(--dark-color-background);
-  --color-logo-primary: var(--dark-color-logo-primary);
-  --color-logo-stroke: var(--dark-color-logo-stroke);
-  --color-warning: var(--dark-color-warning);
-  --color-error: var(--dark-color-error);
+/*
+ * Old Handy names, as aliases of the neutral tokens (VISUAL_DESIGN_SYSTEM §18,
+ * "Перенос при реализации"). Pink is gone: the former accent maps to the grey
+ * "on" colour, the former primary-button fill to the inverse fill.
+ */
+:root {
+  --color-text: var(--t-text-primary);
+  --color-background: var(--t-bg-app);
+  --color-background-ui: var(--t-inverse);
+  --color-logo-primary: var(--t-control-on);
+  --color-logo-stroke: var(--t-text-primary);
+  --color-text-stroke: var(--t-bg-app);
+  --color-mid-gray: var(--t-text-tertiary);
+  --color-warning: var(--t-warning);
+  --color-error: var(--t-danger);
 }

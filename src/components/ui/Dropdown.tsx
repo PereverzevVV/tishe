@@ -1,6 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ChevronDown } from "lucide-react";
+import { Menu } from "./Menu";
 
+/**
+ * Dropdown list (VISUAL_DESIGN_SYSTEM §12.3): looks like a field, 32 high,
+ * chevron 16 tertiary; the open list is the Menu component with a check on
+ * the selected option and a search field above more than 10 options.
+ */
 export interface DropdownOption {
   value: string;
   label: string;
@@ -17,119 +24,107 @@ interface DropdownProps {
   placeholder?: string;
   disabled?: boolean;
   onOpen?: () => void;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  /** Stretch to the row width (stacked rows). */
+  wide?: boolean;
+  id?: string;
 }
+
+const SEARCH_FROM = 11;
 
 export const Dropdown: React.FC<DropdownProps> = ({
   options,
   selectedValue,
   onSelect,
   className = "",
-  menuClassName,
-  placeholder = "Select an option...",
+  placeholder,
   disabled = false,
   onOpen,
+  ariaLabel,
+  ariaLabelledBy,
+  wide = false,
+  id,
 }) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const selected = options.find((o) => o.value === selectedValue);
+  const searchable = options.length >= SEARCH_FROM;
 
-  const selectedOption = options.find(
-    (option) => option.value === selectedValue,
-  );
+  const visible = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return options;
+    return options.filter((o) => o.label.toLowerCase().includes(q));
+  }, [options, query]);
 
-  const handleSelect = (value: string) => {
-    onSelect(value);
-    setIsOpen(false);
-  };
-
-  const handleToggle = () => {
-    if (disabled) return;
-    if (!isOpen) onOpen?.();
-    setIsOpen(!isOpen);
+  const close = () => {
+    setOpen(false);
+    setQuery("");
   };
 
   return (
-    <div className={`relative ${className}`} ref={dropdownRef}>
+    <>
       <button
+        ref={triggerRef}
+        id={id}
         type="button"
-        className={`px-2 py-[5px] text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 rounded-md min-w-[200px] w-full text-start grid grid-cols-[1fr_auto] gap-2 items-center transition-all duration-150 ${
-          disabled
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-logo-primary/10 cursor-pointer hover:border-logo-primary"
-        }`}
-        onClick={handleToggle}
+        className={`t-select ${wide ? "t-select-wide" : ""} ${className}`}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         disabled={disabled}
+        title={selected?.label}
+        onClick={() => {
+          if (!open) onOpen?.();
+          setOpen((o) => !o);
+        }}
+        onKeyDown={(e) => {
+          if (!open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+            e.preventDefault();
+            onOpen?.();
+            setOpen(true);
+          }
+        }}
       >
-        <span className="truncate">{selectedOption?.label || placeholder}</span>
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "transform rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <span className={selected ? "" : "t-placeholder"}>
+          {selected?.label ?? placeholder ?? t("common.choose")}
+        </span>
+        <ChevronDown aria-hidden="true" />
       </button>
-      {isOpen && !disabled && (
-        <div
-          className={`absolute top-full mt-1 bg-background border border-mid-gray/80 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto ${
-            menuClassName ?? "left-0 right-0"
-          }`}
-        >
-          {options.length === 0 ? (
-            <div className="px-2 py-1 text-sm text-mid-gray">
-              {t("common.noOptionsFound")}
+      <Menu
+        anchor={triggerRef.current}
+        open={open && !disabled}
+        onClose={close}
+        role="listbox"
+        checkable
+        minWidth={triggerRef.current?.offsetWidth}
+        emptyText={t("common.noOptionsFound")}
+        header={
+          searchable ? (
+            <div className="t-menu-search">
+              <input
+                autoFocus
+                className="t-field t-field-sm w-full"
+                value={query}
+                placeholder={t("common.search")}
+                onChange={(e) => setQuery(e.target.value)}
+              />
             </div>
-          ) : (
-            options.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className={`w-full text-sm text-start hover:bg-logo-primary/10 transition-colors duration-150 ${
-                  option.description ? "px-3 py-2" : "px-2 py-1"
-                } ${
-                  selectedValue === option.value ? "bg-logo-primary/20" : ""
-                } ${option.disabled ? "opacity-50 cursor-not-allowed" : ""}`}
-                onClick={() => handleSelect(option.value)}
-                disabled={option.disabled}
-              >
-                <span
-                  className={`block whitespace-normal break-words ${
-                    option.description || selectedValue === option.value
-                      ? "font-semibold"
-                      : ""
-                  }`}
-                >
-                  {option.label}
-                </span>
-                {option.description && (
-                  <span className="mt-0.5 block whitespace-normal text-xs font-normal leading-snug text-mid-gray">
-                    {option.description}
-                  </span>
-                )}
-              </button>
-            ))
-          )}
-        </div>
-      )}
-    </div>
+          ) : undefined
+        }
+        items={visible.map((o) => ({
+          value: o.value,
+          label: o.label,
+          description: o.description,
+          disabled: o.disabled,
+          selected: o.value === selectedValue,
+          onSelect: () => onSelect(o.value),
+        }))}
+      />
+    </>
   );
 };

@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Cài đặt...",
-    "checkUpdates": "Kiểm tra cập nhật...",
-    "copyLastTranscript": "Sao chép bản chép lời mới nhất",
+    "settings": "Mở Tishe…",
+    "checkUpdates": "Kiểm tra bản cập nhật…",
+    "copyLastTranscript": "Sao chép lần đọc chính tả gần nhất",
     "unloadModel": "Dỡ mô hình",
     "model": "Mô hình",
     "quit": "Thoát",
     "cancel": "Hủy",
-    "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn"
+    "secureInputWarning": "⚠ Phím tắt bị Secure Input chặn",
+    "modelLocked": "Không thể đổi mô hình khi đang chuyển đổi văn bản",
+    "tooltipDictation": "Đọc chính tả: {{shortcut}}",
+    "backgroundTitle": "Tishe vẫn chạy ở chế độ nền",
+    "backgroundBody": "Quá trình chuyển đổi vẫn tiếp tục. Bạn sẽ nhận được thông báo khi xong."
   },
   "sidebar": {
     "general": "Chung",
-    "models": "Mô hình",
+    "models": "Nhận dạng",
     "advanced": "Nâng cao",
     "postProcessing": "Xử lý sau",
     "history": "Lịch sử",
     "debug": "Gỡ lỗi",
-    "about": "Giới thiệu"
+    "about": "Giới thiệu",
+    "label": "Các mục",
+    "transcription": "Chép lời",
+    "dictation": "Đọc chính tả",
+    "meetings": "Cuộc họp",
+    "llm": "Biên tập AI",
+    "app": "Ứng dụng",
+    "soon": "sớm",
+    "state": {
+      "running": "đang chạy",
+      "new": "đã xong, chưa xem",
+      "downloading": "đang tải xuống"
+    },
+    "next": "Tiếp theo"
   },
   "onboarding": {
     "subtitle": "Để bắt đầu, hãy chọn một mô hình chuyển đổi giọng nói",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Cần cấp quyền",
-      "description": "Handy cần một số quyền để hoạt động bình thường.",
+      "description": "Tishe cần một vài quyền để hoạt động đúng.",
       "microphone": {
         "title": "Quyền truy cập Micrô",
         "description": "Cần thiết để nghe giọng nói của bạn để chuyển đổi."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Không thể kiểm tra quyền. Vui lòng thử lại.",
         "requestFailed": "Không thể yêu cầu quyền. Vui lòng thử lại."
-      }
+      },
+      "skip": "Tiếp tục mà không dùng micrô",
+      "skipHint": "Micrô chỉ cần cho đọc chính tả – chuyển đổi tệp vẫn hoạt động khi không có micrô. Bạn có thể cấp quyền sau trong phần cài đặt Windows."
+    },
+    "step": "Bước {{n}}/{{total}}",
+    "language": {
+      "title": "Bản ghi của bạn bằng ngôn ngữ nào?",
+      "description": "Chúng tôi sẽ tải xuống một mô hình nhận dạng giọng nói cho ngôn ngữ này. Mô hình chạy trên máy tính này.",
+      "ru": {
+        "title": "Tiếng Nga",
+        "limit": "Chỉ tiếng Nga: không nhận dạng được tiếng Anh"
+      },
+      "en": {
+        "title": "Tiếng Anh",
+        "limit": "Chỉ tiếng Anh"
+      },
+      "eu": {
+        "title": "Ngôn ngữ châu Âu khác",
+        "limit": "25 ngôn ngữ châu Âu, tự nhận biết ngôn ngữ"
+      },
+      "other": {
+        "title": "Tiếng Việt hoặc ngôn ngữ khác",
+        "limit": "30 ngôn ngữ: tiếng Trung, Nhật, Hàn, Ả Rập, Thổ Nhĩ Kỳ, Hindi và các ngôn ngữ khác",
+        "limitWhisper": "nhiều ngôn ngữ, chậm hơn trên bộ xử lý"
+      },
+      "onDisk": "đã có trên máy tính này",
+      "shared": "Mô hình sẽ được dùng cho cả đọc chính tả lẫn chuyển đổi tệp. Bạn có thể đổi sau trong mục “$t(sidebar.models)”.",
+      "otherModel": "Chọn mô hình khác",
+      "hideCatalog": "Ẩn danh sách mô hình",
+      "download": "Tải xuống {{size}}",
+      "use": "Dùng {{name}}",
+      "downloadNamed": "Tải xuống {{name}} · {{size}}",
+      "once": "Chỉ tải một lần, sau đó hoạt động không cần internet"
+    },
+    "download": {
+      "title": "Đang tải xuống {{name}}",
+      "description": "Trong lúc chờ bạn có thể làm việc khác: đóng cửa sổ không làm dừng việc tải xuống.",
+      "starting": "Đang kết nối…",
+      "amount": "{{done}}/{{total}}",
+      "speed": "{{n}} MB/giây",
+      "preparing": "Đang chuẩn bị mô hình…",
+      "cancel": "Hủy",
+      "failed": "Chưa tải được mô hình",
+      "failedTitle": "Không tải xuống được mô hình",
+      "failedHint": "Không kết nối được máy chủ. Hãy kiểm tra internet rồi nhấn Thử lại.",
+      "retry": "Thử lại",
+      "continue": "Mở Tishe ngay, không cần chờ"
+    },
+    "welcome": {
+      "title": "Chào mừng bạn đến với Tishe",
+      "lead": "Tishe chuyển giọng nói thành văn bản ngay trên máy tính của bạn – không cần internet, không cần tài khoản.",
+      "files": "Chép lời bản ghi – cuộc họp, bài giảng, phỏng vấn – thành tài liệu Word",
+      "dictation": "Đọc chính tả trong mọi ứng dụng: giữ phím, nói – văn bản hiện ra",
+      "private": "Bản ghi và văn bản không rời khỏi máy tính",
+      "stepsLabel": "Các bước thiết lập",
+      "steps": {
+        "permissions": "Quyền",
+        "language": "Ngôn ngữ của bản ghi",
+        "download": "Tải mô hình"
+      },
+      "credit": "Viktor Pereverzev · dựa trên Handy"
+    },
+    "tips": {
+      "title": "Trong lúc tải – cách hoạt động",
+      "dictationBefore": "Đọc chính tả: trong mọi ứng dụng, hãy giữ",
+      "dictationAfter": "và nói. Thả ra – văn bản sẽ xuất hiện tại vị trí con trỏ.",
+      "files": "Chép lời: kéo tệp âm thanh hoặc video vào cửa sổ Tishe – bạn sẽ nhận được tài liệu Word.",
+      "editing": "Biên tập bằng AI sửa lỗi và dấu câu – bật trong công thức chuyển đổi."
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "Lọc các mô hình hỗ trợ dịch sang tiếng Anh"
       },
       "noModelsMatch": "Không có mô hình nào khớp với bộ lọc này.",
+      "params": {
+        "button": "Tham số",
+        "open": "Tham số mô hình",
+        "title": "Tham số: {{name}}",
+        "savedAtOnce": "Thay đổi được lưu ngay. Các ô hiển thị giá trị đang dùng; giá trị đã đổi có nút đặt lại.",
+        "resetAll": "Khôi phục mặc định",
+        "done": "Xong",
+        "resetField": "Trở về mặc định",
+        "defaultRange": "Mặc định {{value}}; cho phép {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Chỉ dẫn có sẵn. Sửa văn bản để dùng chỉ dẫn của riêng bạn; xóa trống để trở lại chỉ dẫn có sẵn.",
+          "own": "Chỉ dẫn của bạn. Nút đặt lại sẽ khôi phục chỉ dẫn có sẵn."
+        },
+        "asr": {
+          "segment": {
+            "label": "Độ dài đoạn cho tệp, giây",
+            "description": "Tệp được nhận dạng theo từng đoạn cắt tại chỗ ngắt, dài tối đa bằng giá trị này. Đoạn ngắn nhất cũng nhỏ đi theo (12 giây khi đặt 25 giây). Đo thực tế: 12–25 giây giữ dấu câu tốt hơn 60–120 giây."
+          },
+          "device": {
+            "label": "Thiết bị",
+            "description": "“Chỉ bộ xử lý” giải phóng chip đồ họa nhưng thường chậm hơn. Áp dụng cả cho đọc chính tả; có hiệu lực từ lần nhận dạng tiếp theo.",
+            "general": "Theo cài đặt tăng tốc",
+            "cpu": "Chỉ bộ xử lý",
+            "notHere": "Thiết bị của mô hình này theo cài đặt tăng tốc chung."
+          }
+        },
+        "llm": {
+          "promptNote": "Chỉ dẫn cho văn bản tiếng Nga và tiếng Anh. Các ngôn ngữ khác nhận chỉ dẫn tiếng Anh có sẵn kèm tên ngôn ngữ. Chỉ dẫn riêng trong mục Chép lời sẽ thay thế chúng cho mọi ngôn ngữ.",
+          "promptRu": "Chỉ dẫn cho văn bản tiếng Nga",
+          "promptEn": "Chỉ dẫn cho văn bản tiếng Anh",
+          "temperature": {
+            "label": "Nhiệt độ",
+            "description": "Thấp hơn là cẩn thận hơn: ở 0,8 mô hình tự bịa từ, 0,2 là giá trị đo được cho việc biên tập."
+          },
+          "chunk": {
+            "label": "Kích thước khối, ký tự",
+            "description": "Lượng văn bản mô hình biên tập mỗi lần. Mô hình nhỏ bám sát bản gốc hơn với khối ngắn."
+          },
+          "context": {
+            "label": "Ngữ cảnh, token",
+            "description": "Chỗ cho chỉ dẫn, khối văn bản và câu trả lời. Càng lớn càng tốn bộ nhớ."
+          },
+          "answer": {
+            "label": "Giới hạn câu trả lời, token",
+            "description": "Dừng mô hình khi nó bắt đầu lặp lại. Một khối 3000 ký tự vào khoảng 1100 token."
+          },
+          "threads": {
+            "label": "Luồng bộ xử lý cho câu trả lời",
+            "description": "Việc đọc văn bản luôn dùng mọi luồng phần cứng.",
+            "auto": "Tự động – mỗi lõi một luồng"
+          },
+          "restartNote": "Nhiệt độ, ngữ cảnh, giới hạn câu trả lời và số luồng áp dụng khi mô hình khởi động lần sau: mô hình đang chạy sẽ khởi động lại trước tác vụ tiếp theo.",
+          "invalid": "Chưa lưu: {{detail}}",
+          "contextTooSmall": "Chưa lưu: ngữ cảnh phải chứa được khối văn bản và câu trả lời – tối thiểu {{min}} token với kích thước khối và giới hạn câu trả lời hiện tại."
+        }
+      },
       "yourModels": "Mô hình đã tải",
       "availableModels": "Có sẵn để tải xuống",
-      "searchPlaceholder": "Tìm mô hình theo tên…",
+      "searchPlaceholder": "Tìm theo tên",
       "rescan": {
         "label": "Quét lại",
-        "tooltip": "Quét lại các mô hình được thêm vào thư mục mô hình hoặc bộ nhớ đệm Hugging Face bên ngoài Handy"
+        "tooltip": "Tìm các mô hình được thêm thủ công vào thư mục"
       }
     },
     "general": {
       "title": "Chung",
       "shortcut": {
-        "title": "Phím tắt Handy",
+        "title": "Phím tắt của Tishe",
         "description": "Cấu hình phím tắt để kích hoạt ghi âm chuyển đổi giọng nói thành văn bản",
         "loading": "Đang tải phím tắt...",
         "none": "Chưa cấu hình phím tắt",
         "notFound": "Không tìm thấy phím tắt",
-        "pressKeys": "Nhấn phím...",
+        "pressKeys": "Nhấn tổ hợp phím… (Esc để hủy)",
         "bindings": {
           "transcribe": {
-            "name": "Phím tắt chuyển đổi",
-            "description": "Phím tắt để ghi âm và chuyển đổi giọng nói của bạn."
+            "name": "Đọc chính tả",
+            "description": "Giữ và nói – văn bản được dán vào cửa sổ đang hoạt động"
           },
           "cancel": {
-            "name": "Phím tắt hủy",
-            "description": "Phím tắt để hủy bản ghi hiện tại."
+            "name": "Hủy",
+            "description": "Dừng bản ghi đang chạy"
           },
           "transcribe_with_post_process": {
-            "name": "Phím tắt xử lý sau",
-            "description": "Tùy chọn: Phím tắt chuyên dụng luôn áp dụng xử lý sau bằng AI cho bản chuyển đổi của bạn."
+            "name": "Phím đọc chính tả có biên tập",
+            "description": "Văn bản được dán sau khi AI biên tập"
           }
         },
         "errors": {
           "restore": "Không thể khôi phục phím tắt gốc",
           "set": "Không thể đặt phím tắt: {{error}}",
-          "reset": "Không thể đặt lại phím tắt về giá trị gốc"
+          "reset": "Không thể đặt lại phím tắt về giá trị gốc",
+          "taken": "Một chương trình khác đã dùng phím này. Hãy chọn phím khác.",
+          "duplicate": "Phím này đã được dùng cho một thao tác khác ở đây."
         }
       },
       "language": {
-        "title": "Ngôn ngữ",
-        "description": "Chọn ngôn ngữ để nhận dạng giọng nói. Tự động sẽ tự động xác định ngôn ngữ, trong khi chọn một ngôn ngữ cụ thể có thể cải thiện độ chính xác cho ngôn ngữ đó.",
+        "title": "Ngôn ngữ nhận dạng",
+        "description": "“Tự động” tự nhận biết ngôn ngữ; chọn cụ thể sẽ đáng tin cậy hơn",
         "searchPlaceholder": "Tìm kiếm ngôn ngữ...",
         "noResults": "Không tìm thấy ngôn ngữ",
         "auto": "Tự động"
       },
       "shortcutActivation": {
-        "title": "Hành vi phím tắt",
-        "description": "Chọn cách phím tắt chuyển đổi bắt đầu và dừng ghi âm.",
+        "title": "Cách phím hoạt động",
+        "description": "Cách phím bắt đầu và kết thúc ghi âm",
         "options": {
           "holdOrToggle": "Tự động",
           "pushToTalk": "Giữ",
@@ -233,29 +375,40 @@
       "title": "Âm thanh",
       "microphone": {
         "title": "Micrô",
-        "description": "Chọn thiết bị micrô ưa thích của bạn",
+        "description": "Ghi giọng nói từ đâu",
         "placeholder": "Chọn micrô...",
         "loading": "Đang tải..."
       },
       "channel": {
         "title": "Kênh đầu vào",
-        "description": "Chọn kênh đầu vào để ghi âm. Sử dụng tùy chọn này nếu giao diện âm thanh của bạn có nhiều đầu vào.",
+        "description": "Cho card âm thanh có nhiều đầu vào",
         "average": "Trung bình tất cả các kênh",
         "channel": "Kênh {{n}}"
       },
       "audioFeedback": {
-        "label": "Phản hồi âm thanh",
-        "description": "Phát âm thanh khi bắt đầu và kết thúc ghi âm"
+        "label": "Âm thanh phản hồi",
+        "description": "Một âm thanh lúc bắt đầu và kết thúc ghi âm"
       },
       "outputDevice": {
         "title": "Thiết bị đầu ra",
-        "description": "Chọn thiết bị đầu ra âm thanh ưa thích của bạn cho âm thanh phản hồi",
+        "description": "Phát âm thanh phản hồi ở đâu",
         "placeholder": "Chọn thiết bị đầu ra...",
         "loading": "Đang tải..."
       },
       "volume": {
         "title": "Âm lượng",
-        "description": "Điều chỉnh âm lượng của âm thanh phản hồi"
+        "description": "Điều chỉnh âm lượng của âm thanh phản hồi",
+        "levels": {
+          "quiet": "Nhỏ",
+          "medium": "Vừa",
+          "loud": "To"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Của riêng bạn",
+        "preview": "Phát âm thanh bắt đầu và kết thúc"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Thử nghiệm"
       },
       "experimentalToggle": {
-        "label": "Tính năng thử nghiệm",
-        "description": "Bật các tính năng thử nghiệm đang trong quá trình phát triển."
+        "label": "Hiện tính năng thử nghiệm",
+        "description": "Tính năng đang phát triển; có thể không ổn định"
       },
       "lazyStreamClose": {
         "label": "Giữ micro mở giữa các lần phiên âm",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Khởi động ẩn",
-        "description": "Khởi động vào khay hệ thống mà không mở cửa sổ."
+        "label": "Ẩn cửa sổ khi khởi động",
+        "description": "Chương trình khởi động trong khay hệ thống"
       },
       "autostart": {
-        "label": "Khởi động cùng hệ thống",
-        "description": "Tự động khởi động Handy khi bạn đăng nhập vào máy tính."
+        "label": "Khởi động cùng Windows",
+        "description": "Đọc chính tả sẵn sàng ngay sau khi đăng nhập"
       },
       "showTrayIcon": {
-        "label": "Hiển thị biểu tượng khay",
-        "description": "Hiển thị biểu tượng Handy trong khay hệ thống."
+        "label": "Biểu tượng trong khay hệ thống",
+        "description": "Không có biểu tượng, cửa sổ đã đóng chỉ quay lại khi chạy lại chương trình"
       },
       "overlay": {
         "style": {
-          "title": "Lớp phủ",
-          "description": "Chọn lớp phủ khi ghi âm: 'Không có' sẽ ẩn nó, 'Tối giản' hiển thị một chỉ báo nhỏ gọn, 'Trực tiếp' hiển thị bản chép lời theo thời gian thực khi bạn nói (chỉ với các mô hình hỗ trợ truyền trực tiếp — hãy tìm huy hiệu 'Truyền trực tiếp' trong bộ chọn mô hình). Trên Linux, khuyến nghị chọn 'Không có'.",
+          "title": "Kiểu chỉ báo",
+          "description": "Hiển thị gì cạnh con trỏ khi đọc chính tả",
           "options": {
             "none": "Không có",
             "minimal": "Tối giản",
             "live": "Trực tiếp"
-          }
+          },
+          "noneConsequence": "Không có chỉ báo, lỗi sẽ không hiện: văn bản chưa dán được nằm trong Lịch sử"
         },
         "position": {
-          "title": "Vị trí lớp phủ",
-          "description": "Hiển thị lớp phủ phản hồi trực quan trong quá trình ghi âm và chuyển đổi. Trên Linux, 'Không có' được khuyến nghị.",
+          "title": "Vị trí chỉ báo",
+          "description": "Trên cùng hoặc dưới cùng màn hình",
           "options": {
             "bottom": "Dưới",
             "top": "Trên"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Phương thức dán",
-        "description": "Chọn cách chèn văn bản. Trực tiếp: mô phỏng gõ phím qua đầu vào hệ thống. Không có: bỏ qua dán, chỉ cập nhật lịch sử/clipboard.",
+        "description": "Văn bản vào cửa sổ đang hoạt động bằng cách nào",
         "options": {
           "clipboard": "Bảng nhớ tạm ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Bảng nhớ tạm (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Xử lý Clipboard",
-        "description": "Không sửa đổi Clipboard giữ nguyên nội dung clipboard hiện tại sau khi chuyển đổi. Sao chép vào Clipboard để lại kết quả chuyển đổi trong clipboard sau khi dán.",
+        "title": "Bộ nhớ tạm",
+        "description": "Giữ nội dung cũ trong bộ nhớ tạm hoặc để lại văn bản vừa đọc",
         "options": {
           "dontModify": "Không sửa đổi Clipboard",
           "copyToClipboard": "Sao chép vào Clipboard"
         }
       },
       "autoSubmit": {
-        "title": "Gửi tự động",
-        "description": "Tự động gửi tổ hợp phím đã chọn sau khi chèn văn bản. Cmd+Enter áp dụng trên macOS, còn Windows/Linux dùng Super+Enter.",
+        "title": "Gửi sau khi dán",
+        "description": "Nhấn phím đã chọn ngay sau khi dán, ví dụ Enter trong khung chat",
         "options": {
           "off": "Tắt",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Dịch sang tiếng Anh",
-        "description": "Tự động dịch giọng nói từ các ngôn ngữ khác sang tiếng Anh trong quá trình chuyển đổi."
+        "description": "Lời nói bằng bất kỳ ngôn ngữ nào thành văn bản tiếng Anh"
       },
       "modelUnload": {
-        "title": "Giải phóng mô hình",
-        "description": "Tự động giải phóng bộ nhớ GPU/CPU khi mô hình không được sử dụng trong thời gian quy định",
+        "title": "Giải phóng mô hình khỏi bộ nhớ sau…",
+        "description": "Giải phóng bộ nhớ khi một thời gian không cần đến mô hình",
         "options": {
           "never": "Không bao giờ",
           "immediately": "Ngay lập tức",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Từ tùy chỉnh",
-        "description": "Giúp các mô hình được hỗ trợ nhận dạng tên và thuật ngữ chuyên ngành. Tính năng sửa gần đúng hiện chỉ áp dụng cho các từ sử dụng chữ cái A–Z và chữ số.",
+        "title": "Từ của bạn",
+        "description": "Gợi ý cho mô hình Whisper; các mô hình khác chỉ được sửa lỗi, và chỉ với từ có chữ A–Z",
         "placeholder": "Thêm một từ",
         "add": "Thêm",
         "remove": "Xóa {{word}}",
-        "duplicate": "\"{{word}}\" đã tồn tại"
+        "duplicate": "\"{{word}}\" đã tồn tại",
+        "removed": "Đã xóa “{{word}}”"
       },
       "voiceActivityDetection": {
-        "title": "Phát hiện hoạt động giọng nói",
-        "description": "Lọc bỏ khoảng lặng khỏi bản ghi. Các mô hình hỗ trợ truyền trực tiếp dùng đuôi VAD dài hơn; tắt VAD sẽ ghi âm thanh thô."
+        "title": "Bỏ khoảng lặng",
+        "description": "Chỉ lời nói được đưa vào nhận dạng"
       },
       "vadBackend": {
         "title": "Bộ phát hiện giọng nói",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Loại bỏ từ đệm",
-        "description": "Loại bỏ các từ ngập ngừng phổ biến khỏi bản chép lời. Tắt để giữ lại các từ này."
+        "description": "“uh”, “hmm” trong văn bản được dán"
       },
       "chineseScript": {
         "title": "Chữ Hán giản thể/phồn thể",
-        "description": "Ghi bản chép tiếng Quan Thoại và tiếng Quảng Đông bằng chữ Giản thể hoặc Phồn thể. Các ngôn ngữ khác không bị thay đổi.",
+        "description": "Chữ Giản thể hoặc Phồn thể",
         "options": {
           "asTranscribed": "Giữ nguyên bản chép",
           "simplified": "Giản thể",
@@ -434,20 +589,21 @@
           "title": "URL cơ sở",
           "description": "URL cơ sở API cho nhà cung cấp đã chọn. Chỉ có thể chỉnh sửa nhà cung cấp tùy chỉnh.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Địa chỉ do nhà cung cấp đã chọn quy định",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "Khóa API",
-          "description": "Khóa API cho nhà cung cấp đã chọn.",
+          "description": "Chỉ lưu trên máy tính này",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Mô hình",
-          "descriptionCustom": "Cung cấp định danh mô hình được yêu cầu bởi điểm cuối tùy chỉnh của bạn.",
-          "descriptionDefault": "Chọn một mô hình được cung cấp bởi nhà cung cấp đã chọn.",
+          "descriptionCustom": "Tên mô hình trên máy chủ của bạn",
+          "descriptionDefault": "Nút bên phải làm mới danh sách",
           "placeholderWithOptions": "Tìm kiếm hoặc chọn một mô hình",
           "placeholderNoOptions": "Nhập tên mô hình",
-          "refreshModels": "Làm mới mô hình"
+          "refreshModels": "Làm mới danh sách mô hình"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Prompt đã chọn",
           "description": "Chọn một mẫu để tinh chỉnh bản ghi hoặc tạo mới. Sử dụng ${output} trong văn bản prompt để tham chiếu bản ghi đã chụp."
         },
-        "noPrompts": "Không có prompt nào",
-        "selectPrompt": "Chọn một prompt",
+        "noPrompts": "Chưa có chỉ dẫn",
+        "selectPrompt": "Chọn một chỉ dẫn",
         "createNew": "Tạo Prompt mới",
-        "promptLabel": "Nhãn Prompt",
+        "promptLabel": "Tên",
         "promptLabelPlaceholder": "Nhập tên prompt",
-        "promptInstructions": "Hướng dẫn Prompt",
+        "promptInstructions": "Nội dung chỉ dẫn",
         "promptInstructionsPlaceholder": "Viết hướng dẫn để chạy sau khi chuyển đổi. Ví dụ: Cải thiện ngữ pháp và độ rõ ràng cho văn bản sau: ${output}",
         "promptTip": "Mẹo: Sử dụng <code>${output}</code> để chèn văn bản đã chuyển đổi vào prompt của bạn.",
         "updatePrompt": "Cập nhật Prompt",
-        "deletePrompt": "Xóa Prompt",
-        "createPrompt": "Tạo Prompt",
+        "deletePrompt": "Xóa",
+        "createPrompt": "Tạo",
         "cancel": "Hủy",
-        "selectToEdit": "Chọn một prompt ở trên để xem và chỉnh sửa chi tiết.",
-        "createFirst": "Nhấn 'Tạo Prompt mới' ở trên để tạo prompt xử lý sau đầu tiên của bạn."
+        "selectToEdit": "Chọn một chỉ dẫn để sửa.",
+        "createFirst": "Nhấp “Tạo” để thêm chỉ dẫn đầu tiên."
+      },
+      "local": {
+        "intro": "Mô hình chạy ngay trên máy tính này: không cần internet, không cần khóa, văn bản của bạn không bao giờ rời khỏi máy. Hãy tải xuống một mô hình nếu muốn. Nó tự khởi động khi cần và được giải phóng khỏi bộ nhớ khi rảnh. Nó chạy trên bộ xử lý nên chậm hơn dịch vụ đám mây. Mọi mô hình đều vừa với laptop có 16 GB RAM.",
+        "runtimeMissing": "Không tìm thấy công cụ AI tích hợp. Vui lòng cài đặt lại Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Cân bằng",
+            "model": "Qwen3.5 4B",
+            "description": "Bản Qwen 4B thông thường. Cẩn thận với dấu câu nhưng sửa được ít lỗi nhận dạng trong hội thoại thật (thử nghiệm của chúng tôi, 06/10/2026). Bản có tăng tốc chính xác hơn và nhanh hơn."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Mô hình của Google, trung thành với bản gốc. Biên tập giống Gemma trong bản của Google có tăng tốc nhưng chậm hơn khoảng 1,25 lần."
+          },
+          "gigachat31": {
+            "title": "Dành cho tiếng Nga",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Được huấn luyện bằng tiếng Nga ngay từ đầu. Mỗi token chỉ dùng 1,8B trong 10B tham số, nên nhanh hơn so với kích thước. Cần nhiều bộ nhớ hơn."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen cho tiếng Nga",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) với bộ từ vựng tiếng Nga và được huấn luyện thêm trên văn bản tiếng Nga. Trong thử nghiệm, nó sửa ít hơn Gemma E2B và chậm bằng một nửa (khoảng 27 phút cho mỗi giờ ghi âm)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Mô hình nhỏ của NVIDIA, chính thức chỉ hỗ trợ tiếng Anh. Trong thử nghiệm, nó gần như giữ nguyên văn bản cả tiếng Nga lẫn tiếng Anh và chậm hơn Gemma (khoảng 35 phút cho mỗi giờ ghi âm)."
+          },
+          "qwen35_9b": {
+            "title": "Tối đa",
+            "model": "Qwen3.5 9B",
+            "description": "Mô hình cục bộ thông minh nhất: tốt nhất về ngữ cảnh và các chỉnh sửa khó. Chậm nhất."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Cân bằng",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B trong bản mới hơn có tăng tốc tích hợp. Chính xác hơn và nhanh hơn khoảng 1,2 lần so với Qwen 4B thường, nhưng trong thử nghiệm của chúng tôi chỉ sửa được một nửa số lỗi so với Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma nhẹ",
+            "model": "Gemma 4 E2B · bản của Google",
+            "description": "Gemma nhỏ hơn trong bản chính thức của Google, kèm tăng tốc (+98 MB). Nhanh gấp đôi Gemma E4B (khoảng 14 phút cho mỗi giờ ghi âm) với khoảng 2/3 số chỉnh sửa của nó."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · bản của Google",
+            "description": "Chất lượng tốt nhất trong thử nghiệm của chúng tôi (06/10/2026). Bản chính thức của Google kèm tăng tốc (+99 MB): biên tập như Gemma E4B thường, nhanh hơn khoảng 1,25 lần. Khoảng 26 phút cho mỗi giờ ghi âm."
+          }
+        },
+        "speedupBadge": "tăng tốc",
+        "speedupHint": "Một mô hình phụ nhỏ đoán trước vài từ và mô hình chính kiểm tra chúng. Trên bộ xử lý, cách này nhanh hơn khoảng 1,2–1,3 lần.",
+        "untested": "chưa thử nghiệm",
+        "delete": "Xóa mô hình",
+        "state": {
+          "stopped": "Chưa nạp vào bộ nhớ",
+          "loading": "Đang nạp vào bộ nhớ…",
+          "ready": "Đã nạp vào bộ nhớ"
+        },
+        "unloadNow": "Giải phóng ngay",
+        "unload": {
+          "title": "Giải phóng khỏi bộ nhớ",
+          "description": "Mô hình được rảnh bao lâu trước khi bị giải phóng khỏi bộ nhớ, giải phóng khoảng 2–3 GB.",
+          "immediately": "Ngay sau khi xử lý",
+          "min2": "Sau 2 phút",
+          "min5": "Sau 5 phút",
+          "min15": "Sau 15 phút",
+          "never": "Không bao giờ"
+        },
+        "recommended": "Đề xuất"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Mở thư mục ghi âm",
       "loading": "Đang tải lịch sử...",
       "empty": "Chưa có bản ghi nào. Bắt đầu ghi âm để xây dựng lịch sử của bạn!",
-      "copyToClipboard": "Sao chép bản ghi vào clipboard",
+      "copyToClipboard": "Sao chép văn bản",
       "copyError": "Không thể sao chép bản ghi vào bộ nhớ tạm.",
       "save": "Lưu bản ghi",
       "unsave": "Xóa khỏi đã lưu",
       "delete": "Xóa mục",
       "deleteError": "Không thể xóa mục. Vui lòng thử lại.",
-      "retranscribe": "Phiên âm lại",
+      "retranscribe": "Nhận dạng lại",
       "retranscribeError": "Không thể phiên âm lại. Vui lòng thử lại.",
-      "transcribing": "Đang phiên âm...",
+      "transcribing": "Đang nhận dạng…",
       "transcriptionFailed": "Phiên âm thất bại. Bạn có thể phiên âm lại bằng biểu tượng thử lại."
     },
     "debug": {
       "title": "Gỡ lỗi",
       "logDirectory": {
         "title": "Thư mục nhật ký",
-        "description": "Vị trí lưu trữ các tệp nhật ký"
+        "description": "Đính kèm nhật ký khi báo lỗi"
       },
       "logLevel": {
         "title": "Mức nhật ký",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Kiểm tra cập nhật",
-        "description": "Tự động kiểm tra phiên bản mới của Handy",
-        "lockedDescription": "Đã bị vô hiệu hóa bởi cấu hình hệ thống (HANDY_DISABLE_UPDATER)"
+        "description": "Mỗi lần khởi động, hỏi GitHub một lần xem đã có phiên bản Tishe mới chưa. Không gửi bản ghi âm hay văn bản nào",
+        "lockedDescription": "Kiểm tra cập nhật đã bị tắt trong bản này"
       },
       "soundTheme": {
         "label": "Chủ đề âm thanh",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Ngưỡng sửa từ",
-        "description": "Độ nhạy cho việc sửa từ tùy chỉnh"
+        "description": "Một từ phải giống từ của bạn đến mức nào thì được thay thế"
       },
       "historyLimit": {
-        "title": "Giới hạn lịch sử",
-        "description": "Số lượng mục lịch sử tối đa cần giữ",
+        "title": "Giữ bao nhiêu lần đọc chính tả",
+        "description": "Các lần đã giữ lại không được tính",
         "entries": "mục"
       },
       "recordingRetention": {
-        "title": "Tự động xóa ghi âm",
-        "description": "Tự động xóa các bản ghi âm cũ để tiết kiệm dung lượng",
+        "title": "Xóa các lần đọc chính tả cũ",
+        "description": "Âm thanh bị xóa cùng với văn bản",
         "never": "Không bao giờ",
         "preserveLimit": "Giữ {{count}} bản mới nhất",
         "days3": "Sau 3 ngày",
@@ -538,24 +765,24 @@
         "placeholder": "Chọn thời gian lưu giữ..."
       },
       "alwaysOnMicrophone": {
-        "label": "Micrô luôn bật",
-        "description": "Giữ micrô hoạt động để phản hồi nhanh hơn"
+        "label": "Luôn bật micrô",
+        "description": "Ghi âm bắt đầu nhanh hơn nhưng micrô bị chiếm liên tục"
       },
       "clamshellMicrophone": {
-        "title": "Micrô chế độ gập",
-        "description": "Micrô sử dụng khi nắp laptop được đóng"
+        "title": "Micrô khi gập máy",
+        "description": "Dùng micrô nào khi laptop gập lại"
       },
       "postProcessingToggle": {
         "label": "Xử lý sau",
         "description": "Bật tinh chỉnh văn bản bằng AI sau khi chuyển đổi"
       },
       "muteWhileRecording": {
-        "label": "Tắt tiếng khi ghi âm",
-        "description": "Tắt tiếng âm thanh hệ thống trong khi ghi âm"
+        "label": "Tắt tiếng máy tính khi ghi âm",
+        "description": "Nhạc và video sẽ không lọt vào bản ghi"
       },
       "appendTrailingSpace": {
-        "label": "Thêm dấu cách cuối",
-        "description": "Thêm một dấu cách sau bản ghi đã dán"
+        "label": "Thêm dấu cách ở cuối",
+        "description": "Câu tiếp theo sẽ không dính vào câu trước"
       },
       "keyboardImplementation": {
         "title": "Triển khai bàn phím",
@@ -568,28 +795,28 @@
         "settings": "Cài đặt:"
       },
       "pasteDelay": {
-        "title": "Độ trễ dán (trước)",
-        "description": "Độ trễ (tính bằng mili giây) sau khi sao chép văn bản, trước khi gửi phím dán. Tăng nếu không có gì được dán."
+        "title": "Độ trễ trước khi dán",
+        "description": "Tăng lên nếu không có gì được dán"
       },
       "pasteDelayAfter": {
-        "title": "Độ trễ dán (sau)",
-        "description": "Độ trễ (tính bằng mili giây) sau khi gửi phím dán, trước khi khôi phục bảng nhớ tạm trước đó. Tăng nếu nội dung bảng nhớ tạm cũ được dán thay vì bản chép lời."
+        "title": "Độ trễ sau khi dán",
+        "description": "Tăng lên nếu văn bản cũ trong bộ nhớ tạm bị dán"
       },
       "holdThreshold": {
         "title": "Ngưỡng giữ phím",
-        "description": "Chỉ áp dụng cho chế độ Tự động: phím tắt phải được giữ trong bao lâu (mili giây) để được tính là giữ thay vì nhấn nhanh. Giảm xuống nếu bản ghi vẫn tiếp tục sau khi giữ ngắn; tăng lên nếu các lần nhấn nhanh có chủ ý bị coi là giữ phím."
+        "description": "Nhấn ngắn hơn để bật/tắt, lâu hơn được tính là giữ"
       },
       "reliablePaste": {
         "title": "Dán đáng tin cậy (Beta)",
-        "description": "Chỉ khôi phục bảng nhớ tạm sau khi ứng dụng đích thực sự đọc bản chép lời, thay vì sau một độ trễ cố định. Nhằm khắc phục việc nội dung bảng nhớ tạm cũ bị dán khi hệ thống bị tải nặng. Cần một phương thức dán qua bảng nhớ tạm; chỉ dành cho macOS và Windows."
+        "description": "Chờ chương trình đọc xong văn bản thay vì chờ một thời gian cố định"
       },
       "recordingBuffer": {
-        "title": "Bộ đệm ghi âm thêm",
-        "description": "Thời gian thêm (tính bằng mili giây) để tiếp tục ghi âm sau khi nhả phím, để thu âm thanh cuối. 0 = không có bộ đệm thêm."
+        "title": "Ghi tiếp sau khi thả",
+        "description": "Ghi thêm bao lâu sau khi thả phím"
       },
       "keyboardDiagnostic": {
         "title": "Chẩn đoán bàn phím",
-        "description": "Kiểm tra xem các sự kiện bàn phím có đến được Handy hay không. Chỉ số lượng sự kiện được ghi lại — không bao giờ ghi lại bạn bấm phím nào.",
+        "description": "Kiểm tra xem sự kiện bàn phím có đến được Tishe không. Chỉ ghi lại số lượng sự kiện – không bao giờ ghi phím bạn nhấn.",
         "run": "Chạy chẩn đoán 10 giây",
         "running": "Đang lắng nghe… hãy bấm phím tắt của bạn vài lần (ví dụ: Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Chuột",
         "verdictBlocked": "Secure Input đang chặn các sự kiện phím — phím tắt có chứa phím thường không thể hoạt động cho đến khi vấn đề này được xử lý.",
         "verdictSuspicious": "Có sự kiện phím bổ trợ nhưng không có sự kiện phím nào — thứ gì đó đang chặn phím dù Secure Input báo là đang tắt. Vui lòng báo cáo việc này trên GitHub.",
-        "verdictOk": "Các sự kiện phím đang đến Handy bình thường.",
+        "verdictOk": "Sự kiện phím đến Tishe bình thường.",
         "verdictNoEvents": "Không ghi nhận sự kiện nào — bạn có bấm phím nào trong lúc kiểm tra không?",
         "failed": "Chẩn đoán thất bại: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "Giới thiệu",
       "version": {
         "title": "Phiên bản",
-        "description": "Phiên bản hiện tại của Handy"
+        "description": "Phiên bản hiện tại của Tishe"
       },
       "appDataDirectory": {
-        "title": "Thư mục dữ liệu ứng dụng",
-        "description": "Vị trí Handy lưu trữ dữ liệu"
+        "title": "Thư mục dữ liệu",
+        "description": "Cài đặt, mô hình và lịch sử"
       },
       "sourceCode": {
         "title": "Mã nguồn",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Hỗ trợ phát triển",
-        "description": "Giúp chúng tôi tiếp tục xây dựng Handy",
+        "description": "Tishe được xây dựng dựa trên chương trình của họ",
         "button": "Quyên góp"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Suy luận hiệu suất cao của mô hình nhận dạng giọng nói tự động Whisper của OpenAI",
-          "details": "Handy sử dụng ggml để xử lý chuyển đổi giọng nói thành văn bản nhanh, cục bộ. Cảm ơn công việc tuyệt vời của Georgi Gerganov và các cộng tác viên."
+          "details": "Nhận dạng giọng nói nhanh trên máy tính. Cảm ơn Georgi Gerganov và những người đóng góp cho dự án."
         }
       },
       "whatsNewUpdates": {
-        "label": "Hiển thị điểm mới",
-        "description": "Hiển thị ghi chú phát hành sau khi Handy cập nhật"
+        "label": "Hiện “Có gì mới” sau khi cập nhật",
+        "description": "Danh sách ngắn các thay đổi khi mở phiên bản mới lần đầu"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Mở",
     "copy": "Sao chép",
     "clear": "Xóa",
-    "noOptionsFound": "Không tìm thấy tùy chọn"
+    "noOptionsFound": "Không tìm thấy tùy chọn",
+    "cancel": "Hủy",
+    "choose": "Chọn…",
+    "reset": "Đặt lại mặc định",
+    "search": "Tìm kiếm"
   },
   "accessibility": {
-    "permissionsDescription": "Handy cần quyền truy cập để gõ văn bản đã chuyển đổi.",
+    "permissionsDescription": "Để dán văn bản, chương trình cần quyền “Trợ năng”.",
     "openSettings": "Mở Cài đặt Hệ thống"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "mô hình không xác định",
     "pasteFailedTitle": "Không thể dán văn bản",
     "pasteFailed": "Không thể dán văn bản vào ứng dụng đang hoạt động.",
-    "transcriptionFailedTitle": "Phiên âm thất bại"
+    "transcriptionFailedTitle": "Không nhận dạng được"
   },
   "appLanguage": {
-    "title": "Ngôn ngữ ứng dụng",
-    "description": "Thay đổi ngôn ngữ giao diện của Handy"
+    "title": "Ngôn ngữ giao diện",
+    "description": "Ngôn ngữ của chữ trong chương trình"
   },
   "theme": {
-    "title": "Giao diện ứng dụng",
-    "description": "Chọn xem Handy theo chủ đề hệ thống hay giữ ở chế độ sáng hoặc tối",
+    "title": "Chủ đề",
+    "description": "Chọn Tishe theo chủ đề hệ thống hay luôn sáng hoặc tối",
     "options": {
-      "system": "Hệ thống",
+      "system": "Theo hệ thống",
       "light": "Sáng",
       "dark": "Tối"
     }
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "Đang chuyển đổi...",
     "processing": "Đang xử lý...",
+    "waiting": "Mô hình đang bận với một tệp – đọc chính tả sẽ bị chậm",
+    "message": {
+      "paste_failed": "Không dán được. Văn bản đã được lưu trong Lịch sử",
+      "editing_skipped": "Đã dán mà không biên tập: AI chưa sẵn sàng",
+      "no_microphone": "Không tìm thấy micrô",
+      "microphone_denied": "Không có quyền truy cập micrô",
+      "help": "Cần làm gì"
+    },
     "loadingModel": "Đang tải mô hình..."
   },
   "whatsNew": {
-    "title": "Điểm mới trong Handy v{{version}}"
+    "title": "Điểm mới trong Tishe"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} có thể đang chặn 1 phím tắt",
@@ -733,5 +972,696 @@
     "learnMore": "Cách khắc phục",
     "recorderBlocked": "Hiện không thể ghi phím tắt — Secure Input của macOS đang chặn các sự kiện phím. Hãy xử lý cảnh báo Secure Input trước.",
     "dismiss": "Bỏ qua"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "Không tìm thấy ffmpeg. Cần có nó để đọc tệp âm thanh và video, và nó đi kèm trình cài đặt Tishe: hãy cài lại Tishe. Hoặc cài bằng lệnh: winget install Gyan.FFmpeg — rồi khởi động lại Tishe.",
+    "input": {
+      "choose": "Thêm tệp…",
+      "filterName": "Âm thanh và video"
+    },
+    "maxPart": {
+      "title": "Độ dài tối đa của một phần",
+      "unit": "phút"
+    },
+    "cloud": {
+      "provider": "Nhà cung cấp",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Tùy chỉnh (tương thích OpenAI)"
+      },
+      "baseUrl": "URL API",
+      "baseUrlDescription": "URL gốc kết thúc bằng /v1.",
+      "apiKey": "Khóa API",
+      "apiKeyDescription": "Được lưu cục bộ trên máy tính này.",
+      "model": "Mô hình",
+      "modelDescription": "Mô hình gpt-4o-transcribe nhận tối đa ~23 phút mỗi yêu cầu; các phần được tự động rút ngắn.",
+      "language": "Ngôn ngữ",
+      "languageDescription": "Mã ngôn ngữ, ví dụ vi hoặc en. Để trống để tự động nhận biết.",
+      "languagePlaceholder": "tự động"
+    },
+    "diarization": {
+      "count": "Số người trong bản ghi",
+      "auto": "Tự động nhận biết",
+      "model": "Mô hình người nói",
+      "modelDescription": "Tải xuống một lần; phân biệt các giọng nói. Cả hai đều nhỏ và nhanh.",
+      "recommended": "Đề xuất",
+      "cloudUntimed": "Mô hình {{model}} không trả về mốc thời gian nên không thể đánh dấu người nói. Hãy chọn whisper-1, một mô hình whisper trên Groq hoặc nhận dạng cục bộ.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Được huấn luyện trên hàng nghìn giọng nói; phân biệt giọng đáng tin cậy trong bản ghi thực tế. Lựa chọn mặc định tốt."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Một mô hình thay thế: hãy thử nếu mô hình đầu tiên nhầm lẫn các giọng trong bản ghi của bạn."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Kèm cả bản chép thô",
+      "includeRawDescription": "Thêm kết quả nhận dạng chưa biên tập vào cuối tài liệu.",
+      "promptPlaceholder": "Chỉ dẫn có sẵn cho ngôn ngữ của bản ghi (tiếng Nga hoặc tiếng Anh)"
+    },
+    "output": {
+      "format": "Định dạng",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Mốc thời gian",
+      "location": "Lưu vào",
+      "choose": "Chọn thư mục…",
+      "nextToSource": "Cạnh tệp gốc",
+      "notes": "Ghi chú xử lý",
+      "removeFillers": "Bỏ âm ngập ngừng",
+      "saveDebug": "Lưu tệp trung gian",
+      "saveDebugDescription": "Tạo thư mục “<name>.debug” cạnh tài liệu, chứa văn bản sau mỗi bước: nhận dạng, làm sạch, mỗi yêu cầu gửi mô hình ngôn ngữ và câu trả lời, kết quả cuối. Dùng để truy lỗi và để so sánh mô hình."
+    },
+    "actions": {
+      "start": "Chuyển thành văn bản",
+      "cancel": "Hủy"
+    },
+    "progress": {
+      "starting": "Đang bắt đầu…",
+      "elapsed": "Đã trôi qua {{time}}",
+      "extracting": "Đang tách âm thanh…",
+      "extractingPart": "Đang tách âm thanh…",
+      "diarizing": "Đang nhận biết người nói…",
+      "diarizingPart": "Đang nhận biết người nói…",
+      "splitting": "Đang chia thành các phần…",
+      "splittingPart": "Đang chia thành các phần…",
+      "transcribing": "Đang chuyển thành văn bản…",
+      "transcribingPart": "Đang chuyển phần {{part}}/{{total}} thành văn bản…",
+      "post_processing": "Đang làm sạch bằng LLM…",
+      "post_processingPart": "Đang làm sạch phần {{part}}/{{total}} bằng LLM…",
+      "writing": "Đang ghi tài liệu…",
+      "writingPart": "Đang ghi tài liệu…"
+    },
+    "result": {
+      "open": "Mở",
+      "reveal": "Hiện trong thư mục"
+    },
+    "document": {
+      "title": "Bản chép lời",
+      "sourceFile": "Tệp",
+      "duration": "Thời lượng",
+      "parts": "Số phần",
+      "engine": "Nhận dạng",
+      "llm": "Hậu xử lý bằng LLM",
+      "created": "Tạo lúc",
+      "part": "Phần",
+      "rawTranscript": "Bản chép thô",
+      "speaker": "Người nói",
+      "notes": "Ghi chú xử lý",
+      "notesTotal": "Thời gian xử lý",
+      "notesExtracting": "Tách âm thanh",
+      "notesDiarizing": "Nhận biết người nói",
+      "notesTranscribing": "Nhận dạng",
+      "notesLlm": "Xử lý LLM",
+      "notesWarnings": "Cảnh báo",
+      "notesNone": "không có",
+      "notesLanguage": "Ngôn ngữ văn bản",
+      "llmLocal": "{{model}}, trên máy tính này",
+      "warnings": {
+        "noTimestampsModel": "không đánh dấu người nói: mô hình giọng nói này không trả về mốc thời gian; hãy dùng mô hình whisper hoặc nhận dạng cục bộ",
+        "noTimestampsPart": "phần {{part}}: dịch vụ giọng nói không trả về mốc thời gian nên không thể đánh dấu người nói",
+        "llmEmpty": "phần {{part}}, đoạn {{fragment}}: LLM trả về câu trả lời rỗng, giữ nguyên văn bản thô",
+        "llmError": "phần {{part}}, đoạn {{fragment}}: lỗi LLM, giữ nguyên văn bản thô ({{error}})",
+        "numbersBack": "phần {{part}}, đoạn {{fragment}}: đã khôi phục số trong {{lines}} dòng (LLM viết chúng bằng chữ hoặc bỏ đi)",
+        "linesLost": "phần {{part}}, đoạn {{fragment}}: câu trả lời của LLM không giữ các dòng đánh số, giữ nguyên văn bản thô",
+        "linesKept": "phần {{part}}, đoạn {{fragment}}: {{kept}}/{{total}} dòng giữ nguyên văn bản thô ({{reasons}})",
+        "kept": {
+          "missing": "thiếu",
+          "duplicate": "trùng lặp",
+          "empty": "rỗng",
+          "tooLong": "quá dài",
+          "translated": "bị dịch",
+          "tooShort": "quá ngắn",
+          "cutOff": "bị cắt"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Xóa mục đã xong"
+    },
+    "events": {
+      "title": "Tập lệnh sự kiện",
+      "choose": "Chọn…",
+      "none": "Chưa đặt – sự kiện không được gửi đi đâu",
+      "filterName": "Chương trình và tập lệnh",
+      "test": "Kiểm tra",
+      "testOk": "Tập lệnh đã nhận sự kiện thử",
+      "testFailed": "Thất bại: {{error}}",
+      "testMessage": "Tishe: sự kiện thử",
+      "remaining": "còn ~{{minutes}} phút",
+      "started": "Đã bắt đầu chuyển đổi",
+      "finished": "Xong",
+      "cancelled": "Đã hủy",
+      "interval": {
+        "title": "Khoảng cách báo tiến độ",
+        "description": "Tối đa một lần mỗi chừng ấy giây. Giai đoạn hoặc phần mới, lúc bắt đầu và kết thúc được gửi ngay.",
+        "unit": "giây"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Thay đổi",
+    "choose": "Chọn",
+    "open": "Mở",
+    "hide": "Ẩn",
+    "save": "Lưu",
+    "saved": "Đã lưu",
+    "copied": "Đã sao chép",
+    "undo": "Hoàn tác",
+    "download": "Tải xuống",
+    "downloadSize": "Tải xuống {{size}}",
+    "downloadingPercent": "Đang tải · {{percent}}%",
+    "cancelDownload": "Hủy",
+    "deleteNamed": "Xóa {{name}}",
+    "percent": "{{n}}%",
+    "useValue": "Dùng “{{value}}”",
+    "fold": {
+      "more": "Thêm",
+      "changed_other": "đã đổi: {{count}}",
+      "changedA11y_other": "Đã đổi {{count}} cài đặt"
+    },
+    "number": {
+      "hint": "Từ {{min}} đến {{max}}",
+      "hintDefault": "Mặc định {{value}}; từ {{min}} đến {{max}}",
+      "notNumber": "Nhập một số",
+      "range": "Nhập một số từ {{min}} đến {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} giây",
+      "min": "{{n}} phút",
+      "hour": "{{n}} giờ",
+      "hourMin": "{{h}} giờ {{m}} phút",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "hôm nay {{time}}",
+      "yesterday": "hôm qua {{time}}",
+      "todayTitle": "Hôm nay",
+      "yesterdayTitle": "Hôm qua"
+    },
+    "player": {
+      "play": "Phát",
+      "pause": "Tạm dừng",
+      "position": "Vị trí phát"
+    },
+    "shortcut": {
+      "change": "Đổi phím cho “{{name}}”",
+      "reset": "Đặt lại phím mặc định"
+    },
+    "echo": {
+      "recognition": "Nhận dạng: {{model}}",
+      "language": "ngôn ngữ: {{language}}",
+      "sharedWithDictation": "dùng chung với đọc chính tả",
+      "sharedWithFiles": "dùng chung với chuyển đổi tệp",
+      "noModel": "Chưa có mô hình nhận dạng giọng nói"
+    },
+    "llm": {
+      "ready": "Sẵn sàng · {{model}} trên máy tính này",
+      "needed": "Cần AI · {{model}}",
+      "downloading": "Đang tải AI · {{percent}}%",
+      "runtimeMissing": "Thiếu công cụ AI tích hợp",
+      "otherOptions": "Tùy chọn khác",
+      "noKey": "Cần khóa {{provider}}",
+      "noUrl": "Cần địa chỉ máy chủ",
+      "noServerModel": "Cần tên mô hình",
+      "localServer": "Máy chủ của bạn trên máy tính này · {{model}}",
+      "textToServer": "Văn bản được gửi đến {{address}}",
+      "textToService": "Văn bản được gửi đến {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Xóa mô hình {{name}}?",
+      "deleteModel": "Xóa mô hình",
+      "deleteModelBody": "Sẽ giải phóng {{size}}. Để dùng lại mô hình, bạn phải tải xuống lần nữa.",
+      "deleteActiveTitle": "Xóa {{name}}? Đây là mô hình đang dùng",
+      "deleteActiveBody": "Đọc chính tả và chuyển đổi sẽ ngừng hoạt động cho đến khi bạn chọn mô hình khác. Sẽ giải phóng {{size}}.",
+      "deleteLlmTitle": "Xóa mô hình AI {{name}}?",
+      "deleteLlm": "Xóa mô hình AI",
+      "deleteLlmBody": "Sẽ giải phóng {{size}}. Biên tập sẽ không hoạt động cho đến khi bạn tải lại hoặc chọn mô hình khác.",
+      "deleteSpeakerModelBody": "Tách theo người nói sẽ không hoạt động cho đến khi bạn tải lại một mô hình giọng nói."
+    },
+    "back": {
+      "transcription": "Quay lại Chép lời",
+      "dictation": "Quay lại Đọc chính tả",
+      "meetings": "Quay lại Cuộc họp",
+      "history": "Quay lại Lịch sử",
+      "models": "Quay lại Nhận dạng",
+      "llm": "Quay lại Biên tập AI",
+      "app": "Quay lại Ứng dụng",
+      "about": "Quay lại Giới thiệu",
+      "debug": "Quay lại Gỡ lỗi",
+      "next": "Quay lại Tiếp theo"
+    },
+    "changed": "đã đổi"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "đã nạp",
+      "loading": "đang nạp…",
+      "error": "nạp thất bại",
+      "unloaded": "không trong bộ nhớ",
+      "none": "Không có mô hình",
+      "a11y": "Mô hình {{model}}, {{state}}. Đổi mô hình",
+      "menu": "Mô hình đã tải",
+      "all": "Tất cả mô hình…",
+      "locked": "Đang chuyển đổi – hãy đổi sau khi xong"
+    },
+    "task": "Chuyển đổi: tệp {{current}}/{{total}} · {{percent}}%",
+    "downloading": "Đang tải: {{name}} · {{percent}}%",
+    "downloadingMany": "Đang tải: {{count}} · {{percent}}%"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Chép lời cần ffmpeg"
+    },
+    "drop": {
+      "title": "Thả bản ghi vào đây",
+      "text": "Âm thanh hoặc video: mp3, m4a, wav, mp4, mkv và các định dạng khác. Mỗi tệp thành một tài liệu riêng.",
+      "more": "Thả thêm bản ghi hoặc",
+      "release": "Thả ra để thêm",
+      "rejected": "{{names}} – không phải âm thanh hay video",
+      "oneText": "“{{name}}” sẽ vào hàng chờ chuyển đổi",
+      "manyText_other": "{{count}} bản ghi sẽ vào hàng chờ chuyển đổi",
+      "anyText": "Các tệp âm thanh và video sẽ vào hàng chờ chuyển đổi",
+      "noneTitle": "Các tệp này không dùng được",
+      "noneText": "Chỉ có thể chuyển đổi âm thanh và video: mp3, m4a, wav, mp4, mkv và các định dạng khác.",
+      "otherNote_other": "Bỏ qua thêm {{count}} tệp: không phải âm thanh hay video",
+      "alreadyOne": "“{{name}}” đã có trong hàng chờ",
+      "alreadyMany": "Các bản ghi này đã có trong hàng chờ"
+    },
+    "list": {
+      "label": "Bản ghi",
+      "waiting": "Đang chờ",
+      "cancelled": "Đã hủy",
+      "remaining": "còn khoảng {{time}}",
+      "remove": "Gỡ",
+      "removeFile": "Gỡ {{name}}",
+      "removeFromList": "Gỡ khỏi danh sách",
+      "more": "Thêm: {{name}}",
+      "recipeSpeakers": "người nói",
+      "recipeEditing": "biên tập",
+      "recipeCloud": "trên đám mây",
+      "parts_other": "{{count}} phần",
+      "notes_other": "{{count}} ghi chú xử lý",
+      "showAll": "Hiện tất cả ({{count}})",
+      "showFewer": "Thu gọn",
+      "removedOne": "Đã gỡ khỏi danh sách",
+      "removedMany_other": "Đã gỡ {{count}} dòng khỏi danh sách",
+      "chars_other": "{{n}} ký tự",
+      "keptNote": "Lưu giữ {{count}} kết quả gần nhất. Tài liệu trên ổ đĩa không bao giờ bị xóa.",
+      "missing": "Không tìm thấy tài liệu: đã bị di chuyển hoặc xóa, hoặc ổ đĩa chứa nó đã ngắt kết nối",
+      "openDocument": "Mở tài liệu {{name}}"
+    },
+    "recipe": {
+      "title": "Công thức",
+      "locked": "Cài đặt giữ nguyên trong khi chuyển đổi. Tệp mới sẽ dùng cùng cài đặt.",
+      "where": "Nhận dạng ở đâu",
+      "local": "Trên máy tính này",
+      "cloud": "Trên đám mây",
+      "audioToService": "Âm thanh được gửi đến {{provider}}",
+      "cloudEcho": "Nhận dạng: {{model}} trên {{provider}}",
+      "speakers": "Người nói",
+      "speakersDescription": "Tài liệu thành bản ghi hội thoại: “Người nói 1: …”, “Người nói 2: …”",
+      "speakersMissing": "Cần mô hình giọng nói · {{size}}",
+      "speakersDownloading": "Đang tải mô hình giọng nói · {{percent}}%",
+      "speakersReady": "Mô hình giọng nói đã sẵn sàng",
+      "countDescription": "Nếu bạn biết, việc tách sẽ chính xác hơn",
+      "editing": "Biên tập bằng AI",
+      "editingDescription": "Sửa lỗi nhận dạng và dấu câu. Lâu hơn đáng kể: khoảng 15–35 phút cho mỗi giờ ghi âm",
+      "result": "Kết quả",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "cạnh bản ghi"
+    },
+    "more": {
+      "recognition": "Nhận dạng",
+      "maxPartDescription": "Bản ghi dài được cắt tại chỗ ngắt thành các phần không dài hơn giá trị này",
+      "speakers": "Người nói",
+      "editing": "Biên tập",
+      "prompt": "Chỉ dẫn cho tệp",
+      "promptDescription": "Để trống – dùng chỉ dẫn có sẵn theo ngôn ngữ bản ghi. Thứ tự ưu tiên: ô này, rồi ⚙ của mô hình, rồi chỉ dẫn có sẵn",
+      "document": "Tài liệu",
+      "locationDescription": "Tên lấy từ bản ghi; không ghi đè gì cả, thay vào đó thêm (2)",
+      "timestampsDescription": "Thời điểm trong bản ghi trước mỗi đoạn",
+      "removeFillersDescription": "Bỏ “uh”, “um”, “hmm” trong bản ghi tiếng Anh và tiếng Nga. Các từ vẫn giữ nguyên",
+      "globalFillers": "Bản chép gốc giữ nguyên từng chữ. Đọc chính tả có cài đặt từ đệm riêng",
+      "notesDescription": "Ở cuối: thời gian của từng giai đoạn và cảnh báo",
+      "integrations": "Tích hợp",
+      "eventsDescription": "Một chương trình được báo về lúc bắt đầu, tiến độ và kết thúc (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Thêm tệp để bắt đầu",
+      "noFfmpeg": "Cần ffmpeg",
+      "noModel": "Trước tiên hãy tải xuống mô hình nhận dạng",
+      "cloudIncomplete": "Cần khóa {{provider}}",
+      "cloudIncompleteCustom": "Cần địa chỉ API, khóa và mô hình",
+      "noSpeakerModel": "Cần mô hình giọng nói",
+      "running": "Tệp {{current}}/{{total}} · đã qua {{time}}",
+      "start_other": "Chuyển đổi {{count}} tệp",
+      "done_other": "Xong: {{count}} tệp",
+      "errors_other": "{{count}} tệp bị lỗi",
+      "summary_other": "{{count}} bản ghi",
+      "modelDownloading": "Đang tải mô hình nhận dạng · {{percent}}%",
+      "llmDownloading": "Đang tải AI để biên tập · {{percent}}%",
+      "llmMissing": "Biên tập cần có AI",
+      "llmNotSetUp": "AI để biên tập chưa được thiết lập",
+      "withoutEditing": "Không biên tập",
+      "modelNotActive": "Mô hình nhận dạng chưa được bật"
+    },
+    "stop": {
+      "title": "Dừng chuyển đổi?",
+      "body": "Các tệp đã xong ({{done}}) đã được lưu. Tệp hiện tại ({{percent}}%) và các tệp đang chờ ({{waiting}}) sẽ phải chạy lại.",
+      "confirm": "Dừng",
+      "keep": "Tiếp tục"
+    },
+    "tray": {
+      "running": "Chuyển đổi: tệp {{current}}/{{total}} · {{pct}}%",
+      "ready_other": "Đã chuyển đổi xong: {{count}} tệp"
+    },
+    "notify": {
+      "readyOne": "Đã chuyển đổi xong",
+      "readyMany_other": "Đã chuyển đổi xong: {{count}} tệp",
+      "failedOne": "Chuyển đổi thất bại",
+      "failedMany_other": "Chuyển đổi thất bại: {{count}} tệp",
+      "partial": "Xong {{ok}}/{{total}} · {{errors}}",
+      "errors_other": "{{count}} thất bại",
+      "failedFile": "Thất bại: {{name}} · {{reason}}",
+      "open": "Mở"
+    },
+    "try": {
+      "before": "Mở trình soạn thảo bất kỳ, đặt con trỏ vào đó và giữ",
+      "after": "trong khi nói. Thả ra, văn bản sẽ xuất hiện ở đó.",
+      "changeKey": "Đổi phím"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Đọc chính tả đã sẵn sàng ·",
+      "anyWindow": "trong mọi cửa sổ",
+      "keyBusy": "Đọc chính tả không chạy: phím đang bị chiếm",
+      "keyBusyDetail": "Một chương trình khác đang dùng {{key}}. Hãy chọn phím khác.",
+      "changeKey": "Đổi phím"
+    },
+    "keys": {
+      "title": "Phím",
+      "second": "Đọc chính tả có biên tập – phím thứ hai",
+      "secondDescription": "Phím thường dán văn bản nguyên trạng. Phím này dán sau khi AI biên tập",
+      "instruction": "Chỉ dẫn",
+      "manage": "Quản lý…",
+      "secondBusy": "Một chương trình khác đang dùng phím này: hãy chọn phím khác"
+    },
+    "more": {
+      "paste": "Dán văn bản",
+      "indicator": "Chỉ báo ghi âm",
+      "microphone": "Micrô và ghi âm",
+      "prompts": "Chỉ dẫn cho đọc chính tả có biên tập",
+      "promptsDescription_other": "{{count}} chỉ dẫn",
+      "promptsRow": "Tạo và sửa chỉ dẫn",
+      "text": "Văn bản đọc chính tả",
+      "fillersDocuments": "Chỉ cho đọc chính tả. Với tài liệu, việc này do “Bỏ âm ngập ngừng” trên trang Chép lời đảm nhận"
+    },
+    "fix": {
+      "title": "Nếu có gì không hoạt động",
+      "paste": "Văn bản không được dán",
+      "pasteHelp": "Nếu bạn đọc vào một chương trình chạy với quyền quản trị viên, Windows không cho dán vào đó. Nếu không phải vậy, hãy tăng độ trễ bên dưới.",
+      "cutOff": "Cuối câu bị cắt",
+      "hold": "Nhấn ngắn bị tính là giữ"
+    },
+    "prompts": {
+      "title": "Chỉ dẫn cho đọc chính tả có biên tập",
+      "intro": "Chỉ dẫn cho AI biết phải làm gì với văn bản được đọc. ${output} là văn bản được đọc.",
+      "current": "Chỉ dẫn hiện tại",
+      "create": "Tạo",
+      "deleted": "Đã xóa chỉ dẫn “{{name}}”"
+    }
+  },
+  "meetings": {
+    "what": "Tishe sẽ ghi lại các cuộc họp và cuộc gọi trên máy tính này: micrô của bạn và phía bên kia, rồi tạo bản chép lời tách theo người nói.",
+    "how": "Bản ghi ở lại trên máy tính, như mọi thứ khác trong Tishe.",
+    "nowTitle": "Ngay bây giờ",
+    "nowText": "Nếu cuộc họp đã được ghi – bằng Zoom, Teams hay máy ghi âm – hãy thêm tệp ở mục “Chép lời”.",
+    "goTranscription": "Đến Chép lời"
+  },
+  "history": {
+    "storage": {
+      "title": "Lưu trữ",
+      "limit_other": "Lưu giữ {{count}} lần đọc chính tả gần nhất",
+      "never": "Các lần đọc chính tả không bị xóa tự động",
+      "days_3": "Các lần đọc chính tả bị xóa sau 3 ngày",
+      "weeks_2": "Các lần đọc chính tả bị xóa sau 2 tuần",
+      "months_3": "Các lần đọc chính tả bị xóa sau 3 tháng"
+    },
+    "empty": {
+      "title": "Các lần đọc chính tả của bạn sẽ hiện ở đây",
+      "textBefore": "Giữ",
+      "textAfter": "trong cửa sổ bất kỳ và nói.",
+      "textNoKey": "Đặt phím đọc chính tả trong mục “Đọc chính tả”."
+    },
+    "copy": "Sao chép văn bản",
+    "more": "Thao tác khác",
+    "keep": "Giữ lại",
+    "keepDescription": "Không bị xóa tự động",
+    "retry": "Nhận dạng lại",
+    "delete": "Xóa",
+    "deleted": "Đã xóa lần đọc chính tả",
+    "failed": "Không nhận dạng được",
+    "savedTag": "đã giữ",
+    "editingSkipped": "không biên tập",
+    "showMore": "Hiện đầy đủ",
+    "showLess": "Thu gọn",
+    "version": "Phiên bản văn bản",
+    "versionEdited": "Sau biên tập",
+    "versionRaw": "Bản gốc"
+  },
+  "models": {
+    "purpose": "Các mô hình chuyển giọng nói thành văn bản, dùng cho đọc chính tả và chuyển đổi tệp. Biên tập văn bản bằng AI nằm trong mục",
+    "active": {
+      "title": "Mô hình đang dùng",
+      "change": "Đổi mô hình",
+      "none": "Chưa chọn mô hình",
+      "noneHint": "Tải mô hình được đề xuất cho ngôn ngữ của bạn – hoặc bất kỳ mô hình nào trong danh mục bên dưới"
+    },
+    "lockedByTranscription": "Đang chuyển đổi – hãy đổi sau khi xong",
+    "language": {
+      "title": "Ngôn ngữ và dịch",
+      "scope": "Áp dụng cho đọc chính tả và chuyển đổi tệp"
+    },
+    "cleanup": {
+      "title": "Làm sạch văn bản",
+      "scope": "Hoạt động bên trong mô hình nhận dạng, cho đọc chính tả và tệp"
+    },
+    "memory": {
+      "title": "Bộ nhớ"
+    },
+    "onlyLanguage": "chỉ {{language}}",
+    "languageCount_other": "{{count}} ngôn ngữ",
+    "catalog": {
+      "title": "Danh mục",
+      "yours": "Mô hình của bạn",
+      "yoursCount": "Mô hình của bạn ({{count}})",
+      "recommended": "Đề xuất",
+      "all": "Tất cả mô hình",
+      "languageFilter": "Ngôn ngữ",
+      "streaming": "Truyền trực tiếp",
+      "translation": "Dịch",
+      "showAll": "Hiện tất cả mô hình ({{count}})",
+      "showFewer": "Thu gọn"
+    },
+    "row": {
+      "use": "Dùng",
+      "inUse": "đang dùng",
+      "more": "Thêm: {{name}}",
+      "delete": "Xóa mô hình",
+      "translate": "dịch sang tiếng Anh",
+      "streaming": "truyền trực tiếp",
+      "accuracy": "độ chính xác {{n}}/10",
+      "speed": "tốc độ {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Văn bản được biên tập ở đâu và bằng AI nào",
+    "status": {
+      "usedFor": "Dùng cho",
+      "files": "biên tập tệp ({{state}})",
+      "dictation": "đọc chính tả có biên tập ({{state}})",
+      "on": "bật",
+      "off": "tắt"
+    },
+    "where": {
+      "title": "AI chạy ở đâu",
+      "local": "Trên máy tính này",
+      "localText": "Văn bản ở lại trên máy tính",
+      "localUnavailable": "Không có trong bản này",
+      "server": "Máy chủ riêng",
+      "serverText": "Ollama, LM Studio hoặc địa chỉ của bạn · văn bản gửi đến máy chủ của bạn",
+      "cloud": "Dịch vụ đám mây",
+      "cloudText": "OpenAI và các dịch vụ khác · văn bản gửi đến dịch vụ"
+    },
+    "variant": {
+      "local": "AI tích hợp",
+      "server": "Máy chủ",
+      "cloud": "Dịch vụ"
+    },
+    "local": {
+      "speed": "tốc độ {{n}}/5",
+      "quality": "chất lượng {{n}}/5",
+      "footprint": "ổ đĩa {{disk}} · bộ nhớ ~{{ram}} GB",
+      "showAll": "Hiện tất cả mô hình ({{count}})",
+      "showFewer": "Thu gọn"
+    },
+    "server": {
+      "urlDescription": "Địa chỉ tương thích OpenAI kết thúc bằng /v1",
+      "keyDescription": "Chỉ khi máy chủ của bạn yêu cầu"
+    }
+  },
+  "app": {
+    "purpose": "Cách chương trình hoạt động nói chung",
+    "launch": "Khởi động và khay hệ thống",
+    "look": "Giao diện",
+    "updates": "Cập nhật",
+    "checkNow": "Kiểm tra phiên bản mới",
+    "checkNowButton": "Kiểm tra ngay",
+    "experimental": "Tính năng thử nghiệm",
+    "quit": {
+      "title": "Thoát Tishe?",
+      "body": "Đang chuyển đổi “{{name}}” ({{pct}}%). Việc này sẽ dừng; các tài liệu đã xong vẫn được lưu.",
+      "bodyIdle": "Việc chuyển đổi sẽ dừng; các tài liệu đã xong vẫn được lưu.",
+      "confirm": "Thoát",
+      "stay": "Ở lại"
+    },
+    "notifications": "Thông báo",
+    "notifyLabel": "Báo cho tôi khi chuyển đổi xong",
+    "notifyDescription": "Thông báo của Windows, chỉ khi cửa sổ bị ẩn hoặc không được chọn. Nhấp để mở kết quả.",
+    "trayHint": "Windows ẩn các biểu tượng mới. Để luôn thấy nó, hãy kéo nó từ các biểu tượng ẩn ra thanh tác vụ."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Có gì mới",
+    "project": {
+      "title": "Về dự án",
+      "basedOn": "Dựa trên Handy",
+      "basedOnText": "Mã nguồn mở, giấy phép MIT",
+      "tishe": "Tishe",
+      "tisheText": "Mã nguồn mở, giấy phép MIT. Bản phát hành và báo lỗi có trên GitHub",
+      "licenses": "Giấy phép",
+      "licensesText": "Thư viện và mô hình bên thứ ba mà Tishe sử dụng",
+      "licensesOpen": "Mở",
+      "licensesError": "Không thể mở tệp giấy phép",
+      "author": "Nhà phát triển",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "Hồ sơ GitHub"
+    },
+    "supportHandy": "Ủng hộ tác giả của Handy",
+    "folders": "Thư mục",
+    "versionRelease": "Tishe {{version}}, bản phát hành {{release}}"
+  },
+  "debug": {
+    "onBefore": "Chế độ gỡ lỗi đang bật và vẫn bật giữa các lần khởi động.",
+    "onAfter": "để ẩn nó.",
+    "log": "Nhật ký",
+    "previews": "Xem trước",
+    "keyboard": "Bàn phím",
+    "transcription": "Chép lời"
+  },
+  "release": {
+    "available": "Đã có phiên bản {{release}}",
+    "openPage": "Mở trang phát hành trên GitHub",
+    "upToDate": "Đây là phiên bản mới nhất",
+    "checkFailed": "Không thể kiểm tra cập nhật"
+  },
+  "next": {
+    "lead": "Tishe là phần đầu tiên của Private Memory: bộ nhớ riêng tư về các cuộc trò chuyện của bạn, nằm hoàn toàn trên máy tính của bạn.",
+    "now": "Ngay hôm nay, Tishe gõ lời bạn đọc vào bất kỳ ứng dụng nào và chép lời các bản ghi dài, phân tách theo người nói. Không cần internet, không cần tài khoản.",
+    "planTitle": "Trong các phiên bản tới",
+    "plan": {
+      "meetings": {
+        "title": "Ghi âm cuộc họp",
+        "text": "micro của bạn và những người tham gia khác thành hai rãnh, văn bản hiện ra ngay trong lúc trò chuyện."
+      },
+      "summaries": {
+        "title": "Tóm tắt cuộc họp",
+        "text": "quyết định và việc cần làm ngay sau khi dừng ghi, bằng ngôn ngữ của cuộc họp, do mô hình ngôn ngữ tích hợp viết."
+      },
+      "search": {
+        "title": "Tìm kiếm trong cuộc họp",
+        "text": "trước theo từ, sau theo ý nghĩa."
+      },
+      "agents": {
+        "title": "Ghi chú và trợ lý",
+        "text": "thư mục cuộc họp cho Obsidian và quyền truy cập của trợ lý AI vào các cuộc họp của bạn qua MCP, vẫn không cần đám mây."
+      }
+    },
+    "order": "Không hứa ngày: thứ tự có thể thay đổi theo góp ý.",
+    "freeTitle": "Miễn phí và mã nguồn mở",
+    "freeText": "Phần lõi của Tishe miễn phí và sẽ luôn miễn phí. Hãy theo dõi các bản phát hành và cho chúng tôi biết trên GitHub còn thiếu gì.",
+    "follow": "Theo dõi trên GitHub",
+    "feedback": "Báo lỗi hoặc góp ý"
+  },
+  "fileErrors": {
+    "notFound": "Không tìm thấy tệp: tệp đã bị di chuyển hoặc xóa.",
+    "noAudio": "Tệp không có âm thanh, hoặc không đọc được.",
+    "unreadable": "Không đọc được âm thanh từ tệp. Tệp có thể bị hỏng.",
+    "noModel": "Chưa chọn mô hình nhận dạng giọng nói: hãy chọn trong «$t(sidebar.models)».",
+    "noSpeakerModel": "Mô hình giọng chưa được tải về: hãy tải trong «$t(transcription.more.speakers)».",
+    "noLlmModel": "Mô hình ngôn ngữ chưa được tải về: hãy tải trong «$t(sidebar.llm)».",
+    "noLlmRuntime": "Thiếu bộ máy mô hình ngôn ngữ tích hợp. Hãy cài lại Tishe.",
+    "cloudKey": "Nhận dạng trên đám mây cần khóa API.",
+    "cloudConfig": "Nhận dạng trên đám mây chưa được thiết lập: hãy nhập địa chỉ và mô hình.",
+    "busy": "Một tệp khác đang được chép lời.",
+    "noSpace": "Ổ đĩa đã đầy.",
+    "fileInUse": "Tài liệu đang mở trong chương trình khác (ví dụ Word). Hãy đóng nó rồi thử lại.",
+    "accessDenied": "Không có quyền truy cập thư mục lưu tài liệu. Hãy chọn thư mục khác: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Tải xuống mô hình nhận dạng giọng nói",
+      "text": "Mô hình chuyển giọng nói thành văn bản – cho cả bản ghi lẫn đọc chính tả. Chạy trên máy tính này, không cần internet. Chỉ cần tải một lần.",
+      "language": "Ngôn ngữ của bản ghi",
+      "allModels": "Tất cả mô hình",
+      "onDisk": "Mô hình {{name}} đã có trên máy tính – chỉ cần bật lên.",
+      "whileDownloading": "Trong lúc tải, bạn có thể thêm bản ghi: quá trình chuyển đổi sẽ bắt đầu khi mô hình sẵn sàng."
+    },
+    "llm": {
+      "title": "Biên tập cần có AI",
+      "what": "AI sửa lỗi nhận dạng và dấu câu. Chúng tôi khuyên dùng AI tích hợp: chạy trên máy tính này, văn bản không đi đâu cả.",
+      "recommended": "{{size}} trên ổ đĩa · cần khoảng {{ram}} GB bộ nhớ · chỉ tải một lần",
+      "otherWays": "Máy chủ riêng hoặc đám mây",
+      "downloadOn": "Tải xuống {{size}} và bật",
+      "runtimeTitle": "AI tích hợp không khả dụng",
+      "runtime": "Bản dựng này không có công cụ chạy AI tích hợp. Bạn có thể kết nối máy chủ riêng (Ollama, LM Studio) hoặc dịch vụ đám mây trong mục “$t(sidebar.llm)”.",
+      "openPage": "Mở “$t(sidebar.llm)”",
+      "notSetUp": "{{reason}} – thiếu điều này AI sẽ không hoạt động. Hãy bật biên tập và hoàn tất thiết lập trong mục “$t(sidebar.llm)”.",
+      "onAndSetUp": "Bật và thiết lập",
+      "onDisk": "Đã có trên máy tính này — không cần tải gì thêm.",
+      "turnOn": "Bật biên tập"
+    },
+    "quick": {
+      "title": "Bắt đầu nhanh",
+      "progress": "{{done}}/{{total}}",
+      "hide": "Ẩn",
+      "hideHint": "Ẩn “Bắt đầu nhanh” – mọi cài đặt vẫn nằm trong các mục bên trái",
+      "model": "Tải xuống mô hình nhận dạng",
+      "modelDone": "Mô hình nhận dạng đã sẵn sàng · {{name}}",
+      "dictation": "Thử đọc chính tả",
+      "dictationDone": "Đọc chính tả hoạt động · các bản đọc được lưu trong “Lịch sử”",
+      "file": "Chuyển đổi một bản ghi",
+      "fileDone": "Đã chuyển đổi bản ghi đầu tiên",
+      "fileHint": "Kéo tệp âm thanh hoặc video vào cửa sổ này hoặc chọn tệp – tài liệu Word sẽ xuất hiện bên cạnh bản ghi.",
+      "llm": "Biên tập bằng AI",
+      "optional": "không bắt buộc",
+      "llmHint": "Sửa lỗi nhận dạng và dấu câu trong tài liệu. {{model}}: {{size}}, chạy trên máy tính này.",
+      "llmReady": "AI đã sẵn sàng · {{model}}",
+      "doneTitle": "Đã xong",
+      "doneText": "Tishe đã được thiết lập. Các bản đọc chính tả nằm trong “Lịch sử”, tài liệu ở danh sách bên dưới, cài đặt ở các mục bên trái.",
+      "close": "Đóng"
+    }
   }
 }

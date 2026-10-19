@@ -39,83 +39,93 @@ type NonCreatableProps = {
 
 export type SelectProps = BaseProps & (CreatableProps | NonCreatableProps);
 
-const baseBackground =
-  "color-mix(in srgb, var(--color-mid-gray) 10%, transparent)";
-const hoverBackground =
-  "color-mix(in srgb, var(--color-logo-primary) 12%, transparent)";
-const focusBackground =
-  "color-mix(in srgb, var(--color-logo-primary) 20%, transparent)";
-const neutralBorder =
-  "color-mix(in srgb, var(--color-mid-gray) 80%, transparent)";
-
+// react-select styled as the Tishe field and menu (§12.2, §12.3, §12.9).
 const selectStyles: StylesConfig<SelectOption, false> = {
   control: (base, state) => ({
     ...base,
-    minHeight: 40,
+    minHeight: 32,
+    height: 32,
     borderRadius: 6,
-    borderColor: state.isFocused ? "var(--color-logo-primary)" : neutralBorder,
-    boxShadow: state.isFocused ? "0 0 0 1px var(--color-logo-primary)" : "none",
-    backgroundColor: state.isFocused ? focusBackground : baseBackground,
-    fontSize: "0.875rem",
-    color: "var(--color-text)",
-    transition: "all 150ms ease",
+    borderWidth: 1,
+    borderColor: state.isDisabled
+      ? "var(--t-separator)"
+      : "var(--t-border-control)",
+    boxShadow: state.isFocused ? "0 0 0 2px var(--t-accent)" : "none",
+    backgroundColor: state.isDisabled
+      ? "var(--t-overlay-hover)"
+      : "var(--t-bg-field)",
+    fontSize: 14,
+    color: "var(--t-text-primary)",
+    transition: "border-color 100ms cubic-bezier(0.2, 0, 0, 1)",
     ":hover": {
-      borderColor: "var(--color-logo-primary)",
-      backgroundColor: hoverBackground,
+      borderColor: "var(--t-border-control-hover)",
     },
   }),
   valueContainer: (base) => ({
     ...base,
-    paddingInline: 10,
-    paddingBlock: 6,
+    paddingInline: 12,
+    paddingBlock: 0,
   }),
+  indicatorsContainer: (base) => ({ ...base, height: 30 }),
+  indicatorSeparator: () => ({ display: "none" }),
   input: (base) => ({
     ...base,
-    color: "var(--color-text)",
+    margin: 0,
+    padding: 0,
+    color: "var(--t-text-primary)",
   }),
-  singleValue: (base) => ({
+  singleValue: (base, state) => ({
     ...base,
-    color: "var(--color-text)",
+    color: state.isDisabled
+      ? "var(--t-text-disabled)"
+      : "var(--t-text-primary)",
   }),
-  dropdownIndicator: (base, state) => ({
+  dropdownIndicator: (base) => ({
     ...base,
-    color: state.isFocused
-      ? "var(--color-logo-primary)"
-      : "color-mix(in srgb, var(--color-mid-gray) 80%, transparent)",
-    ":hover": {
-      color: "var(--color-logo-primary)",
-    },
+    padding: "0 8px",
+    color: "var(--t-text-tertiary)",
+    ":hover": { color: "var(--t-text-tertiary)" },
   }),
   clearIndicator: (base) => ({
     ...base,
-    color: "color-mix(in srgb, var(--color-mid-gray) 80%, transparent)",
-    ":hover": {
-      color: "var(--color-logo-primary)",
-    },
+    padding: "0 4px",
+    color: "var(--t-text-tertiary)",
+    ":hover": { color: "var(--t-text-primary)" },
   }),
+  loadingIndicator: (base) => ({ ...base, color: "var(--t-text-tertiary)" }),
+  menuPortal: (base) => ({ ...base, zIndex: 200 }),
   menu: (provided) => ({
     ...provided,
-    zIndex: 30,
-    backgroundColor: "var(--color-background)",
-    color: "var(--color-text)",
-    border:
-      "1px solid color-mix(in srgb, var(--color-mid-gray) 30%, transparent)",
-    boxShadow: "0 10px 30px rgba(15, 15, 15, 0.2)",
+    zIndex: 200,
+    marginTop: 4,
+    backgroundColor: "var(--t-bg-raised)",
+    color: "var(--t-text-primary)",
+    border: "none",
+    borderRadius: 10,
+    boxShadow: "var(--t-shadow-e2)",
   }),
+  menuList: (base) => ({ ...base, padding: 4, maxHeight: 312 }),
   option: (base, state) => ({
     ...base,
-    backgroundColor: state.isSelected
-      ? focusBackground
-      : state.isFocused
-        ? hoverBackground
-        : "transparent",
-    color: "var(--color-text)",
-    cursor: state.isDisabled ? "not-allowed" : base.cursor,
-    opacity: state.isDisabled ? 0.5 : 1,
+    minHeight: 32,
+    padding: "6px 8px",
+    borderRadius: 6,
+    fontSize: 14,
+    backgroundColor: state.isFocused ? "var(--t-overlay-hover)" : "transparent",
+    fontWeight: state.isSelected ? 600 : 400,
+    color: state.isDisabled
+      ? "var(--t-text-disabled)"
+      : "var(--t-text-primary)",
+    ":active": { backgroundColor: "var(--t-overlay-pressed)" },
   }),
   placeholder: (base) => ({
     ...base,
-    color: "color-mix(in srgb, var(--color-mid-gray) 65%, transparent)",
+    color: "var(--t-text-tertiary)",
+  }),
+  noOptionsMessage: (base) => ({
+    ...base,
+    fontSize: 12,
+    color: "var(--t-text-secondary)",
   }),
 };
 

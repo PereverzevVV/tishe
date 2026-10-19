@@ -256,6 +256,9 @@ pub struct TranscriptionManager {
     is_loading: Arc<Mutex<bool>>,
     loading_condvar: Arc<Condvar>,
     reload_model_on_next_use: Arc<AtomicBool>,
+    /// Set while a file transcription job runs, so the "unload immediately"
+    /// setting does not reload the model for every segment.
+    batch_hold: Arc<AtomicBool>,
     /// Routes real-time audio frames to the active streaming worker; see
     /// [`StreamRouter`]. Shared with the audio recorder so per-frame feeds skip
     /// Tauri state and the manager lock.
@@ -284,6 +287,7 @@ impl TranscriptionManager {
             app_handle: app_handle.clone(),
             current_model_id: Arc::new(Mutex::new(None)),
             last_activity: Arc::new(AtomicU64::new(Self::now_ms())),
+            batch_hold: Arc::new(AtomicBool::new(false)),
             shutdown_signal: Arc::new(AtomicBool::new(false)),
             watcher_handle: Arc::new(Mutex::new(None)),
             is_loading: Arc::new(Mutex::new(false)),
@@ -325,7 +329,7 @@ impl TranscriptionManager {
                     let is_recording = app_handle_cloned
                         .try_state::<Arc<AudioRecordingManager>>()
                         .is_some_and(|a| a.is_recording());
-                    if is_recording {
+                    if is_recording || manager_cloned.batch_hold.load(Ordering::SeqCst) {
                         manager_cloned.touch_activity();
                         continue;
                     }
@@ -502,10 +506,31 @@ impl TranscriptionManager {
         self.last_activity.store(Self::now_ms(), Ordering::Relaxed);
     }
 
+    /// Waits for an in-flight model load, then reports whether the loaded model
+    /// is whisper-family.
+    pub fn loaded_model_is_whisper(&self) -> bool {
+        {
+            let mut is_loading = self.is_loading.lock().unwrap();
+            while *is_loading {
+                is_loading = self.loading_condvar.wait(is_loading).unwrap();
+            }
+        }
+        self.engine
+            .loaded()
+            .is_some_and(|info| info.arch == "whisper")
+    }
+
+    pub fn set_batch_hold(&self, hold: bool) {
+        self.batch_hold.store(hold, Ordering::SeqCst);
+    }
+
     /// Unloads the model immediately if the setting is enabled and the model
     /// is loaded. Never waits for the worker to exit, so it is safe on any
     /// thread, including the event loop.
     pub fn maybe_unload_immediately(&self, context: &str) {
+        if self.batch_hold.load(Ordering::SeqCst) {
+            return;
+        }
         let settings = get_settings(&self.app_handle);
         if settings.model_unload_timeout == ModelUnloadTimeout::Immediately
             && self.is_model_loaded()
@@ -614,6 +639,13 @@ impl TranscriptionManager {
                 // loadable device (a host without GPU access lists none).
                 let (backend, device) = match device_index {
                     Some(index) => (Backend::Auto, DeviceSelector::Index(index)),
+                    // Tishe: "processor only" in the model's ⚙ window.
+                    None if crate::model_settings::asr(&self.app_handle, model_id)
+                        .cpu_only
+                        .unwrap_or(false) =>
+                    {
+                        (Backend::Cpu, DeviceSelector::Auto)
+                    }
                     None => {
                         let settings = get_settings(&self.app_handle);
                         let accelerator = settings.transcribe_accelerator;
@@ -1126,6 +1158,18 @@ impl TranscriptionManager {
     }
 
     pub fn transcribe(&self, audio: Vec<f32>) -> Result<String> {
+        self.transcribe_with(audio, false)
+    }
+
+    /// A part of a media file (Tishe, DD-27): the same recognition, but the
+    /// dictation filler filter («Убирать слова-паразиты») is not applied, so
+    /// the source text of a document stays verbatim. Documents remove
+    /// hesitations with their own «Убирать заминки» option.
+    pub fn transcribe_verbatim(&self, audio: Vec<f32>) -> Result<String> {
+        self.transcribe_with(audio, true)
+    }
+
+    fn transcribe_with(&self, audio: Vec<f32>, verbatim: bool) -> Result<String> {
         #[cfg(debug_assertions)]
         if std::env::var("HANDY_FORCE_TRANSCRIPTION_FAILURE").is_ok() {
             return Err(anyhow::anyhow!(
@@ -1161,7 +1205,10 @@ impl TranscriptionManager {
         }
 
         // Get current settings for configuration
-        let settings = get_settings(&self.app_handle);
+        let mut settings = get_settings(&self.app_handle);
+        if verbatim {
+            settings.filler_word_removal_enabled = false;
+        }
 
         // Validate selected language against the model's supported languages.
         // If the language isn't supported, fall back to "auto" to prevent errors.

@@ -1,0 +1,1 @@
+The text is split into numbered lines; each starts with its number in square brackets, like [12]. Edit each line on its own. Answer with every line, in the same order, each starting with the same number: one line per number. Do not merge, split, skip or renumber lines, and do not move words from one line to another.

@@ -70,7 +70,7 @@ fn strip_invisible_chars(s: &str) -> String {
 /// reasoning, and some local servers put the reasoning text into `content`
 /// instead of a separate field — without this the user would get the model's
 /// chain of thought pasted along with the cleaned transcription.
-fn strip_think_block(s: &str) -> &str {
+pub(crate) fn strip_think_block(s: &str) -> &str {
     if let Some(rest) = s.trim_start().strip_prefix("<think>") {
         if let Some(end) = rest.find("</think>") {
             return rest[end + "</think>".len()..].trim_start();
@@ -118,7 +118,11 @@ fn should_use_streaming_overlay(style: OverlayStyle, is_streaming: bool) -> bool
     style == OverlayStyle::Live && is_streaming
 }
 
-async fn post_process_transcription(settings: &AppSettings, transcription: &str) -> Option<String> {
+async fn post_process_transcription(
+    app: &AppHandle,
+    settings: &AppSettings,
+    transcription: &str,
+) -> Option<String> {
     if is_blank_transcription(transcription) {
         debug!("Post-processing skipped because the transcription is empty");
         return None;
@@ -184,6 +188,16 @@ async fn post_process_transcription(settings: &AppSettings, transcription: &str)
         .get(&provider.id)
         .cloned()
         .unwrap_or_default();
+
+    // The built-in local LLM is started on demand; the guard keeps it from
+    // being stopped while this request runs.
+    let (provider, _local_llm) = match crate::local_llm::prepare_provider(app, provider).await {
+        Ok(prepared) => prepared,
+        Err(e) => {
+            error!("Local LLM unavailable for post-processing: {e:#}");
+            return None;
+        }
+    };
 
     // Ask these providers to skip reasoning/thinking — post-processing rarely
     // benefits from it and it adds seconds of latency. llm_client picks the
@@ -361,7 +375,8 @@ pub(crate) async fn process_transcription_output(
     let mut post_process_prompt: Option<String> = None;
 
     if post_process {
-        if let Some(processed_text) = post_process_transcription(&settings, &final_text).await {
+        if let Some(processed_text) = post_process_transcription(app, &settings, &final_text).await
+        {
             post_processed_text = Some(processed_text.clone());
             final_text = processed_text;
 
@@ -535,13 +550,26 @@ impl ShortcutAction for TranscribeAction {
             // Starting failed (for example due to blocked microphone permissions).
             // Revert UI state so we don't stay stuck in the recording overlay.
             tm.cancel_stream();
-            utils::hide_recording_overlay(app);
             set_tray_state(app, TrayIconState::Idle);
             if let Some(err) = recording_error {
+                let error_type = recording_error_type(&err);
+                // Tishe: the window is usually hidden while dictating, so the
+                // overlay says what happened and offers «Что делать» (S15).
+                match error_type {
+                    "microphone_permission_denied" => crate::overlay::show_overlay_message(
+                        app,
+                        crate::overlay::OverlayMessageKind::MicrophoneDenied,
+                    ),
+                    "no_input_device" => crate::overlay::show_overlay_message(
+                        app,
+                        crate::overlay::OverlayMessageKind::NoMicrophone,
+                    ),
+                    _ => utils::hide_recording_overlay(app),
+                }
                 let _ = app.emit(
                     "recording-error",
                     RecordingErrorEvent {
-                        error_type: recording_error_type(&err).to_string(),
+                        error_type: error_type.to_string(),
                         detail: Some(format!("{err:#}")),
                     },
                 );
@@ -582,6 +610,9 @@ impl ShortcutAction for TranscribeAction {
         let use_streaming_overlay = should_use_streaming_overlay(style, tm.is_streaming());
         if use_streaming_overlay {
             tm.emit_stream_working(StreamWorkKind::Transcribing);
+        } else if crate::file_transcription::queue_running() {
+            // Tishe: the model is busy with a file; say why the text is late.
+            crate::overlay::show_waiting_overlay(app);
         } else {
             show_transcribing_overlay(app);
         }
@@ -730,6 +761,12 @@ impl ShortcutAction for TranscribeAction {
                                 }
                             }
 
+                            // Tishe: dictation with editing that pasted the
+                            // text as is says so (S15).
+                            let editing_skipped = post_process
+                                && processed.post_processed_text.is_none()
+                                && !processed.final_text.trim().is_empty();
+
                             if processed.final_text.is_empty() {
                                 utils::hide_recording_overlay(&ah);
                                 set_tray_state(&ah, TrayIconState::Idle);
@@ -746,17 +783,33 @@ impl ShortcutAction for TranscribeAction {
                                         return;
                                     }
 
-                                    match utils::paste(final_text, ah_clone.clone()) {
-                                        Ok(()) => debug!(
-                                            "Text pasted successfully in {:?}",
-                                            paste_time.elapsed()
-                                        ),
+                                    let pasted = match utils::paste(final_text, ah_clone.clone()) {
+                                        Ok(()) => {
+                                            debug!(
+                                                "Text pasted successfully in {:?}",
+                                                paste_time.elapsed()
+                                            );
+                                            true
+                                        }
                                         Err(e) => {
                                             error!("Failed to paste transcription: {}", e);
                                             let _ = ah_clone.emit("paste-error", ());
+                                            false
                                         }
+                                    };
+                                    if !pasted {
+                                        crate::overlay::show_overlay_message(
+                                            &ah_clone,
+                                            crate::overlay::OverlayMessageKind::PasteFailed,
+                                        );
+                                    } else if editing_skipped {
+                                        crate::overlay::show_overlay_message(
+                                            &ah_clone,
+                                            crate::overlay::OverlayMessageKind::EditingSkipped,
+                                        );
+                                    } else {
+                                        utils::hide_recording_overlay(&ah_clone);
                                     }
-                                    utils::hide_recording_overlay(&ah_clone);
                                     set_tray_state(&ah_clone, TrayIconState::Idle);
                                 })
                                 .unwrap_or_else(|e| {

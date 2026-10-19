@@ -76,6 +76,51 @@ function hasKeyPath(obj: TranslationData, keyPath: string[]): boolean {
   return true;
 }
 
+// Tishe: plural keys follow each language's CLDR categories, not English's
+// one/other — Polish needs _few and _many, Japanese only _other — so the
+// expected set is built per language and any other plural form is not "extra".
+const PLURAL_SUFFIX = /_(zero|one|two|few|many|other)$/;
+
+function pluralBase(keyPath: string[]): string[] | null {
+  const last = keyPath[keyPath.length - 1];
+  return PLURAL_SUFFIX.test(last)
+    ? [...keyPath.slice(0, -1), last.replace(PLURAL_SUFFIX, "")]
+    : null;
+}
+
+function isPluralForm(reference: TranslationData, keyPath: string[]): boolean {
+  const base = pluralBase(keyPath);
+  if (!base) return false;
+  const other = [...base.slice(0, -1), `${base[base.length - 1]}_other`];
+  return hasKeyPath(reference, other);
+}
+
+function expectedKeyPaths(reference: string[][], lang: string): string[][] {
+  const categories = new Intl.PluralRules(lang).resolvedOptions()
+    .pluralCategories;
+  const seen = new Set<string>();
+  const expected: string[][] = [];
+  for (const keyPath of reference) {
+    const base = pluralBase(keyPath);
+    if (
+      !base ||
+      !reference.some((k) => k.join(".") === `${base.join(".")}_other`)
+    ) {
+      expected.push(keyPath);
+      continue;
+    }
+    if (seen.has(base.join("."))) continue;
+    seen.add(base.join("."));
+    for (const category of categories) {
+      expected.push([
+        ...base.slice(0, -1),
+        `${base[base.length - 1]}_${category}`,
+      ]);
+    }
+  }
+  return expected;
+}
+
 function loadTranslationFile(lang: string): TranslationData | null {
   const filePath = path.join(LOCALES_DIR, lang, "translation.json");
 
@@ -122,14 +167,16 @@ function validateTranslations(): void {
     }
 
     // Find missing keys
-    const missing = referenceKeyPaths.filter(
+    const missing = expectedKeyPaths(referenceKeyPaths, lang).filter(
       (keyPath) => !hasKeyPath(langData, keyPath),
     );
 
     // Find extra keys (keys in language but not in reference)
     const langKeyPaths = getAllKeyPaths(langData);
     const extra = langKeyPaths.filter(
-      (keyPath) => !hasKeyPath(referenceData, keyPath),
+      (keyPath) =>
+        !hasKeyPath(referenceData, keyPath) &&
+        !isPluralForm(referenceData, keyPath),
     );
 
     results[lang] = {

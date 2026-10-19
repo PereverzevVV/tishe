@@ -128,7 +128,17 @@ struct ChatCompletionResponse {
 #[derive(Debug, Deserialize)]
 struct ChatChoice {
     message: ChatMessageResponse,
+    /// "length" when the answer stopped at the token limit (Tishe).
+    #[serde(default)]
     finish_reason: Option<String>,
+}
+
+/// A chat answer and whether it was cut off at the token limit (Tishe:
+/// the file transcription keeps the raw text of a cut-off last line).
+#[derive(Debug, Default)]
+pub struct ChatAnswer {
+    pub content: Option<String>,
+    pub cut_off: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -186,13 +196,13 @@ fn build_headers(provider: &PostProcessProvider, api_key: &str) -> Result<Header
     headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
     headers.insert(
         REFERER,
-        HeaderValue::from_static("https://github.com/cjpais/Handy"),
+        HeaderValue::from_static("https://github.com/PereverzevVV/tishe"),
     );
     headers.insert(
         USER_AGENT,
-        HeaderValue::from_static("Handy/1.0 (+https://github.com/cjpais/Handy)"),
+        HeaderValue::from_static("Tishe/1.0 (+https://github.com/PereverzevVV/tishe)"),
     );
-    headers.insert("X-Title", HeaderValue::from_static("Handy"));
+    headers.insert("X-Title", HeaderValue::from_static("Tishe"));
 
     // Provider-specific auth headers
     if !api_key.is_empty() {
@@ -382,6 +392,38 @@ pub async fn send_chat_completion_with_schema(
     json_schema: Option<Value>,
     disable_reasoning: bool,
 ) -> Result<Option<String>, String> {
+    send_chat_completion_answer(
+        provider,
+        api_key,
+        model,
+        user_content,
+        system_prompt,
+        json_schema,
+        disable_reasoning,
+    )
+    .await
+    .and_then(|answer| {
+        // A response cut off at the provider's output limit is incomplete; pasting
+        // it would silently drop the end of the dictation (or, for structured
+        // output, paste unparseable JSON).
+        if answer.cut_off {
+            return Err("Response was truncated at the provider's output token limit".to_string());
+        }
+        Ok(answer.content)
+    })
+}
+
+/// Same as `send_chat_completion_with_schema`, plus whether the answer was
+/// cut off at the token limit (Tishe).
+pub async fn send_chat_completion_answer(
+    provider: &PostProcessProvider,
+    api_key: String,
+    model: &str,
+    user_content: String,
+    system_prompt: Option<String>,
+    json_schema: Option<Value>,
+    disable_reasoning: bool,
+) -> Result<ChatAnswer, String> {
     let base_url = provider.base_url.trim_end_matches('/');
     let url = format!("{}/chat/completions", base_url);
 
@@ -502,18 +544,11 @@ pub async fn send_chat_completion_with_schema(
         .await
         .map_err(|e| report_reqwest_error("Failed to parse API response", &e))?;
 
-    let Some(choice) = completion.choices.into_iter().next() else {
-        return Ok(None);
-    };
-
-    // A response cut off at the provider's output limit is incomplete; pasting
-    // it would silently drop the end of the dictation (or, for structured
-    // output, paste unparseable JSON).
-    if choice.finish_reason.as_deref() == Some("length") {
-        return Err("Response was truncated at the provider's output token limit".to_string());
-    }
-
-    Ok(choice.message.content)
+    let choice = completion.choices.first();
+    Ok(ChatAnswer {
+        content: choice.and_then(|choice| choice.message.content.clone()),
+        cut_off: choice.and_then(|choice| choice.finish_reason.as_deref()) == Some("length"),
+    })
 }
 
 /// Send a single-prompt request to an Anthropic Messages API (`/messages`).

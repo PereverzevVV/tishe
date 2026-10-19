@@ -8,10 +8,11 @@ import {
   HardDrive,
   Languages,
   Loader2,
+  Settings,
   Trash2,
 } from "lucide-react";
 import type { ModelInfo } from "@/bindings";
-import { formatModelSize } from "../../lib/utils/format";
+import { formatMb } from "@/lib/utils/humanize";
 import {
   getTranslatedModelDescription,
   getTranslatedModelName,
@@ -22,6 +23,7 @@ import {
 } from "../../lib/constants/languages";
 import Badge from "../ui/Badge";
 import { Button } from "../ui/Button";
+import { ProgressLine } from "../ui/ProgressLine";
 import { useSettingsStore } from "@/stores/settingsStore";
 
 // Get display text for model's language support
@@ -72,6 +74,8 @@ interface ModelCardProps {
   onDownload?: (modelId: string) => void;
   onDelete?: (modelId: string) => void;
   onCancel?: (modelId: string) => void;
+  /** Tishe: opens the model's ⚙ parameters. */
+  onSettings?: (modelId: string) => void;
   downloadProgress?: number;
   downloadSpeed?: number; // MB/s
   showRecommended?: boolean;
@@ -87,11 +91,12 @@ const ModelCard: React.FC<ModelCardProps> = ({
   onDownload,
   onDelete,
   onCancel,
+  onSettings,
   downloadProgress,
   downloadSpeed,
   showRecommended = true,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const debugMode = useSettingsStore(
     (state) => state.settings?.debug_mode ?? false,
   );
@@ -105,29 +110,25 @@ const ModelCard: React.FC<ModelCardProps> = ({
   const displayDescription = getTranslatedModelDescription(model, t);
   const showModelSize =
     status === "downloadable" || status === "available" || status === "active";
-  const formattedModelSize = formatModelSize(Number(model.size_mb));
+  const formattedModelSize = formatMb(Number(model.size_mb), t, i18n.language);
   const quantLabel = getQuantLabel(model.filename);
   const capabilityLanguages = getUniqueCapabilityLanguages(
     model.supported_languages,
   );
 
-  const baseClasses =
-    "flex flex-col rounded-xl px-4 py-3 gap-2 text-left transition-all duration-200";
+  const baseClasses = "t-card-choice flex flex-col gap-2 text-left";
 
   const getVariantClasses = () => {
-    if (status === "active") {
-      return "border-2 border-logo-primary/50 bg-logo-primary/10";
-    }
-    if (isFeatured) {
-      return "border-2 border-logo-primary/25 bg-logo-primary/5";
-    }
-    return "border-2 border-mid-gray/20";
+    // Choice card (VISUAL_DESIGN_SYSTEM §12.6): the selected one has a 2 px
+    // primary border drawn inside; nothing is coloured.
+    if (status === "active") return "t-card-choice-selected";
+    return isFeatured ? "" : "";
   };
 
   const getInteractiveClasses = () => {
     if (!isClickable) return "";
-    if (disabled) return "opacity-50 cursor-not-allowed";
-    return "cursor-pointer hover:border-logo-primary/50 hover:bg-logo-primary/5 hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] group";
+    if (disabled) return "t-card-choice-disabled";
+    return "t-card-choice-clickable";
   };
 
   const handleClick = () => {
@@ -142,6 +143,11 @@ const ModelCard: React.FC<ModelCardProps> = ({
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     onDelete?.(model.id);
+  };
+
+  const handleSettings = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onSettings?.(model.id);
   };
 
   return (
@@ -165,11 +171,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col items-start flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
-            <h3
-              className={`text-base font-semibold text-text ${isClickable ? "group-hover:text-logo-primary" : ""} transition-colors`}
-            >
-              {displayName}
-            </h3>
+            <h3 className="font-semibold">{displayName}</h3>
             {showRecommended && model.is_recommended && (
               <Badge variant="primary">{t("onboarding.recommended")}</Badge>
             )}
@@ -192,7 +194,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
               </Badge>
             )}
           </div>
-          <p className="text-text/60 text-sm leading-relaxed">
+          <p className="t-type-caption t-text-secondary">
             {displayDescription}
           </p>
         </div>
@@ -200,23 +202,23 @@ const ModelCard: React.FC<ModelCardProps> = ({
           <div className="hidden sm:flex items-center ms-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <p className="text-xs text-text/60 w-24 text-end">
+                <p className="t-type-caption t-text-secondary w-24 text-end">
                   {t("onboarding.modelCard.accuracy")}
                 </p>
-                <div className="w-16 h-1.5 bg-mid-gray/20 rounded-full overflow-hidden">
+                <div className="w-16 h-1 bg-t-pressed rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-logo-primary rounded-full"
+                    className="h-full bg-t-secondary rounded-full"
                     style={{ width: `${model.accuracy_score * 100}%` }}
                   />
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <p className="text-xs text-text/60 w-24 text-end">
+                <p className="t-type-caption t-text-secondary w-24 text-end">
                   {t("onboarding.modelCard.speed")}
                 </p>
-                <div className="w-16 h-1.5 bg-mid-gray/20 rounded-full overflow-hidden">
+                <div className="w-16 h-1 bg-t-pressed rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-logo-primary rounded-full"
+                    className="h-full bg-t-secondary rounded-full"
                     style={{ width: `${model.speed_score * 100}%` }}
                   />
                 </div>
@@ -226,13 +228,13 @@ const ModelCard: React.FC<ModelCardProps> = ({
         )}
       </div>
 
-      <hr className="w-full border-mid-gray/20" />
+      <hr className="w-full border-t-separator" />
 
       {/* Bottom row: tags + action buttons (full width) */}
       <div className="flex items-center gap-3 w-full -mb-0.5 mt-0.5 h-5">
         {capabilityLanguages.length > 0 && (
           <div
-            className="flex items-center gap-1 text-xs text-text/50"
+            className="flex items-center gap-1 t-type-caption t-text-tertiary"
             title={
               capabilityLanguages.length === 1
                 ? t("modelSelector.capabilities.singleLanguage")
@@ -245,7 +247,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
         )}
         {model.supports_translation && (
           <div
-            className="flex items-center gap-1 text-xs text-text/50"
+            className="flex items-center gap-1 t-type-caption t-text-tertiary"
             title={t("modelSelector.capabilities.translation")}
           >
             <Languages className="w-3.5 h-3.5" />
@@ -254,7 +256,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
         )}
         {model.supports_streaming && (
           <div
-            className="flex items-center gap-1 text-xs text-text/50"
+            className="flex items-center gap-1 t-type-caption t-text-tertiary"
             title={t("modelSelector.capabilities.streaming")}
           >
             <AudioLines className="w-3.5 h-3.5" />
@@ -262,17 +264,26 @@ const ModelCard: React.FC<ModelCardProps> = ({
           </div>
         )}
         {showModelSize && (
-          <span className="flex items-center gap-1.5 ms-auto text-xs text-text/50">
+          <span className="flex items-center gap-1 ms-auto t-type-caption t-text-tertiary">
             {status === "downloadable" ? (
               <Download className="w-3.5 h-3.5" />
             ) : (
               <HardDrive className="w-3.5 h-3.5" />
             )}
             <span>{formattedModelSize}</span>
-            {debugMode && quantLabel && (
-              <span className="text-text/40">{quantLabel}</span>
-            )}
+            {debugMode && quantLabel && <span>{quantLabel}</span>}
           </span>
+        )}
+        {onSettings && (status === "available" || status === "active") && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleSettings}
+            title={t("settings.models.params.open")}
+          >
+            <Settings className="w-3.5 h-3.5" />
+            <span>{t("settings.models.params.button")}</span>
+          </Button>
         )}
         {onDelete && (status === "available" || status === "active") && (
           <Button
@@ -280,7 +291,6 @@ const ModelCard: React.FC<ModelCardProps> = ({
             size="sm"
             onClick={handleDelete}
             title={t("modelSelector.deleteModel", { modelName: displayName })}
-            className="flex items-center gap-1.5 text-logo-primary/85 hover:text-logo-primary hover:bg-logo-primary/10"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span>{t("common.delete")}</span>
@@ -291,21 +301,16 @@ const ModelCard: React.FC<ModelCardProps> = ({
       {/* Download/extract progress */}
       {status === "downloading" && downloadProgress !== undefined && (
         <div className="w-full mt-3">
-          <div className="w-full h-1.5 bg-mid-gray/20 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-logo-primary rounded-full transition-all duration-300"
-              style={{ width: `${downloadProgress}%` }}
-            />
-          </div>
+          <ProgressLine value={downloadProgress} label={displayName} />
           <div className="flex items-center justify-between text-xs mt-1">
-            <span className="text-text/50">
+            <span className="t-text-tertiary">
               {t("modelSelector.downloading", {
                 percentage: Math.round(downloadProgress),
               })}
             </span>
             <div className="flex items-center gap-2">
               {downloadSpeed !== undefined && downloadSpeed > 0 && (
-                <span className="tabular-nums text-text/50">
+                <span className="t-text-tertiary">
                   {t("modelSelector.downloadSpeed", {
                     speed: downloadSpeed.toFixed(1),
                   })}
@@ -313,7 +318,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
               )}
               {onCancel && (
                 <Button
-                  variant="danger-ghost"
+                  variant="quiet"
                   size="sm"
                   onClick={(e) => {
                     e.preventDefault();
@@ -331,20 +336,16 @@ const ModelCard: React.FC<ModelCardProps> = ({
       )}
       {status === "verifying" && (
         <div className="w-full mt-3">
-          <div className="w-full h-1.5 bg-mid-gray/20 rounded-full overflow-hidden">
-            <div className="h-full bg-logo-primary rounded-full animate-pulse w-full" />
-          </div>
-          <p className="text-xs text-text/50 mt-1">
+          <ProgressLine value={null} label={displayName} />
+          <p className="t-type-caption t-text-tertiary mt-1">
             {t("modelSelector.verifyingGeneric")}
           </p>
         </div>
       )}
       {status === "extracting" && (
         <div className="w-full mt-3">
-          <div className="w-full h-1.5 bg-mid-gray/20 rounded-full overflow-hidden">
-            <div className="h-full bg-logo-primary rounded-full animate-pulse w-full" />
-          </div>
-          <p className="text-xs text-text/50 mt-1">
+          <ProgressLine value={null} label={displayName} />
+          <p className="t-type-caption t-text-tertiary mt-1">
             {t("modelSelector.extractingGeneric")}
           </p>
         </div>

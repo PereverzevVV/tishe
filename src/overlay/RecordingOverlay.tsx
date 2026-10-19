@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import "./RecordingOverlay.css";
 import { commands, events } from "@/bindings";
 import type {
+  OverlayMessageKind,
   StreamPhase,
   StreamPhaseEvent,
   StreamTextEvent,
@@ -13,7 +14,20 @@ import i18n, { syncLanguageFromSettings } from "@/i18n";
 import type { ModelStateEvent } from "@/lib/types/events";
 import { getLanguageDirection } from "@/lib/utils/rtl";
 
-type OverlayState = "recording" | "streaming" | "transcribing" | "processing";
+type OverlayState =
+  | "recording"
+  | "streaming"
+  | "transcribing"
+  | "processing"
+  // Tishe (S15): dictation waits for a model busy with a file; a message
+  // after a failure with «Что делать».
+  | "waiting"
+  | "message";
+
+interface OverlayMessage {
+  kind: OverlayMessageKind;
+  help: boolean;
+}
 
 // Number of reactive bars in the waveform (the simple, smoothed style shared by
 // every overlay form). Mic levels arrive as 16 FFT buckets; we take the first N.
@@ -29,6 +43,7 @@ const RecordingOverlay: React.FC = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [state, setState] = useState<OverlayState>("recording");
+  const [message, setMessage] = useState<OverlayMessage | null>(null);
   // `Stream::play()` returning does not mean hardware callbacks are flowing.
   // Stay visually in an arming state until the backend processes the first
   // actual microphone sample chunk.
@@ -113,6 +128,15 @@ const RecordingOverlay: React.FC = () => {
         setCaptureReady(false);
       });
 
+      const unlistenMessage = await listen<OverlayMessage>(
+        "overlay-message",
+        (event) => {
+          setMessage(event.payload);
+          setState("message");
+          setIsVisible(true);
+        },
+      );
+
       const unlistenReady = await listen("recording-ready", () => {
         setElapsed(0);
         setCaptureReady(true);
@@ -170,6 +194,7 @@ const RecordingOverlay: React.FC = () => {
       return () => {
         unlistenShow();
         unlistenHide();
+        unlistenMessage();
         unlistenReady();
         unlistenLevel();
         unlistenStream();
@@ -244,7 +269,7 @@ const RecordingOverlay: React.FC = () => {
   const cancelBtn = (
     <button
       className="sx"
-      aria-label="cancel"
+      aria-label={t("common.cancel")}
       onClick={() => commands.cancelOperation()}
     >
       <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -345,12 +370,61 @@ const RecordingOverlay: React.FC = () => {
     );
   }
 
+  // ---- Message after a failure (S15): one sentence and «Что делать», which
+  // opens the window at the matching help. It does not take focus from the
+  // app the person is typing in; it goes away on its own.
+  if (state === "message" && message) {
+    return (
+      <div
+        dir={direction}
+        className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
+      >
+        <div className="scard compact cmessage" role="status">
+          <div className="smsg">
+            <svg className="smsg-icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 1.75 15 14.25H1L8 1.75Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 6v3.5M8 11.6v.4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="smsg-text">
+              {t(`overlay.message.${message.kind}`)}
+            </span>
+            {message.help && (
+              <button
+                type="button"
+                className="shelp"
+                onClick={() => void commands.overlayHelp(message.kind)}
+              >
+                {t("overlay.message.help")}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ---- Minimal overlay: exactly one row at a time — waveform (recording), or a
   // spinner + label (transcribing / processing). Never both. The pill animates its
   // width between them; the cancel button is in both rows so it stays put.
-  const working = state === "transcribing" || state === "processing";
+  const working =
+    state === "transcribing" || state === "processing" || state === "waiting";
   const workLabel =
-    state === "processing" ? t("overlay.processing") : transcribingLabel;
+    state === "processing"
+      ? t("overlay.processing")
+      : state === "waiting"
+        ? t("overlay.waiting")
+        : transcribingLabel;
 
   return (
     <div
@@ -358,7 +432,9 @@ const RecordingOverlay: React.FC = () => {
       className={`ov-stage ${position} ov-fade ${isVisible ? "show" : ""}`}
     >
       <div
-        className={`scard compact ${working && isVisible ? "cworking" : ""}`}
+        className={`scard compact ${working && isVisible ? "cworking" : ""} ${
+          state === "waiting" ? "cmessage" : ""
+        }`}
       >
         {working ? workingRow(workLabel, true) : listeningRow(false, true)}
       </div>

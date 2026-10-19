@@ -6,10 +6,12 @@ import { useSettings } from "../../hooks/useSettings";
 interface ShowTrayIconProps {
   descriptionMode?: "inline" | "tooltip";
   grouped?: boolean;
+  /** Service line under the switch. */
+  extra?: React.ReactNode;
 }
 
 export const ShowTrayIcon: React.FC<ShowTrayIconProps> = React.memo(
-  ({ descriptionMode = "tooltip", grouped = false }) => {
+  ({ descriptionMode = "tooltip", grouped = false, extra }) => {
     const { t } = useTranslation();
     const { getSetting, updateSetting, isUpdating } = useSettings();
 
@@ -24,6 +26,7 @@ export const ShowTrayIcon: React.FC<ShowTrayIconProps> = React.memo(
         description={t("settings.advanced.showTrayIcon.description")}
         descriptionMode={descriptionMode}
         grouped={grouped}
+        extra={extra}
         tooltipPosition="bottom"
       />
     );

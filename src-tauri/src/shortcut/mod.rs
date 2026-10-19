@@ -855,6 +855,37 @@ pub fn change_show_whats_new_on_update_setting(
     Ok(())
 }
 
+/// Tishe: bindings whose key another program holds (S2). Empty with
+/// handy-keys, the default on Windows: it hears keys through a hook.
+#[tauri::command]
+#[specta::specta]
+pub fn get_shortcut_conflicts() -> Vec<String> {
+    tauri_impl::conflicts()
+}
+
+/// Tishe: Windows notifications at the end of a file transcription
+/// («Приложение → Уведомления»).
+#[tauri::command]
+#[specta::specta]
+pub fn change_transcription_notifications_setting(
+    app: AppHandle,
+    enabled: bool,
+) -> Result<(), String> {
+    let mut settings = settings::get_settings(&app);
+    settings.transcription_notifications = enabled;
+    settings::write_settings(&app, settings);
+
+    let _ = app.emit(
+        "settings-changed",
+        serde_json::json!({
+            "setting": "transcription_notifications",
+            "value": enabled
+        }),
+    );
+
+    Ok(())
+}
+
 #[tauri::command]
 #[specta::specta]
 pub fn change_whats_new_last_seen_version_setting(

@@ -1,194 +1,148 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Tooltip } from "./Tooltip";
+import React, { useContext, useId } from "react";
+import { useTranslation } from "react-i18next";
+import type { AppSettings } from "@/bindings";
+import { useSettingChange } from "@/hooks/useSettingChange";
+import { InFoldContext } from "./Fold";
+import { ResetButton } from "./ResetButton";
 
+/**
+ * Setting row (VISUAL_DESIGN_SYSTEM §12.14): label and description on the
+ * left, the control on the right; a wide control goes under the label
+ * (`layout="stacked"`).
+ *
+ * The description is always visible text (§2, principle 4; debt A10): the old
+ * ⓘ tooltip mode is ignored, `descriptionMode` stays only so callers compile.
+ *
+ * Inside a fold a row whose value differs from the default shows the tag
+ * «изменено» after its label and a reset before its control
+ * (UX_INTERACTION_ARCHITECTURE, Progressive Disclosure, rule 3).
+ */
 interface SettingContainerProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  children?: React.ReactNode;
   descriptionMode?: "inline" | "tooltip";
+  /** Kept for callers; a row is always drawn inside a group. */
   grouped?: boolean;
   layout?: "horizontal" | "stacked";
   disabled?: boolean;
   tooltipPosition?: "top" | "bottom";
+  /** Service lines under the description: consequence, readiness, echo. */
+  extra?: React.ReactNode;
+  /** A setting that depends on the row above: indented, no separator. */
+  dependent?: boolean;
+  /** Deep-link target id (navigation store). */
+  anchor?: string;
+  /** id of the control, so the label can point at it. */
+  controlId?: string;
+  className?: string;
+  /** App setting behind the row: «изменено» and reset inside a fold. */
+  settingKey?: keyof AppSettings;
+  /** Explicit «changed» for values that are not app settings. */
+  changed?: boolean;
+  /** Explicit reset for values that are not app settings. */
+  onReset?: () => void;
+  /** The control has its own reset (number fields): only the tag. */
+  ownReset?: boolean;
 }
 
 export const SettingContainer: React.FC<SettingContainerProps> = ({
   title,
   description,
   children,
-  descriptionMode = "tooltip",
-  grouped = false,
+  grouped = true,
   layout = "horizontal",
   disabled = false,
-  tooltipPosition = "top",
+  extra,
+  dependent = false,
+  anchor,
+  controlId,
+  className = "",
+  settingKey,
+  changed: changedProp,
+  onReset,
+  ownReset = false,
 }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
+  const labelId = useId();
+  const inFold = useContext(InFoldContext);
+  const setting = useSettingChange(inFold ? settingKey : undefined);
+  const changed = inFold && (changedProp ?? setting.changed);
+  const reset = ownReset ? undefined : (onReset ?? setting.reset);
+  const tag = changed ? (
+    <span className="t-tag t-row-changed">{t("ui.changed")}</span>
+  ) : null;
+  const resetButton =
+    changed && reset ? (
+      <ResetButton onClick={reset} disabled={disabled} />
+    ) : null;
+  const classes = [
+    layout === "stacked" ? "t-row-stacked" : "t-row",
+    dependent ? "t-row-dependent" : "",
+    disabled ? "t-row-disabled" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  // Handle click outside to close tooltip
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        tooltipRef.current &&
-        !tooltipRef.current.contains(event.target as Node)
-      ) {
-        setShowTooltip(false);
-      }
-    };
+  const label = controlId ? (
+    <label className="t-row-label" id={labelId} htmlFor={controlId}>
+      {title}
+    </label>
+  ) : (
+    <span className="t-row-label" id={labelId}>
+      {title}
+    </span>
+  );
 
-    if (showTooltip) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }
-  }, [showTooltip]);
-
-  const toggleTooltip = () => {
-    setShowTooltip(!showTooltip);
-  };
-
-  const containerClasses = grouped
-    ? "px-4 p-2"
-    : "px-4 p-2 rounded-lg border border-mid-gray/20";
-
-  if (layout === "stacked") {
-    if (descriptionMode === "tooltip") {
-      return (
-        <div className={containerClasses}>
-          <div className="flex items-center gap-2 mb-2">
-            <h3
-              className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}
-            >
-              {title}
-            </h3>
-            <div
-              ref={tooltipRef}
-              className="relative"
-              onMouseEnter={() => setShowTooltip(true)}
-              onMouseLeave={() => setShowTooltip(false)}
-              onClick={toggleTooltip}
-            >
-              <svg
-                className="w-4 h-4 text-mid-gray cursor-help hover:text-logo-primary transition-colors duration-200 select-none"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-label="More information"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    toggleTooltip();
-                  }
-                }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              {showTooltip && (
-                <Tooltip targetRef={tooltipRef} position="top">
-                  <p className="text-sm text-center leading-relaxed">
-                    {description}
-                  </p>
-                </Tooltip>
-              )}
-            </div>
-          </div>
-          <div className="w-full">{children}</div>
+  const text = (
+    <div className="t-row-text">
+      {tag ? (
+        <div className="t-row-title">
+          {label}
+          {tag}
         </div>
-      );
-    }
-
-    return (
-      <div className={containerClasses}>
-        <div className="mb-2">
-          <h3 className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}>
-            {title}
-          </h3>
-          <p className={`text-sm ${disabled ? "opacity-50" : ""}`}>
-            {description}
-          </p>
-        </div>
-        <div className="w-full">{children}</div>
-      </div>
-    );
-  }
-
-  // Horizontal layout (default)
-  const horizontalContainerClasses = grouped
-    ? "flex items-center justify-between min-h-12 px-4 p-2"
-    : "flex items-center justify-between min-h-12 px-4 p-2 rounded-lg border border-mid-gray/20";
-
-  if (descriptionMode === "tooltip") {
-    return (
-      <div className={horizontalContainerClasses}>
-        <div className="max-w-2/3">
-          <div className="flex items-center gap-2">
-            <h3
-              className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}
-            >
-              {title}
-            </h3>
-            <div
-              ref={tooltipRef}
-              className="relative"
-              onMouseEnter={() => setShowTooltip(true)}
-              onMouseLeave={() => setShowTooltip(false)}
-              onClick={toggleTooltip}
-            >
-              <svg
-                className="w-4 h-4 text-mid-gray cursor-help hover:text-logo-primary transition-colors duration-200 select-none"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-label="More information"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    toggleTooltip();
-                  }
-                }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              {showTooltip && (
-                <Tooltip targetRef={tooltipRef} position={tooltipPosition}>
-                  <p className="text-sm text-center leading-relaxed">
-                    {description}
-                  </p>
-                </Tooltip>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="relative">{children}</div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={horizontalContainerClasses}>
-      <div className="max-w-2/3">
-        <h3 className={`text-sm font-medium ${disabled ? "opacity-50" : ""}`}>
-          {title}
-        </h3>
-        <p className={`text-sm ${disabled ? "opacity-50" : ""}`}>
-          {description}
-        </p>
-      </div>
-      <div className="relative">{children}</div>
+      ) : (
+        label
+      )}
+      {description ? <div className="t-row-desc">{description}</div> : null}
+      {extra}
     </div>
   );
+
+  const row =
+    layout === "stacked" ? (
+      <div
+        className={classes}
+        data-anchor={anchor}
+        role="group"
+        aria-labelledby={labelId}
+      >
+        {text}
+        {children || resetButton ? (
+          <div className="t-row-body">
+            {resetButton}
+            {children}
+          </div>
+        ) : null}
+      </div>
+    ) : (
+      <div
+        className={classes}
+        data-anchor={anchor}
+        role="group"
+        aria-labelledby={labelId}
+      >
+        {text}
+        {children || resetButton ? (
+          <div className="t-row-control">
+            {resetButton}
+            {children}
+          </div>
+        ) : null}
+      </div>
+    );
+
+  // A row used on its own (outside SettingsGroup) gets its own container.
+  return grouped ? row : <div className="t-group">{row}</div>;
 };

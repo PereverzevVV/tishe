@@ -1,4 +1,3 @@
-use crate::utils;
 use log::{debug, warn};
 use serde::de::{self, Visitor};
 use serde::{Deserialize, Deserializer, Serialize};
@@ -455,6 +454,9 @@ pub struct AppSettings {
     pub custom_words: Vec<String>,
     #[serde(default)]
     pub model_unload_timeout: ModelUnloadTimeout,
+    /// When the built-in local LLM process (`local_llm`) is stopped after use.
+    #[serde(default)]
+    pub local_llm_unload_timeout: ModelUnloadTimeout,
     #[serde(default = "default_word_correction_threshold")]
     pub word_correction_threshold: f64,
     #[serde(default = "default_history_limit")]
@@ -544,6 +546,18 @@ pub struct AppSettings {
     /// `overlay_position` (position `none` → style `None`).
     #[serde(default = "default_overlay_style")]
     pub overlay_style: OverlayStyle,
+    /// Tishe: a Windows notification when a file transcription queue ends
+    /// while the window is hidden or not in focus («Приложение → Уведомления»).
+    #[serde(default = "default_transcription_notifications")]
+    pub transcription_notifications: bool,
+    /// Tishe: the one-time «работаю в фоне» notice (window closed during a
+    /// transcription) has been shown.
+    #[serde(default)]
+    pub background_notice_shown: bool,
+}
+
+fn default_transcription_notifications() -> bool {
+    true
 }
 
 fn default_model() -> String {
@@ -645,8 +659,10 @@ fn default_auto_submit() -> bool {
     false
 }
 
+/// Tishe: 50 dictations on fresh settings (was 5): «История» is the way back
+/// to a text that was not pasted (UX_INTERACTION_ARCHITECTURE DD-23).
 fn default_history_limit() -> usize {
-    5
+    50
 }
 
 fn default_recording_retention_period() -> RecordingRetentionPeriod {
@@ -680,7 +696,16 @@ fn default_show_tray_icon() -> bool {
 }
 
 fn default_post_process_provider_id() -> String {
-    "openai".to_string()
+    // Tishe: a new install starts on the built-in LLM where it exists, the
+    // way «Редактура» recommends it, not on a cloud service without a key.
+    #[cfg(target_os = "windows")]
+    {
+        crate::local_llm::LOCAL_PROVIDER_ID.to_string()
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        "openai".to_string()
+    }
 }
 
 fn default_post_process_providers() -> Vec<PostProcessProvider> {
@@ -766,6 +791,19 @@ fn default_post_process_providers() -> Vec<PostProcessProvider> {
         allow_base_url_edit: false,
         models_endpoint: Some("/models".to_string()),
         supports_structured_output: true,
+        api_format: PostProcessApiFormat::OpenAi,
+    });
+
+    // Built-in local LLM: a bundled llama-server started on demand. Its real
+    // address is only known once the process runs (see `local_llm`).
+    #[cfg(target_os = "windows")]
+    providers.push(PostProcessProvider {
+        id: crate::local_llm::LOCAL_PROVIDER_ID.to_string(),
+        label: "Local (built-in)".to_string(),
+        base_url: "http://127.0.0.1".to_string(),
+        allow_base_url_edit: false,
+        models_endpoint: None,
+        supports_structured_output: false,
         api_format: PostProcessApiFormat::OpenAi,
     });
 
@@ -990,6 +1028,7 @@ pub fn get_default_settings() -> AppSettings {
         log_level: default_log_level(),
         custom_words: Vec::new(),
         model_unload_timeout: ModelUnloadTimeout::default(),
+        local_llm_unload_timeout: ModelUnloadTimeout::default(),
         word_correction_threshold: default_word_correction_threshold(),
         history_limit: default_history_limit(),
         recording_retention_period: default_recording_retention_period(),
@@ -1027,6 +1066,8 @@ pub fn get_default_settings() -> AppSettings {
         vad_enabled: default_vad_enabled(),
         vad_backend: VadBackend::default(),
         overlay_style: default_overlay_style(),
+        transcription_notifications: default_transcription_notifications(),
+        background_notice_shown: false,
     }
 }
 
@@ -1262,13 +1303,11 @@ fn apply_settings_migrations(
     updated
 }
 
-/// Update checks are forced off (without touching the persisted setting) when
-/// `HANDY_DISABLE_UPDATER` is set — e.g. by the Nix package, since self-update
-/// can't work against an immutable /nix/store install.
+/// Update checks are forced off without touching the persisted setting.
 pub fn update_checks_forced_disabled() -> bool {
     use std::sync::OnceLock;
     static IS_UPDATER_DISABLED: OnceLock<bool> = OnceLock::new();
-    *IS_UPDATER_DISABLED.get_or_init(|| utils::env_flag_enabled("HANDY_DISABLE_UPDATER"))
+    *IS_UPDATER_DISABLED.get_or_init(|| crate::utils::env_flag_enabled("HANDY_DISABLE_UPDATER"))
 }
 
 /// Effective updater state: the user's stored preference, overridden to `false`

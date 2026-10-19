@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { CircleAlert, X } from "lucide-react";
 import { useSettings } from "../../hooks/useSettings";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
@@ -17,109 +18,114 @@ const normalizeCustomWord = (word: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
+/**
+ * «Свои слова» (SF19): a field with «Добавить», the words as tags with ×. A
+ * duplicate is an error under the field, not a toast; removing a word is
+ * reversible with «Вернуть».
+ */
 export const CustomWords: React.FC<CustomWordsProps> = React.memo(
-  ({ descriptionMode = "tooltip", grouped = false }) => {
+  ({ grouped = true }) => {
     const { t } = useTranslation();
     const { getSetting, updateSetting, isUpdating } = useSettings();
     const [newWord, setNewWord] = useState("");
     const customWords = getSetting("custom_words") || [];
     const normalizedWord = normalizeCustomWord(newWord);
+    const duplicate =
+      normalizedWord !== "" && customWords.includes(normalizedWord);
+    const busy = isUpdating("custom_words");
 
     const handleAddWord = () => {
-      if (normalizedWord && normalizedWord.length <= 50) {
-        if (customWords.includes(normalizedWord)) {
-          toast.error(
-            t("settings.advanced.customWords.duplicate", {
-              word: normalizedWord,
-            }),
-          );
-          return;
-        }
-        updateSetting("custom_words", [...customWords, normalizedWord]);
-        setNewWord("");
-      }
+      if (!normalizedWord || normalizedWord.length > 50 || duplicate) return;
+      updateSetting("custom_words", [...customWords, normalizedWord]);
+      setNewWord("");
     };
 
-    const handleRemoveWord = (wordToRemove: string) => {
+    const handleRemoveWord = (word: string) => {
+      const before = customWords;
       updateSetting(
         "custom_words",
-        customWords.filter((word) => word !== wordToRemove),
+        customWords.filter((w) => w !== word),
       );
-    };
-
-    const handleKeyPress = (e: React.KeyboardEvent) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        handleAddWord();
-      }
+      toast(t("settings.advanced.customWords.removed", { word }), {
+        duration: 6000,
+        action: {
+          label: t("ui.undo"),
+          onClick: () => updateSetting("custom_words", before),
+        },
+      });
     };
 
     return (
-      <>
-        <SettingContainer
-          title={t("settings.advanced.customWords.title")}
-          description={t("settings.advanced.customWords.description")}
-          descriptionMode={descriptionMode}
-          grouped={grouped}
-        >
-          <div className="flex items-center gap-2">
-            <Input
-              type="text"
-              className="max-w-40"
-              value={newWord}
-              onChange={(e) => setNewWord(e.target.value)}
-              onKeyDown={handleKeyPress}
-              placeholder={t("settings.advanced.customWords.placeholder")}
-              variant="compact"
-              disabled={isUpdating("custom_words")}
-            />
-            <Button
-              onClick={handleAddWord}
-              disabled={
-                !normalizedWord ||
-                normalizedWord.length > 50 ||
-                isUpdating("custom_words")
+      <SettingContainer
+        settingKey="custom_words"
+        ownReset
+        title={t("settings.advanced.customWords.title")}
+        description={t("settings.advanced.customWords.description")}
+        grouped={grouped}
+        layout="stacked"
+        extra={
+          duplicate ? (
+            <div className="t-field-error">
+              <CircleAlert width={14} height={14} aria-hidden="true" />
+              {t("settings.advanced.customWords.duplicate", {
+                word: normalizedWord,
+              })}
+            </div>
+          ) : undefined
+        }
+      >
+        <div className="flex items-center gap-2">
+          <Input
+            type="text"
+            className="min-w-0 flex-1"
+            value={newWord}
+            onChange={(e) => setNewWord(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleAddWord();
               }
-              variant="primary"
-              size="md"
-            >
-              {t("settings.advanced.customWords.add")}
-            </Button>
-          </div>
-        </SettingContainer>
+            }}
+            placeholder={t("settings.advanced.customWords.placeholder")}
+            aria-label={t("settings.advanced.customWords.placeholder")}
+            invalid={duplicate}
+            disabled={busy}
+          />
+          <Button
+            onClick={handleAddWord}
+            disabled={
+              !normalizedWord || normalizedWord.length > 50 || duplicate || busy
+            }
+            variant="secondary"
+          >
+            {t("settings.advanced.customWords.add")}
+          </Button>
+        </div>
         {customWords.length > 0 && (
-          <div
-            className={`px-4 p-2 ${grouped ? "" : "rounded-lg border border-mid-gray/20"} flex flex-wrap gap-1`}
+          <ul
+            className="mt-2 flex flex-wrap gap-1"
+            aria-label={t("settings.advanced.customWords.title")}
           >
             {customWords.map((word) => (
-              <Button
-                key={word}
-                onClick={() => handleRemoveWord(word)}
-                disabled={isUpdating("custom_words")}
-                variant="secondary"
-                size="sm"
-                className="inline-flex items-center gap-1 cursor-pointer"
-                aria-label={t("settings.advanced.customWords.remove", { word })}
-              >
+              <li key={word} className="t-tag pe-1">
                 <span>{word}</span>
-                <svg
-                  className="w-3 h-3"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  type="button"
+                  className="t-tag-remove"
+                  onClick={() => handleRemoveWord(word)}
+                  disabled={busy}
+                  aria-label={t("settings.advanced.customWords.remove", {
+                    word,
+                  })}
+                  title={t("settings.advanced.customWords.remove", { word })}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </Button>
+                  <X width={12} height={12} aria-hidden="true" />
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
-      </>
+      </SettingContainer>
     );
   },
 );

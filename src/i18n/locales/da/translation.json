@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Indstillinger...",
-    "checkUpdates": "Tjek for opdateringer...",
-    "copyLastTranscript": "Kopiér seneste transskription",
+    "settings": "Åbn Tishe…",
+    "checkUpdates": "Søg efter opdateringer…",
+    "copyLastTranscript": "Kopiér seneste diktat",
     "unloadModel": "Frigør model",
     "model": "Model",
     "quit": "Afslut",
     "cancel": "Annuller",
-    "secureInputWarning": "⚠ Genveje blokeret af Secure Input"
+    "secureInputWarning": "⚠ Genveje blokeret af Secure Input",
+    "modelLocked": "Modellen kan ikke skiftes, mens en transskription kører",
+    "tooltipDictation": "Diktat: {{shortcut}}",
+    "backgroundTitle": "Tishe kører videre i baggrunden",
+    "backgroundBody": "Transskriptionen fortsætter. Du får en notifikation, når den er klar."
   },
   "sidebar": {
     "general": "Generelt",
-    "models": "Modeller",
+    "models": "Genkendelse",
     "advanced": "Avanceret",
     "postProcessing": "Efterbehandling",
     "history": "Historik",
     "debug": "Fejlfinding",
-    "about": "Om"
+    "about": "Om",
+    "label": "Sektioner",
+    "transcription": "Transskription",
+    "dictation": "Diktat",
+    "meetings": "Møder",
+    "llm": "AI-redigering",
+    "app": "App",
+    "soon": "snart",
+    "state": {
+      "running": "i gang",
+      "new": "klar, ikke set",
+      "downloading": "downloader"
+    },
+    "next": "Hvad nu"
   },
   "onboarding": {
     "subtitle": "For at komme i gang skal du vælge en transskriptionsmodel",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Tilladelser påkrævet",
-      "description": "Handy har brug for et par tilladelser for at fungere korrekt.",
+      "description": "Tishe har brug for et par tilladelser for at fungere korrekt.",
       "microphone": {
         "title": "Mikrofonadgang",
         "description": "Påkrævet for at høre din stemme til transskription."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Kunne ikke tjekke tilladelser. Prøv igen.",
         "requestFailed": "Kunne ikke anmode om tilladelse. Prøv igen."
-      }
+      },
+      "skip": "Fortsæt uden mikrofon",
+      "skipHint": "Mikrofonen er kun nødvendig til diktat – transskription af filer virker uden den. Du kan give adgang senere i Windows-indstillingerne."
+    },
+    "step": "Trin {{n}} af {{total}}",
+    "language": {
+      "title": "Hvilket sprog er dine optagelser på?",
+      "description": "Vi downloader en talegenkendelsesmodel til dette sprog. Den kører på denne computer.",
+      "ru": {
+        "title": "Russisk",
+        "limit": "Kun russisk: genkender ikke engelsk tale"
+      },
+      "en": {
+        "title": "Engelsk",
+        "limit": "Kun engelsk"
+      },
+      "eu": {
+        "title": "Dansk eller et andet europæisk sprog",
+        "limit": "25 europæiske sprog, genkender selv sproget"
+      },
+      "other": {
+        "title": "Et andet sprog",
+        "limit": "30 sprog: kinesisk, japansk, koreansk, arabisk, tyrkisk, hindi og flere",
+        "limitWhisper": "mange sprog, langsommere på processoren"
+      },
+      "onDisk": "findes allerede på denne computer",
+      "shared": "Modellen bruges både til diktat og til transskription af filer. Du kan skifte den senere under »$t(sidebar.models)«.",
+      "otherModel": "Vælg en anden model",
+      "hideCatalog": "Skjul listen over modeller",
+      "download": "Download {{size}}",
+      "use": "Brug {{name}}",
+      "downloadNamed": "Download {{name}} · {{size}}",
+      "once": "Downloades én gang og virker derefter uden internet"
+    },
+    "download": {
+      "title": "Downloader {{name}}",
+      "description": "Du kan lave andet imens: at lukke vinduet stopper ikke downloadet.",
+      "starting": "Forbinder…",
+      "amount": "{{done}} af {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Forbereder modellen…",
+      "cancel": "Annullér",
+      "failed": "Modellen blev ikke downloadet",
+      "failedTitle": "Modellen kunne ikke downloades",
+      "failedHint": "Ingen forbindelse til serveren. Tjek internettet, og klik på Prøv igen.",
+      "retry": "Prøv igen",
+      "continue": "Åbn Tishe uden at vente"
+    },
+    "welcome": {
+      "title": "Velkommen til Tishe",
+      "lead": "Tishe gør tale til tekst direkte på din computer – uden internet og uden konto.",
+      "files": "Transskribér optagelser – møder, forelæsninger, interviews – til et Word-dokument",
+      "dictation": "Diktér i ethvert program: hold en tast nede, tal – og teksten kommer frem",
+      "private": "Optagelser og tekster forlader aldrig computeren",
+      "stepsLabel": "Trin i opsætningen",
+      "steps": {
+        "permissions": "Tilladelser",
+        "language": "Optagelsernes sprog",
+        "download": "Download af model"
+      },
+      "credit": "Viktor Pereverzev · bygger på Handy"
+    },
+    "tips": {
+      "title": "Mens den downloader – sådan virker det",
+      "dictationBefore": "Diktat: hold",
+      "dictationAfter": "nede i et hvilket som helst program, og tal. Slip – så kommer teksten frem ved markøren.",
+      "files": "Transskription: slip en lyd- eller videofil i Tishe-vinduet, så får du et Word-dokument.",
+      "editing": "Redigering med AI retter fejl og tegnsætning – du slår den til i transskriptionens opskrift."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "Generelt",
       "shortcut": {
-        "title": "Handy-genveje",
+        "title": "Genveje i Tishe",
         "description": "Konfigurer tastaturgenveje til at udløse tale-til-tekst-optagelse",
         "loading": "Indlæser genveje...",
         "none": "Ingen genveje konfigureret",
         "notFound": "Genvej ikke fundet",
-        "pressKeys": "Tryk på ønskede taster...",
+        "pressKeys": "Tryk en kombination… (Esc annullerer)",
         "bindings": {
           "transcribe": {
-            "name": "Transskriptionsgenvej",
-            "description": "Tastaturgenvejen til at optage og transskribere din stemme."
+            "name": "Diktat",
+            "description": "Hold nede, og tal – teksten indsættes i det aktive vindue"
           },
           "cancel": {
-            "name": "Annulleringsgenvej",
-            "description": "Tastaturgenvejen til at annullere den aktuelle optagelse."
+            "name": "Annullér",
+            "description": "Afbryder den igangværende optagelse"
           },
           "transcribe_with_post_process": {
-            "name": "Genvej til efterbehandling",
-            "description": "Valgfrit: En dedikeret genvej, der altid anvender AI-efterbehandling på din transskription."
+            "name": "Tast til diktat med redigering",
+            "description": "Teksten indsættes efter redigering med AI"
           }
         },
         "errors": {
           "restore": "Kunne ikke gendanne den oprindelige genvej",
           "set": "Kunne ikke indstille genvej: {{error}}",
-          "reset": "Kunne ikke nulstille genvej til oprindelig indstilling"
+          "reset": "Kunne ikke nulstille genvej til oprindelig indstilling",
+          "taken": "Et andet program bruger allerede denne tast. Vælg en anden.",
+          "duplicate": "Denne tast bruges allerede her til en anden handling."
         }
       },
       "language": {
-        "title": "Sprog",
-        "description": "Vælg sproget til talegenkendelse. Auto tyder automatisk sproget, mens valg af et specifikt sprog kan forbedre nøjagtigheden for det pågældende sprog.",
+        "title": "Genkendelsessprog",
+        "description": "»Auto« genkender selv sproget; at vælge det er mere pålideligt",
         "searchPlaceholder": "Søg efter sprog...",
         "noResults": "Ingen sprog fundet",
         "auto": "Automatisk"
       },
       "shortcutActivation": {
-        "title": "Genvejens adfærd",
-        "description": "Vælg, hvordan transskriptionsgenvejen starter og stopper optagelsen.",
+        "title": "Tastens adfærd",
+        "description": "Hvordan tasten starter og stopper optagelsen",
         "options": {
           "holdOrToggle": "Automatisk",
           "pushToTalk": "Hold",
@@ -212,7 +298,7 @@
     "models": {
       "title": "Transskriptionsmodeller",
       "description": "Vælg en transskriptionsmodel, eller download flere modeller. Forskellige modeller tilbyder varierende niveauer af nøjagtighed og hastighed.",
-      "searchPlaceholder": "Søg efter modeller ved navn…",
+      "searchPlaceholder": "Søg efter navn",
       "yourModels": "Downloadede modeller",
       "availableModels": "Tilgængelig til download",
       "deleteConfirm": "Er du sikker på, at du vil slette {{modelName}}? Du skal downloade den igen for at bruge den.",
@@ -225,37 +311,104 @@
       },
       "rescan": {
         "label": "Søg igen",
-        "tooltip": "Søg igen efter modeller, der er tilføjet til modelmappen eller Hugging Face-cachen uden for Handy"
+        "tooltip": "Find modeller, der er lagt i mappen manuelt"
       },
-      "noModelsMatch": "Ingen modeller matcher dette filter."
+      "noModelsMatch": "Ingen modeller matcher dette filter.",
+      "params": {
+        "button": "Parametre",
+        "open": "Modelparametre",
+        "title": "Parametre: {{name}}",
+        "savedAtOnce": "Ændringer gemmes med det samme. Felterne viser de anvendte værdier; en ændret værdi har en nulstillingsknap.",
+        "resetAll": "Gendan standarder",
+        "done": "Færdig",
+        "resetField": "Tilbage til standard",
+        "defaultRange": "Standard {{value}}; tilladt {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Indbygget instruktion. Redigér teksten for at bruge din egen; ryd den for at vende tilbage til den indbyggede.",
+          "own": "Din instruktion. Nulstillingsknappen bringer den indbyggede tilbage."
+        },
+        "asr": {
+          "segment": {
+            "label": "Segmentlængde for filer, sekunder",
+            "description": "Filer genkendes i stykker, der klippes ved pauser og højst er så lange. Det korteste stykke bliver mindre med (12 s ved 25 s). Målt: 12–25 s bevarer tegnsætningen bedre end 60–120 s."
+          },
+          "device": {
+            "label": "Enhed",
+            "description": "»Kun processor« aflaster grafikchippen, men er som regel langsommere. Gælder også diktat; træder i kraft ved næste genkendelse.",
+            "general": "Som i accelerationsindstillingen",
+            "cpu": "Kun processor",
+            "notHere": "Denne models enhed følger den generelle accelerationsindstilling."
+          }
+        },
+        "llm": {
+          "promptNote": "Instruktioner til russisk og engelsk tekst. Andre sprog får den indbyggede engelske instruktion med sprogets navn. En egen instruktion under Transskription erstatter dem for alle sprog.",
+          "promptRu": "Instruktion til russisk tekst",
+          "promptEn": "Instruktion til engelsk tekst",
+          "temperature": {
+            "label": "Temperatur",
+            "description": "Lavere er mere forsigtigt: ved 0,8 opfandt modellen ord, 0,2 er den målte værdi til redigering."
+          },
+          "chunk": {
+            "label": "Blokstørrelse, tegn",
+            "description": "Hvor meget tekst modellen redigerer ad gangen. Små modeller holder sig tættere på originalen i korte blokke."
+          },
+          "context": {
+            "label": "Kontekst, tokens",
+            "description": "Plads til instruktionen, blokken og svaret. Mere bruger mere hukommelse."
+          },
+          "answer": {
+            "label": "Svargrænse, tokens",
+            "description": "Stopper en model, der begynder at gentage sig selv. En blok på 3000 tegn er omkring 1100 tokens."
+          },
+          "threads": {
+            "label": "Processortråde til svaret",
+            "description": "Læsning af teksten bruger altid alle hardwaretråde.",
+            "auto": "Auto – én pr. kerne"
+          },
+          "restartNote": "Temperatur, kontekst, svargrænse og tråde gælder, næste gang modellen starter: en kørende model genstarter før næste opgave.",
+          "invalid": "Ikke gemt: {{detail}}",
+          "contextTooSmall": "Ikke gemt: konteksten skal kunne rumme blokken og svaret – mindst {{min}} tokens med den nuværende blokstørrelse og svargrænse."
+        }
+      }
     },
     "sound": {
       "title": "Lyd",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Vælg din foretrukne mikrofonenhed",
+        "description": "Hvor stemmen optages fra",
         "placeholder": "Vælg mikrofon...",
         "loading": "Indlæser..."
       },
       "channel": {
         "title": "Inputkanal",
-        "description": "Vælg, hvilken inputkanal der skal optages fra. Brug dette, hvis din lydgrænseflade har flere indgange.",
+        "description": "Til lydkort med flere indgange",
         "average": "Gennemsnit af alle kanaler",
         "channel": "Kanal {{n}}"
       },
       "audioFeedback": {
         "label": "Lydfeedback",
-        "description": "Afspil lyd, når optagelse starter og stopper"
+        "description": "En lyd ved starten og slutningen af optagelsen"
       },
       "outputDevice": {
         "title": "Outputenhed",
-        "description": "Vælg din foretrukne lydoutputenhed til feedbacklyde",
+        "description": "Hvor feedbacklydene afspilles",
         "placeholder": "Vælg outputenhed...",
         "loading": "Indlæser..."
       },
       "volume": {
         "title": "Lydstyrke",
-        "description": "Juster lydstyrken for lydfeedback"
+        "description": "Juster lydstyrken for lydfeedback",
+        "levels": {
+          "quiet": "Lav",
+          "medium": "Mellem",
+          "loud": "Høj"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Egen",
+        "preview": "Afspil start- og stoplyde"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Eksperimentel"
       },
       "experimentalToggle": {
-        "label": "Eksperimentelle funktioner",
-        "description": "Aktivér eksperimentelle funktioner, der stadig er under udvikling."
+        "label": "Vis eksperimentelle funktioner",
+        "description": "Funktioner under udvikling; kan være ustabile"
       },
       "lazyStreamClose": {
         "label": "Hold mikrofon åben mellem transskriptioner",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Start skjult",
-        "description": "Vis på meddelelsesområdet uden at åbne vinduet."
+        "label": "Skjul vinduet ved start",
+        "description": "Programmet starter i meddelelsesområdet"
       },
       "autostart": {
-        "label": "Start ved opstart",
-        "description": "Start Handy automatisk, når du logger ind på din computer."
+        "label": "Start sammen med Windows",
+        "description": "Diktat er klar lige efter login"
       },
       "showTrayIcon": {
-        "label": "Vis proceslinjeikon",
-        "description": "Vis Handy-ikonet i meddelelsesområdet."
+        "label": "Ikon i meddelelsesområdet",
+        "description": "Uden ikonet kommer et lukket vindue kun tilbage, hvis programmet startes igen"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Vælg optagelses-overlay: Ingen skjuler det, Minimal viser en kompakt pille, Live viser transskription i realtid, mens du taler (kun modeller med streaming-understøttelse — se efter Streaming-mærket i modelvælgeren). På Linux anbefales 'Ingen'.",
+          "title": "Indikatorens stil",
+          "description": "Hvad der vises ved markøren under diktat",
           "options": {
             "none": "Ingen",
             "minimal": "Minimal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Uden indikatoren vises fejl ikke: en tekst, der ikke blev indsat, ligger i Historik"
         },
         "position": {
-          "title": "Overlay-placering",
-          "description": "Hvor overlayet vises på skærmen under optagelse og transskription.",
+          "title": "Indikatorens placering",
+          "description": "Øverst eller nederst på skærmen",
           "options": {
             "bottom": "Bund",
             "top": "Top"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Indsætningsmetode",
-        "description": "Vælg, hvordan tekst indsættes. Direkte: simulerer tastetryk via systeminput. Ingen: springer indsætning over, opdaterer kun historik/udklipsholder.",
+        "description": "Hvordan teksten kommer ind i det aktive vindue",
         "options": {
           "clipboard": "Udklipsholder ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Udklipsholder (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Håndtering af udklipsholder",
-        "description": "Rør ikke ved udklipsholder bevarer dit nuværende udklipsholderindhold efter transskription. Kopiér til udklipsholder efterlader transskriptionsresultatet i din udklipsholder efter indsætning.",
+        "title": "Udklipsholder",
+        "description": "Behold det, der var i udklipsholderen, eller lad den dikterede tekst blive der",
         "options": {
           "dontModify": "Rør ikke ved udklipsholder",
           "copyToClipboard": "Kopiér til udklipsholder"
         }
       },
       "autoSubmit": {
-        "title": "Automatisk indsendelse",
-        "description": "Send automatisk den valgte tastekombination efter tekstindsættelse. Cmd+Enter gælder på macOS, mens Windows/Linux bruger Super+Enter.",
+        "title": "Send efter indsættelse",
+        "description": "Tryk på den valgte tast lige efter indsættelsen, f.eks. Enter i en chat",
         "options": {
           "off": "Fra",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Oversæt til engelsk",
-        "description": "Oversæt automatisk tale fra andre sprog til engelsk under transskription."
+        "description": "Tale på et hvilket som helst sprog bliver til engelsk tekst"
       },
       "modelUnload": {
-        "title": "Frigør model",
-        "description": "Frigør automatisk GPU-/CPU-hukommelse, når modellen ikke har været brugt i den angivne tid",
+        "title": "Fjern modellen fra hukommelsen efter…",
+        "description": "Frigør hukommelse, når modellen ikke bruges i et stykke tid",
         "options": {
           "never": "Aldrig",
           "immediately": "Med det samme",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Brugerdefinerede ord",
-        "description": "Hjælp understøttede modeller med at genkende navne og specialiserede udtryk. Fuzzy-korrektion er i øjeblikket begrænset til ord, der bruger A-Z og tal.",
+        "title": "Egne ord",
+        "description": "Et hint til Whisper-modeller; andre modeller får kun rettelser og kun for ord med A–Z",
         "placeholder": "Tilføj et ord",
         "add": "Tilføj",
         "remove": "Fjern {{word}}",
-        "duplicate": "\"{{word}}\" findes allerede"
+        "duplicate": "\"{{word}}\" findes allerede",
+        "removed": "»{{word}}« fjernet"
       },
       "voiceActivityDetection": {
-        "title": "Stemmeaktivitetsdetektion",
-        "description": "Filtrer stilhed fra optagelser. Streaming-modeller bruger en længere VAD-hale; deaktivering af VAD optager rå lyd."
+        "title": "Spring stilhed over",
+        "description": "Kun tale går til genkendelsen"
       },
       "vadBackend": {
         "title": "Stemmedetektions-backend",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Fjern fyldord",
-        "description": "Fjerner almindelige tøveord fra transskriptioner. Slå fra for at beholde dem."
+        "description": "»uh«, »hmm« i den indsatte tekst"
       },
       "chineseScript": {
         "title": "Kinesisk skrift",
-        "description": "Skriver mandarin- og kantonesisk-transskriptioner med forenklede eller traditionelle tegn. Andre sprog ændres ikke.",
+        "description": "Forenklede eller traditionelle tegn",
         "options": {
           "asTranscribed": "Som transskriberet",
           "simplified": "Forenklet",
@@ -434,20 +589,21 @@
           "title": "Basis-URL",
           "description": "API-basis-URL for den valgte udbyder. Kun den brugerdefinerede udbyder kan redigeres.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Adressen bestemmes af den valgte udbyder",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API-nøgle",
-          "description": "API-nøgle til den valgte udbyder.",
+          "description": "Gemmes kun på denne computer",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Angiv den modelidentifikator, som det brugerdefinerede endpoint forventer.",
-          "descriptionDefault": "Vælg en model, der udbydes af den valgte udbyder.",
+          "descriptionCustom": "Modellens navn på din server",
+          "descriptionDefault": "Knappen til højre opdaterer listen",
           "placeholderWithOptions": "Søg eller vælg en model",
           "placeholderNoOptions": "Skriv et modelnavn",
-          "refreshModels": "Opdater modeller"
+          "refreshModels": "Opdatér modellisten"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Valgt prompt",
           "description": "Vælg en skabelon til at forfine transskriptioner, eller opret en ny. Brug ${output} i promptteksten for at referere til den fangede transskription."
         },
-        "noPrompts": "Ingen prompts tilgængelige",
-        "selectPrompt": "Vælg en prompt",
+        "noPrompts": "Ingen instruktioner",
+        "selectPrompt": "Vælg en instruktion",
         "createNew": "Opret ny prompt",
-        "promptLabel": "Promptnavn",
+        "promptLabel": "Navn",
         "promptLabelPlaceholder": "Indtast promptnavn",
-        "promptInstructions": "Promptinstruktioner",
+        "promptInstructions": "Instruktionens tekst",
         "promptInstructionsPlaceholder": "Skriv de instruktioner, der skal køres efter transskription. Eksempel: Forbedr grammatik og klarhed for følgende tekst: ${output}",
         "promptTip": "Tip: Brug <code>${output}</code> til at indsætte den transskriberede tekst i din prompt.",
         "updatePrompt": "Opdater prompt",
-        "deletePrompt": "Slet prompt",
-        "createPrompt": "Opret prompt",
+        "deletePrompt": "Slet",
+        "createPrompt": "Opret",
         "cancel": "Annuller",
-        "selectToEdit": "Vælg en prompt ovenfor for at se og redigere dens detaljer.",
-        "createFirst": "Klik på 'Opret ny prompt' ovenfor for at oprette din første efterbehandlingsprompt."
+        "selectToEdit": "Vælg en instruktion for at redigere den.",
+        "createFirst": "Klik på »Opret« for at tilføje den første instruktion."
+      },
+      "local": {
+        "intro": "Modellen kører direkte på denne computer: intet internet, ingen nøgler, din tekst forlader aldrig maskinen. Download en model, hvis du vil. Den starter selv, når den skal bruges, og fjernes fra hukommelsen, når den er inaktiv. Den kører på processoren og er derfor langsommere end cloudtjenester. Alle modeller kan være på en bærbar med 16 GB RAM.",
+        "runtimeMissing": "Den indbyggede AI-motor blev ikke fundet. Geninstallér Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Afbalanceret",
+            "model": "Qwen3.5 4B",
+            "description": "Den almindelige Qwen 4B-udgave. Omhyggelig med tegnsætning, men retter få genkendelsesfejl i rigtige samtaler (vores test, 06-10-2026). Udgaven med acceleration er mere præcis og hurtigere."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Googles model, tro mod originalen. Redigerer som Gemma i Googles udgave med acceleration, men omkring 1,25 gange langsommere."
+          },
+          "gigachat31": {
+            "title": "Til russisk",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Trænet på russisk fra starten. Kun 1,8B af dens 10B parametre er aktive pr. token, så den er hurtigere, end størrelsen antyder. Kræver mere hukommelse."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen til russisk",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) med russisk ordforråd og ekstra træning på russiske tekster. I testen retter den mindre end Gemma E2B og er halvt så hurtig (ca. 27 min pr. times optagelse)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIAs lille model, officielt kun engelsk. I testen lod den teksten næsten uændret på både russisk og engelsk, og den er langsommere end Gemma (ca. 35 min pr. times optagelse)."
+          },
+          "qwen35_9b": {
+            "title": "Maksimum",
+            "model": "Qwen3.5 9B",
+            "description": "Den klogeste lokale model: bedst til kontekst og svære rettelser. Den langsomste."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Afbalanceret",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B i en nyere udgave med indbygget acceleration. Mere præcis og omkring 1,2 gange hurtigere end almindelig Qwen 4B, men retter i vores test halvt så mange fejl som Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma let",
+            "model": "Gemma 4 E2B · Googles udgave",
+            "description": "Den mindre Gemma i Googles officielle udgave med acceleration (+98 MB). Dobbelt så hurtig som Gemma E4B (omkring 14 min pr. times optagelse) med omkring 2/3 af dens rettelser."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Googles udgave",
+            "description": "Den bedste kvalitet i vores test (06-10-2026). Googles officielle udgave med acceleration (+99 MB): redigerer som almindelig Gemma E4B, omkring 1,25 gange hurtigere. Omkring 26 min pr. times optagelse."
+          }
+        },
+        "speedupBadge": "acceleration",
+        "speedupHint": "En lille hjælpemodel gætter flere ord frem, og hovedmodellen tjekker dem. På en processor er det omkring 1,2–1,3 gange hurtigere.",
+        "untested": "ikke testet",
+        "delete": "Slet model",
+        "state": {
+          "stopped": "Ikke indlæst i hukommelsen",
+          "loading": "Indlæser i hukommelsen…",
+          "ready": "Indlæst i hukommelsen"
+        },
+        "unloadNow": "Fjern fra hukommelsen nu",
+        "unload": {
+          "title": "Fjern fra hukommelsen",
+          "description": "Hvor længe modellen må være inaktiv, før den fjernes fra hukommelsen og frigør omkring 2–3 GB.",
+          "immediately": "Lige efter behandlingen",
+          "min2": "Efter 2 minutter",
+          "min5": "Efter 5 minutter",
+          "min15": "Efter 15 minutter",
+          "never": "Aldrig"
+        },
+        "recommended": "Anbefalet"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Åbn optagelsesmappe",
       "loading": "Indlæser historik...",
       "empty": "Ingen transskriptioner endnu. Start optagelse for at opbygge din historik!",
-      "copyToClipboard": "Kopiér transskription til udklipsholder",
+      "copyToClipboard": "Kopiér tekst",
       "copyError": "Kunne ikke kopiere transskriptionen til udklipsholderen.",
       "save": "Gem transskription",
       "unsave": "Fjern fra gemte",
       "delete": "Slet post",
       "deleteError": "Kunne ikke slette posten. Prøv igen.",
-      "retranscribe": "Transskribér igen",
+      "retranscribe": "Genkend igen",
       "retranscribeError": "Kunne ikke transskribere igen. Prøv igen.",
-      "transcribing": "Transskriberer...",
+      "transcribing": "Genkender…",
       "transcriptionFailed": "Transskription mislykkedes. Du kan transskribere igen ved hjælp af genforsøgsikonet."
     },
     "debug": {
       "title": "Fejlfinding",
       "logDirectory": {
         "title": "Logmappe",
-        "description": "Placering af logfiler"
+        "description": "Vedhæft loggen til en fejlrapport"
       },
       "logLevel": {
         "title": "Logniveau",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Tjek for opdateringer",
-        "description": "Tjek automatisk for nye versioner af Handy",
-        "lockedDescription": "Deaktiveret af systemkonfiguration (HANDY_DISABLE_UPDATER)"
+        "description": "Spørg GitHub én gang ved start, om der er kommet en ny version af Tishe. Optagelser og tekster sendes ikke",
+        "lockedDescription": "Søgning efter opdateringer er slået fra i denne version"
       },
       "whatsNewPreview": {
         "title": "Forhåndsvisning af nyheder",
@@ -534,16 +761,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Tærskel for ordkorrektion",
-        "description": "Følsomhed for brugerdefinerede ordkorrektioner"
+        "description": "Hvor meget et ord skal ligne et af dine for at blive erstattet"
       },
       "historyLimit": {
-        "title": "Historikgrænse",
-        "description": "Maksimalt antal historikposter, der skal beholdes",
+        "title": "Hvor mange diktater der gemmes",
+        "description": "Beholdte diktater tæller ikke med",
         "entries": "poster"
       },
       "recordingRetention": {
-        "title": "Automatisk sletning af optagelser",
-        "description": "Slet automatisk gamle optagelser for at spare plads",
+        "title": "Slet gamle diktater",
+        "description": "Lyden slettes sammen med teksten",
         "never": "Aldrig",
         "preserveLimit": "Behold de seneste {{count}}",
         "days3": "Efter 3 dage",
@@ -552,24 +779,24 @@
         "placeholder": "Vælg opbevaringsperiode..."
       },
       "alwaysOnMicrophone": {
-        "label": "Altid aktiv mikrofon",
-        "description": "Hold mikrofonen aktiv for hurtigere reaktion"
+        "label": "Hold mikrofonen tændt",
+        "description": "Optagelsen starter hurtigere, men mikrofonen er optaget hele tiden"
       },
       "clamshellMicrophone": {
-        "title": "Clamshell-mikrofon",
-        "description": "Mikrofon, der skal bruges, når den bærbares låg er lukket"
+        "title": "Mikrofon med lukket låg",
+        "description": "Hvilken mikrofon der bruges, når den bærbare er lukket"
       },
       "postProcessingToggle": {
         "label": "Efterbehandling",
         "description": "Aktivér AI-drevet tekstforbedring efter transskription"
       },
       "muteWhileRecording": {
-        "label": "Mute under optagelse",
-        "description": "Sluk for systemlyd under optagelse"
+        "label": "Slå computerens lyd fra under optagelse",
+        "description": "Musik og video kommer ikke med i optagelsen"
       },
       "appendTrailingSpace": {
-        "label": "Tilføj efterfølgende mellemrum",
-        "description": "Tilføj et mellemrum efter indsat transskription"
+        "label": "Tilføj et mellemrum til sidst",
+        "description": "Næste sætning klæber ikke til den forrige"
       },
       "keyboardImplementation": {
         "title": "Tastaturimplementering",
@@ -582,28 +809,28 @@
         "settings": "Indstillinger:"
       },
       "pasteDelay": {
-        "title": "Forsinkelse af indsættelse (før)",
-        "description": "Forsinkelse (i millisekunder) efter kopiering af tekst, før tastetrykket for indsætning sendes. Øg, hvis intet bliver indsat."
+        "title": "Forsinkelse før indsættelse",
+        "description": "Øg, hvis intet bliver indsat"
       },
       "pasteDelayAfter": {
-        "title": "Forsinkelse af indsættelse (efter)",
-        "description": "Forsinkelse (i millisekunder) efter tastetrykket for indsætning, før din tidligere udklipsholder gendannes. Øg, hvis dit gamle udklipsholderindhold bliver indsat i stedet for transskriptionen."
+        "title": "Forsinkelse efter indsættelse",
+        "description": "Øg, hvis gammel tekst fra udklipsholderen bliver indsat"
       },
       "holdThreshold": {
         "title": "Holdetærskel",
-        "description": "Kun i automatisk tilstand: hvor længe (i millisekunder) genvejen skal holdes nede, før det tæller som et hold i stedet for et tryk. Sænk værdien, hvis korte hold lader optagelsen køre videre; hæv den, hvis bevidste tryk behandles som hold."
+        "description": "Et kortere tryk skifter, et længere tæller som at holde nede"
       },
       "reliablePaste": {
         "title": "Pålidelig indsættelse (Beta)",
-        "description": "Gendan først din udklipsholder, når målappen faktisk har læst transskriptionen, i stedet for efter en fast forsinkelse. Skal afhjælpe, at gammelt udklipsholderindhold indsættes, når systemet er belastet. Kræver en indsætningsmetode via udklipsholderen; kun macOS og Windows."
+        "description": "Vent, til programmet har læst teksten, i stedet for en fast tid"
       },
       "recordingBuffer": {
-        "title": "Ekstra optagelsesbuffer",
-        "description": "Ekstra tid (i millisekunder) til at fortsætte optagelsen, efter du slipper tasten, for at fange efterfølgende lyd. 0 = ingen ekstra buffer."
+        "title": "Optag videre efter slip",
+        "description": "Hvor længe der stadig optages, efter at tasten er sluppet"
       },
       "keyboardDiagnostic": {
         "title": "Tastaturdiagnostik",
-        "description": "Kontrollerer, om tastaturhændelser når frem til Handy. Kun antallet af hændelser registreres — aldrig hvilke taster du trykker på.",
+        "description": "Tjekker, om tastaturhændelser når frem til Tishe. Kun antallet af hændelser registreres – aldrig hvilke taster du trykker på.",
         "run": "Kør 10 s diagnostik",
         "running": "Lytter… tryk på din genvej et par gange (f.eks. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -617,7 +844,7 @@
         "mouse": "Mus",
         "verdictBlocked": "Secure Input blokerer tastehændelser — genveje med en almindelig tast kan ikke fungere, før det er løst.",
         "verdictSuspicious": "Der kom modifikatorhændelser, men ingen tastehændelser — noget undertrykker taster, selvom Secure Input rapporteres som deaktiveret. Rapportér det gerne på GitHub.",
-        "verdictOk": "Tastehændelser når frem til Handy som normalt.",
+        "verdictOk": "Tastehændelser når frem til Tishe som normalt.",
         "verdictNoEvents": "Ingen hændelser registreret — trykkede du på nogen taster under testen?",
         "failed": "Diagnostik mislykkedes: {{error}}"
       }
@@ -626,15 +853,15 @@
       "title": "Om",
       "version": {
         "title": "Version",
-        "description": "Nuværende version af Handy"
+        "description": "Nuværende version af Tishe"
       },
       "whatsNewUpdates": {
-        "label": "Vis nyheder",
-        "description": "Vis udgivelsesnoter, efter Handy opdateres"
+        "label": "Vis »Nyheder« efter en opdatering",
+        "description": "En kort liste over ændringer ved første start af en ny version"
       },
       "appDataDirectory": {
-        "title": "Appdatamappe",
-        "description": "Placering, hvor Handy gemmer sine data"
+        "title": "Datamappe",
+        "description": "Indstillinger, modeller og historik"
       },
       "sourceCode": {
         "title": "Kildekode",
@@ -643,7 +870,7 @@
       },
       "supportDevelopment": {
         "title": "Støt udviklingen",
-        "description": "Hjælp os med at fortsætte udviklingen af Handy",
+        "description": "Tishe bygger på deres program",
         "button": "Donér"
       },
       "acknowledgments": {
@@ -651,7 +878,7 @@
         "ggml": {
           "title": "ggml",
           "description": "Højtydende tensor-bibliotek til maskinlæringsinferens på enheden",
-          "details": "Handys lokale tale-til-tekst funktionalitet er bygget på transcribe.cpp og ggml. Tak for det fantastiske arbejde af Georgi Gerganov og bidragyderne."
+          "details": "Hurtig talegenkendelse på computeren. Tak til Georgi Gerganov og projektets bidragydere."
         }
       }
     }
@@ -672,7 +899,7 @@
     "portableUpdateBrowseButton": "Åbn GitHub Releases"
   },
   "whatsNew": {
-    "title": "Nyt i Handy v{{version}}"
+    "title": "Nyt i Tishe"
   },
   "common": {
     "loading": "Indlæser...",
@@ -681,10 +908,14 @@
     "open": "Åbn",
     "copy": "Kopiér",
     "clear": "Ryd",
-    "noOptionsFound": "Ingen muligheder fundet"
+    "noOptionsFound": "Ingen muligheder fundet",
+    "cancel": "Annullér",
+    "choose": "Vælg…",
+    "reset": "Nulstil til standard",
+    "search": "Søg"
   },
   "accessibility": {
-    "permissionsDescription": "Handy har brug for tilgængelighedstilladelser for at skrive den transskriberede tekst.",
+    "permissionsDescription": "For at indsætte tekst skal programmet have tilladelsen »Tilgængelighed«.",
     "openSettings": "Åbn systemindstillinger"
   },
   "errors": {
@@ -703,17 +934,17 @@
     "modelLoadFailedUnknown": "ukendt model",
     "pasteFailedTitle": "Kunne ikke indsætte tekst",
     "pasteFailed": "Teksten kunne ikke indsættes i det aktive program.",
-    "transcriptionFailedTitle": "Transskription mislykkedes"
+    "transcriptionFailedTitle": "Kunne ikke genkendes"
   },
   "appLanguage": {
-    "title": "Applikationssprog",
-    "description": "Skift sproget for Handy-grænsefladen"
+    "title": "Brugerfladens sprog",
+    "description": "Sproget i programmets tekster"
   },
   "theme": {
-    "title": "Applikationstema",
-    "description": "Vælg om Handy skal følge dit systemtema eller forblive lyst eller mørkt",
+    "title": "Tema",
+    "description": "Vælg, om Tishe følger systemets tema eller altid er lyst eller mørkt",
     "options": {
-      "system": "System",
+      "system": "Som systemet",
       "light": "Lys",
       "dark": "Mørk"
     }
@@ -721,6 +952,14 @@
   "overlay": {
     "transcribing": "Transskriberer...",
     "processing": "Behandler...",
+    "waiting": "Modellen er optaget af en fil – diktatet bliver forsinket",
+    "message": {
+      "paste_failed": "Kunne ikke indsætte. Teksten er gemt i Historik",
+      "editing_skipped": "Indsat uden redigering: AI'en er ikke klar",
+      "no_microphone": "Ingen mikrofon fundet",
+      "microphone_denied": "Ingen adgang til mikrofonen",
+      "help": "Hvad du kan gøre"
+    },
     "loadingModel": "Indlæser model..."
   },
   "secureInput": {
@@ -733,5 +972,715 @@
     "learnMore": "Sådan løser du det",
     "recorderBlocked": "Genveje kan ikke optages lige nu — macOS Secure Input blokerer tastehændelser. Løs advarslen om Secure Input først.",
     "dismiss": "Afvis"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg blev ikke fundet. Det skal bruges til at læse lyd- og videofiler og følger med Tishes installationsprogram: geninstallér Tishe. Eller installér det med kommandoen: winget install Gyan.FFmpeg — og genstart Tishe.",
+    "input": {
+      "choose": "Tilføj filer…",
+      "filterName": "Lyd og video"
+    },
+    "maxPart": {
+      "title": "Maksimal længde af en del",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Udbyder",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Brugerdefineret (OpenAI-kompatibel)"
+      },
+      "baseUrl": "API-URL",
+      "baseUrlDescription": "Basis-URL, der ender på /v1.",
+      "apiKey": "API-nøgle",
+      "apiKeyDescription": "Gemmes lokalt på denne computer.",
+      "model": "Model",
+      "modelDescription": "gpt-4o-transcribe-modeller modtager højst ~23 min pr. forespørgsel; dele forkortes automatisk.",
+      "language": "Sprog",
+      "languageDescription": "Sprogkode, f.eks. da eller en. Lad feltet være tomt for automatisk genkendelse.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Personer i optagelsen",
+      "auto": "Genkend automatisk",
+      "model": "Talermodel",
+      "modelDescription": "Downloades én gang; skelner mellem stemmer. Begge er små og hurtige.",
+      "recommended": "Anbefalet",
+      "cloudUntimed": "Modellen {{model}} returnerer ingen tidsstempler, så talere kan ikke markeres. Vælg whisper-1, en whisper-model hos Groq eller lokal genkendelse.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Trænet på tusindvis af stemmer; skelner pålideligt mellem stemmer i rigtige optagelser. Godt standardvalg."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "En alternativ model: prøv den, hvis den første blander stemmerne sammen i dine optagelser."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Medtag også den rå transskription",
+      "includeRawDescription": "Tilføj genkendelsens uredigerede resultat sidst i dokumentet.",
+      "promptPlaceholder": "Indbygget instruktion til optagelsens sprog (russisk eller engelsk)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Tidsstempler",
+      "location": "Gem i",
+      "choose": "Vælg mappe…",
+      "nextToSource": "Ved siden af kildefilen",
+      "notes": "Behandlingsnoter",
+      "removeFillers": "Fjern tøvelyde",
+      "saveDebug": "Gem mellemfiler",
+      "saveDebugDescription": "Opretter en mappe »<name>.debug« ved siden af dokumentet med teksten efter hvert trin: genkendelse, oprydning, hver forespørgsel til sprogmodellen og dens svar, slutresultat. Til fejlsøgning og til modelsammenligningen."
+    },
+    "actions": {
+      "start": "Transskribér",
+      "cancel": "Annullér"
+    },
+    "progress": {
+      "starting": "Starter…",
+      "elapsed": "Forløbet: {{time}}",
+      "extracting": "Udtrækker lyd…",
+      "extractingPart": "Udtrækker lyd…",
+      "diarizing": "Genkender talere…",
+      "diarizingPart": "Genkender talere…",
+      "splitting": "Deler op i dele…",
+      "splittingPart": "Deler op i dele…",
+      "transcribing": "Transskriberer…",
+      "transcribingPart": "Transskriberer del {{part}} af {{total}}…",
+      "post_processing": "Rydder op med LLM…",
+      "post_processingPart": "Rydder op i del {{part}} af {{total}} med LLM…",
+      "writing": "Skriver dokumentet…",
+      "writingPart": "Skriver dokumentet…"
+    },
+    "result": {
+      "open": "Åbn",
+      "reveal": "Vis i mappe"
+    },
+    "document": {
+      "title": "Transskription",
+      "sourceFile": "Fil",
+      "duration": "Varighed",
+      "parts": "Dele",
+      "engine": "Genkendelse",
+      "llm": "Efterbehandling med LLM",
+      "created": "Oprettet",
+      "part": "Del",
+      "rawTranscript": "Rå transskription",
+      "speaker": "Taler",
+      "notes": "Behandlingsnoter",
+      "notesTotal": "Behandlingstid",
+      "notesExtracting": "Lydudtrækning",
+      "notesDiarizing": "Talergenkendelse",
+      "notesTranscribing": "Genkendelse",
+      "notesLlm": "LLM-behandling",
+      "notesWarnings": "Advarsler",
+      "notesNone": "ingen",
+      "notesLanguage": "Tekstens sprog",
+      "llmLocal": "{{model}}, på denne computer",
+      "warnings": {
+        "noTimestampsModel": "talere blev ikke markeret: denne talemodel returnerer ingen tidsstempler; brug en whisper-model eller lokal genkendelse",
+        "noTimestampsPart": "del {{part}}: taletjenesten returnerede ingen tidsstempler, så talere kunne ikke markeres",
+        "llmEmpty": "del {{part}}, fragment {{fragment}}: LLM'en gav et tomt svar, rå tekst beholdt",
+        "llmError": "del {{part}}, fragment {{fragment}}: LLM-fejl, rå tekst beholdt ({{error}})",
+        "numbersBack": "del {{part}}, fragment {{fragment}}: tal sat tilbage i {{lines}} linjer (LLM'en skrev dem med bogstaver eller udelod dem)",
+        "linesLost": "del {{part}}, fragment {{fragment}}: LLM-svaret beholdt ikke de nummererede linjer, rå tekst beholdt",
+        "linesKept": "del {{part}}, fragment {{fragment}}: {{kept}} af {{total}} linjer beholdt deres rå tekst ({{reasons}})",
+        "kept": {
+          "missing": "mangler",
+          "duplicate": "dublet",
+          "empty": "tom",
+          "tooLong": "for lang",
+          "translated": "oversat",
+          "tooShort": "for kort",
+          "cutOff": "afskåret"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Ryd færdige"
+    },
+    "events": {
+      "title": "Hændelsesscript",
+      "choose": "Vælg…",
+      "none": "Ikke angivet – hændelser sendes ingen steder hen",
+      "filterName": "Programmer og scripts",
+      "test": "Test",
+      "testOk": "Scriptet modtog en testhændelse",
+      "testFailed": "Mislykkedes: {{error}}",
+      "testMessage": "Tishe: testhændelse",
+      "remaining": "~{{minutes}} min tilbage",
+      "started": "Transskription startet",
+      "finished": "Færdig",
+      "cancelled": "Annulleret",
+      "interval": {
+        "title": "Interval for statusmeddelelser",
+        "description": "Højst én gang pr. så mange sekunder. Et nyt trin eller en ny del, start og slut sendes med det samme.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Skift",
+    "choose": "Vælg",
+    "open": "Åbn",
+    "hide": "Skjul",
+    "save": "Gem",
+    "saved": "Gemt",
+    "copied": "Kopieret",
+    "undo": "Fortryd",
+    "download": "Download",
+    "downloadSize": "Download {{size}}",
+    "downloadingPercent": "Downloader · {{percent}} %",
+    "cancelDownload": "Annullér",
+    "deleteNamed": "Slet {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Brug »{{value}}«",
+    "fold": {
+      "more": "Mere",
+      "changed_one": "ændret: {{count}}",
+      "changed_other": "ændret: {{count}}",
+      "changedA11y_one": "{{count}} indstilling ændret",
+      "changedA11y_other": "{{count}} indstillinger ændret"
+    },
+    "number": {
+      "hint": "Fra {{min}} til {{max}}",
+      "hintDefault": "Standard {{value}}; fra {{min}} til {{max}}",
+      "notNumber": "Indtast et tal",
+      "range": "Indtast et tal fra {{min}} til {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} t",
+      "hourMin": "{{h}} t {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "i dag {{time}}",
+      "yesterday": "i går {{time}}",
+      "todayTitle": "I dag",
+      "yesterdayTitle": "I går"
+    },
+    "player": {
+      "play": "Afspil",
+      "pause": "Pause",
+      "position": "Afspilningsposition"
+    },
+    "shortcut": {
+      "change": "Skift tast for »{{name}}«",
+      "reset": "Nulstil tasten til standard"
+    },
+    "echo": {
+      "recognition": "Genkendelse: {{model}}",
+      "language": "sprog: {{language}}",
+      "sharedWithDictation": "delt med diktat",
+      "sharedWithFiles": "delt med filtransskription",
+      "noModel": "Ingen talegenkendelsesmodel"
+    },
+    "llm": {
+      "ready": "Klar · {{model}} på denne computer",
+      "needed": "Kræver AI'en · {{model}}",
+      "downloading": "Downloader AI'en · {{percent}} %",
+      "runtimeMissing": "Den indbyggede AI-motor mangler",
+      "otherOptions": "Andre muligheder",
+      "noKey": "Kræver en {{provider}}-nøgle",
+      "noUrl": "Kræver serverens adresse",
+      "noServerModel": "Kræver et modelnavn",
+      "localServer": "Din server på denne computer · {{model}}",
+      "textToServer": "Teksten sendes til {{address}}",
+      "textToService": "Teksten sendes til {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Slet modellen {{name}}?",
+      "deleteModel": "Slet model",
+      "deleteModelBody": "{{size}} frigøres. For at bruge modellen igen skal du downloade den.",
+      "deleteActiveTitle": "Slet {{name}}? Det er den aktuelle model",
+      "deleteActiveBody": "Diktat og transskription holder op med at virke, indtil du vælger en anden model. {{size}} frigøres.",
+      "deleteLlmTitle": "Slet AI-modellen {{name}}?",
+      "deleteLlm": "Slet AI-model",
+      "deleteLlmBody": "{{size}} frigøres. Redigering virker ikke, før du downloader den igen eller vælger en anden.",
+      "deleteSpeakerModelBody": "Opdeling efter taler virker ikke, før du downloader en stemmemodel igen."
+    },
+    "back": {
+      "transcription": "Tilbage til Transskription",
+      "dictation": "Tilbage til Diktat",
+      "meetings": "Tilbage til Møder",
+      "history": "Tilbage til Historik",
+      "models": "Tilbage til Genkendelse",
+      "llm": "Tilbage til AI-redigering",
+      "app": "Tilbage til App",
+      "about": "Tilbage til Om",
+      "debug": "Tilbage til Fejlfinding",
+      "next": "Tilbage til Hvad nu"
+    },
+    "changed": "ændret"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "indlæst",
+      "loading": "indlæser…",
+      "error": "kunne ikke indlæses",
+      "unloaded": "ikke i hukommelsen",
+      "none": "Ingen model",
+      "a11y": "Model {{model}}, {{state}}. Skift model",
+      "menu": "Downloadede modeller",
+      "all": "Alle modeller…",
+      "locked": "En transskription kører – skift, når den er færdig"
+    },
+    "task": "Transskription: fil {{current}} af {{total}} · {{percent}} %",
+    "downloading": "Downloader: {{name}} · {{percent}} %",
+    "downloadingMany": "Downloader: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transskription kræver ffmpeg"
+    },
+    "drop": {
+      "title": "Slip en optagelse her",
+      "text": "Lyd eller video: mp3, m4a, wav, mp4, mkv og andre. Hver fil bliver et separat dokument.",
+      "more": "Slip flere optagelser her eller",
+      "release": "Slip for at tilføje",
+      "rejected": "{{names}} – ikke lyd eller video",
+      "oneText": "»{{name}}« kommer i transskriptionskøen",
+      "manyText_one": "{{count}} optagelse kommer i transskriptionskøen",
+      "manyText_other": "{{count}} optagelser kommer i transskriptionskøen",
+      "anyText": "Lyd- og videofiler kommer i transskriptionskøen",
+      "noneTitle": "Disse filer duer ikke",
+      "noneText": "Kun lyd og video kan transskriberes: mp3, m4a, wav, mp4, mkv og andre.",
+      "otherNote_one": "{{count}} fil mere springes over: den er ikke lyd eller video",
+      "otherNote_other": "{{count}} filer mere springes over: de er ikke lyd eller video",
+      "alreadyOne": "»{{name}}« er allerede i køen",
+      "alreadyMany": "Disse optagelser er allerede i køen"
+    },
+    "list": {
+      "label": "Optagelser",
+      "waiting": "Venter",
+      "cancelled": "Annulleret",
+      "remaining": "omkring {{time}} tilbage",
+      "remove": "Fjern",
+      "removeFile": "Fjern {{name}}",
+      "removeFromList": "Fjern fra listen",
+      "more": "Mere: {{name}}",
+      "recipeSpeakers": "talere",
+      "recipeEditing": "redigering",
+      "recipeCloud": "i skyen",
+      "parts_one": "{{count}} del",
+      "parts_other": "{{count}} dele",
+      "notes_one": "{{count}} behandlingsnote",
+      "notes_other": "{{count}} behandlingsnoter",
+      "showAll": "Vis alle ({{count}})",
+      "showFewer": "Vis færre",
+      "removedOne": "Fjernet fra listen",
+      "removedMany_one": "{{count}} række fjernet fra listen",
+      "removedMany_other": "{{count}} rækker fjernet fra listen",
+      "chars_one": "{{n}} tegn",
+      "chars_other": "{{n}} tegn",
+      "keptNote": "De seneste {{count}} resultater gemmes. Dokumenter på disken slettes aldrig.",
+      "missing": "Dokumentet blev ikke fundet: det er flyttet eller slettet, eller drevet er frakoblet",
+      "openDocument": "Åbn dokumentet {{name}}"
+    },
+    "recipe": {
+      "title": "Opskrift",
+      "locked": "Indstillingerne ændres ikke, mens transskriptionen kører. Nye filer bruger de samme indstillinger.",
+      "where": "Hvor der genkendes",
+      "local": "På denne computer",
+      "cloud": "I skyen",
+      "audioToService": "Lyden sendes til {{provider}}",
+      "cloudEcho": "Genkendelse: {{model}} hos {{provider}}",
+      "speakers": "Talere",
+      "speakersDescription": "Dokumentet bliver et samtalereferat: »Taler 1: …«, »Taler 2: …«",
+      "speakersMissing": "Kræver en stemmemodel · {{size}}",
+      "speakersDownloading": "Downloader stemmemodellen · {{percent}} %",
+      "speakersReady": "Stemmemodellen er klar",
+      "countDescription": "Hvis du ved det, bliver opdelingen mere præcis",
+      "editing": "Redigering med AI",
+      "editingDescription": "Retter genkendelsesfejl og tegnsætning. Tager mærkbart længere tid: omkring 15–35 min pr. times optagelse",
+      "result": "Resultat",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "ved siden af optagelsen"
+    },
+    "more": {
+      "recognition": "Genkendelse",
+      "maxPartDescription": "En lang optagelse klippes ved pauser i dele, der ikke er længere end dette",
+      "speakers": "Talere",
+      "editing": "Redigering",
+      "prompt": "Instruktion til filer",
+      "promptDescription": "Tom – den indbyggede instruktion på optagelsens sprog. Rækkefølge: dette felt, så modellens ⚙, så den indbyggede",
+      "document": "Dokument",
+      "locationDescription": "Navnet kommer fra optagelsen; intet overskrives, i stedet tilføjes (2)",
+      "timestampsDescription": "Optagelsestid før hvert afsnit",
+      "removeFillersDescription": "Fjerner »uh«, »um«, »hmm« i engelske og russiske optagelser. Ord bliver stående",
+      "globalFillers": "Kildetransskriptionen forbliver ordret. Diktat har sin egen indstilling for fyldord",
+      "notesDescription": "Til sidst: tid for hvert trin og advarsler",
+      "integrations": "Integrationer",
+      "eventsDescription": "Et program, der får besked om start, fremskridt og afslutning (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Tilføj filer for at starte",
+      "noFfmpeg": "Kræver ffmpeg",
+      "noModel": "Download først en talegenkendelsesmodel",
+      "cloudIncomplete": "Kræver en {{provider}}-nøgle",
+      "cloudIncompleteCustom": "Kræver API-adresse, nøgle og model",
+      "noSpeakerModel": "Kræver en stemmemodel",
+      "running": "Fil {{current}} af {{total}} · {{time}} forløbet",
+      "start_one": "Transskribér {{count}} fil",
+      "start_other": "Transskribér {{count}} filer",
+      "done_one": "Færdig: {{count}} fil",
+      "done_other": "Færdig: {{count}} filer",
+      "errors_one": "{{count}} fil med fejl",
+      "errors_other": "{{count}} filer med fejl",
+      "summary_one": "{{count}} optagelse",
+      "summary_other": "{{count}} optagelser",
+      "modelDownloading": "Talegenkendelsesmodellen downloades · {{percent}} %",
+      "llmDownloading": "AI'en til redigering downloades · {{percent}} %",
+      "llmMissing": "Redigering kræver en AI",
+      "llmNotSetUp": "AI'en til redigering er ikke sat op",
+      "withoutEditing": "Uden redigering",
+      "modelNotActive": "Talemodellen er ikke slået til"
+    },
+    "stop": {
+      "title": "Stop transskriptionen?",
+      "body": "Færdige filer ({{done}}) er gemt. Den aktuelle fil ({{percent}} %) og de ventende ({{waiting}}) skal startes igen.",
+      "confirm": "Stop",
+      "keep": "Fortsæt"
+    },
+    "tray": {
+      "running": "Transskription: fil {{current}} af {{total}} · {{pct}} %",
+      "ready_one": "Transskription klar: {{count}} fil",
+      "ready_other": "Transskription klar: {{count}} filer"
+    },
+    "notify": {
+      "readyOne": "Transskriptionen er klar",
+      "readyMany_one": "Transskription klar: {{count}} fil",
+      "readyMany_other": "Transskription klar: {{count}} filer",
+      "failedOne": "Transskriptionen mislykkedes",
+      "failedMany_one": "Transskription mislykkedes: {{count}} fil",
+      "failedMany_other": "Transskription mislykkedes: {{count}} filer",
+      "partial": "{{ok}} af {{total}} færdige · {{errors}}",
+      "errors_one": "{{count}} mislykkedes",
+      "errors_other": "{{count}} mislykkedes",
+      "failedFile": "Mislykkedes: {{name}} · {{reason}}",
+      "open": "Åbn"
+    },
+    "try": {
+      "before": "Åbn en hvilken som helst editor, placér markøren i den, og hold",
+      "after": "nede, mens du taler. Slip, så kommer teksten frem der.",
+      "changeKey": "Skift tasten"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Diktat er klar ·",
+      "anyWindow": "i ethvert vindue",
+      "keyBusy": "Diktat starter ikke: tasten er optaget",
+      "keyBusyDetail": "Et andet program bruger {{key}}. Vælg en anden tast.",
+      "changeKey": "Skift tasten"
+    },
+    "keys": {
+      "title": "Taster",
+      "second": "Diktat med redigering – anden tast",
+      "secondDescription": "Den almindelige tast indsætter teksten, som den er. Denne indsætter den efter redigering med AI",
+      "instruction": "Instruktion",
+      "manage": "Administrér…",
+      "secondBusy": "Et andet program bruger denne tast: vælg en anden"
+    },
+    "more": {
+      "paste": "Indsættelse af tekst",
+      "indicator": "Optageindikator",
+      "microphone": "Mikrofon og optagelse",
+      "prompts": "Instruktioner til diktat med redigering",
+      "promptsDescription_one": "{{count}} instruktion",
+      "promptsDescription_other": "{{count}} instruktioner",
+      "promptsRow": "Opret og redigér instruktioner",
+      "text": "Diktattekst",
+      "fillersDocuments": "Kun til diktat. I dokumenter klares det af »Fjern tøvelyde« på siden Transskription"
+    },
+    "fix": {
+      "title": "Hvis noget ikke virker",
+      "paste": "Teksten bliver ikke indsat",
+      "pasteHelp": "Hvis du dikterer i et program, der kører som administrator, tillader Windows ikke indsættelse i det. Ellers kan du øge forsinkelserne nedenfor.",
+      "cutOff": "Slutningen af en sætning skæres af",
+      "hold": "Et kort tryk tæller som at holde nede"
+    },
+    "prompts": {
+      "title": "Instruktioner til diktat med redigering",
+      "intro": "Instruktionen fortæller AI'en, hvad den skal gøre med den dikterede tekst. ${output} er den dikterede tekst.",
+      "current": "Aktuel instruktion",
+      "create": "Opret",
+      "deleted": "Instruktionen »{{name}}« er slettet"
+    }
+  },
+  "meetings": {
+    "what": "Tishe kommer til at optage møder og opkald på denne computer: din mikrofon og den anden part, og derefter en transskription opdelt efter taler.",
+    "how": "Optagelserne bliver på computeren ligesom alt andet i Tishe.",
+    "nowTitle": "Allerede nu",
+    "nowText": "Hvis et møde allerede er optaget – med Zoom, Teams eller en diktafon – så tilføj filen under »Transskription«.",
+    "goTranscription": "Gå til Transskription"
+  },
+  "history": {
+    "storage": {
+      "title": "Opbevaring",
+      "limit_one": "Det seneste diktat gemmes",
+      "limit_other": "De seneste {{count}} diktater gemmes",
+      "never": "Diktater slettes ikke automatisk",
+      "days_3": "Diktater slettes efter 3 dage",
+      "weeks_2": "Diktater slettes efter 2 uger",
+      "months_3": "Diktater slettes efter 3 måneder"
+    },
+    "empty": {
+      "title": "Dine diktater vises her",
+      "textBefore": "Hold",
+      "textAfter": "nede i et hvilket som helst vindue, og tal.",
+      "textNoKey": "Indstil en diktattast under »Diktat«."
+    },
+    "copy": "Kopiér tekst",
+    "more": "Flere handlinger",
+    "keep": "Behold",
+    "keepDescription": "Slettes ikke automatisk",
+    "retry": "Genkend igen",
+    "delete": "Slet",
+    "deleted": "Diktatet er slettet",
+    "failed": "Kunne ikke genkendes",
+    "savedTag": "beholdt",
+    "editingSkipped": "uden redigering",
+    "showMore": "Vis hele",
+    "showLess": "Skjul",
+    "version": "Tekstversion",
+    "versionEdited": "Efter redigering",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Modeller, der gør tale til tekst, til diktat og filtransskription. Redigering af teksten med AI findes under",
+    "active": {
+      "title": "Aktiv model",
+      "change": "Skift model",
+      "none": "Ingen model valgt",
+      "noneHint": "Download den, der anbefales til dit sprog – eller en hvilken som helst model fra kataloget nedenfor"
+    },
+    "lockedByTranscription": "En transskription kører – skift, når den er færdig",
+    "language": {
+      "title": "Sprog og oversættelse",
+      "scope": "Gælder diktat og filtransskription"
+    },
+    "cleanup": {
+      "title": "Tekstoprydning",
+      "scope": "Virker inde i genkendelsesmodellen, til diktat og filer"
+    },
+    "memory": {
+      "title": "Hukommelse"
+    },
+    "onlyLanguage": "kun {{language}}",
+    "languageCount_one": "{{count}} sprog",
+    "languageCount_other": "{{count}} sprog",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Dine modeller",
+      "yoursCount": "Dine modeller ({{count}})",
+      "recommended": "Anbefalede",
+      "all": "Alle modeller",
+      "languageFilter": "Sprog",
+      "streaming": "Streaming",
+      "translation": "Oversættelse",
+      "showAll": "Vis alle modeller ({{count}})",
+      "showFewer": "Vis færre"
+    },
+    "row": {
+      "use": "Brug",
+      "inUse": "i brug",
+      "more": "Mere: {{name}}",
+      "delete": "Slet model",
+      "translate": "oversætter til engelsk",
+      "streaming": "streaming",
+      "accuracy": "nøjagtighed {{n}}/10",
+      "speed": "hastighed {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Hvor og med hvilken AI teksten redigeres",
+    "status": {
+      "usedFor": "Bruges til",
+      "files": "redigering af filer ({{state}})",
+      "dictation": "diktat med redigering ({{state}})",
+      "on": "til",
+      "off": "fra"
+    },
+    "where": {
+      "title": "Hvor AI'en kører",
+      "local": "På denne computer",
+      "localText": "Teksten bliver på computeren",
+      "localUnavailable": "Ikke tilgængelig i denne udgave",
+      "server": "Egen server",
+      "serverText": "Ollama, LM Studio eller din adresse · teksten sendes til din server",
+      "cloud": "Cloudtjeneste",
+      "cloudText": "OpenAI og andre · teksten sendes til tjenesten"
+    },
+    "variant": {
+      "local": "Indbygget AI",
+      "server": "Server",
+      "cloud": "Tjeneste"
+    },
+    "local": {
+      "speed": "hastighed {{n}} af 5",
+      "quality": "kvalitet {{n}} af 5",
+      "footprint": "disk {{disk}} · hukommelse ~{{ram}} GB",
+      "showAll": "Vis alle modeller ({{count}})",
+      "showFewer": "Vis færre"
+    },
+    "server": {
+      "urlDescription": "OpenAI-kompatibel adresse, der ender på /v1",
+      "keyDescription": "Kun hvis din server beder om en"
+    }
+  },
+  "app": {
+    "purpose": "Hvordan programmet opfører sig som helhed",
+    "launch": "Start og meddelelsesområde",
+    "look": "Udseende",
+    "updates": "Opdateringer",
+    "checkNow": "Søg efter en ny version",
+    "checkNowButton": "Søg nu",
+    "experimental": "Eksperimentelle funktioner",
+    "quit": {
+      "title": "Afslut Tishe?",
+      "body": "»{{name}}« transskriberes ({{pct}} %). Det stoppes; færdige dokumenter er gemt.",
+      "bodyIdle": "Transskriptionen stoppes; færdige dokumenter er gemt.",
+      "confirm": "Afslut",
+      "stay": "Bliv"
+    },
+    "notifications": "Notifikationer",
+    "notifyLabel": "Giv besked, når en transskription er klar",
+    "notifyDescription": "En Windows-notifikation, kun når vinduet er skjult eller ikke i fokus. Et klik åbner resultatet.",
+    "trayHint": "Windows skjuler nye ikoner. For at holde det synligt kan du trække det fra de skjulte ikoner ned på proceslinjen."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Nyheder",
+    "project": {
+      "title": "Om projektet",
+      "basedOn": "Bygger på Handy",
+      "basedOnText": "Open source, MIT-licens",
+      "tishe": "Tishe",
+      "tisheText": "Åben kildekode, MIT-licens. Udgivelser og fejlrapporter findes på GitHub",
+      "licenses": "Licenser",
+      "licensesText": "Tredjepartsbiblioteker og modeller, som Tishe bruger",
+      "licensesOpen": "Åbn",
+      "licensesError": "Licensfilen kunne ikke åbnes",
+      "author": "Udvikler",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub-profil"
+    },
+    "supportHandy": "Støt Handys udviklere",
+    "folders": "Mapper",
+    "versionRelease": "Tishe {{version}}, udgivelse {{release}}"
+  },
+  "debug": {
+    "onBefore": "Fejlfindingstilstand er slået til og forbliver slået til mellem starter.",
+    "onAfter": "skjuler den.",
+    "log": "Log",
+    "previews": "Forhåndsvisninger",
+    "keyboard": "Tastatur",
+    "transcription": "Transskription"
+  },
+  "release": {
+    "available": "Version {{release}} er udkommet",
+    "openPage": "Åbn udgivelsessiden på GitHub",
+    "upToDate": "Dette er den nyeste version",
+    "checkFailed": "Kunne ikke søge efter opdateringer"
+  },
+  "next": {
+    "lead": "Tishe er første del af Private Memory: en privat hukommelse af dine samtaler, som ligger helt på din computer.",
+    "now": "Allerede nu skriver Tishe din diktat i ethvert program og transskriberer lange optagelser med opdeling efter talere. Uden internet og uden konto.",
+    "planTitle": "I de næste versioner",
+    "plan": {
+      "meetings": {
+        "title": "Optagelse af møder",
+        "text": "din mikrofon og de andre deltagere som to spor, og teksten dukker op under samtalen."
+      },
+      "summaries": {
+        "title": "Mødereferater",
+        "text": "beslutninger og opgaver lige efter stop, på mødets sprog, skrevet af den indbyggede sprogmodel."
+      },
+      "search": {
+        "title": "Søgning i møder",
+        "text": "først efter ord, derefter efter betydning."
+      },
+      "agents": {
+        "title": "Noter og assistenter",
+        "text": "en mødemappe til Obsidian og adgang for AI-assistenter til dine møder via MCP, stadig uden sky."
+      }
+    },
+    "order": "Ingen datoer: rækkefølgen kan ændre sig efter feedback.",
+    "freeTitle": "Gratis og åben kildekode",
+    "freeText": "Kernen i Tishe er gratis og forbliver gratis. Følg udgivelserne, og fortæl os på GitHub, hvad der mangler.",
+    "follow": "Følg på GitHub",
+    "feedback": "Meld et problem eller en idé"
+  },
+  "fileErrors": {
+    "notFound": "Filen blev ikke fundet: den er flyttet eller slettet.",
+    "noAudio": "Filen har ingen lyd, eller den kunne ikke læses.",
+    "unreadable": "Lyden i filen kunne ikke læses. Filen kan være beskadiget.",
+    "noModel": "Der er ikke valgt en talegenkendelsesmodel: vælg en under «$t(sidebar.models)».",
+    "noSpeakerModel": "Stemmemodellen er ikke downloadet: download den under «$t(transcription.more.speakers)».",
+    "noLlmModel": "Sprogmodellen er ikke downloadet: download den under «$t(sidebar.llm)».",
+    "noLlmRuntime": "Den indbyggede sprogmodel-motor mangler. Geninstallér Tishe.",
+    "cloudKey": "Genkendelse i skyen kræver en API-nøgle.",
+    "cloudConfig": "Genkendelse i skyen er ikke sat op: angiv adresse og model.",
+    "busy": "En anden fil bliver allerede transskriberet.",
+    "noSpace": "Disken er fuld.",
+    "fileInUse": "Dokumentet er åbent i et andet program (f.eks. Word). Luk det, og prøv igen.",
+    "accessDenied": "Ingen adgang til mappen til dokumentet. Vælg en anden mappe: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Download en talegenkendelsesmodel",
+      "text": "Den gør tale til tekst – både til optagelser og til diktat. Den kører på denne computer, uden internet. Du skal kun downloade den én gang.",
+      "language": "Optagelsernes sprog",
+      "allModels": "Alle modeller",
+      "onDisk": "Modellen {{name}} findes allerede på computeren – du skal bare slå den til.",
+      "whileDownloading": "Du kan tilføje optagelser, mens den downloader: transskriptionen starter, når modellen er klar."
+    },
+    "llm": {
+      "title": "Redigering kræver en AI",
+      "what": "AI'en retter genkendelsesfejl og tegnsætning. Vi anbefaler den indbyggede: den kører på denne computer, og teksten forlader den ikke.",
+      "recommended": "{{size}} på disken · kræver ca. {{ram}} GB hukommelse · downloades én gang",
+      "otherWays": "Egen server eller cloud",
+      "downloadOn": "Download {{size}} og slå til",
+      "runtimeTitle": "Den indbyggede AI er ikke tilgængelig",
+      "runtime": "Denne version har ingen motor til den indbyggede AI. Du kan forbinde din egen server (Ollama, LM Studio) eller en cloudtjeneste under »$t(sidebar.llm)«.",
+      "openPage": "Åbn »$t(sidebar.llm)«",
+      "notSetUp": "{{reason}} – uden det virker AI'en ikke. Slå redigering til, og gør opsætningen færdig under »$t(sidebar.llm)«.",
+      "onAndSetUp": "Slå til og konfigurér",
+      "onDisk": "Findes allerede på computeren — intet skal hentes.",
+      "turnOn": "Slå redigering til"
+    },
+    "quick": {
+      "title": "Hurtig start",
+      "progress": "{{done}} af {{total}}",
+      "hide": "Skjul",
+      "hideHint": "Skjul »Hurtig start« – alle indstillinger bliver i sektionerne til venstre",
+      "model": "Download en talegenkendelsesmodel",
+      "modelDone": "Talegenkendelsesmodellen er klar · {{name}}",
+      "dictation": "Prøv diktat",
+      "dictationDone": "Diktat virker · diktater gemmes under »Historik«",
+      "file": "Transskribér en optagelse",
+      "fileDone": "Første optagelse transskriberet",
+      "fileHint": "Slip en lyd- eller videofil i dette vindue, eller vælg filer – et Word-dokument dukker op ved siden af optagelsen.",
+      "llm": "Redigering med AI",
+      "optional": "valgfrit",
+      "llmHint": "Retter genkendelsesfejl og tegnsætning i dokumenter. {{model}}: {{size}}, kører på denne computer.",
+      "llmReady": "AI'en er klar · {{model}}",
+      "doneTitle": "Alt er klar",
+      "doneText": "Tishe er klar. Diktater ligger under »Historik«, dokumenter i listen nedenfor og indstillinger i sektionerne til venstre.",
+      "close": "Luk"
+    }
   }
 }

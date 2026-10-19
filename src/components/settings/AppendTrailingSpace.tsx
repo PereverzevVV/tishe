@@ -17,6 +17,7 @@ export const AppendTrailingSpace: React.FC<AppendTrailingSpaceProps> =
 
     return (
       <ToggleSwitch
+        settingKey="append_trailing_space"
         checked={enabled}
         onChange={(enabled) => updateSetting("append_trailing_space", enabled)}
         isUpdating={isUpdating("append_trailing_space")}

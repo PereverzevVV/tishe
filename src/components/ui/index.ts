@@ -1,9 +1,3 @@
-export { Dropdown } from "./Dropdown";
+// Components are imported from their own files; only the dialog of the
+// upstream "What's new" window comes through this barrel.
 export { Dialog } from "./Dialog";
-export { Slider } from "./Slider";
-export { ToggleSwitch } from "./ToggleSwitch";
-export { SettingContainer } from "./SettingContainer";
-export { SettingsGroup } from "./SettingsGroup";
-export { TextDisplay } from "./TextDisplay";
-export { Textarea } from "./Textarea";
-export { Tooltip } from "./Tooltip";

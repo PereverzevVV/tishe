@@ -1,0 +1,79 @@
+Speech and language models
+==========================
+
+Tishe does not ship any speech recognition model or language model in its
+installer. The user chooses and downloads models inside the app, from
+Hugging Face or from the Handy model mirror (blob.handy.computer). Each model
+stays under the license of its authors. The notices below give the
+attributions those licenses ask for.
+
+The installer ships one model file:
+
+- Silero VAD v6.2 (resources/models/silero-vad-v6.2-F32.gguf), voice
+  activity detection. Copyright (c) 2020-present Silero Team. MIT License.
+  https://github.com/snakers4/silero-vad
+- GigaAM vocabulary (resources/models/gigaam_vocab.txt), from GigaAM v3 by
+  SberDevices (ai-sage/GigaAM-v3). MIT License.
+
+Creative Commons Attribution 4.0 (CC BY 4.0)
+--------------------------------------------
+https://creativecommons.org/licenses/by/4.0/
+
+The models below are used as published, converted to GGUF or ONNX format
+without changes to their weights, except where a quantized file is chosen.
+
+- NVIDIA Parakeet (TDT, CTC, RNN-T, TDT-CTC and Unified EN variants) and
+  NVIDIA Canary (180M Flash, 1B Flash, 1B v2, Canary-Qwen 2.5B).
+  Copyright NVIDIA Corporation. https://huggingface.co/nvidia
+- Parakeet Ultra 0.6B by Moondream (moondream/parakeet-ultra), further
+  trained from NVIDIA Parakeet TDT 0.6B v3.
+- Parakeet TDT 0.6B primeLine (primeline/parakeet-primeline), fine-tuned
+  from NVIDIA Parakeet.
+- WeSpeaker ResNet34 speaker embedding model trained on VoxCeleb
+  (used for speaker separation), by the WeNet community.
+  https://github.com/wenet-e2e/wespeaker
+
+NVIDIA Open Model License
+-------------------------
+https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/
+
+Licensed by NVIDIA Corporation under the NVIDIA Open Model License:
+- Nemotron Speech Streaming EN 0.6B
+- Multitalker Parakeet Streaming EN 0.6B
+- NVIDIA Nemotron 3 Nano 4B (built-in language model option)
+
+OpenMDW License 1.1
+-------------------
+- NVIDIA Nemotron 3.5 ASR Streaming 0.6B
+
+FunASR Model License
+--------------------
+https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE
+- SenseVoice Small, Fun-ASR Nano (FunAudioLLM / Alibaba Tongyi Lab)
+
+Apache License 2.0
+------------------
+https://www.apache.org/licenses/LICENSE-2.0
+- Qwen3-ASR 0.6B / 1.7B and Qwen3.5 4B / 9B (Alibaba Qwen team)
+- RuadaptQwen3 4B Instruct (RefalMachine)
+- Gemma 4 E2B / E4B (Google), and the MTP assistant quantizations by
+  amaranus
+- Whisper (OpenAI; the original weights are released under the MIT License)
+- Granite Speech (IBM), Voxtral (Mistral AI), Cohere Transcribe (Cohere),
+  Breeze-ASR-25 (MediaTek Research), MOSS-Transcribe-Diarize (OpenMOSS)
+- 3D-Speaker ERes2Net speaker embedding model (Alibaba)
+
+MIT License
+-----------
+- GigaAM v3 (SberDevices), GigaChat 3.1 10B-A1.8B (SberDevices)
+- Moonshine (Useful Sensors): English Tiny, Base and Streaming models
+- pyannote segmentation-3.0 (pyannote, ONNX export by k2-fsa/sherpa-onnx)
+
+Other terms
+-----------
+- Moonshine Tiny/Base for Arabic, Chinese, Japanese, Korean, Ukrainian and
+  Vietnamese: Moonshine AI Community License (free for organizations with
+  annual revenue under USD 1 million); see each model card.
+- MedASR (Google): Health AI Developer Foundations Terms of Use; not for
+  clinical use without the required regulatory clearances.
+  https://developers.google.com/health-ai-developer-foundations/terms

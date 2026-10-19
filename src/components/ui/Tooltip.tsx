@@ -1,14 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-type TooltipPosition = "top" | "bottom";
-
-interface TooltipCoords {
-  top: number;
-  left: number;
-  arrowLeft: number;
-  actualPosition: TooltipPosition;
-}
+/**
+ * Tooltip (VISUAL_DESIGN_SYSTEM §12.18): inverse surface, caption text, no
+ * arrow or border, up to 280 wide, 8 px from the element.
+ */
+type TooltipPosition = "top" | "bottom" | "right";
 
 interface TooltipProps {
   targetRef: React.RefObject<HTMLElement>;
@@ -16,99 +13,109 @@ interface TooltipProps {
   children: React.ReactNode;
 }
 
-const TOOLTIP_WIDTH = 200;
-const VIEWPORT_PADDING = 12;
 const GAP = 8;
-const ARROW_MARGIN = 12;
-const DEFAULT_HEIGHT = 60;
+const EDGE = 8;
 
 export const Tooltip: React.FC<TooltipProps> = ({
   targetRef,
   position = "top",
   children,
 }) => {
-  const [coords, setCoords] = useState<TooltipCoords | null>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(
+    null,
+  );
 
-  const updatePosition = useCallback(() => {
-    if (!targetRef.current) return;
-
-    const targetRect = targetRef.current.getBoundingClientRect();
-    const tooltipHeight = tooltipRef.current?.offsetHeight || DEFAULT_HEIGHT;
-
-    let actualPosition = position;
-    let top: number;
-
-    if (position === "top") {
-      const spaceAbove = targetRect.top - tooltipHeight - GAP;
-      if (spaceAbove < VIEWPORT_PADDING) {
-        actualPosition = "bottom";
-        top = targetRect.bottom + GAP;
-      } else {
-        top = targetRect.top - GAP - tooltipHeight;
-      }
-    } else {
-      const spaceBelow =
-        window.innerHeight - targetRect.bottom - tooltipHeight - GAP;
-      if (spaceBelow < VIEWPORT_PADDING) {
-        actualPosition = "top";
-        top = targetRect.top - GAP - tooltipHeight;
-      } else {
-        top = targetRect.bottom + GAP;
-      }
+  const update = useCallback(() => {
+    const target = targetRef.current;
+    const tip = ref.current;
+    if (!target || !tip) return;
+    const t = target.getBoundingClientRect();
+    const r = tip.getBoundingClientRect();
+    if (position === "right") {
+      const top = Math.max(
+        EDGE,
+        Math.min(
+          t.top + t.height / 2 - r.height / 2,
+          window.innerHeight - EDGE - r.height,
+        ),
+      );
+      setCoords({ top, left: t.right + GAP });
+      return;
     }
-
-    const targetCenter = targetRect.left + targetRect.width / 2;
-    let left = targetCenter - TOOLTIP_WIDTH / 2;
-
-    if (left < VIEWPORT_PADDING) {
-      left = VIEWPORT_PADDING;
-    } else if (left + TOOLTIP_WIDTH > window.innerWidth - VIEWPORT_PADDING) {
-      left = window.innerWidth - TOOLTIP_WIDTH - VIEWPORT_PADDING;
-    }
-
-    const arrowLeft = Math.min(
-      Math.max(targetCenter - left, ARROW_MARGIN),
-      TOOLTIP_WIDTH - ARROW_MARGIN,
-    );
-
-    setCoords({ top, left, arrowLeft, actualPosition });
+    let top = position === "top" ? t.top - GAP - r.height : t.bottom + GAP;
+    if (top < EDGE) top = t.bottom + GAP;
+    if (top + r.height > window.innerHeight - EDGE)
+      top = t.top - GAP - r.height;
+    let left = t.left + t.width / 2 - r.width / 2;
+    left = Math.max(EDGE, Math.min(left, window.innerWidth - EDGE - r.width));
+    setCoords({ top, left });
   }, [targetRef, position]);
 
   useEffect(() => {
-    updatePosition();
-
-    window.addEventListener("scroll", updatePosition, true);
-    window.addEventListener("resize", updatePosition);
-
+    update();
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
     return () => {
-      window.removeEventListener("scroll", updatePosition, true);
-      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
     };
-  }, [updatePosition]);
-
-  const arrowClasses =
-    coords?.actualPosition === "top" ? "top-full" : "bottom-full rotate-180";
+  }, [update]);
 
   return createPortal(
     <div
-      ref={tooltipRef}
+      ref={ref}
+      role="tooltip"
+      className="t-tooltip"
       style={{
-        position: "fixed",
         top: coords?.top ?? -9999,
         left: coords?.left ?? -9999,
-        width: TOOLTIP_WIDTH,
-        zIndex: 9999,
-        opacity: coords ? 1 : 0,
+        visibility: coords ? "visible" : "hidden",
       }}
-      className="px-3 py-2 bg-background border border-mid-gray/80 rounded-lg shadow-lg whitespace-normal transition-opacity duration-150"
     >
       {children}
-      <div
-        style={{ left: coords?.arrowLeft ?? 0 }}
-        className={`absolute ${arrowClasses} transform -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-mid-gray/80`}
-      />
     </div>,
     document.body,
+  );
+};
+
+/** Hover/focus tooltip around any element (500 ms on hover, at once on focus). */
+export const WithTooltip: React.FC<{
+  text: React.ReactNode;
+  children: React.ReactElement;
+  position?: TooltipPosition;
+  /** Take the full width of the parent (e.g. a sidebar item). */
+  block?: boolean;
+}> = ({ text, children, position, block }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [show, setShow] = useState(false);
+  const timer = useRef<number | null>(null);
+  const clear = () => {
+    if (timer.current) window.clearTimeout(timer.current);
+    timer.current = null;
+  };
+  return (
+    <span
+      ref={ref}
+      className={block ? "flex" : "inline-flex"}
+      onMouseEnter={() => {
+        clear();
+        timer.current = window.setTimeout(() => setShow(true), 500);
+      }}
+      onMouseLeave={() => {
+        clear();
+        setShow(false);
+      }}
+      onFocus={() => setShow(true)}
+      onBlur={() => setShow(false)}
+      onKeyDown={(e) => e.key === "Escape" && setShow(false)}
+    >
+      {children}
+      {show && (
+        <Tooltip targetRef={ref} position={position}>
+          {text}
+        </Tooltip>
+      )}
+    </span>
   );
 };

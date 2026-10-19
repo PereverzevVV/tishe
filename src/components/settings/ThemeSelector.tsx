@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Dropdown } from "../ui/Dropdown";
+import { Segments } from "../ui/Segments";
 import { SettingContainer } from "../ui/SettingContainer";
 import { useSettings } from "@/hooks/useSettings";
 import { applyTheme, THEME_OPTIONS } from "@/lib/utils/theme";
@@ -32,14 +32,14 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(
     return (
       <SettingContainer
         title={t("theme.title")}
-        description={t("theme.description")}
-        descriptionMode={descriptionMode}
         grouped={grouped}
+        layout="stacked"
       >
-        <Dropdown
+        <Segments
+          ariaLabel={t("theme.title")}
           options={themeOptions}
-          selectedValue={currentTheme}
-          onSelect={handleThemeChange}
+          value={currentTheme}
+          onChange={handleThemeChange}
         />
       </SettingContainer>
     );

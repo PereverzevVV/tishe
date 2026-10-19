@@ -730,6 +730,16 @@ Section Install
   !endif
 
   !insertmacro CheckIfAppIsRunning "${MAINBINARYNAME}.exe" "${PRODUCTNAME}"
+  ; Tishe: builds before the public release ran as handy.exe.
+  ${If} ${FileExists} "$INSTDIR\handy.exe"
+    ; By process name (tauri-bundler 2.9.x, which @tauri-apps/cli 2.11 uses).
+    !insertmacro CheckIfAppIsRunning "handy.exe" "${PRODUCTNAME}"
+  ${EndIf}
+
+  ; Tishe: replace the installation made under the old name.
+  ${If} $PortableMode <> 1
+    Call RemoveHandyPlus
+  ${EndIf}
 
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
@@ -983,6 +993,10 @@ Section Uninstall
     SetShellVarContext current
     RmDir /r "$APPDATA\${BUNDLEID}"
     RmDir /r "$LOCALAPPDATA\${BUNDLEID}"
+    ; Tishe: data folders of builds before the public release, in case the
+    ; app never started after the update and did not move them.
+    RmDir /r "$APPDATA\com.handyplus.app"
+    RmDir /r "$LOCALAPPDATA\com.handyplus.app"
   ${EndIf}
 
   !ifmacrodef NSIS_HOOK_POSTUNINSTALL
@@ -995,6 +1009,42 @@ Section Uninstall
     SetAutoClose true
   ${EndIf}
 SectionEnd
+
+; Tishe was called "Handy Plus" until 2026-10. Remove that installation
+; (files, shortcuts, uninstall entry, autostart) so there are not two copies
+; of one program. Its uninstaller runs silently, so "delete app data" stays
+; off: settings, models and history stay, and Tishe moves them from
+; %APPDATA%\com.handyplus.app to its own folder on first start
+; (src-tauri/src/data_migration.rs).
+Function RemoveHandyPlus
+  ReadRegStr $R0 SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\Handy Plus" "InstallLocation"
+  ${If} $R0 == ""
+    Return
+  ${EndIf}
+  ; The value is quoted: "C:\...\Handy Plus"
+  StrCpy $R1 $R0 1
+  ${If} $R1 == '"'
+    StrCpy $R0 $R0 -1 1
+  ${EndIf}
+  ${If} $R0 == $INSTDIR
+    Return
+  ${EndIf}
+  ${If} ${FileExists} "$R0\uninstall.exe"
+    DetailPrint "Removing the previous installation (Handy Plus): $R0"
+    ExecWait '"$R0\uninstall.exe" /S _?=$R0'
+    Delete "$R0\uninstall.exe"
+  ${EndIf}
+  ; Leftovers of the old program folder, only if it really is that folder.
+  StrCpy $R2 $R0 "" -10
+  ${If} $R2 == "Handy Plus"
+    RMDir /r "$R0"
+  ${EndIf}
+  ; In case the old uninstaller was missing or failed.
+  DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\Handy Plus"
+  DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Run" "Handy Plus"
+  Delete "$SMPROGRAMS\Handy Plus.lnk"
+  Delete "$DESKTOP\Handy Plus.lnk"
+FunctionEnd
 
 Function RestorePreviousInstallLocation
   ReadRegStr $4 SHCTX "${MANUPRODUCTKEY}" ""

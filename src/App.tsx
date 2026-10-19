@@ -15,16 +15,29 @@ import {
 } from "tauri-plugin-macos-permissions-api";
 import { ModelStateEvent, RecordingErrorEvent } from "./lib/types/events";
 import "./App.css";
-import AccessibilityPermissions from "./components/AccessibilityPermissions";
-import SecureInputWarning from "./components/SecureInputWarning";
-import Footer from "./components/footer";
 import Onboarding, { AccessibilityOnboarding } from "./components/onboarding";
-import {
-  DebugSettings,
-  type OnboardingPreviewStep,
-} from "./components/settings";
+import { type OnboardingPreviewStep } from "./components/settings/debug/OnboardingPreview";
 import { ErrorBoundary } from "./components/ErrorBoundary";
-import { Sidebar, SidebarSection, SECTIONS_CONFIG } from "./components/Sidebar";
+import { Sidebar } from "./components/Sidebar";
+import { StatusBar } from "./components/shell/StatusBar";
+import { QuitConfirm } from "./components/shell/QuitConfirm";
+import { TranscriptionPage } from "./components/pages/TranscriptionPage";
+import { DictationPage } from "./components/pages/DictationPage";
+import { MeetingsPage } from "./components/pages/MeetingsPage";
+import { HistoryPage } from "./components/pages/HistoryPage";
+import { ModelsPage } from "./components/pages/ModelsPage";
+import { LlmPage } from "./components/pages/LlmPage";
+import { AppPage } from "./components/pages/AppPage";
+import { AboutPage } from "./components/pages/AboutPage";
+import { NextPage } from "./components/pages/NextPage";
+import { DebugPage } from "./components/pages/DebugPage";
+import { useNavigationStore, type SectionId } from "./stores/navigationStore";
+import { useLlmStore } from "./stores/llmStore";
+import { useFileOptionsStore } from "./stores/fileOptionsStore";
+import { useFileTranscriptionStore } from "./stores/fileTranscriptionStore";
+import { startQueueSignals } from "./lib/queueSignals";
+import { useOnboardingStore } from "./stores/onboardingStore";
+import { useFileDrop } from "./hooks/useFileDrop";
 import { WhatsNewGate } from "./components/whats-new";
 import { useSettings } from "./hooks/useSettings";
 import { useSettingsStore } from "./stores/settingsStore";
@@ -36,17 +49,32 @@ type OnboardingStep = "accessibility" | "model" | "done";
 // Stable identity so preview effects do not re-run due to callback changes.
 const NOOP = () => {};
 
-const renderSettingsContent = (
-  section: SidebarSection,
+const renderSection = (
+  section: SectionId,
   onPreviewOnboarding: (step: OnboardingPreviewStep) => void,
 ) => {
-  if (section === "debug") {
-    return <DebugSettings onPreviewOnboarding={onPreviewOnboarding} />;
+  switch (section) {
+    case "transcription":
+      return <TranscriptionPage />;
+    case "dictation":
+      return <DictationPage />;
+    case "meetings":
+      return <MeetingsPage />;
+    case "history":
+      return <HistoryPage />;
+    case "models":
+      return <ModelsPage />;
+    case "llm":
+      return <LlmPage />;
+    case "app":
+      return <AppPage />;
+    case "next":
+      return <NextPage />;
+    case "about":
+      return <AboutPage />;
+    case "debug":
+      return <DebugPage onPreviewOnboarding={onPreviewOnboarding} />;
   }
-
-  const ActiveComponent =
-    SECTIONS_CONFIG[section]?.component || SECTIONS_CONFIG.general.component;
-  return <ActiveComponent />;
 };
 
 function App() {
@@ -59,8 +87,12 @@ function App() {
   // Track if this is a returning user who just needs to grant permissions
   // (vs a new user who needs full onboarding including model selection)
   const [isReturningUser, setIsReturningUser] = useState(false);
-  const [currentSection, setCurrentSection] =
-    useState<SidebarSection>("general");
+  const currentSection = useNavigationStore((state) => state.section);
+  const openSection = useNavigationStore((state) => state.open);
+  const goBack = useNavigationStore((state) => state.goBack);
+  const loadLlm = useLlmStore((state) => state.load);
+  const loadFileOptions = useFileOptionsStore((state) => state.load);
+  const loadResults = useFileTranscriptionStore((state) => state.loadResults);
   const { settings, updateSetting } = useSettings();
   const direction = getLanguageDirection(i18n.language);
   const refreshAudioDevices = useSettingsStore(
@@ -70,7 +102,6 @@ function App() {
     (state) => state.refreshOutputDevices,
   );
   const hasCompletedPostOnboardingInit = useRef(false);
-  const settingsScrollRef = useRef<HTMLDivElement>(null);
   const isShowingOnboarding =
     onboardingPreview !== null ||
     onboardingStep === "accessibility" ||
@@ -85,10 +116,40 @@ function App() {
     return () => document.documentElement.removeAttribute(attribute);
   }, [isShowingOnboarding]);
 
-  // Reset the scroll position whenever the active section changes.
-  useLayoutEffect(() => {
-    settingsScrollRef.current?.scrollTo({ top: 0 });
-  }, [currentSection]);
+  // Recordings dropped onto the window go to the «Расшифровка» queue.
+  useFileDrop(onboardingStep === "done" && onboardingPreview === null);
+
+  // Shared resources read by several pages and the sidebar.
+  useEffect(() => {
+    void loadLlm();
+    void loadFileOptions();
+    void loadResults();
+    // Tray tooltip and Windows notifications follow the queue.
+    startQueueSignals();
+  }, [loadLlm, loadFileOptions, loadResults]);
+
+  // «Отладка» hidden again while open: go to «Расшифровка».
+  useEffect(() => {
+    if (currentSection === "debug" && settings && !settings.debug_mode) {
+      openSection("transcription");
+    }
+  }, [currentSection, settings, openSection]);
+
+  // Alt+← and the mouse back button follow the back row while it is shown.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.altKey && event.key === "ArrowLeft") goBack();
+    };
+    const onMouse = (event: MouseEvent) => {
+      if (event.button === 3) goBack();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mouseup", onMouse);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mouseup", onMouse);
+    };
+  }, [goBack]);
 
   useEffect(() => {
     checkOnboardingStatus();
@@ -288,8 +349,19 @@ function App() {
   };
 
   const handleModelSelected = () => {
-    // Transition to main app - user has started a download
+    // The model is ready: «Расшифровка» with «Быстрый старт» (VD-87).
     setOnboardingStep("done");
+    useOnboardingStore.getState().openQuickStart();
+    openSection("transcription");
+  };
+
+  // «Открыть Tishe» while the model downloads: the download goes on and
+  // «Быстрый старт» shows its progress; the status bar makes the model active
+  // when it completes.
+  const handleContinueWhileDownloading = () => {
+    setOnboardingStep("done");
+    useOnboardingStore.getState().openQuickStart();
+    openSection("transcription");
   };
 
   // Rendered once around every step below (including onboarding) so
@@ -297,18 +369,24 @@ function App() {
   // its position in the tree doesn't affect layout. Without this, errors during
   // onboarding (e.g. a model download failing because blob.handy.computer is
   // unreachable) are silently swallowed and the wizard just appears to "blink".
+  // Toasts (VISUAL_DESIGN_SYSTEM §12.22): right edge of the field, 64 px from
+  // the top so they never cover the page title or the launch panel.
   const toaster = (
     <Toaster
       theme="system"
+      position="top-right"
+      offset={{ top: 64, right: 12 }}
+      gap={8}
+      visibleToasts={3}
       toastOptions={{
         unstyled: true,
         classNames: {
-          toast:
-            "bg-background border border-mid-gray/20 rounded-lg shadow-lg px-4 py-3 flex items-center gap-3 text-sm",
-          title: "font-medium",
-          description: "text-mid-gray",
-          actionButton:
-            "px-2 py-1 text-xs font-medium rounded-lg border bg-mid-gray/10 border-mid-gray/20 hover:bg-background-ui/30 hover:border-logo-primary cursor-pointer whitespace-nowrap",
+          toast: "t-toast",
+          title: "t-toast-title",
+          description: "t-toast-desc",
+          actionButton: "t-btn t-btn-quiet t-btn-sm",
+          cancelButton: "t-btn t-btn-quiet t-btn-sm",
+          closeButton: "t-btn t-btn-quiet t-btn-sm t-btn-icon",
         },
       }}
     />
@@ -337,7 +415,8 @@ function App() {
         <button
           type="button"
           onClick={() => setOnboardingPreview(null)}
-          className="fixed top-4 end-4 z-50 rounded-lg border border-mid-gray/20 bg-background px-4 py-2 text-sm font-medium text-text shadow-lg hover:bg-background-ui/30 cursor-pointer"
+          className="t-btn t-btn-secondary fixed top-4 end-4"
+          style={{ zIndex: "var(--t-z-toast)" }}
         >
           {t("settings.debug.onboardingPreview.exitButton")}
         </button>
@@ -345,38 +424,30 @@ function App() {
     );
   } else if (onboardingStep === "accessibility") {
     content = (
-      <AccessibilityOnboarding onComplete={handleAccessibilityComplete} />
+      <AccessibilityOnboarding
+        onComplete={handleAccessibilityComplete}
+        showStep={!isReturningUser}
+      />
     );
   } else if (onboardingStep === "model") {
-    content = <Onboarding onModelSelected={handleModelSelected} />;
+    content = (
+      <Onboarding
+        onModelSelected={handleModelSelected}
+        onContinue={handleContinueWhileDownloading}
+      />
+    );
   } else {
     content = (
-      <div
-        dir={direction}
-        className="h-screen flex flex-col select-none cursor-default"
-      >
+      <div dir={direction} className="t-window">
         <ErrorBoundary context="What's New">
           <WhatsNewGate />
         </ErrorBoundary>
-        {/* Main content area that takes remaining space */}
-        <div className="flex-1 flex overflow-hidden">
-          <Sidebar
-            activeSection={currentSection}
-            onSectionChange={setCurrentSection}
-          />
-          {/* Scrollable content area */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div ref={settingsScrollRef} className="flex-1 overflow-y-auto">
-              <div className="flex flex-col items-center p-4 gap-4">
-                <AccessibilityPermissions />
-                <SecureInputWarning />
-                {renderSettingsContent(currentSection, setOnboardingPreview)}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Fixed footer at bottom */}
-        <Footer />
+        <Sidebar />
+        <ErrorBoundary key={currentSection} context={currentSection}>
+          {renderSection(currentSection, setOnboardingPreview)}
+        </ErrorBoundary>
+        <StatusBar />
+        <QuitConfirm />
       </div>
     );
   }

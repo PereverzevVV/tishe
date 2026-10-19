@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Configuració...",
-    "checkUpdates": "Comprova si hi ha actualitzacions...",
-    "copyLastTranscript": "Copia l'última transcripció",
+    "settings": "Obre Tishe…",
+    "checkUpdates": "Cerca actualitzacions…",
+    "copyLastTranscript": "Copia l’últim dictat",
     "unloadModel": "Allibera el model de la memòria",
     "model": "Model",
     "quit": "Surt",
     "cancel": "Cancel·la",
-    "secureInputWarning": "⚠ Dreceres blocades per l'entrada segura"
+    "secureInputWarning": "⚠ Dreceres blocades per l'entrada segura",
+    "modelLocked": "No es pot canviar el model mentre hi ha una transcripció en curs",
+    "tooltipDictation": "Dictat: {{shortcut}}",
+    "backgroundTitle": "Tishe continua funcionant en segon pla",
+    "backgroundBody": "La transcripció continua. Rebràs una notificació quan estigui llesta."
   },
   "sidebar": {
     "general": "General",
-    "models": "Models",
+    "models": "Reconeixement",
     "advanced": "Avançat",
     "postProcessing": "Postprocessament",
     "history": "Historial",
     "debug": "Depuració",
-    "about": "Quant a"
+    "about": "Quant a",
+    "label": "Seccions",
+    "transcription": "Transcripció",
+    "dictation": "Dictat",
+    "meetings": "Reunions",
+    "llm": "Edició amb IA",
+    "app": "Aplicació",
+    "soon": "aviat",
+    "state": {
+      "running": "en curs",
+      "new": "llest, sense veure",
+      "downloading": "baixant"
+    },
+    "next": "Què ve ara"
   },
   "onboarding": {
     "subtitle": "Per començar, trieu un model de transcripció",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Permisos necessaris",
-      "description": "El Handy demana alguns permisos per funcionar correctament.",
+      "description": "Tishe necessita alguns permisos per funcionar correctament.",
       "microphone": {
         "title": "Accés al micròfon",
         "description": "Necessari per escoltar la vostra veu i transcriure-la."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "No s'han pogut comprovar els permisos. Torneu-ho a provar.",
         "requestFailed": "No s'ha pogut sol·licitar el permís. Torneu-ho a provar."
-      }
+      },
+      "skip": "Continua sense el micròfon",
+      "skipHint": "El micròfon només cal per al dictat; la transcripció de fitxers funciona sense ell. El pots permetre més tard a la configuració de Windows."
+    },
+    "step": "Pas {{n}} de {{total}}",
+    "language": {
+      "title": "En quina llengua són els teus enregistraments?",
+      "description": "Baixarem un model de reconeixement de veu per a aquesta llengua. Funciona en aquest ordinador.",
+      "ru": {
+        "title": "Rus",
+        "limit": "Només rus: no reconeix la parla en anglès"
+      },
+      "en": {
+        "title": "Anglès",
+        "limit": "Només anglès"
+      },
+      "eu": {
+        "title": "Una altra llengua europea",
+        "limit": "25 llengües europees, reconeix la llengua tot sol"
+      },
+      "other": {
+        "title": "El català o una altra llengua",
+        "limit": "30 llengües: xinès, japonès, coreà, àrab, turc, hindi i altres",
+        "limitWhisper": "moltes llengües, més lent al processador"
+      },
+      "onDisk": "ja és en aquest ordinador",
+      "shared": "El model servirà tant per al dictat com per transcriure fitxers. El pots canviar més endavant a la secció «$t(sidebar.models)».",
+      "otherModel": "Tria un altre model",
+      "hideCatalog": "Amaga la llista de models",
+      "download": "Baixa {{size}}",
+      "use": "Fes servir {{name}}",
+      "downloadNamed": "Baixa {{name}} · {{size}}",
+      "once": "Es baixa una sola vegada i després funciona sense internet"
+    },
+    "download": {
+      "title": "S’està baixant {{name}}",
+      "description": "Mentrestant pots fer altres coses: tancar la finestra no atura la baixada.",
+      "starting": "S’està connectant…",
+      "amount": "{{done}} de {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "S’està preparant el model…",
+      "cancel": "Cancel·la",
+      "failed": "El model no s’ha baixat",
+      "failedTitle": "No s’ha pogut baixar el model",
+      "failedHint": "No hi ha connexió amb el servidor. Comprova internet i prem Torna-ho a provar.",
+      "retry": "Torna-ho a provar",
+      "continue": "Obre Tishe sense esperar"
+    },
+    "welcome": {
+      "title": "Et donem la benvinguda a Tishe",
+      "lead": "Tishe converteix la veu en text directament al teu ordinador, sense internet i sense compte.",
+      "files": "Transcripció d’enregistraments (reunions, classes, entrevistes) a un document de Word",
+      "dictation": "Dictat a qualsevol aplicació: mantén premuda una tecla, parla i apareix el text",
+      "private": "Els enregistraments i els textos no surten de l’ordinador",
+      "stepsLabel": "Passos de configuració",
+      "steps": {
+        "permissions": "Permisos",
+        "language": "Llengua dels enregistraments",
+        "download": "Baixada del model"
+      },
+      "credit": "Viktor Pereverzev · basat en Handy"
+    },
+    "tips": {
+      "title": "Mentre es baixa: així funciona",
+      "dictationBefore": "Dictat: a qualsevol aplicació, mantén premuda",
+      "dictationAfter": "i parla. Deixa-la anar i el text apareixerà on hi hagi el cursor.",
+      "files": "Transcripció: arrossega un fitxer d’àudio o vídeo a la finestra de Tishe i obtindràs un document de Word.",
+      "editing": "L’edició amb IA corregeix errors i puntuació; s’activa a la recepta de transcripció."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "General",
       "shortcut": {
-        "title": "Dreceres del Handy",
+        "title": "Dreceres de Tishe",
         "description": "Configura les dreceres de teclat per iniciar l'enregistrament de veu per a la transcripció",
         "loading": "S'estan carregant les dreceres...",
         "none": "No hi ha cap drecera configurada",
         "notFound": "No s'ha trobat la drecera",
-        "pressKeys": "Premeu les tecles...",
+        "pressKeys": "Prem una combinació… (Esc cancel·la)",
         "bindings": {
           "transcribe": {
-            "name": "Drecera de transcripció",
-            "description": "La drecera de teclat per enregistrar i transcriure la vostra veu."
+            "name": "Dictat",
+            "description": "Mantén premut i parla: el text s’enganxa a la finestra activa"
           },
           "cancel": {
-            "name": "Drecera de cancel·lació",
-            "description": "La drecera de teclat per cancel·lar l'enregistrament actual."
+            "name": "Cancel·la",
+            "description": "Atura l’enregistrament en curs"
           },
           "transcribe_with_post_process": {
-            "name": "Drecera de postprocessament",
-            "description": "Opcional: una drecera específica que sempre aplica postprocessament amb IA a la transcripció."
+            "name": "Tecla de dictat amb edició",
+            "description": "El text s’enganxa després de l’edició amb IA"
           }
         },
         "errors": {
           "restore": "No s'ha pogut restaurar la drecera original",
           "set": "No s'ha pogut definir la drecera: {{error}}",
-          "reset": "No s'ha pogut restablir la drecera al valor original"
+          "reset": "No s'ha pogut restablir la drecera al valor original",
+          "taken": "Un altre programa ja fa servir aquesta tecla. Tria’n una altra.",
+          "duplicate": "Aquesta tecla ja s’utilitza aquí per a una altra acció."
         }
       },
       "language": {
-        "title": "Llengua",
-        "description": "Seleccioneu la llengua per al reconeixement de la parla. L'opció automàtica detecta la llengua, mentre que seleccionar-ne una d'específica pot millorar-ne la precisió.",
+        "title": "Llengua de reconeixement",
+        "description": "«Auto» detecta la llengua tot sol; triar-la és més fiable",
         "searchPlaceholder": "Cerca llengües...",
         "noResults": "No s'ha trobat cap llengua",
         "auto": "Automàtica"
       },
       "shortcutActivation": {
-        "title": "Comportament de la drecera",
-        "description": "Trieu com la drecera de transcripció inicia i atura l'enregistrament.",
+        "title": "Comportament de la tecla",
+        "description": "Com la tecla inicia i atura l’enregistrament",
         "options": {
           "holdOrToggle": "Automàtic",
           "pushToTalk": "Mantén premuda",
@@ -212,7 +298,7 @@
     "models": {
       "title": "Models de transcripció",
       "description": "Seleccioneu un model de transcripció o baixeu-ne més. Els models ofereixen diferents nivells de precisió i velocitat.",
-      "searchPlaceholder": "Cerqueu models pel nom…",
+      "searchPlaceholder": "Cerca per nom",
       "yourModels": "Models baixats",
       "availableModels": "Disponibles per baixar",
       "deleteConfirm": "Segur que voleu suprimir {{modelName}}? Haureu de tornar-lo a baixar per utilitzar-lo.",
@@ -225,37 +311,104 @@
       },
       "rescan": {
         "label": "Torna a cercar",
-        "tooltip": "Torna a cercar models afegits a la carpeta de models o a la memòria cau de Hugging Face des de fora del Handy"
+        "tooltip": "Troba els models afegits a mà a la carpeta"
       },
-      "noModelsMatch": "Cap model no coincideix amb aquest filtre."
+      "noModelsMatch": "Cap model no coincideix amb aquest filtre.",
+      "params": {
+        "button": "Paràmetres",
+        "open": "Paràmetres del model",
+        "title": "Paràmetres: {{name}}",
+        "savedAtOnce": "Els canvis es desen a l’instant. Els camps mostren els valors en ús; un valor canviat té un botó per restablir-lo.",
+        "resetAll": "Restableix els valors per defecte",
+        "done": "Fet",
+        "resetField": "Torna al valor per defecte",
+        "defaultRange": "Per defecte {{value}}; permès {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Instrucció integrada. Edita el text per fer servir la teva; buida’l per tornar a la integrada.",
+          "own": "La teva instrucció. El botó de restabliment torna la integrada."
+        },
+        "asr": {
+          "segment": {
+            "label": "Durada dels fragments per a fitxers, segons",
+            "description": "Els fitxers es reconeixen per trossos tallats a les pauses, com a màxim d’aquesta durada. El tros més curt es redueix amb ella (12 s amb 25 s). Mesurat: 12–25 s conserven millor la puntuació que 60–120 s."
+          },
+          "device": {
+            "label": "Dispositiu",
+            "description": "«Només processador» allibera el xip gràfic, però sol ser més lent. També s’aplica al dictat; té efecte al següent reconeixement.",
+            "general": "Com a l’ajust d’acceleració",
+            "cpu": "Només processador",
+            "notHere": "El dispositiu d’aquest model segueix l’ajust general d’acceleració."
+          }
+        },
+        "llm": {
+          "promptNote": "Instruccions per a text en rus i en anglès. Les altres llengües reben la instrucció integrada en anglès amb el nom de la llengua. Una instrucció pròpia a la secció Transcripció les substitueix per a totes les llengües.",
+          "promptRu": "Instrucció per a text en rus",
+          "promptEn": "Instrucció per a text en anglès",
+          "temperature": {
+            "label": "Temperatura",
+            "description": "Més baix és més prudent: amb 0,8 el model s’inventava paraules; 0,2 és el valor mesurat per a l’edició."
+          },
+          "chunk": {
+            "label": "Mida del fragment, caràcters",
+            "description": "Quant text edita el model de cop. Els models petits són més fidels amb fragments curts."
+          },
+          "context": {
+            "label": "Context, tokens",
+            "description": "Espai per a la instrucció, el fragment i la resposta. Més espai fa servir més memòria."
+          },
+          "answer": {
+            "label": "Límit de resposta, tokens",
+            "description": "Atura un model que comença a repetir-se. Un fragment de 3000 caràcters són uns 1100 tokens."
+          },
+          "threads": {
+            "label": "Fils del processador per a la resposta",
+            "description": "Per llegir el text sempre es fan servir tots els fils del maquinari.",
+            "auto": "Automàtic: un per nucli"
+          },
+          "restartNote": "La temperatura, el context, el límit de resposta i els fils s’apliquen el pròxim cop que s’iniciï el model: un model en marxa es reinicia abans de la tasca següent.",
+          "invalid": "No desat: {{detail}}",
+          "contextTooSmall": "No desat: el context ha de contenir el fragment i la resposta, almenys {{min}} tokens amb la mida de fragment i el límit de resposta actuals."
+        }
+      }
     },
     "sound": {
       "title": "So",
       "microphone": {
         "title": "Micròfon",
-        "description": "Selecciona el micròfon preferit",
+        "description": "D’on enregistrar la veu",
         "placeholder": "Seleccionaun micròfon...",
         "loading": "S'està carregant..."
       },
       "channel": {
         "title": "Canal d'entrada",
-        "description": "Seleccioneu el canal d'entrada des del qual voleu enregistrar. Feu servir aquesta opció si la interfície d'àudio té diverses entrades.",
+        "description": "Per a targetes de so amb diverses entrades",
         "average": "Fes la mitjana de tots els canals",
         "channel": "Canal {{n}}"
       },
       "audioFeedback": {
-        "label": "Avisos sonors",
-        "description": "Reprodueix un so quan s'inicia i s'atura l'enregistrament"
+        "label": "Resposta sonora",
+        "description": "Un so a l’inici i al final de l’enregistrament"
       },
       "outputDevice": {
         "title": "Dispositiu de sortida",
-        "description": "Selecciona el dispositiu de sortida d'àudio preferit per als avisos sonors",
+        "description": "On sonen els sons de resposta",
         "placeholder": "Selecciona un dispositiu de sortida...",
         "loading": "S'està carregant..."
       },
       "volume": {
         "title": "Volum",
-        "description": "Ajusta el volum dels avisos sonors"
+        "description": "Ajusta el volum dels avisos sonors",
+        "levels": {
+          "quiet": "Baix",
+          "medium": "Mitjà",
+          "loud": "Alt"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Propi",
+        "preview": "Reprodueix els sons d’inici i de final"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Experimental"
       },
       "experimentalToggle": {
-        "label": "Funcions experimentals",
-        "description": "Activa les funcions experimentals que encara estan en desenvolupament."
+        "label": "Mostra les funcions experimentals",
+        "description": "Funcions en desenvolupament; poden ser inestables"
       },
       "lazyStreamClose": {
         "label": "Mantén el micròfon obert entre transcripcions",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Inicia ocult",
-        "description": "Inicia a la safata del sistema sense obrir la finestra."
+        "label": "Amaga la finestra en iniciar",
+        "description": "El programa s’inicia a la safata"
       },
       "autostart": {
-        "label": "Inicia en entrar a la sessió",
-        "description": "Inicia automàticament el Handy quan entreu a la sessió de l'ordinador."
+        "label": "Inicia amb Windows",
+        "description": "El dictat és a punt just després d’iniciar la sessió"
       },
       "showTrayIcon": {
-        "label": "Mostra la icona a la safata",
-        "description": "Mostra la icona del Handy a la safata del sistema."
+        "label": "Icona a la safata",
+        "description": "Sense la icona, una finestra tancada només torna si s’obre el programa de nou"
       },
       "overlay": {
         "style": {
-          "title": "Finestra superposada",
-          "description": "Tria la finestra superposada d'enregistrament: Cap l'amaga, Mínima mostra un indicador compacte i En directe mostra la transcripció en temps real mentre parleu (només amb models compatibles; cerqueu el distintiu En temps real al selector de models). Al Linux es recomana Cap.",
+          "title": "Estil de l’indicador",
+          "description": "Què mostrar al costat del cursor mentre dictes",
           "options": {
             "none": "Cap",
             "minimal": "Mínima",
             "live": "En directe"
-          }
+          },
+          "noneConsequence": "Sense l’indicador no es mostren els errors: un text que no s’ha enganxat és a l’Historial"
         },
         "position": {
-          "title": "Posició de la finestra superposada",
-          "description": "On apareix la finestra superposada a la pantalla durant l'enregistrament i la transcripció.",
+          "title": "Posició de l’indicador",
+          "description": "A dalt o a baix de la pantalla",
           "options": {
             "bottom": "A baix",
             "top": "A dalt"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Mètode d'enganxament",
-        "description": "Trieu com s'insereix el text. Directe: simula l'escriptura mitjançant l'entrada del sistema. Cap: no enganxa el text, només actualitza l'historial i el porta-retalls.",
+        "description": "Com arriba el text a la finestra activa",
         "options": {
           "clipboard": "Porta-retalls ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Porta-retalls (Ctrl+Maj+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Gestió del porta-retalls",
-        "description": "«No modifiqueu el porta-retalls» conserva el contingut actual del porta-retalls després de la transcripció. «Copieu al porta-retalls» hi deixa el resultat de la transcripció després d'enganxar-lo.",
+        "title": "Porta-retalls",
+        "description": "Conservar el que hi havia al porta-retalls o deixar-hi el text dictat",
         "options": {
           "dontModify": "No modifiqueu el porta-retalls",
           "copyToClipboard": "Copia al porta-retalls"
         }
       },
       "autoSubmit": {
-        "title": "Enviament automàtic",
-        "description": "Envia automàticament la combinació de tecles seleccionada després d'inserir el text. S'utilitza Cmd+Enter al macOS i Super+Enter al Windows i al Linux.",
+        "title": "Envia després d’enganxar",
+        "description": "Prémer la tecla triada just després d’enganxar, per exemple Retorn en un xat",
         "options": {
           "off": "Desactivat",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Traduïu a l'anglès",
-        "description": "Tradueix automàticament la parla d'altres llengües a l'anglès durant la transcripció."
+        "description": "La veu en qualsevol llengua es converteix en text en anglès"
       },
       "modelUnload": {
-        "title": "Allibera el model de la memòria",
-        "description": "Allibera automàticament la memòria de la GPU i de la CPU quan el model no s'ha utilitzat durant el temps especificat",
+        "title": "Descarrega el model de la memòria al cap de…",
+        "description": "Allibera memòria quan el model no es necessita durant una estona",
         "options": {
           "never": "Mai",
           "immediately": "Immediatament",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Paraules personalitzades",
-        "description": "Ajudeu els models compatibles a reconèixer noms i termes especialitzats. Actualment, la correcció per similitu es limita a paraules amb lletres de la A a la Z i números.",
+        "title": "Les teves paraules",
+        "description": "Una pista per als models Whisper; els altres models només reben correccions, i només per a paraules amb A–Z",
         "placeholder": "Afegiu una paraula",
         "add": "Afegiu",
         "remove": "Suprimiu {{word}}",
-        "duplicate": "«{{word}}» ja existeix"
+        "duplicate": "«{{word}}» ja existeix",
+        "removed": "«{{word}}» eliminada"
       },
       "voiceActivityDetection": {
-        "title": "Detecció d'activitat de veu",
-        "description": "Filtra els silencis dels enregistraments. Els models compatibles amb la transcripció en temps real utilitzen un marge final de detecció de veu més llarg; si desactiveu la detecció, s'enregistra l'àudio sense filtrar."
+        "title": "Descarta el silenci",
+        "description": "Només la veu passa al reconeixement"
       },
       "vadBackend": {
         "title": "Motor de detecció d'activitat de veu",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Elimina les falques",
-        "description": "Elimina les expressions de vacil·lació habituals de les transcripcions. Desactiveu aquesta opció per conservar-les."
+        "description": "«uh», «hmm» al text enganxat"
       },
       "chineseScript": {
         "title": "Escriptura xinesa",
-        "description": "Escriu les transcripcions en mandarí i cantonès amb caràcters simplificats o tradicionals. Els altres idiomes no es modifiquen.",
+        "description": "Caràcters simplificats o tradicionals",
         "options": {
           "asTranscribed": "Tal com s'ha transcrit",
           "simplified": "Simplificat",
@@ -434,20 +589,21 @@
           "title": "URL de base",
           "description": "URL de base de l'API del proveïdor seleccionat. Només es pot editar la del proveïdor personalitzat.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "L’adreça la fixa el proveïdor triat",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "Clau de l'API",
-          "description": "Clau de l'API del proveïdor seleccionat.",
+          "description": "Es desa només en aquest ordinador",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Introduïu l'identificador de model que espera el punt de connexió personalitzat.",
-          "descriptionDefault": "Trieu un model ofert pel proveïdor seleccionat.",
+          "descriptionCustom": "El nom del model al teu servidor",
+          "descriptionDefault": "El botó de la dreta actualitza la llista",
           "placeholderWithOptions": "Cerqueu o seleccioneu un model",
           "placeholderNoOptions": "Escriviu el nom d'un model",
-          "refreshModels": "Actualitzeu els models"
+          "refreshModels": "Actualitza la llista de models"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Indicació seleccionada",
           "description": "Seleccioneu una plantilla per millorar les transcripcions o creeu-ne una de nova. Utilitzeu ${output} dins del text de la indicació per fer referència a la transcripció enregistrada."
         },
-        "noPrompts": "No hi ha indicacions disponibles",
-        "selectPrompt": "Seleccioneu una indicació",
+        "noPrompts": "No hi ha instruccions",
+        "selectPrompt": "Tria una instrucció",
         "createNew": "Creeu una indicació nova",
-        "promptLabel": "Nom de la indicació",
+        "promptLabel": "Nom",
         "promptLabelPlaceholder": "Introduïu el nom de la indicació",
-        "promptInstructions": "Instruccions de la indicació",
+        "promptInstructions": "Text de la instrucció",
         "promptInstructionsPlaceholder": "Escriviu les instruccions que s'executaran després de la transcripció. Exemple: Millora la gramàtica i la claredat del text següol: ${output}",
         "promptTip": "Consell: utilitzeu <code>${output}</code> per inserir el text transcrit a la indicació.",
         "updatePrompt": "Actualitzeu la indicació",
-        "deletePrompt": "Suprimiu la indicació",
-        "createPrompt": "Creeu la indicació",
+        "deletePrompt": "Suprimeix",
+        "createPrompt": "Crea",
         "cancel": "Cancel·leu",
-        "selectToEdit": "Seleccioneu una indicació more amunt per veure'n i editar-ne els detalls.",
-        "createFirst": "Feu clic a «Creeu una indicació nova» més amunt per crear la primera indicació de postprocessament."
+        "selectToEdit": "Tria una instrucció per editar-la.",
+        "createFirst": "Fes clic a «Crea» per afegir la primera instrucció."
+      },
+      "local": {
+        "intro": "El model funciona directament en aquest ordinador: sense internet, sense claus, el teu text no surt mai de l’equip. Baixa un model si vols. S’inicia tot sol quan cal i es descarrega de la memòria quan està inactiu. Funciona al processador, per això és més lent que els serveis al núvol. Tots els models caben en un portàtil amb 16 GB de RAM.",
+        "runtimeMissing": "No s’ha trobat el motor d’IA integrat. Torna a instal·lar Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Equilibrat",
+            "model": "Qwen3.5 4B",
+            "description": "La versió bàsica de Qwen 4B. Acurat amb la puntuació, però corregeix pocs errors de reconeixement en converses reals (les nostres proves, 06/10/2026). La versió amb acceleració és més precisa i més ràpida."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "El model de Google, fidel a l’original. Edita com la Gemma de la versió de Google amb acceleració, però unes 1,25 vegades més lent."
+          },
+          "gigachat31": {
+            "title": "Per al rus",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Entrenat en rus des del principi. Només 1,8B dels seus 10B paràmetres són actius per token, així que és més ràpid del que suggereix la seva mida. Necessita més memòria."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen per al rus",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) amb vocabulari rus i entrenament addicional amb textos russos. A la prova corregeix menys que Gemma E2B i és la meitat de ràpid (uns 27 min per hora d'enregistrament)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Model petit de NVIDIA, oficialment només en anglès. A la prova va deixar el text gairebé igual tant en rus com en anglès, i és més lent que Gemma (uns 35 min per hora d'enregistrament)."
+          },
+          "qwen35_9b": {
+            "title": "Màxim",
+            "model": "Qwen3.5 9B",
+            "description": "El model local més intel·ligent: el millor amb el context i les correccions difícils. El més lent."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Equilibrat",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B en una versió més nova amb acceleració integrada. Més precís i unes 1,2 vegades més ràpid que el Qwen 4B bàsic, però a les nostres proves corregeix la meitat d’errors que Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma lleugera",
+            "model": "Gemma 4 E2B · versió de Google",
+            "description": "La Gemma petita en la versió oficial de Google, amb acceleració (+98 MB). El doble de ràpida que Gemma E4B (uns 14 min per hora d’enregistrament) amb uns 2/3 de les seves correccions."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · versió de Google",
+            "description": "La millor qualitat a les nostres proves (06/10/2026). Versió oficial de Google amb acceleració (+99 MB): edita com la Gemma E4B bàsica, unes 1,25 vegades més ràpid. Uns 26 min per hora d’enregistrament."
+          }
+        },
+        "speedupBadge": "acceleració",
+        "speedupHint": "Un petit model auxiliar endevina diverses paraules per endavant i el model principal les comprova. En un processador és unes 1,2–1,3 vegades més ràpid.",
+        "untested": "sense provar",
+        "delete": "Suprimeix el model",
+        "state": {
+          "stopped": "No carregat a la memòria",
+          "loading": "S’està carregant a la memòria…",
+          "ready": "Carregat a la memòria"
+        },
+        "unloadNow": "Descarrega ara de la memòria",
+        "unload": {
+          "title": "Descàrrega de la memòria",
+          "description": "Quant temps pot estar inactiu el model abans de descarregar-se, cosa que allibera uns 2–3 GB de memòria.",
+          "immediately": "Just després del processament",
+          "min2": "Al cap de 2 minuts",
+          "min5": "Al cap de 5 minuts",
+          "min15": "Al cap de 15 minuts",
+          "never": "Mai"
+        },
+        "recommended": "Recomanat"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Obriu la carpeta d'enregistraments",
       "loading": "S'està carregant l'historial...",
       "empty": "Encara no hi ha transcripcions. Comenceu a enregistrar per crear l'historial!",
-      "copyToClipboard": "Copia la transcripció al porta-retalls",
+      "copyToClipboard": "Copia el text",
       "copyError": "No s'ha pogut copiar la transcripció al porta-retalls.",
       "save": "Desa la transcripció",
       "unsave": "Treu de les desades",
       "delete": "Suprimeix l'entrada",
       "deleteError": "No s'ha pogut suprimir l'entrada. Torneu-ho a provar.",
-      "retranscribe": "Torneu a transcriure",
+      "retranscribe": "Torna a reconèixer",
       "retranscribeError": "No s'ha pogut tornar a transcriure. Torneu-ho a provar.",
-      "transcribing": "S'està transcrivint...",
+      "transcribing": "S’està reconeixent…",
       "transcriptionFailed": "La transcripció ha fallat. Podeu tornar a transcriure amb la icona de reintent."
     },
     "debug": {
       "title": "Depuració",
       "logDirectory": {
-        "title": "Directori de registres",
-        "description": "Ubicació on es desen els fitxers de registre"
+        "title": "Carpeta de registres",
+        "description": "Adjunta el registre a un informe d’error"
       },
       "logLevel": {
         "title": "Nivell de registre",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Comproveu si hi ha actualitzacions",
-        "description": "Comprova automàticament si hi ha versions noves del Handy",
-        "lockedDescription": "Desactivat per la configuració del sistema (HANDY_DISABLE_UPDATER)"
+        "description": "Un cop per inici, preguntar a GitHub si hi ha una versió nova de Tishe. No s'envien enregistraments ni textos",
+        "lockedDescription": "La cerca d’actualitzacions està desactivada en aquesta versió"
       },
       "whatsNewPreview": {
         "title": "Previsualització de les novetats",
@@ -534,16 +761,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Llindar de correcció de paraules",
-        "description": "Sensibilitat de les correccions de paraules personalitzades"
+        "description": "Quant s’ha d’assemblar una paraula a una de les teves per substituir-la"
       },
       "historyLimit": {
-        "title": "Límit de l'historial",
-        "description": "Nombre màxim d'entrades de l'historial que es conservaran",
+        "title": "Quants dictats es conserven",
+        "description": "Els dictats conservats no compten",
         "entries": "entrades"
       },
       "recordingRetention": {
-        "title": "Supressió automàtica d'enregistraments",
-        "description": "Suprimeix automàticament els enregistraments antics per estalviar espai",
+        "title": "Esborra els dictats antics",
+        "description": "L’àudio s’esborra juntament amb el text",
         "never": "Mai",
         "preserveLimit": "Conserva els últims {{count}}",
         "days3": "Al cap de 3 dies",
@@ -552,24 +779,24 @@
         "placeholder": "Selecciona el període de conservació..."
       },
       "alwaysOnMicrophone": {
-        "label": "Micròfon sempre actiu",
-        "description": "Mantén el micròfon actiu per respondre més de pressa"
+        "label": "Mantén el micròfon encès",
+        "description": "L’enregistrament comença abans, però el micròfon queda ocupat tota l’estona"
       },
       "clamshellMicrophone": {
         "title": "Micròfon amb la tapa tancada",
-        "description": "Micròfon que s'utilitzarà quan la tapa del portàtil estigui tancada"
+        "description": "Quin micròfon fer servir quan el portàtil està tancat"
       },
       "postProcessingToggle": {
         "label": "Postprocessament",
         "description": "Activa la millora del text amb IA després de la transcripció"
       },
       "muteWhileRecording": {
-        "label": "Silencia durant l'enregistrament",
-        "description": "Silencia l'àudio del sistema durant l'enregistrament"
+        "label": "Silencia l’ordinador mentre s’enregistra",
+        "description": "La música i els vídeos no entraran a l’enregistrament"
       },
       "appendTrailingSpace": {
-        "label": "Afegiu un espai al final",
-        "description": "Afegeix un espai après de la transcripció enganxada"
+        "label": "Afegeix un espai al final",
+        "description": "La frase següent no s’enganxarà a l’anterior"
       },
       "keyboardImplementation": {
         "title": "Implementació del teclat",
@@ -582,28 +809,28 @@
         "settings": "Configuració:"
       },
       "pasteDelay": {
-        "title": "Retard abans d'enganxar",
-        "description": "Retard (en mil·lisegons) després de copiar el text i abans d'enviar la combinació de tecles per enganxar-lo. Augmenteu-lo si no s'enganxa res."
+        "title": "Retard abans d’enganxar",
+        "description": "Augmenta’l si no s’enganxa res"
       },
       "pasteDelayAfter": {
-        "title": "Retard après d'enganxar",
-        "description": "Retard (en mil·lisegons) després d'enviar la combinació de tecles per enganxar i abans de restaurar el porta-retalls anterior. Augmenteu-lo si s'enganxa el contingut antic del porta-retalls en lloc de la transcripció."
+        "title": "Retard després d’enganxar",
+        "description": "Augmenta’l si s’enganxa text antic del porta-retalls"
       },
       "holdThreshold": {
         "title": "Llindar de pulsació llarga",
-        "description": "Només en mode automàtic: temps (en mil·lisegons) que cal mantenir premuda la drecera perquè es consideri una pulsació llarga en lloc d'una de breu. Reduïu-lo si les pulsacions llargues curtes deixen l'enregistrament actiu; augmenteu-lo si les pulsacions breus intencionades es tracten com a llargues."
+        "description": "Una pulsació més curta alterna, una de més llarga manté"
       },
       "reliablePaste": {
         "title": "Enganxament fiable (beta)",
-        "description": "Restaura el porta-retalls només quan l'aplicació de destinació ha llegit la transcripció, en lloc de fer-ho després d'un retard fix. Pensat per evitar que s'enganxi el contingut antic del porta-retalls quan el sistema està carregat. Requereix un mètode d'enganxament amb el porta-retalls; només al macOS i al Windows."
+        "description": "Esperar que el programa llegeixi el text en lloc d’un temps fix"
       },
       "recordingBuffer": {
-        "title": "Marge addicional d'enregistrament",
-        "description": "Temps addicional (en mil·lisegons) durant el qual es continua enregistrant després de deixar anar la tecla per capturar l'àudio final. 0 = sense marge addicional."
+        "title": "Continua enregistrant després de deixar anar",
+        "description": "Quant temps més s’enregistra després de deixar anar la tecla"
       },
       "keyboardDiagnostic": {
         "title": "Diagnòstic del teclat",
-        "description": "Comprova si els esdeveniments del teclat arriben al Handy. Només se'n registra el recompte, mai les tecles que premeu.",
+        "description": "Comprova si els esdeveniments del teclat arriben a Tishe. Només es registra el nombre d’esdeveniments, mai quines tecles prems.",
         "run": "Executa un diagnòstic de 10 s",
         "running": "S'està escoltant… prema la drecera unes quantes vegades (p. ex., Option+Space)",
         "secureInputLabel": "Entrada segura",
@@ -617,7 +844,7 @@
         "mouse": "Ratolí",
         "verdictBlocked": "L'entrada segura bloca els esdeveniments de tecla. Les dreceres amb tecles no poden funcionar fins que es resolgui.",
         "verdictSuspicious": "Han arribat esdeveniments de modificadors, però no de tecles. Alguna cosa suprimeix les tecles tot i que l'entrada segura consta com a desactivada. Informeu-ne al GitHub.",
-        "verdictOk": "Els esdeveniments de tecla arriben al Handy amb normalitat.",
+        "verdictOk": "Els esdeveniments de tecles arriben a Tishe amb normalitat.",
         "verdictNoEvents": "No s'ha capturat cap esdeveniment. Heu premut alguna tecla durant la prova?",
         "failed": "El diagnòstic ha fallat: {{error}}"
       }
@@ -626,15 +853,15 @@
       "title": "Quant a",
       "version": {
         "title": "Versió",
-        "description": "Versió actual del Handy"
+        "description": "Versió actual de Tishe"
       },
       "whatsNewUpdates": {
-        "label": "Mostra les novetats",
-        "description": "Mostra les notes de la versió després d'actualitzar el Handy"
+        "label": "Mostra «Novetats» després d’una actualització",
+        "description": "Una llista breu de canvis en obrir per primer cop una versió nova"
       },
       "appDataDirectory": {
-        "title": "Directori de dades de l'aplicació",
-        "description": "Ubicació on el Handy desa les dades"
+        "title": "Carpeta de dades",
+        "description": "Configuració, models i historial"
       },
       "sourceCode": {
         "title": "Codi font",
@@ -643,7 +870,7 @@
       },
       "supportDevelopment": {
         "title": "Dona suport al desenvolupament",
-        "description": "Ajudeu-nos a continuar desenvolupant el Handy",
+        "description": "Tishe es basa en el seu programa",
         "button": "Feu una donació"
       },
       "acknowledgments": {
@@ -651,7 +878,7 @@
         "ggml": {
           "title": "ggml",
           "description": "Biblioteca de tensors d'alt rendiment per a la inferència d'aprenentatge automàtic al dispositiu",
-          "details": "La transcripció local de veu a text del Handy es basa en el transcribe.cpp i el ggml. Gràcies a la gran feina de Georgi Gerganov i dels col·laboradors."
+          "details": "Reconeixement de veu ràpid a l’ordinador. Gràcies a Georgi Gerganov i als col·laboradors del projecte."
         }
       }
     }
@@ -672,7 +899,7 @@
     "portableUpdateBrowseButton": "Obriu GitHub Releases"
   },
   "whatsNew": {
-    "title": "Novetats del Handy v{{version}}"
+    "title": "Novetats de Tishe"
   },
   "common": {
     "loading": "S'està carregant...",
@@ -681,10 +908,14 @@
     "open": "Obre",
     "copy": "Copia",
     "clear": "Neteja",
-    "noOptionsFound": "No s'ha trobat cap opció"
+    "noOptionsFound": "No s'ha trobat cap opció",
+    "cancel": "Cancel·la",
+    "choose": "Tria…",
+    "reset": "Restableix el valor per defecte",
+    "search": "Cerca"
   },
   "accessibility": {
-    "permissionsDescription": "El Handy necessita permisos d'accessibilitat per escriure el text transcrit.",
+    "permissionsDescription": "Per enganxar text, el programa necessita el permís d’«Accessibilitat».",
     "openSettings": "Obriu la configuració del sistema"
   },
   "errors": {
@@ -703,17 +934,17 @@
     "modelLoadFailedUnknown": "model desconegut",
     "pasteFailedTitle": "No s'ha pogut enganxar el text",
     "pasteFailed": "No s'ha pogut enganxar el text a l'aplicació activa.",
-    "transcriptionFailedTitle": "La transcripció ha fallat"
+    "transcriptionFailedTitle": "No s’ha pogut reconèixer"
   },
   "appLanguage": {
-    "title": "Llengua de l'aplicació",
-    "description": "Canvia la llengua de la interfície del Handy"
+    "title": "Llengua de la interfície",
+    "description": "La llengua dels textos del programa"
   },
   "theme": {
-    "title": "Tema de l'aplicació",
-    "description": "Tria si el Handy segueix el tema del sistema o es manté en mode clar o fosc",
+    "title": "Tema",
+    "description": "Tria si Tishe segueix el tema del sistema o es queda clar o fosc",
     "options": {
-      "system": "Sistema",
+      "system": "Com el sistema",
       "light": "Clar",
       "dark": "Fosc"
     }
@@ -721,17 +952,756 @@
   "overlay": {
     "transcribing": "S'està transcrivint...",
     "processing": "S'està processant...",
+    "waiting": "El model està ocupat amb un fitxer: el dictat arribarà amb retard",
+    "message": {
+      "paste_failed": "No s’ha pogut enganxar. El text s’ha desat a l’Historial",
+      "editing_skipped": "Enganxat sense editar: la IA no està llesta",
+      "no_microphone": "No s’ha trobat cap micròfon",
+      "microphone_denied": "Sense accés al micròfon",
+      "help": "Què cal fer"
+    },
     "loadingModel": "S'està carregant el model..."
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} pot estar blocant 1 drecera",
+    "blockedWithCulprit_many": "{{name}} pot estar blocant {{count}} dreceres",
     "blockedWithCulprit_other": "{{name}} pot estar blocant {{count}} dreceres",
     "blockedNoCulprit_one": "El macOS està blocant temporalment 1 drecera",
+    "blockedNoCulprit_many": "El macOS està blocant temporalment {{count}} dreceres",
     "blockedNoCulprit_other": "El macOS està blocant temporalment {{count}} dreceres",
     "recorderBlockedWithCulprit": "{{name}} pot estar blocant els canvis de dreceres",
     "recorderBlockedNoCulprit": "El macOS està blocant temporalment els canvis de dreceres",
     "learnMore": "Com es resol",
     "recorderBlocked": "Ara no se'n poden enregistrar dreceres: l'entrada segura del macOS bloca els esdeveniments de tecla. Resol primer l'avís d'entrada segura.",
     "dismiss": "Descarta"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "No s’ha trobat ffmpeg. Cal per llegir fitxers d’àudio i vídeo i ve amb l’instal·lador de Tishe: torna a instal·lar Tishe. O instal·la’l amb l’ordre: winget install Gyan.FFmpeg — i reinicia Tishe.",
+    "input": {
+      "choose": "Afegeix fitxers…",
+      "filterName": "Àudio i vídeo"
+    },
+    "maxPart": {
+      "title": "Durada màxima d’una part",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Proveïdor",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Personalitzat (compatible amb OpenAI)"
+      },
+      "baseUrl": "URL de l’API",
+      "baseUrlDescription": "URL base que acaba en /v1.",
+      "apiKey": "Clau d’API",
+      "apiKeyDescription": "Es desa localment en aquest ordinador.",
+      "model": "Model",
+      "modelDescription": "Els models gpt-4o-transcribe accepten com a màxim ~23 min per sol·licitud; les parts s’escurcen automàticament.",
+      "language": "Llengua",
+      "languageDescription": "Codi de llengua, per exemple ca o en. Deixa-ho buit per a la detecció automàtica.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Persones a l’enregistrament",
+      "auto": "Detecta automàticament",
+      "model": "Model de parlants",
+      "modelDescription": "Es baixa un cop; distingeix les veus. Tots dos són petits i ràpids.",
+      "recommended": "Recomanat",
+      "cloudUntimed": "El model {{model}} no retorna marques de temps, així que no es poden marcar els parlants. Tria whisper-1, un model whisper a Groq o el reconeixement local.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Entrenat amb milers de veus; distingeix les veus de manera fiable en enregistraments reals. Bona opció per defecte."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Un model alternatiu: prova’l si el primer confon les veus als teus enregistraments."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Inclou també la transcripció sense editar",
+      "includeRawDescription": "Afegeix al final del document el resultat sense editar del reconeixement.",
+      "promptPlaceholder": "Instrucció integrada per a la llengua de l’enregistrament (rus o anglès)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Marques de temps",
+      "location": "Desa a",
+      "choose": "Tria una carpeta…",
+      "nextToSource": "Al costat del fitxer d’origen",
+      "notes": "Notes de processament",
+      "removeFillers": "Elimina les vacil·lacions",
+      "saveDebug": "Desa els fitxers intermedis",
+      "saveDebugDescription": "Crea al costat del document una carpeta «<name>.debug» amb el text després de cada pas: reconeixement, neteja, cada sol·licitud al model de llenguatge i la seva resposta, resultat final. Per rastrejar errors i per a la comparativa de models."
+    },
+    "actions": {
+      "start": "Transcriu",
+      "cancel": "Cancel·la"
+    },
+    "progress": {
+      "starting": "S’està iniciant…",
+      "elapsed": "Temps transcorregut: {{time}}",
+      "extracting": "S’està extraient l’àudio…",
+      "extractingPart": "S’està extraient l’àudio…",
+      "diarizing": "S’estan detectant els parlants…",
+      "diarizingPart": "S’estan detectant els parlants…",
+      "splitting": "S’està dividint en parts…",
+      "splittingPart": "S’està dividint en parts…",
+      "transcribing": "S’està transcrivint…",
+      "transcribingPart": "S’està transcrivint la part {{part}} de {{total}}…",
+      "post_processing": "S’està netejant amb el LLM…",
+      "post_processingPart": "S’està netejant la part {{part}} de {{total}} amb el LLM…",
+      "writing": "S’està escrivint el document…",
+      "writingPart": "S’està escrivint el document…"
+    },
+    "result": {
+      "open": "Obre",
+      "reveal": "Mostra a la carpeta"
+    },
+    "document": {
+      "title": "Transcripció",
+      "sourceFile": "Fitxer",
+      "duration": "Durada",
+      "parts": "Parts",
+      "engine": "Reconeixement",
+      "llm": "Postprocessament amb LLM",
+      "created": "Creat",
+      "part": "Part",
+      "rawTranscript": "Transcripció sense editar",
+      "speaker": "Parlant",
+      "notes": "Notes de processament",
+      "notesTotal": "Temps de processament",
+      "notesExtracting": "Extracció de l’àudio",
+      "notesDiarizing": "Detecció de parlants",
+      "notesTranscribing": "Reconeixement",
+      "notesLlm": "Processament amb LLM",
+      "notesWarnings": "Advertiments",
+      "notesNone": "cap",
+      "notesLanguage": "Llengua del text",
+      "llmLocal": "{{model}}, en aquest ordinador",
+      "warnings": {
+        "noTimestampsModel": "no s’han marcat els parlants: aquest model de veu no retorna marques de temps; fes servir un model whisper o el reconeixement local",
+        "noTimestampsPart": "part {{part}}: el servei de veu no ha retornat marques de temps, així que no s’han pogut marcar els parlants",
+        "llmEmpty": "part {{part}}, fragment {{fragment}}: el LLM ha retornat una resposta buida, s’ha conservat el text sense editar",
+        "llmError": "part {{part}}, fragment {{fragment}}: error del LLM, s’ha conservat el text sense editar ({{error}})",
+        "numbersBack": "part {{part}}, fragment {{fragment}}: números restaurats en {{lines}} línies (el LLM els ha escrit amb lletres o els ha omès)",
+        "linesLost": "part {{part}}, fragment {{fragment}}: la resposta del LLM no ha conservat les línies numerades, s’ha conservat el text sense editar",
+        "linesKept": "part {{part}}, fragment {{fragment}}: {{kept}} de {{total}} línies han conservat el text sense editar ({{reasons}})",
+        "kept": {
+          "missing": "falta",
+          "duplicate": "duplicada",
+          "empty": "buida",
+          "tooLong": "massa llarga",
+          "translated": "traduïda",
+          "tooShort": "massa curta",
+          "cutOff": "tallada"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Esborra les acabades"
+    },
+    "events": {
+      "title": "Script d’esdeveniments",
+      "choose": "Tria…",
+      "none": "Sense definir: els esdeveniments no s’envien enlloc",
+      "filterName": "Programes i scripts",
+      "test": "Prova",
+      "testOk": "L’script ha rebut un esdeveniment de prova",
+      "testFailed": "Error: {{error}}",
+      "testMessage": "Tishe: esdeveniment de prova",
+      "remaining": "queden ~{{minutes}} min",
+      "started": "Transcripció iniciada",
+      "finished": "Fet",
+      "cancelled": "Cancel·lat",
+      "interval": {
+        "title": "Interval dels avisos de progrés",
+        "description": "Com a màxim un cop cada tants segons. Una etapa o part nova, l’inici i el final s’envien de seguida.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Canvia",
+    "choose": "Tria",
+    "open": "Obre",
+    "hide": "Amaga",
+    "save": "Desa",
+    "saved": "Desat",
+    "copied": "Copiat",
+    "undo": "Desfés",
+    "download": "Baixa",
+    "downloadSize": "Baixa {{size}}",
+    "downloadingPercent": "Baixant · {{percent}} %",
+    "cancelDownload": "Cancel·la",
+    "deleteNamed": "Suprimeix {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Fes servir «{{value}}»",
+    "fold": {
+      "more": "Més",
+      "changed_one": "canviat: {{count}}",
+      "changed_many": "canviats: {{count}}",
+      "changed_other": "canviats: {{count}}",
+      "changedA11y_one": "{{count}} ajust canviat",
+      "changedA11y_many": "{{count}} ajustos canviats",
+      "changedA11y_other": "{{count}} ajustos canviats"
+    },
+    "number": {
+      "hint": "De {{min}} a {{max}}",
+      "hintDefault": "Per defecte {{value}}; de {{min}} a {{max}}",
+      "notNumber": "Introdueix un número",
+      "range": "Introdueix un número de {{min}} a {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} h",
+      "hourMin": "{{h}} h {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "avui {{time}}",
+      "yesterday": "ahir {{time}}",
+      "todayTitle": "Avui",
+      "yesterdayTitle": "Ahir"
+    },
+    "player": {
+      "play": "Reprodueix",
+      "pause": "Pausa",
+      "position": "Posició de reproducció"
+    },
+    "shortcut": {
+      "change": "Canvia la tecla de «{{name}}»",
+      "reset": "Restableix la tecla per defecte"
+    },
+    "echo": {
+      "recognition": "Reconeixement: {{model}}",
+      "language": "llengua: {{language}}",
+      "sharedWithDictation": "compartit amb el dictat",
+      "sharedWithFiles": "compartit amb la transcripció de fitxers",
+      "noModel": "Cap model de reconeixement de veu"
+    },
+    "llm": {
+      "ready": "Llest · {{model}} en aquest ordinador",
+      "needed": "Cal la IA · {{model}}",
+      "downloading": "Baixant la IA · {{percent}} %",
+      "runtimeMissing": "Falta el motor d’IA integrat",
+      "otherOptions": "Altres opcions",
+      "noKey": "Cal una clau de {{provider}}",
+      "noUrl": "Cal l’adreça del servidor",
+      "noServerModel": "Cal un nom de model",
+      "localServer": "El teu servidor en aquest ordinador · {{model}}",
+      "textToServer": "El text va a {{address}}",
+      "textToService": "El text va a {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Vols suprimir el model {{name}}?",
+      "deleteModel": "Suprimeix el model",
+      "deleteModelBody": "S’alliberaran {{size}}. Per tornar a fer servir el model l’hauràs de baixar de nou.",
+      "deleteActiveTitle": "Vols suprimir {{name}}? És el model actual",
+      "deleteActiveBody": "El dictat i la transcripció deixaran de funcionar fins que triïs un altre model. S’alliberaran {{size}}.",
+      "deleteLlmTitle": "Vols suprimir el model d’IA {{name}}?",
+      "deleteLlm": "Suprimeix el model d’IA",
+      "deleteLlmBody": "S’alliberaran {{size}}. L’edició no funcionarà fins que el tornis a baixar o en triïs un altre.",
+      "deleteSpeakerModelBody": "La separació per parlants no funcionarà fins que tornis a baixar un model de veu."
+    },
+    "back": {
+      "transcription": "Torna a Transcripció",
+      "dictation": "Torna a Dictat",
+      "meetings": "Torna a Reunions",
+      "history": "Torna a Historial",
+      "models": "Torna a Reconeixement",
+      "llm": "Torna a Edició amb IA",
+      "app": "Torna a Aplicació",
+      "about": "Torna a Quant a",
+      "debug": "Torna a Depuració",
+      "next": "Torna a Què ve ara"
+    },
+    "changed": "canviat"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "carregat",
+      "loading": "carregant…",
+      "error": "error en carregar",
+      "unloaded": "no és a la memòria",
+      "none": "Cap model",
+      "a11y": "Model {{model}}, {{state}}. Canvia el model",
+      "menu": "Models baixats",
+      "all": "Tots els models…",
+      "locked": "Hi ha una transcripció en curs: canvia’l quan acabi"
+    },
+    "task": "Transcripció: fitxer {{current}} de {{total}} · {{percent}} %",
+    "downloading": "Baixant: {{name}} · {{percent}} %",
+    "downloadingMany": "Baixant: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "La transcripció necessita ffmpeg"
+    },
+    "drop": {
+      "title": "Deixa anar un enregistrament aquí",
+      "text": "Àudio o vídeo: mp3, m4a, wav, mp4, mkv i altres. Cada fitxer es converteix en un document separat.",
+      "more": "Deixa anar més enregistraments o",
+      "release": "Deixa anar per afegir",
+      "rejected": "{{names}}: no és àudio ni vídeo",
+      "oneText": "«{{name}}» entrarà a la cua de transcripció",
+      "manyText_one": "{{count}} enregistrament entrarà a la cua de transcripció",
+      "manyText_many": "{{count}} enregistraments entraran a la cua de transcripció",
+      "manyText_other": "{{count}} enregistraments entraran a la cua de transcripció",
+      "anyText": "Els fitxers d’àudio i vídeo entraran a la cua de transcripció",
+      "noneTitle": "Aquests fitxers no serveixen",
+      "noneText": "Només es pot transcriure àudio i vídeo: mp3, m4a, wav, mp4, mkv i altres.",
+      "otherNote_one": "S’ometrà {{count}} fitxer més: no és àudio ni vídeo",
+      "otherNote_many": "S’ometran {{count}} fitxers més: no són àudio ni vídeo",
+      "otherNote_other": "S’ometran {{count}} fitxers més: no són àudio ni vídeo",
+      "alreadyOne": "«{{name}}» ja és a la cua",
+      "alreadyMany": "Aquests enregistraments ja són a la cua"
+    },
+    "list": {
+      "label": "Enregistraments",
+      "waiting": "En espera",
+      "cancelled": "Cancel·lat",
+      "remaining": "queden uns {{time}}",
+      "remove": "Treu",
+      "removeFile": "Treu {{name}}",
+      "removeFromList": "Treu de la llista",
+      "more": "Més: {{name}}",
+      "recipeSpeakers": "parlants",
+      "recipeEditing": "edició",
+      "recipeCloud": "al núvol",
+      "parts_one": "{{count}} part",
+      "parts_many": "{{count}} parts",
+      "parts_other": "{{count}} parts",
+      "notes_one": "{{count}} nota de processament",
+      "notes_many": "{{count}} notes de processament",
+      "notes_other": "{{count}} notes de processament",
+      "showAll": "Mostra-ho tot ({{count}})",
+      "showFewer": "Mostra’n menys",
+      "removedOne": "Tret de la llista",
+      "removedMany_one": "{{count}} fila treta de la llista",
+      "removedMany_many": "{{count}} files tretes de la llista",
+      "removedMany_other": "{{count}} files tretes de la llista",
+      "chars_one": "{{n}} caràcter",
+      "chars_many": "{{n}} caràcters",
+      "chars_other": "{{n}} caràcters",
+      "keptNote": "Es conserven els últims {{count}} resultats. Els documents del disc no s’esborren mai.",
+      "missing": "No s’ha trobat el document: s’ha mogut o suprimit, o la seva unitat està desconnectada",
+      "openDocument": "Obre el document {{name}}"
+    },
+    "recipe": {
+      "title": "Recepta",
+      "locked": "Els ajustos no canvien mentre dura la transcripció. Els fitxers nous faran servir els mateixos ajustos.",
+      "where": "On reconèixer",
+      "local": "En aquest ordinador",
+      "cloud": "Al núvol",
+      "audioToService": "L’àudio va a {{provider}}",
+      "cloudEcho": "Reconeixement: {{model}} a {{provider}}",
+      "speakers": "Parlants",
+      "speakersDescription": "El document es converteix en una transcripció per torns: «Parlant 1: …», «Parlant 2: …»",
+      "speakersMissing": "Cal un model de veu · {{size}}",
+      "speakersDownloading": "Baixant el model de veu · {{percent}} %",
+      "speakersReady": "Model de veu llest",
+      "countDescription": "Si ho saps, la separació és més precisa",
+      "editing": "Edició amb IA",
+      "editingDescription": "Corregeix errors de reconeixement i de puntuació. Triga força més: uns 15–35 min per hora d’enregistrament",
+      "result": "Resultat",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "al costat de l’enregistrament"
+    },
+    "more": {
+      "recognition": "Reconeixement",
+      "maxPartDescription": "Un enregistrament llarg es talla a les pauses en parts que no superen aquesta durada",
+      "speakers": "Parlants",
+      "editing": "Edició",
+      "prompt": "Instrucció per a fitxers",
+      "promptDescription": "Buit: la instrucció integrada en la llengua de l’enregistrament. Prioritat: aquest camp, després ⚙ del model, després la integrada",
+      "document": "Document",
+      "locationDescription": "El nom es pren de l’enregistrament; no se sobreescriu res, s’hi afegeix (2)",
+      "timestampsDescription": "Hora de l’enregistrament abans de cada paràgraf",
+      "removeFillersDescription": "Elimina «uh», «um», «hmm» en enregistraments en anglès i en rus. Les paraules es mantenen",
+      "globalFillers": "La transcripció d’origen es manté literal. El dictat té el seu propi ajust de falques",
+      "notesDescription": "Al final: durada de cada etapa i advertiments",
+      "integrations": "Integracions",
+      "eventsDescription": "Un programa a qui s’avisa de l’inici, el progrés i el final (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Afegeix fitxers per començar",
+      "noFfmpeg": "Cal ffmpeg",
+      "noModel": "Primer baixa un model de reconeixement",
+      "cloudIncomplete": "Cal una clau de {{provider}}",
+      "cloudIncompleteCustom": "Calen l’adreça de l’API, la clau i el model",
+      "noSpeakerModel": "Cal un model de veu",
+      "running": "Fitxer {{current}} de {{total}} · {{time}} transcorregut",
+      "start_one": "Transcriu {{count}} fitxer",
+      "start_many": "Transcriu {{count}} fitxers",
+      "start_other": "Transcriu {{count}} fitxers",
+      "done_one": "Fet: {{count}} fitxer",
+      "done_many": "Fet: {{count}} fitxers",
+      "done_other": "Fet: {{count}} fitxers",
+      "errors_one": "{{count}} fitxer amb error",
+      "errors_many": "{{count}} fitxers amb errors",
+      "errors_other": "{{count}} fitxers amb errors",
+      "summary_one": "{{count}} enregistrament",
+      "summary_many": "{{count}} enregistraments",
+      "summary_other": "{{count}} enregistraments",
+      "modelDownloading": "Baixant el model de reconeixement · {{percent}} %",
+      "llmDownloading": "Baixant la IA per editar · {{percent}} %",
+      "llmMissing": "L’edició necessita una IA",
+      "llmNotSetUp": "La IA per editar no està configurada",
+      "withoutEditing": "Sense edició",
+      "modelNotActive": "El model de reconeixement no està activat"
+    },
+    "stop": {
+      "title": "Vols aturar la transcripció?",
+      "body": "Els fitxers acabats ({{done}}) estan desats. El fitxer actual ({{percent}} %) i els que esperen ({{waiting}}) s’hauran de tornar a iniciar.",
+      "confirm": "Atura",
+      "keep": "Continua"
+    },
+    "tray": {
+      "running": "Transcripció: fitxer {{current}} de {{total}} · {{pct}} %",
+      "ready_one": "Transcripció llesta: {{count}} fitxer",
+      "ready_many": "Transcripció llesta: {{count}} fitxers",
+      "ready_other": "Transcripció llesta: {{count}} fitxers"
+    },
+    "notify": {
+      "readyOne": "Transcripció llesta",
+      "readyMany_one": "Transcripció llesta: {{count}} fitxer",
+      "readyMany_many": "Transcripció llesta: {{count}} fitxers",
+      "readyMany_other": "Transcripció llesta: {{count}} fitxers",
+      "failedOne": "La transcripció ha fallat",
+      "failedMany_one": "La transcripció ha fallat: {{count}} fitxer",
+      "failedMany_many": "La transcripció ha fallat: {{count}} fitxers",
+      "failedMany_other": "La transcripció ha fallat: {{count}} fitxers",
+      "partial": "Acabats {{ok}} de {{total}} · {{errors}}",
+      "errors_one": "{{count}} amb error",
+      "errors_many": "{{count}} amb error",
+      "errors_other": "{{count}} amb error",
+      "failedFile": "Error: {{name}} · {{reason}}",
+      "open": "Obre"
+    },
+    "try": {
+      "before": "Obre qualsevol editor, posa-hi el cursor i mantén premuda",
+      "after": "mentre parles. Deixa-la anar i el text hi apareixerà.",
+      "changeKey": "Canvia la tecla"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "El dictat és a punt ·",
+      "anyWindow": "a qualsevol finestra",
+      "keyBusy": "El dictat no s’inicia: la tecla està ocupada",
+      "keyBusyDetail": "Un altre programa fa servir {{key}}. Tria una altra tecla.",
+      "changeKey": "Canvia la tecla"
+    },
+    "keys": {
+      "title": "Tecles",
+      "second": "Dictat amb edició: segona tecla",
+      "secondDescription": "La tecla habitual enganxa el text tal com és. Aquesta l’enganxa després de l’edició amb IA",
+      "instruction": "Instrucció",
+      "manage": "Gestiona…",
+      "secondBusy": "Un altre programa fa servir aquesta tecla: tria’n una altra"
+    },
+    "more": {
+      "paste": "Enganxar el text",
+      "indicator": "Indicador d’enregistrament",
+      "microphone": "Micròfon i enregistrament",
+      "prompts": "Instruccions per al dictat amb edició",
+      "promptsDescription_one": "{{count}} instrucció",
+      "promptsDescription_many": "{{count}} instruccions",
+      "promptsDescription_other": "{{count}} instruccions",
+      "promptsRow": "Crea i edita instruccions",
+      "text": "Text del dictat",
+      "fillersDocuments": "Només per al dictat. Als documents se n’encarrega «Elimina les vacil·lacions» de la pàgina Transcripció"
+    },
+    "fix": {
+      "title": "Si alguna cosa no funciona",
+      "paste": "El text no s’enganxa",
+      "pasteHelp": "Si dictes en un programa executat com a administrador, Windows no permet enganxar-hi. Si no, augmenta els retards de sota.",
+      "cutOff": "Es talla el final d’una frase",
+      "hold": "Una pulsació curta compta com a mantenir"
+    },
+    "prompts": {
+      "title": "Instruccions per al dictat amb edició",
+      "intro": "La instrucció diu a la IA què ha de fer amb el text dictat. ${output} és el text dictat.",
+      "current": "Instrucció actual",
+      "create": "Crea",
+      "deleted": "S’ha suprimit la instrucció «{{name}}»"
+    }
+  },
+  "meetings": {
+    "what": "Tishe enregistrarà reunions i trucades en aquest ordinador: el teu micròfon i l’altra banda, i després una transcripció separada per parlants.",
+    "how": "Els enregistraments es queden a l’ordinador, com tota la resta a Tishe.",
+    "nowTitle": "Ja ara",
+    "nowText": "Si una reunió ja està enregistrada (amb Zoom, Teams o una gravadora), afegeix el fitxer a «Transcripció».",
+    "goTranscription": "Vés a Transcripció"
+  },
+  "history": {
+    "storage": {
+      "title": "Emmagatzematge",
+      "limit_one": "Es conserva l’últim dictat",
+      "limit_many": "Es conserven els últims {{count}} dictats",
+      "limit_other": "Es conserven els últims {{count}} dictats",
+      "never": "Els dictats no s’esborren automàticament",
+      "days_3": "Els dictats s’esborren al cap de 3 dies",
+      "weeks_2": "Els dictats s’esborren al cap de 2 setmanes",
+      "months_3": "Els dictats s’esborren al cap de 3 mesos"
+    },
+    "empty": {
+      "title": "Els teus dictats apareixeran aquí",
+      "textBefore": "Mantén premuda",
+      "textAfter": "a qualsevol finestra i parla.",
+      "textNoKey": "Defineix una tecla de dictat a «Dictat»."
+    },
+    "copy": "Copia el text",
+    "more": "Més accions",
+    "keep": "Conserva",
+    "keepDescription": "No s’esborra automàticament",
+    "retry": "Torna a reconèixer",
+    "delete": "Suprimeix",
+    "deleted": "S’ha suprimit el dictat",
+    "failed": "No s’ha pogut reconèixer",
+    "savedTag": "conservat",
+    "editingSkipped": "sense editar",
+    "showMore": "Mostra-ho sencer",
+    "showLess": "Redueix",
+    "version": "Versió del text",
+    "versionEdited": "Després de l’edició",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Models que converteixen la veu en text, per al dictat i la transcripció de fitxers. L’edició del text amb IA és a la secció",
+    "active": {
+      "title": "Model actiu",
+      "change": "Canvia el model",
+      "none": "No s’ha triat cap model",
+      "noneHint": "Baixa el recomanat per a la teva llengua o qualsevol model del catàleg de sota"
+    },
+    "lockedByTranscription": "Hi ha una transcripció en curs: canvia’l quan acabi",
+    "language": {
+      "title": "Llengua i traducció",
+      "scope": "S’aplica al dictat i a la transcripció de fitxers"
+    },
+    "cleanup": {
+      "title": "Neteja del text",
+      "scope": "Funciona dins del model de reconeixement, per al dictat i els fitxers"
+    },
+    "memory": {
+      "title": "Memòria"
+    },
+    "onlyLanguage": "només {{language}}",
+    "languageCount_one": "{{count}} llengua",
+    "languageCount_many": "{{count}} llengües",
+    "languageCount_other": "{{count}} llengües",
+    "catalog": {
+      "title": "Catàleg",
+      "yours": "Els teus models",
+      "yoursCount": "Els teus models ({{count}})",
+      "recommended": "Recomanats",
+      "all": "Tots els models",
+      "languageFilter": "Llengua",
+      "streaming": "Streaming",
+      "translation": "Traducció",
+      "showAll": "Mostra tots els models ({{count}})",
+      "showFewer": "Mostra’n menys"
+    },
+    "row": {
+      "use": "Fes-lo servir",
+      "inUse": "en ús",
+      "more": "Més: {{name}}",
+      "delete": "Suprimeix el model",
+      "translate": "tradueix a l’anglès",
+      "streaming": "streaming",
+      "accuracy": "precisió {{n}}/10",
+      "speed": "velocitat {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "On i amb quina IA s’edita el text",
+    "status": {
+      "usedFor": "Es fa servir per a",
+      "files": "editar fitxers ({{state}})",
+      "dictation": "dictat amb edició ({{state}})",
+      "on": "activat",
+      "off": "desactivat"
+    },
+    "where": {
+      "title": "On funciona la IA",
+      "local": "En aquest ordinador",
+      "localText": "El text es queda a l’ordinador",
+      "localUnavailable": "No disponible en aquesta versió",
+      "server": "El teu propi servidor",
+      "serverText": "Ollama, LM Studio o la teva adreça · el text va al teu servidor",
+      "cloud": "Servei al núvol",
+      "cloudText": "OpenAI i altres · el text va al servei"
+    },
+    "variant": {
+      "local": "IA integrada",
+      "server": "Servidor",
+      "cloud": "Servei"
+    },
+    "local": {
+      "speed": "velocitat {{n}} de 5",
+      "quality": "qualitat {{n}} de 5",
+      "footprint": "disc {{disk}} · memòria ~{{ram}} GB",
+      "showAll": "Mostra tots els models ({{count}})",
+      "showFewer": "Mostra’n menys"
+    },
+    "server": {
+      "urlDescription": "Adreça compatible amb OpenAI que acaba en /v1",
+      "keyDescription": "Només si el teu servidor la demana"
+    }
+  },
+  "app": {
+    "purpose": "Com es comporta el programa en conjunt",
+    "launch": "Inici i safata",
+    "look": "Aspecte",
+    "updates": "Actualitzacions",
+    "checkNow": "Cerca una versió nova",
+    "checkNowButton": "Cerca ara",
+    "experimental": "Funcions experimentals",
+    "quit": {
+      "title": "Vols sortir de Tishe?",
+      "body": "S’està transcrivint «{{name}}» ({{pct}} %). S’aturarà; els documents acabats estan desats.",
+      "bodyIdle": "La transcripció s’aturarà; els documents acabats estan desats.",
+      "confirm": "Surt",
+      "stay": "Queda’t"
+    },
+    "notifications": "Notificacions",
+    "notifyLabel": "Avisa’m quan una transcripció estigui llesta",
+    "notifyDescription": "Una notificació de Windows, només mentre la finestra està amagada o sense focus. Un clic obre el resultat.",
+    "trayHint": "Windows amaga les icones noves. Per tenir-la a la vista, arrossega-la des de les icones amagades a la barra de tasques."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Novetats",
+    "project": {
+      "title": "Sobre el projecte",
+      "basedOn": "Basat en Handy",
+      "basedOnText": "Codi obert, llicència MIT",
+      "tishe": "Tishe",
+      "tisheText": "Codi obert, llicència MIT. Versions i informes d'errors a GitHub",
+      "licenses": "Llicències",
+      "licensesText": "Biblioteques i models de tercers que fa servir Tishe",
+      "licensesOpen": "Obre",
+      "licensesError": "No s'ha pogut obrir el fitxer de llicències",
+      "author": "Desenvolupador",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "Perfil de GitHub"
+    },
+    "supportHandy": "Dona suport als autors de Handy",
+    "folders": "Carpetes",
+    "versionRelease": "Tishe {{version}}, versió del {{release}}"
+  },
+  "debug": {
+    "onBefore": "El mode de depuració està activat i es manté entre inicis.",
+    "onAfter": "l’amaga.",
+    "log": "Registre",
+    "previews": "Previsualitzacions",
+    "keyboard": "Teclat",
+    "transcription": "Transcripció"
+  },
+  "release": {
+    "available": "Ja és aquí la versió {{release}}",
+    "openPage": "Obre la pàgina de la versió a GitHub",
+    "upToDate": "Aquesta és la versió més recent",
+    "checkFailed": "No s'han pogut cercar actualitzacions"
+  },
+  "next": {
+    "lead": "Tishe és la primera part de Private Memory: una memòria privada de les teves converses que viu del tot al teu ordinador.",
+    "now": "Ja avui Tishe escriu al dictat en qualsevol aplicació i transcriu enregistraments llargs separant els parlants. Sense internet i sense compte.",
+    "planTitle": "En les properes versions",
+    "plan": {
+      "meetings": {
+        "title": "Enregistrament de reunions",
+        "text": "el teu micròfon i els altres participants en dues pistes, amb el text apareixent durant la conversa."
+      },
+      "summaries": {
+        "title": "Resums de reunions",
+        "text": "decisions i tasques just després d'aturar l'enregistrament, en l'idioma de la reunió, escrites pel model de llenguatge integrat."
+      },
+      "search": {
+        "title": "Cerca a les reunions",
+        "text": "primer per paraules, després per significat."
+      },
+      "agents": {
+        "title": "Notes i assistents",
+        "text": "una carpeta de reunió per a Obsidian i accés dels assistents d'IA a les teves reunions per MCP, també sense núvol."
+      }
+    },
+    "order": "Sense dates: l'ordre pot canviar segons els comentaris.",
+    "freeTitle": "Gratuït i de codi obert",
+    "freeText": "La base de Tishe és gratuïta i ho continuarà sent. Segueix les versions i explica'ns a GitHub què hi trobes a faltar.",
+    "follow": "Segueix a GitHub",
+    "feedback": "Informa d'un problema o una idea"
+  },
+  "fileErrors": {
+    "notFound": "No s’ha trobat el fitxer: s’ha mogut o eliminat.",
+    "noAudio": "El fitxer no té so o no s’ha pogut llegir.",
+    "unreadable": "No s’ha pogut llegir el so del fitxer. Pot ser que estigui malmès.",
+    "noModel": "No hi ha cap model de reconeixement triat: tria’n un a «$t(sidebar.models)».",
+    "noSpeakerModel": "El model de veus no està baixat: baixa’l a «$t(transcription.more.speakers)».",
+    "noLlmModel": "El model de llenguatge no està baixat: baixa’l a «$t(sidebar.llm)».",
+    "noLlmRuntime": "Falta el motor del model de llenguatge integrat. Torna a instal·lar Tishe.",
+    "cloudKey": "El reconeixement al núvol necessita una clau d’API.",
+    "cloudConfig": "El reconeixement al núvol no està configurat: indica l’adreça i el model.",
+    "busy": "Ja s’està transcrivint un altre fitxer.",
+    "noSpace": "El disc és ple.",
+    "fileInUse": "El document està obert en un altre programa (per exemple, Word). Tanca’l i torna-ho a provar.",
+    "accessDenied": "No hi ha accés a la carpeta del document. Tria una altra carpeta: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Baixa un model de reconeixement de veu",
+      "text": "Converteix la veu en text, tant per als enregistraments com per al dictat. Funciona en aquest ordinador, sense internet. Només cal baixar-lo una vegada.",
+      "language": "Llengua dels enregistraments",
+      "allModels": "Tots els models",
+      "onDisk": "El model {{name}} ja és a l’ordinador: només cal activar-lo.",
+      "whileDownloading": "Mentre es baixa, ja pots afegir enregistraments: la transcripció començarà quan el model estigui llest."
+    },
+    "llm": {
+      "title": "L’edició necessita una IA",
+      "what": "La IA corregeix els errors de reconeixement i la puntuació. Et recomanem la integrada: funciona en aquest ordinador i el text no en surt.",
+      "recommended": "{{size}} al disc · cal uns {{ram}} GB de memòria · es baixa una sola vegada",
+      "otherWays": "El teu servidor o el núvol",
+      "downloadOn": "Baixa {{size}} i activa",
+      "runtimeTitle": "La IA integrada no està disponible",
+      "runtime": "Aquesta versió no inclou el motor de la IA integrada. Pots connectar el teu propi servidor (Ollama, LM Studio) o un servei al núvol a la secció «$t(sidebar.llm)».",
+      "openPage": "Obre «$t(sidebar.llm)»",
+      "notSetUp": "{{reason}}: sense això, la IA no funcionarà. Activa l’edició i acaba la configuració a la secció «$t(sidebar.llm)».",
+      "onAndSetUp": "Activa i configura",
+      "onDisk": "Ja és en aquest ordinador: no cal baixar res.",
+      "turnOn": "Activa l’edició"
+    },
+    "quick": {
+      "title": "Inici ràpid",
+      "progress": "{{done}} de {{total}}",
+      "hide": "Amaga",
+      "hideHint": "Amaga «Inici ràpid»: tota la configuració continua a les seccions de l’esquerra",
+      "model": "Baixa un model de reconeixement",
+      "modelDone": "Model de reconeixement llest · {{name}}",
+      "dictation": "Prova el dictat",
+      "dictationDone": "El dictat funciona · els dictats es desen a «Historial»",
+      "file": "Transcriu un enregistrament",
+      "fileDone": "Primer enregistrament transcrit",
+      "fileHint": "Arrossega un fitxer d’àudio o vídeo a aquesta finestra o tria fitxers: al costat de l’enregistrament apareixerà un document de Word.",
+      "llm": "Edició amb IA",
+      "optional": "opcional",
+      "llmHint": "Corregeix errors de reconeixement i puntuació als documents. {{model}}: {{size}}, funciona en aquest ordinador.",
+      "llmReady": "IA llesta · {{model}}",
+      "doneTitle": "Tot llest",
+      "doneText": "Tishe està configurat. Els dictats són a «Historial», els documents a la llista de sota i la configuració a les seccions de l’esquerra.",
+      "close": "Tanca"
+    }
   }
 }

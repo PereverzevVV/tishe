@@ -18,6 +18,7 @@ export const VoiceActivityDetection: React.FC<VoiceActivityDetectionProps> = ({
 
   return (
     <ToggleSwitch
+      settingKey="vad_enabled"
       checked={enabled}
       onChange={(enabled) => updateSetting("vad_enabled", enabled)}
       isUpdating={isUpdating("vad_enabled")}

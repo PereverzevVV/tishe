@@ -56,6 +56,9 @@ impl TrayIconState {
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct MenuInputs {
     busy: bool,
+    /// A file transcription queue is running (Tishe): the model submenu
+    /// explains why it is locked, «Выгрузить модель» is disabled.
+    file_running: bool,
     warning: bool,
     model_loaded: bool,
     selected_model: String,
@@ -70,11 +73,21 @@ struct MenuInputs {
 struct TrayDesired {
     icon_path: &'static str,
     menu: MenuInputs,
+    /// Set on its own, so the transcription progress in it does not rebuild
+    /// the menu.
+    tooltip: String,
 }
 
 struct TrayInner {
     /// Intent set by [`set_tray_state`].
     icon_state: TrayIconState,
+    /// A file transcription queue is running (set by the window).
+    file_running: bool,
+    /// Transcription line for the tooltip, composed by the window («Расшифровка:
+    /// файл 2 из 3 · 47 %», «Расшифровка готова: 3 файла»); `None` in idle.
+    file_tooltip: Option<String>,
+    /// Tooltip the native tray currently shows.
+    applied_tooltip: Option<String>,
     /// Latest computed snapshot, waiting to be (or just) applied.
     desired: Option<TrayDesired>,
     /// Icon the native tray currently shows. Only updated when `set_icon`
@@ -84,6 +97,10 @@ struct TrayInner {
     /// is derived from the same inputs and set best-effort alongside the menu;
     /// it is not tracked separately.
     applied_menu: Option<MenuInputs>,
+    /// The icon is shown. While it is hidden (setting off, `--no-tray`),
+    /// Windows refuses icon and tooltip changes, so they wait for it to be
+    /// shown again instead of failing on every progress update.
+    visible: bool,
     /// An apply is scheduled on the main thread.
     pending: bool,
     /// Decoded icons by resource path so the main thread never touches disk.
@@ -102,9 +119,13 @@ impl TrayState {
     pub fn new() -> Self {
         Self(Mutex::new(TrayInner {
             icon_state: TrayIconState::Idle,
+            file_running: false,
+            file_tooltip: None,
+            applied_tooltip: None,
             desired: None,
             applied_icon: None,
             applied_menu: None,
+            visible: true,
             pending: false,
             icons: HashMap::new(),
             next_seq: 0,
@@ -219,6 +240,16 @@ pub fn set_tray_state(app: &AppHandle, state: TrayIconState) {
     sync_tray_with(app, |inner| inner.icon_state = state);
 }
 
+/// A file transcription queue started or ended (Tishe).
+pub fn set_file_queue_running(app: &AppHandle, running: bool) {
+    sync_tray_with(app, |inner| inner.file_running = running);
+}
+
+/// The transcription line of the tooltip (Tishe); `None` returns to idle.
+pub fn set_file_tooltip(app: &AppHandle, text: Option<String>) {
+    sync_tray_with(app, |inner| inner.file_tooltip = text);
+}
+
 /// Re-syncs the tray after something other than the recording state changed
 /// (theme, Secure Input warning). The recording state itself is preserved.
 pub fn refresh_tray_icon(app: &AppHandle) {
@@ -249,11 +280,16 @@ fn sync_tray_with(app: &AppHandle, update: impl FnOnce(&mut TrayInner)) {
 
     // Record intent and claim a sequence number in one critical section, so
     // sequence order == the order in which state changes were requested.
-    let (seq, icon_state) = {
+    let (seq, icon_state, file_running, file_tooltip) = {
         let mut inner = state.lock();
         update(&mut inner);
         inner.next_seq += 1;
-        (inner.next_seq, inner.icon_state)
+        (
+            inner.next_seq,
+            inner.icon_state,
+            inner.file_running,
+            inner.file_tooltip.clone(),
+        )
     };
 
     // Tray not built yet (early secure-input monitor callbacks). The intent
@@ -262,7 +298,7 @@ fn sync_tray_with(app: &AppHandle, update: impl FnOnce(&mut TrayInner)) {
         return;
     }
 
-    let desired = compute_desired(app, icon_state);
+    let desired = compute_desired(app, icon_state, file_running, file_tooltip);
 
     // Decode the icon off the main thread, once per path, outside the lock.
     let needs_icon = !state.lock().icons.contains_key(desired.icon_path);
@@ -309,7 +345,12 @@ fn sync_tray_with(app: &AppHandle, update: impl FnOnce(&mut TrayInner)) {
     }
 }
 
-fn compute_desired(app: &AppHandle, icon_state: TrayIconState) -> TrayDesired {
+fn compute_desired(
+    app: &AppHandle,
+    icon_state: TrayIconState,
+    file_running: bool,
+    file_tooltip: Option<String>,
+) -> TrayDesired {
     let settings = settings::get_settings(app);
     let theme = get_current_theme(app);
     let warning = crate::secure_input::tray_warning_active(app);
@@ -324,16 +365,27 @@ fn compute_desired(app: &AppHandle, icon_state: TrayIconState) -> TrayDesired {
         .collect();
     downloaded_models.sort_by(|a, b| a.1.cmp(&b.1));
 
+    let tooltip = compose_tooltip(&settings, &downloaded_models, file_tooltip, warning);
+    // A running file queue shows the «working» icon while dictation is idle.
+    let shown_state = if file_running && icon_state == TrayIconState::Idle {
+        TrayIconState::Transcribing
+    } else {
+        icon_state
+    };
+
     TrayDesired {
-        icon_path: get_icon_path(theme, icon_state, warning),
+        icon_path: get_icon_path(theme, shown_state, warning),
+        tooltip,
         menu: MenuInputs {
             busy: icon_state.is_busy(),
+            file_running,
             warning,
             model_loaded,
             selected_model: settings.selected_model,
             downloaded_models,
             locale: settings.app_language,
-            update_checks_enabled: settings.update_checks_enabled,
+            update_checks_enabled: settings.update_checks_enabled
+                && !crate::settings::update_checks_forced_disabled(),
         },
     }
 }
@@ -360,20 +412,24 @@ fn apply_on_main(app: &AppHandle) {
     };
 
     let started = Instant::now();
-    let (desired, icon, icon_changed, menu_changed) = {
+    let (desired, icon, icon_changed, menu_changed, tooltip_changed) = {
         let mut inner = state.lock();
         inner.pending = false;
         let Some(desired) = inner.desired.clone() else {
             return;
         };
-        let icon_changed = inner.applied_icon != Some(desired.icon_path);
+        // A hidden icon keeps what it showed last (tray-icon re-adds it from
+        // that), and the sync after showing it applies the rest.
+        let visible = inner.visible;
+        let icon_changed = visible && inner.applied_icon != Some(desired.icon_path);
         let menu_changed = inner.applied_menu.as_ref() != Some(&desired.menu);
-        if !icon_changed && !menu_changed {
+        let tooltip_changed = visible && inner.applied_tooltip.as_ref() != Some(&desired.tooltip);
+        if !icon_changed && !menu_changed && !tooltip_changed {
             trace!("tray apply: nothing changed");
             return;
         }
         let icon = inner.icons.get(desired.icon_path).cloned();
-        (desired, icon, icon_changed, menu_changed)
+        (desired, icon, icon_changed, menu_changed, tooltip_changed)
     };
 
     // Each part is recorded as applied only if its native call succeeded, so a
@@ -393,21 +449,21 @@ fn apply_on_main(app: &AppHandle) {
     let mut menu_ok = false;
     if menu_changed {
         match build_menu(app, &desired.menu) {
-            Ok((menu, tooltip)) => match tray.set_menu(Some(menu)) {
-                Ok(()) => {
-                    menu_ok = true;
-                    // Best-effort: logged, not retried. The tooltip is cosmetic
-                    // and can only fail on Windows, where a failing
-                    // Shell_NotifyIcon call means the icon is failing too.
-                    // Gating `menu_ok` on it would re-run the full menu
-                    // rebuild on every sync for the cheapest mutation.
-                    if let Err(err) = tray.set_tooltip(Some(tooltip)) {
-                        error!("Failed to set tray tooltip: {err}");
-                    }
-                }
+            Ok(menu) => match tray.set_menu(Some(menu)) {
+                Ok(()) => menu_ok = true,
                 Err(err) => error!("Failed to set tray menu: {err}"),
             },
             Err(err) => error!("Failed to build tray menu: {err}"),
+        }
+    }
+
+    // Best-effort: the tooltip is cosmetic and can only fail on Windows, where
+    // a failing Shell_NotifyIcon call means the icon is failing too. It is
+    // recorded as applied either way, so a failure is not retried on every
+    // progress update.
+    if tooltip_changed {
+        if let Err(err) = tray.set_tooltip(Some(desired.tooltip.as_str())) {
+            error!("Failed to set tray tooltip: {err}");
         }
     }
 
@@ -418,6 +474,9 @@ fn apply_on_main(app: &AppHandle) {
         }
         if menu_ok {
             inner.applied_menu = Some(desired.menu.clone());
+        }
+        if tooltip_changed {
+            inner.applied_tooltip = Some(desired.tooltip.clone());
         }
     }
 
@@ -443,20 +502,106 @@ pub fn tray_tooltip() -> String {
     version_label()
 }
 
-fn version_label() -> String {
-    if cfg!(debug_assertions) {
-        format!("Handy v{} (Dev)", env!("CARGO_PKG_VERSION"))
+/// Windows cuts tray tooltips at 127 characters.
+const TOOLTIP_MAX: usize = 127;
+
+/// Idle: «Tishe · Диктовка: Ctrl+Space · GigaAM v3»; during and after a file
+/// transcription the window's line («Расшифровка: файл 2 из 3 · 47 %»). The
+/// Secure Input warning (macOS) is appended in both cases.
+fn compose_tooltip(
+    settings: &settings::AppSettings,
+    downloaded_models: &[(String, String)],
+    file_tooltip: Option<String>,
+    warning: bool,
+) -> String {
+    let strings = get_tray_translations(Some(settings.app_language.clone()));
+    let english = get_tray_translations(Some("en".to_string()));
+    let mut text = match file_tooltip {
+        Some(line) => line,
+        None => {
+            let mut parts = vec!["Tishe".to_string()];
+            if let Some(binding) = settings.bindings.get("transcribe") {
+                if !binding.current_binding.trim().is_empty() {
+                    parts.push(
+                        or_english(&strings.tooltip_dictation, &english.tooltip_dictation)
+                            .replace("{{shortcut}}", &pretty_shortcut(&binding.current_binding)),
+                    );
+                }
+            }
+            if let Some((_, name)) = downloaded_models
+                .iter()
+                .find(|(id, _)| *id == settings.selected_model)
+            {
+                parts.push(name.clone());
+            }
+            parts.join(" · ")
+        }
+    };
+    if warning {
+        text = format!(
+            "{} — {}",
+            text,
+            or_english(&strings.secure_input_warning, &english.secure_input_warning)
+        );
+    }
+    if text.chars().count() > TOOLTIP_MAX {
+        text = text.chars().take(TOOLTIP_MAX - 1).collect::<String>() + "…";
+    }
+    text
+}
+
+/// Locales that have not translated a newer tray key get English instead of
+/// an empty string (build.rs emits "" for missing keys).
+fn or_english(text: &str, english: &str) -> String {
+    if text.is_empty() {
+        english.to_string()
     } else {
-        format!("Handy v{}", env!("CARGO_PKG_VERSION"))
+        text.to_string()
     }
 }
 
-/// Builds the tray menu and tooltip for the given inputs. Pure with respect
+/// «ctrl+space» → «Ctrl+Space».
+fn pretty_shortcut(binding: &str) -> String {
+    binding
+        .split('+')
+        .map(|key| match key.trim().to_lowercase().as_str() {
+            "ctrl" | "control" => "Ctrl".to_string(),
+            "alt" | "option" => "Alt".to_string(),
+            "shift" => "Shift".to_string(),
+            "super" | "meta" | "cmd" | "command" | "win" => {
+                if cfg!(target_os = "macos") {
+                    "Cmd".to_string()
+                } else {
+                    "Win".to_string()
+                }
+            }
+            other => {
+                let mut chars = other.chars();
+                match chars.next() {
+                    Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+                    None => String::new(),
+                }
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("+")
+}
+
+fn version_label() -> String {
+    if cfg!(debug_assertions) {
+        format!("Tishe v{} (Dev)", env!("CARGO_PKG_VERSION"))
+    } else {
+        format!("Tishe v{}", env!("CARGO_PKG_VERSION"))
+    }
+}
+
+/// Builds the tray menu for the given inputs. Pure with respect
 /// to app state: everything it depends on is in `inputs`, plus the
 /// process-constant `HANDY_DISABLE_UPDATER` env flag behind
 /// `update_checks_forced_disabled()`, which cannot change during a run.
-fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri::Wry>, String)> {
+fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<Menu<tauri::Wry>> {
     let strings = get_tray_translations(Some(inputs.locale.clone()));
+    let english = get_tray_translations(Some("en".to_string()));
 
     // Secure Input warning entry (macOS): clicking opens the settings window
     // where the full warning banner explains the situation. Locales that
@@ -539,10 +684,30 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
             .unwrap_or_else(|| strings.model.clone());
 
         let model_submenu = Submenu::with_id(app, "model_submenu", &submenu_label, true)?;
+        // Tishe: while a file transcription runs the model stays as it is;
+        // the first line says why (UX_INTERACTION_ARCHITECTURE, Трей).
+        if inputs.file_running {
+            let reason = MenuItem::with_id(
+                app,
+                "model_locked",
+                or_english(&strings.model_locked, &english.model_locked),
+                false,
+                None::<&str>,
+            )?;
+            model_submenu.append(&reason)?;
+            model_submenu.append(&separator()?)?;
+        }
         for (id, name) in &inputs.downloaded_models {
             let is_active = *id == inputs.selected_model;
             let item_id = format!("model_select:{}", id);
-            let item = CheckMenuItem::with_id(app, &item_id, name, true, is_active, None::<&str>)?;
+            let item = CheckMenuItem::with_id(
+                app,
+                &item_id,
+                name,
+                !inputs.file_running,
+                is_active,
+                None::<&str>,
+            )?;
             model_submenu.append(&item)?;
         }
 
@@ -550,7 +715,7 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
             app,
             "unload_model",
             &strings.unload_model,
-            inputs.model_loaded,
+            inputs.model_loaded && !inputs.file_running,
             None::<&str>,
         )?;
 
@@ -584,14 +749,12 @@ fn build_menu(app: &AppHandle, inputs: &MenuInputs) -> tauri::Result<(Menu<tauri
 
     // Both layouts start with [version, separator, ...]; slot the warning in
     // right below the version line so it's the first actionable thing seen.
-    let mut tooltip = version_label;
     if let Some(warning_item) = secure_input_warning {
         menu.insert(&warning_item, 2)?;
         menu.insert(&separator()?, 3)?;
-        tooltip = format!("{} — {}", tooltip, warning_item.text().unwrap_or_default());
     }
 
-    Ok((menu, tooltip))
+    Ok(menu)
 }
 
 fn last_transcript_text(entry: &HistoryEntry) -> &str {
@@ -605,8 +768,15 @@ pub fn set_tray_visibility(app: &AppHandle, visible: bool) {
     let tray = app.state::<TrayIcon>();
     if let Err(e) = tray.set_visible(visible) {
         error!("Failed to set tray visibility: {}", e);
-    } else {
-        info!("Tray visibility set to: {}", visible);
+        return;
+    }
+    info!("Tray visibility set to: {}", visible);
+    if let Some(state) = app.try_state::<TrayState>() {
+        state.lock().visible = visible;
+    }
+    // The icon and tooltip were held back while hidden.
+    if visible {
+        sync_tray(app);
     }
 }
 
@@ -688,6 +858,7 @@ mod tests {
     fn inputs(busy: bool) -> MenuInputs {
         MenuInputs {
             busy,
+            file_running: false,
             warning: false,
             model_loaded: true,
             selected_model: "small".to_string(),
@@ -728,10 +899,12 @@ mod tests {
         let recording = TrayDesired {
             icon_path: "resources/tray_recording.png",
             menu: inputs(TrayIconState::Recording.is_busy()),
+            tooltip: String::new(),
         };
         let transcribing = TrayDesired {
             icon_path: "resources/tray_transcribing.png",
             menu: inputs(TrayIconState::Transcribing.is_busy()),
+            tooltip: String::new(),
         };
         assert_ne!(recording.icon_path, transcribing.icon_path);
         assert_eq!(recording.menu, transcribing.menu);
@@ -740,5 +913,11 @@ mod tests {
     #[test]
     fn idle_and_busy_menus_differ() {
         assert_ne!(inputs(false), inputs(true));
+    }
+
+    #[test]
+    fn shortcuts_are_spelled_for_people() {
+        assert_eq!(super::pretty_shortcut("ctrl+space"), "Ctrl+Space");
+        assert_eq!(super::pretty_shortcut("ctrl+shift+f12"), "Ctrl+Shift+F12");
     }
 }

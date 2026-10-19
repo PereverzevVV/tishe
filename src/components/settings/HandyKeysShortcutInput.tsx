@@ -4,9 +4,11 @@ import { listen } from "@tauri-apps/api/event";
 import { formatKeyCombination } from "../../lib/utils/keyboard";
 import { ResetButton } from "../ui/ResetButton";
 import { SettingContainer } from "../ui/SettingContainer";
+import { Keycaps } from "../ui/Keycap";
 import { useSettings } from "../../hooks/useSettings";
 import { useOsType } from "../../hooks/useOsType";
 import { commands } from "@/bindings";
+import { shortcutErrorText } from "@/lib/utils/shortcutError";
 import { toast } from "sonner";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { SECURE_INPUT_HELP_URL } from "../SecureInputWarning";
@@ -16,6 +18,8 @@ interface HandyKeysShortcutInputProps {
   grouped?: boolean;
   shortcutId: string;
   disabled?: boolean;
+  /** Indented under the row it depends on. */
+  dependent?: boolean;
 }
 
 interface HandyKeysEvent {
@@ -30,6 +34,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
   grouped = false,
   shortcutId,
   disabled = false,
+  dependent,
 }) => {
   const { t } = useTranslation();
   const { getSetting, updateBinding, resetBinding, isUpdating, isLoading } =
@@ -96,11 +101,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
           await updateBinding(shortcutId, keysToCommit);
         } catch (error) {
           console.error("Failed to change binding:", error);
-          toast.error(
-            t("settings.general.shortcut.errors.set", {
-              error: String(error),
-            }),
-          );
+          toast.error(shortcutErrorText(error, t));
 
           // Reset to original binding on error
           if (originalBinding) {
@@ -229,11 +230,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
             },
           });
         } else {
-          toast.error(
-            t("settings.general.shortcut.errors.set", {
-              error: String(result.error),
-            }),
-          );
+          toast.error(shortcutErrorText(result.error, t));
         }
         return;
       }
@@ -244,9 +241,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
       modifierOnlyShortcutRef.current = "";
     } catch (error) {
       console.error("Failed to start recording:", error);
-      toast.error(
-        t("settings.general.shortcut.errors.set", { error: String(error) }),
-      );
+      toast.error(shortcutErrorText(error, t));
     }
   };
 
@@ -265,7 +260,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="text-sm text-mid-gray">
+        <div className="t-type-caption t-text-secondary">
           {t("settings.general.shortcut.loading")}
         </div>
       </SettingContainer>
@@ -281,7 +276,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="text-sm text-mid-gray">
+        <div className="t-type-caption t-text-secondary">
           {t("settings.general.shortcut.none")}
         </div>
       </SettingContainer>
@@ -297,7 +292,7 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="text-sm text-mid-gray">
+        <div className="t-type-caption t-text-secondary">
           {t("settings.general.shortcut.none")}
         </div>
       </SettingContainer>
@@ -321,28 +316,39 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
       descriptionMode={descriptionMode}
       grouped={grouped}
       disabled={disabled}
+      dependent={dependent}
       layout="horizontal"
     >
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center gap-1">
         {isRecording ? (
           <div
             ref={shortcutRef}
-            className="px-2 py-1 text-sm font-semibold border border-logo-primary bg-logo-primary/30 rounded-md"
+            className="t-select t-shortcut"
+            data-recording="true"
+            aria-live="polite"
           >
-            {formatCurrentKeys()}
+            <span className="t-text-tertiary">{formatCurrentKeys()}</span>
           </div>
         ) : (
-          <div
-            className="px-2 py-1 text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 hover:bg-logo-primary/10 rounded-md cursor-pointer hover:border-logo-primary"
+          <button
+            type="button"
+            className="t-select t-shortcut"
+            disabled={disabled}
+            aria-label={t("ui.shortcut.change", { name: translatedName })}
             onClick={startRecording}
           >
-            {formatKeyCombination(binding.current_binding, osType)}
-          </div>
+            <Keycaps
+              combo={formatKeyCombination(binding.current_binding, osType)}
+            />
+          </button>
         )}
-        <ResetButton
-          onClick={() => resetBinding(shortcutId)}
-          disabled={isUpdating(`binding_${shortcutId}`)}
-        />
+        {binding.current_binding !== binding.default_binding && (
+          <ResetButton
+            onClick={() => resetBinding(shortcutId)}
+            disabled={isUpdating(`binding_${shortcutId}`)}
+            ariaLabel={t("ui.shortcut.reset")}
+          />
+        )}
       </div>
     </SettingContainer>
   );

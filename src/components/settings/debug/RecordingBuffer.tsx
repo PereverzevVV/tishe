@@ -1,38 +1,32 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Slider } from "../../ui/Slider";
+import { NumberField } from "../../ui/NumberField";
 import { useSettings } from "../../../hooks/useSettings";
+import { useSettingsStore } from "../../../stores/settingsStore";
 
 interface RecordingBufferProps {
   descriptionMode?: "tooltip" | "inline";
   grouped?: boolean;
 }
 
-export const RecordingBuffer: React.FC<RecordingBufferProps> = ({
-  descriptionMode = "tooltip",
-  grouped = false,
-}) => {
+/** Extra recording after the key is released, in ms (VD-81: a number field). */
+export const RecordingBuffer: React.FC<RecordingBufferProps> = () => {
   const { t } = useTranslation();
-  const { settings, updateSetting, resetSetting, isUpdating } = useSettings();
-
-  const handleBufferChange = (value: number) => {
-    updateSetting("extra_recording_buffer_ms", value);
-  };
-
+  const { settings, updateSetting } = useSettings();
+  const defaults = useSettingsStore((s) => s.defaultSettings);
   return (
-    <Slider
+    <NumberField
+      label={t("settings.debug.recordingBuffer.title")}
+      description={t("settings.debug.recordingBuffer.description")}
       value={settings?.extra_recording_buffer_ms ?? 0}
-      onChange={handleBufferChange}
-      onReset={() => resetSetting("extra_recording_buffer_ms")}
-      isResetting={isUpdating("extra_recording_buffer_ms")}
+      onChange={(v) =>
+        updateSetting("extra_recording_buffer_ms", Math.round(v))
+      }
       min={0}
       max={1500}
       step={50}
-      label={t("settings.debug.recordingBuffer.title")}
-      description={t("settings.debug.recordingBuffer.description")}
-      descriptionMode={descriptionMode}
-      grouped={grouped}
-      formatValue={(v) => `${v}ms`}
+      unit={t("ui.units.ms")}
+      defaultValue={defaults?.extra_recording_buffer_ms ?? undefined}
     />
   );
 };

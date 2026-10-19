@@ -1,18 +1,68 @@
-import React from "react";
+import React, { useId } from "react";
 import { SettingContainer } from "./SettingContainer";
+import { Spinner } from "./Spinner";
+
+/** A bare switch (§12.4): outline when off, grey fill when on. */
+export const Switch: React.FC<{
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  disabled?: boolean;
+  busy?: boolean;
+  id?: string;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
+}> = ({
+  checked,
+  onChange,
+  disabled = false,
+  busy = false,
+  id,
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
+}) =>
+  busy ? (
+    <span className="flex h-5 w-9 items-center justify-center">
+      <Spinner size={12} />
+    </span>
+  ) : (
+    <button
+      id={id}
+      type="button"
+      role="switch"
+      className="t-toggle"
+      aria-checked={checked}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      disabled={disabled}
+      onClick={() => onChange(!checked)}
+    />
+  );
 
 interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
   isUpdating?: boolean;
-  label: string;
-  description: string;
+  label: React.ReactNode;
+  description?: React.ReactNode;
   descriptionMode?: "inline" | "tooltip";
   grouped?: boolean;
   tooltipPosition?: "top" | "bottom";
+  /** Service lines under the description. */
+  extra?: React.ReactNode;
+  dependent?: boolean;
+  anchor?: string;
+  /** App setting behind the switch: «изменено» and reset inside a fold. */
+  settingKey?: React.ComponentProps<typeof SettingContainer>["settingKey"];
+  /** Explicit «changed» / reset for values that are not app settings. */
+  changed?: boolean;
+  onReset?: () => void;
 }
 
+/** A setting row whose control is a switch. */
 export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
   checked,
   onChange,
@@ -20,37 +70,36 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
   isUpdating = false,
   label,
   description,
-  descriptionMode = "tooltip",
-  grouped = false,
-  tooltipPosition = "top",
+  grouped = true,
+  extra,
+  dependent,
+  anchor,
+  settingKey,
+  changed,
+  onReset,
 }) => {
+  const id = useId();
   return (
     <SettingContainer
       title={label}
       description={description}
-      descriptionMode={descriptionMode}
       grouped={grouped}
       disabled={disabled}
-      tooltipPosition={tooltipPosition}
+      extra={extra}
+      dependent={dependent}
+      anchor={anchor}
+      controlId={id}
+      settingKey={settingKey}
+      changed={changed}
+      onReset={onReset}
     >
-      <label
-        className={`flex items-center ${disabled || isUpdating ? "cursor-not-allowed" : "cursor-pointer"}`}
-      >
-        <input
-          type="checkbox"
-          value=""
-          className="sr-only peer"
-          checked={checked}
-          disabled={disabled || isUpdating}
-          onChange={(e) => onChange(e.target.checked)}
-        />
-        <div className="relative w-11 h-6 bg-mid-gray/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-logo-primary rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-background-ui peer-disabled:opacity-50"></div>
-      </label>
-      {isUpdating && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-4 h-4 border-2 border-logo-primary border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      <Switch
+        id={id}
+        checked={checked}
+        onChange={onChange}
+        disabled={disabled}
+        busy={isUpdating}
+      />
     </SettingContainer>
   );
 };

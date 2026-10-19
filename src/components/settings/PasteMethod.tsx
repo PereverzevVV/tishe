@@ -83,6 +83,7 @@ export const PasteMethodSetting: React.FC<PasteMethodProps> = React.memo(
 
     return (
       <SettingContainer
+        settingKey="paste_method"
         title={t("settings.advanced.pasteMethod.title")}
         description={t("settings.advanced.pasteMethod.description")}
         descriptionMode={descriptionMode}

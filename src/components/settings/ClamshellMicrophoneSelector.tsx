@@ -69,12 +69,14 @@ export const ClamshellMicrophoneSelector: React.FC<ClamshellMicrophoneSelectorPr
 
     return (
       <SettingContainer
+        settingKey="clamshell_microphone"
+        ownReset
         title={t("settings.debug.clamshellMicrophone.title")}
         description={t("settings.debug.clamshellMicrophone.description")}
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="flex items-center space-x-1">
+        <div className="flex min-w-0 items-center gap-1">
           <Dropdown
             options={microphoneOptions}
             selectedValue={selectedClamshellMicrophone}
@@ -91,10 +93,13 @@ export const ClamshellMicrophoneSelector: React.FC<ClamshellMicrophoneSelectorPr
             }
             onOpen={refreshAudioDevices}
           />
-          <ResetButton
-            onClick={handleReset}
-            disabled={isUpdating("clamshell_microphone") || isLoading}
-          />
+          {!!getSetting("clamshell_microphone") &&
+            getSetting("clamshell_microphone") !== "default" && (
+              <ResetButton
+                onClick={handleReset}
+                disabled={isUpdating("clamshell_microphone") || isLoading}
+              />
+            )}
         </div>
       </SettingContainer>
     );

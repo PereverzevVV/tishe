@@ -1,0 +1,23 @@
+# cargo-about config for THIRD_PARTY_NOTICES.txt (scripts/notices/gen-notices.ts).
+# Only what is linked into the Windows exe: no build or dev dependencies.
+accepted = [
+  "MIT",
+  "MIT-0",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "Zlib",
+  "BSL-1.0",
+  "0BSD",
+  "Unlicense",
+  "CC0-1.0",
+  "Unicode-3.0",
+  "Unicode-DFS-2016",
+  "MPL-2.0",
+  "CDLA-Permissive-2.0",
+]
+targets = ["x86_64-pc-windows-msvc"]
+ignore-build-dependencies = true
+ignore-dev-dependencies = true

@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Einstellungen...",
-    "checkUpdates": "Nach Updates suchen...",
-    "copyLastTranscript": "Letzte Transkription kopieren",
+    "settings": "Tishe öffnen…",
+    "checkUpdates": "Nach Updates suchen…",
+    "copyLastTranscript": "Letztes Diktat kopieren",
     "unloadModel": "Modell entladen",
     "model": "Modell",
     "quit": "Beenden",
     "cancel": "Abbrechen",
-    "secureInputWarning": "⚠ Tastenkürzel durch Secure Input blockiert"
+    "secureInputWarning": "⚠ Tastenkürzel durch Secure Input blockiert",
+    "modelLocked": "Während einer Transkription lässt sich das Modell nicht wechseln",
+    "tooltipDictation": "Diktat: {{shortcut}}",
+    "backgroundTitle": "Tishe läuft im Hintergrund weiter",
+    "backgroundBody": "Die Transkription läuft weiter. Du bekommst eine Benachrichtigung, sobald sie fertig ist."
   },
   "sidebar": {
     "general": "Allgemein",
-    "models": "Modelle",
+    "models": "Erkennung",
     "advanced": "Erweitert",
     "postProcessing": "Nachbearbeitung",
     "history": "Verlauf",
     "debug": "Debug",
-    "about": "Info"
+    "about": "Info",
+    "label": "Bereiche",
+    "transcription": "Transkription",
+    "dictation": "Diktat",
+    "meetings": "Meetings",
+    "llm": "Überarbeitung",
+    "app": "App",
+    "soon": "bald",
+    "state": {
+      "running": "läuft",
+      "new": "fertig, noch nicht angesehen",
+      "downloading": "wird heruntergeladen"
+    },
+    "next": "Was kommt"
   },
   "onboarding": {
     "subtitle": "Wähle ein Transkriptionsmodell, um loszulegen",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Berechtigungen erforderlich",
-      "description": "Handy benötigt einige Berechtigungen, um richtig zu funktionieren.",
+      "description": "Tishe benötigt einige Berechtigungen, um richtig zu funktionieren.",
       "microphone": {
         "title": "Mikrofonzugriff",
         "description": "Erforderlich, um deine Stimme für die Transkription zu hören."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Berechtigungsprüfung fehlgeschlagen. Bitte erneut versuchen.",
         "requestFailed": "Berechtigungsanfrage fehlgeschlagen. Bitte erneut versuchen."
-      }
+      },
+      "skip": "Ohne Mikrofon fortfahren",
+      "skipHint": "Das Mikrofon wird nur für Diktate gebraucht – die Transkription von Dateien funktioniert auch ohne. Du kannst es später in den Windows-Einstellungen erlauben."
+    },
+    "step": "Schritt {{n}} von {{total}}",
+    "language": {
+      "title": "In welcher Sprache sind deine Aufnahmen?",
+      "description": "Wir laden ein Spracherkennungsmodell für diese Sprache herunter. Es läuft auf diesem Computer.",
+      "ru": {
+        "title": "Russisch",
+        "limit": "Nur Russisch: erkennt keine englische Sprache"
+      },
+      "en": {
+        "title": "Englisch",
+        "limit": "Nur Englisch"
+      },
+      "eu": {
+        "title": "Deutsch oder eine andere europäische Sprache",
+        "limit": "25 europäische Sprachen, erkennt die Sprache selbst"
+      },
+      "other": {
+        "title": "Eine andere Sprache",
+        "limit": "30 Sprachen: Chinesisch, Japanisch, Koreanisch, Arabisch, Türkisch, Hindi und weitere",
+        "limitWhisper": "viele Sprachen, langsamer auf dem Prozessor"
+      },
+      "onDisk": "bereits auf diesem Computer",
+      "shared": "Das Modell wird für Diktate und für die Transkription von Dateien verwendet. Du kannst es später im Bereich „$t(sidebar.models)“ ändern.",
+      "otherModel": "Anderes Modell wählen",
+      "hideCatalog": "Modellliste ausblenden",
+      "download": "{{size}} herunterladen",
+      "use": "{{name}} verwenden",
+      "downloadNamed": "{{name}} herunterladen · {{size}}",
+      "once": "Wird einmal heruntergeladen und funktioniert dann ohne Internet"
+    },
+    "download": {
+      "title": "{{name}} wird heruntergeladen",
+      "description": "Du kannst währenddessen etwas anderes tun: Das Schließen des Fensters stoppt den Download nicht.",
+      "starting": "Verbindung wird hergestellt…",
+      "amount": "{{done}} von {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Modell wird vorbereitet…",
+      "cancel": "Abbrechen",
+      "failed": "Das Modell wurde nicht heruntergeladen",
+      "failedTitle": "Das Modell konnte nicht heruntergeladen werden",
+      "failedHint": "Keine Verbindung zum Server. Prüfe die Internetverbindung und klicke auf „Erneut versuchen“.",
+      "retry": "Erneut versuchen",
+      "continue": "Tishe öffnen, ohne zu warten"
+    },
+    "welcome": {
+      "title": "Willkommen bei Tishe",
+      "lead": "Tishe wandelt Sprache direkt auf deinem Computer in Text um – ohne Internet und ohne Konto.",
+      "files": "Aufnahmen – Meetings, Vorlesungen, Interviews – als Word-Dokument transkribieren",
+      "dictation": "Diktieren in jeder App: Taste halten, sprechen – und der Text erscheint",
+      "private": "Aufnahmen und Texte verlassen den Computer nicht",
+      "stepsLabel": "Einrichtungsschritte",
+      "steps": {
+        "permissions": "Berechtigungen",
+        "language": "Sprache der Aufnahmen",
+        "download": "Modell-Download"
+      },
+      "credit": "Viktor Pereverzev · basiert auf Handy"
+    },
+    "tips": {
+      "title": "Während des Downloads – so funktioniert es",
+      "dictationBefore": "Diktat: Halte in einer beliebigen App",
+      "dictationAfter": "gedrückt und sprich. Lass los – der Text erscheint an der Cursorposition.",
+      "files": "Transkription: Ziehe eine Audio- oder Videodatei ins Tishe-Fenster – es entsteht ein Word-Dokument.",
+      "editing": "Die Überarbeitung durch KI korrigiert Fehler und Zeichensetzung – du schaltest sie im Rezept der Transkription ein."
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "Modelle filtern, die Übersetzungen ins Englische unterstützen"
       },
       "noModelsMatch": "Keine Modelle entsprechen diesem Filter.",
+      "params": {
+        "button": "Parameter",
+        "open": "Modellparameter",
+        "title": "Parameter: {{name}}",
+        "savedAtOnce": "Änderungen werden sofort gespeichert. Die Felder zeigen die verwendeten Werte; ein geänderter Wert hat eine Zurücksetzen-Schaltfläche.",
+        "resetAll": "Auf Standardwerte zurücksetzen",
+        "done": "Fertig",
+        "resetField": "Auf Standard zurücksetzen",
+        "defaultRange": "Standard {{value}}; erlaubt {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Integrierte Anweisung. Bearbeite den Text, um eine eigene zu verwenden; leere ihn, um zur integrierten zurückzukehren.",
+          "own": "Deine Anweisung. Die Zurücksetzen-Schaltfläche stellt die integrierte wieder her."
+        },
+        "asr": {
+          "segment": {
+            "label": "Abschnittslänge für Dateien, Sekunden",
+            "description": "Dateien werden in Abschnitten erkannt, die an Pausen geschnitten werden und höchstens so lang sind. Der kürzeste Abschnitt schrumpft mit (12 s bei 25 s). Gemessen: 12–25 s erhalten die Zeichensetzung besser als 60–120 s."
+          },
+          "device": {
+            "label": "Gerät",
+            "description": "„Nur Prozessor“ entlastet den Grafikchip, ist aber meist langsamer. Gilt auch für Diktate; wirkt ab der nächsten Erkennung.",
+            "general": "Wie in der Beschleunigungseinstellung",
+            "cpu": "Nur Prozessor",
+            "notHere": "Das Gerät dieses Modells folgt der allgemeinen Beschleunigungseinstellung."
+          }
+        },
+        "llm": {
+          "promptNote": "Anweisungen für russischen und englischen Text. Andere Sprachen erhalten die integrierte englische Anweisung mit dem Namen der Sprache. Eine eigene Anweisung im Bereich „Transkription“ ersetzt diese für alle Sprachen.",
+          "promptRu": "Anweisung für russischen Text",
+          "promptEn": "Anweisung für englischen Text",
+          "temperature": {
+            "label": "Temperatur",
+            "description": "Niedriger ist vorsichtiger: Bei 0,8 hat das Modell Wörter erfunden, 0,2 ist der gemessene Wert für die Überarbeitung."
+          },
+          "chunk": {
+            "label": "Abschnittsgröße, Zeichen",
+            "description": "Wie viel Text das Modell auf einmal überarbeitet. Kleine Modelle bleiben bei kurzen Abschnitten genauer am Original."
+          },
+          "context": {
+            "label": "Kontext, Tokens",
+            "description": "Platz für die Anweisung, den Abschnitt und die Antwort. Mehr braucht mehr Arbeitsspeicher."
+          },
+          "answer": {
+            "label": "Antwortlimit, Tokens",
+            "description": "Stoppt ein Modell, das sich zu wiederholen beginnt. Ein Abschnitt mit 3000 Zeichen sind etwa 1100 Tokens."
+          },
+          "threads": {
+            "label": "Prozessor-Threads für die Antwort",
+            "description": "Zum Lesen des Textes werden immer alle Hardware-Threads genutzt.",
+            "auto": "Automatisch – einer pro Kern"
+          },
+          "restartNote": "Temperatur, Kontext, Antwortlimit und Threads gelten beim nächsten Start des Modells: Ein laufendes Modell startet vor der nächsten Aufgabe neu.",
+          "invalid": "Nicht gespeichert: {{detail}}",
+          "contextTooSmall": "Nicht gespeichert: Der Kontext muss den Abschnitt und die Antwort fassen – bei der aktuellen Abschnittsgröße und dem Antwortlimit mindestens {{min}} Tokens."
+        }
+      },
       "yourModels": "Heruntergeladene Modelle",
       "availableModels": "Zum Download verfügbar",
-      "searchPlaceholder": "Modelle nach Namen suchen…",
+      "searchPlaceholder": "Nach Namen suchen",
       "rescan": {
         "label": "Neu scannen",
-        "tooltip": "Erneut nach Modellen scannen, die außerhalb von Handy zum Modellordner oder Hugging-Face-Cache hinzugefügt wurden"
+        "tooltip": "Modelle finden, die von Hand in den Ordner gelegt wurden"
       }
     },
     "general": {
       "title": "Allgemein",
       "shortcut": {
-        "title": "Handy-Tastenkürzel",
+        "title": "Tishe-Tastenkürzel",
         "description": "Tastenkürzel für die Sprachaufnahme konfigurieren",
         "loading": "Tastenkürzel werden geladen...",
         "none": "Keine Tastenkürzel konfiguriert",
         "notFound": "Tastenkürzel nicht gefunden",
-        "pressKeys": "Tasten drücken...",
+        "pressKeys": "Kombination drücken… (Esc bricht ab)",
         "bindings": {
           "transcribe": {
-            "name": "Transkriptions-Tastenkürzel",
-            "description": "Das Tastenkürzel zum Aufnehmen und Transkribieren deiner Stimme."
+            "name": "Diktat",
+            "description": "Halten und sprechen – der Text wird ins aktive Fenster eingefügt"
           },
           "cancel": {
-            "name": "Abbrechen-Tastenkürzel",
-            "description": "Das Tastenkürzel zum Abbrechen der aktuellen Aufnahme."
+            "name": "Abbrechen",
+            "description": "Bricht die laufende Aufnahme ab"
           },
           "transcribe_with_post_process": {
-            "name": "Nachbearbeitungs-Tastenkürzel",
-            "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf deine Transkription anwendet."
+            "name": "Taste für Diktat mit Überarbeitung",
+            "description": "Der Text wird nach der Überarbeitung durch die KI eingefügt"
           }
         },
         "errors": {
           "restore": "Ursprüngliches Tastenkürzel konnte nicht wiederhergestellt werden",
           "set": "Tastenkürzel konnte nicht gesetzt werden: {{error}}",
-          "reset": "Tastenkürzel konnte nicht auf Originalwert zurückgesetzt werden"
+          "reset": "Tastenkürzel konnte nicht auf Originalwert zurückgesetzt werden",
+          "taken": "Ein anderes Programm belegt diese Taste bereits. Wähle eine andere.",
+          "duplicate": "Diese Taste ist hier bereits einer anderen Aktion zugewiesen."
         }
       },
       "language": {
-        "title": "Sprache",
-        "description": "Wähle die Sprache für die Spracherkennung. Auto erkennt die Sprache automatisch, die Auswahl einer bestimmten Sprache kann die Genauigkeit verbessern.",
+        "title": "Erkennungssprache",
+        "description": "„Automatisch“ erkennt die Sprache selbst; eine feste Auswahl ist zuverlässiger",
         "searchPlaceholder": "Sprachen suchen...",
         "noResults": "Keine Sprachen gefunden",
         "auto": "Automatisch"
       },
       "shortcutActivation": {
-        "title": "Verhalten der Tastenkombination",
-        "description": "Wähle aus, wie das Transkriptions-Tastenkürzel die Aufnahme startet und beendet.",
+        "title": "Tastenverhalten",
+        "description": "Wie die Taste die Aufnahme startet und beendet",
         "options": {
           "holdOrToggle": "Automatisch",
           "pushToTalk": "Halten",
@@ -233,29 +375,40 @@
       "title": "Ton",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Bevorzugtes Mikrofon auswählen",
+        "description": "Woher die Stimme aufgenommen wird",
         "placeholder": "Mikrofon auswählen...",
         "loading": "Wird geladen..."
       },
       "channel": {
         "title": "Eingangskanal",
-        "description": "Wähle den Eingangskanal aus, von dem aufgenommen werden soll. Verwende diese Option, wenn dein Audio-Interface mehrere Eingänge hat.",
+        "description": "Für Soundkarten mit mehreren Eingängen",
         "average": "Alle Kanäle mitteln",
         "channel": "Kanal {{n}}"
       },
       "audioFeedback": {
-        "label": "Audio-Feedback",
-        "description": "Ton bei Start und Ende der Aufnahme abspielen"
+        "label": "Akustisches Feedback",
+        "description": "Ein Ton zu Beginn und am Ende der Aufnahme"
       },
       "outputDevice": {
         "title": "Ausgabegerät",
-        "description": "Bevorzugtes Audioausgabegerät für Feedback-Töne auswählen",
+        "description": "Wo die Feedback-Töne abgespielt werden",
         "placeholder": "Ausgabegerät auswählen...",
         "loading": "Wird geladen..."
       },
       "volume": {
         "title": "Lautstärke",
-        "description": "Lautstärke der Audio-Feedback-Töne anpassen"
+        "description": "Lautstärke der Audio-Feedback-Töne anpassen",
+        "levels": {
+          "quiet": "Leise",
+          "medium": "Mittel",
+          "loud": "Laut"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Eigene",
+        "preview": "Start- und Stopp-Ton abspielen"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Experimentell"
       },
       "experimentalToggle": {
-        "label": "Experimentelle Funktionen",
-        "description": "Experimentelle Funktionen aktivieren, die sich noch in Entwicklung befinden."
+        "label": "Experimentelle Funktionen anzeigen",
+        "description": "Funktionen in Entwicklung; können instabil sein"
       },
       "lazyStreamClose": {
         "label": "Mikrofon zwischen Transkriptionen offen halten",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Versteckt starten",
-        "description": "In den Systembereich starten, ohne das Fenster zu öffnen."
+        "label": "Fenster beim Start ausblenden",
+        "description": "Das Programm startet im Infobereich"
       },
       "autostart": {
-        "label": "Beim Start ausführen",
-        "description": "Handy automatisch beim Anmelden starten."
+        "label": "Mit Windows starten",
+        "description": "Das Diktat ist direkt nach der Anmeldung bereit"
       },
       "showTrayIcon": {
-        "label": "Taskleistensymbol anzeigen",
-        "description": "Das Handy-Symbol in der Taskleiste anzeigen."
+        "label": "Symbol im Infobereich",
+        "description": "Ohne Symbol kommt ein geschlossenes Fenster nur durch einen erneuten Programmstart zurück"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Wähle das Aufnahme-Overlay: „Keine“ blendet es aus, „Minimal“ zeigt ein kompaktes Element, „Live“ zeigt die Transkription in Echtzeit während des Sprechens an (nur für streamingfähige Modelle – suche nach dem Streaming-Badge in der Modellauswahl). Unter Linux wird „Keine“ empfohlen.",
+          "title": "Art der Anzeige",
+          "description": "Was beim Diktieren neben dem Cursor angezeigt wird",
           "options": {
             "none": "Keine",
             "minimal": "Minimal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Ohne Anzeige werden Fehler nicht gemeldet: Ein nicht eingefügter Text steht im Verlauf"
         },
         "position": {
-          "title": "Overlay-Position",
-          "description": "Visuelles Feedback-Overlay während Aufnahme und Transkription anzeigen. Unter Linux wird 'Keine' empfohlen.",
+          "title": "Position der Anzeige",
+          "description": "Oben oder unten auf dem Bildschirm",
           "options": {
             "bottom": "Unten",
             "top": "Oben"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Einfügemethode",
-        "description": "Wähle, wie Text eingefügt wird. Direkt: simuliert Tippen über Systemeingabe. Keine: überspringt Einfügen, aktualisiert nur Verlauf/Zwischenablage.",
+        "description": "Wie der Text ins aktive Fenster gelangt",
         "options": {
           "clipboard": "Zwischenablage ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Zwischenablage (Strg+Umschalt+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Zwischenablage-Verhalten",
-        "description": "Zwischenablage nicht ändern bewahrt den aktuellen Inhalt nach der Transkription. In Zwischenablage kopieren hinterlässt das Transkriptionsergebnis in der Zwischenablage.",
+        "title": "Zwischenablage",
+        "description": "Den bisherigen Inhalt der Zwischenablage behalten oder den diktierten Text darin lassen",
         "options": {
           "dontModify": "Zwischenablage nicht ändern",
           "copyToClipboard": "In Zwischenablage kopieren"
         }
       },
       "autoSubmit": {
-        "title": "Automatisch absenden",
-        "description": "Sendet nach dem Einfügen von Text automatisch die ausgewählte Tastenkombination. Cmd+Enter gilt für macOS, während Windows/Linux Super+Enter verwenden.",
+        "title": "Nach dem Einfügen senden",
+        "description": "Direkt nach dem Einfügen die gewählte Taste drücken, z. B. Enter im Chat",
         "options": {
           "off": "Aus",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Ins Englische übersetzen",
-        "description": "Sprache aus anderen Sprachen automatisch während der Transkription ins Englische übersetzen."
+        "description": "Sprache in jeder Sprache wird zu englischem Text"
       },
       "modelUnload": {
-        "title": "Modell entladen",
-        "description": "GPU/CPU-Speicher automatisch freigeben, wenn das Modell für die angegebene Zeit nicht verwendet wurde",
+        "title": "Modell aus dem Speicher entladen nach…",
+        "description": "Gibt Speicher frei, wenn das Modell eine Weile nicht gebraucht wird",
         "options": {
           "never": "Nie",
           "immediately": "Sofort",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Benutzerdefinierte Wörter",
-        "description": "Hilf unterstützten Modellen, Namen und Fachbegriffe zu erkennen. Die unscharfe Korrektur ist derzeit auf Wörter mit den Buchstaben A–Z und Zahlen beschränkt.",
+        "title": "Eigene Wörter",
+        "description": "Ein Hinweis für Whisper-Modelle; andere Modelle erhalten nur Korrekturen, und zwar nur für Wörter aus A–Z",
         "placeholder": "Wort hinzufügen",
         "add": "Hinzufügen",
         "remove": "{{word}} entfernen",
-        "duplicate": "\"{{word}}\" existiert bereits"
+        "duplicate": "\"{{word}}\" existiert bereits",
+        "removed": "„{{word}}“ entfernt"
       },
       "voiceActivityDetection": {
-        "title": "Sprachaktivitätserkennung (VAD)",
-        "description": "Filtert Stille aus Aufnahmen. Streamingfähige Modelle verwenden ein längeres VAD-Ende; das Deaktivieren von VAD nimmt Rohaudio auf."
+        "title": "Stille verwerfen",
+        "description": "Nur Sprache geht in die Erkennung"
       },
       "vadBackend": {
         "title": "VAD-Backend",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Füllwörter entfernen",
-        "description": "Entfernt häufige Verzögerungslaute aus Transkriptionen. Deaktivieren Sie diese Option, um sie beizubehalten."
+        "description": "„äh“, „ähm“, „hmm“ im eingefügten Text"
       },
       "chineseScript": {
         "title": "Chinesische Schrift",
-        "description": "Schreibt Transkriptionen auf Mandarin und Kantonesisch in vereinfachten oder traditionellen Schriftzeichen. Andere Sprachen bleiben unverändert.",
+        "description": "Vereinfachte oder traditionelle Schriftzeichen",
         "options": {
           "asTranscribed": "Wie transkribiert",
           "simplified": "Vereinfacht",
@@ -434,20 +589,21 @@
           "title": "Basis-URL",
           "description": "API-Basis-URL für den ausgewählten Anbieter. Nur der benutzerdefinierte Anbieter kann bearbeitet werden.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Die Adresse legt der gewählte Anbieter fest",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API-Schlüssel",
-          "description": "API-Schlüssel für den ausgewählten Anbieter.",
+          "description": "Wird nur auf diesem Computer gespeichert",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Modell",
-          "descriptionCustom": "Gib die Modellkennung an, die von deinem benutzerdefinierten Endpunkt erwartet wird.",
-          "descriptionDefault": "Wähle ein Modell des ausgewählten Anbieters.",
+          "descriptionCustom": "Der Modellname auf deinem Server",
+          "descriptionDefault": "Die Schaltfläche rechts aktualisiert die Liste",
           "placeholderWithOptions": "Modell suchen oder auswählen",
           "placeholderNoOptions": "Modellnamen eingeben",
-          "refreshModels": "Modelle aktualisieren"
+          "refreshModels": "Modellliste aktualisieren"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Ausgewählter Prompt",
           "description": "Wähle eine Vorlage zur Verfeinerung von Transkriptionen oder erstelle eine neue. Verwende ${output} im Prompt-Text, um auf das erfasste Transkript zu verweisen."
         },
-        "noPrompts": "Keine Prompts verfügbar",
-        "selectPrompt": "Prompt auswählen",
+        "noPrompts": "Keine Anweisungen",
+        "selectPrompt": "Anweisung wählen",
         "createNew": "Neuen Prompt erstellen",
-        "promptLabel": "Prompt-Name",
+        "promptLabel": "Name",
         "promptLabelPlaceholder": "Prompt-Namen eingeben",
-        "promptInstructions": "Prompt-Anweisungen",
+        "promptInstructions": "Text der Anweisung",
         "promptInstructionsPlaceholder": "Schreibe die Anweisungen, die nach der Transkription ausgeführt werden sollen. Beispiel: Verbessere Grammatik und Klarheit für folgenden Text: ${output}",
         "promptTip": "Tipp: Verwende <code>${output}</code>, um den transkribierten Text in deinen Prompt einzufügen.",
         "updatePrompt": "Prompt aktualisieren",
-        "deletePrompt": "Prompt löschen",
-        "createPrompt": "Prompt erstellen",
+        "deletePrompt": "Löschen",
+        "createPrompt": "Erstellen",
         "cancel": "Abbrechen",
-        "selectToEdit": "Wähle oben einen Prompt aus, um dessen Details anzuzeigen und zu bearbeiten.",
-        "createFirst": "Klicke oben auf 'Neuen Prompt erstellen', um deinen ersten Nachbearbeitungs-Prompt zu erstellen."
+        "selectToEdit": "Wähle eine Anweisung, um sie zu bearbeiten.",
+        "createFirst": "Klicke auf „Erstellen“, um die erste Anweisung hinzuzufügen."
+      },
+      "local": {
+        "intro": "Das Modell läuft direkt auf diesem Computer: kein Internet, keine Schlüssel, dein Text verlässt das Gerät nie. Lade bei Bedarf ein Modell herunter. Es startet bei Bedarf von selbst und wird bei Leerlauf aus dem Speicher entladen. Es läuft auf dem Prozessor und ist daher langsamer als Cloud-Dienste. Alle Modelle passen auf einen Laptop mit 16 GB RAM.",
+        "runtimeMissing": "Die integrierte KI-Engine wurde nicht gefunden. Bitte installiere Tishe neu.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Ausgewogen",
+            "model": "Qwen3.5 4B",
+            "description": "Die einfache Qwen-4B-Version. Sorgfältig bei der Zeichensetzung, korrigiert in echten Gesprächen aber wenige Erkennungsfehler (unsere Tests, 06.10.2026). Die Version mit Beschleunigung ist genauer und schneller."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Das Modell von Google, nah am Original. Überarbeitet wie die Gemma in Googles Version mit Beschleunigung, ist aber etwa 1,25-mal langsamer."
+          },
+          "gigachat31": {
+            "title": "Für Russisch",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Von Anfang an auf Russisch trainiert. Pro Token sind nur 1,8B seiner 10B Parameter aktiv, daher ist es schneller, als seine Größe vermuten lässt. Braucht mehr Arbeitsspeicher."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen für Russisch",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) mit russischem Wortschatz und zusätzlichem Training auf russischen Texten. Im Test korrigiert es weniger als Gemma E2B und ist halb so schnell (etwa 27 Min. pro Stunde Aufnahme)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Kleines Modell von NVIDIA, offiziell nur Englisch. Im Test ließ es den Text auf Russisch und Englisch fast unverändert und ist langsamer als Gemma (etwa 35 Min. pro Stunde Aufnahme)."
+          },
+          "qwen35_9b": {
+            "title": "Maximum",
+            "model": "Qwen3.5 9B",
+            "description": "Das klügste lokale Modell: am besten bei Kontext und schwierigen Korrekturen. Das langsamste."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Ausgewogen",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B in einer neueren Version mit integrierter Beschleunigung. Genauer und etwa 1,2-mal schneller als das einfache Qwen 4B, korrigiert in unseren Tests aber nur halb so viele Fehler wie Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma leicht",
+            "model": "Gemma 4 E2B · Google-Version",
+            "description": "Die kleinere Gemma in Googles offizieller Version, plus Beschleunigung (+98 MB). Doppelt so schnell wie Gemma E4B (etwa 14 Min. pro Stunde Aufnahme) mit etwa 2/3 ihrer Korrekturen."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google-Version",
+            "description": "Die beste Qualität in unseren Tests (06.10.2026). Googles offizielle Version plus Beschleunigung (+99 MB): überarbeitet wie die einfache Gemma E4B, etwa 1,25-mal schneller. Etwa 26 Min. pro Stunde Aufnahme."
+          }
+        },
+        "speedupBadge": "Beschleunigung",
+        "speedupHint": "Ein kleines Hilfsmodell rät mehrere Wörter im Voraus, und das Hauptmodell prüft sie. Auf einem Prozessor ist das etwa 1,2–1,3-mal schneller.",
+        "untested": "nicht getestet",
+        "delete": "Modell löschen",
+        "state": {
+          "stopped": "Nicht im Speicher geladen",
+          "loading": "Wird in den Speicher geladen…",
+          "ready": "Im Speicher geladen"
+        },
+        "unloadNow": "Jetzt entladen",
+        "unload": {
+          "title": "Aus dem Speicher entladen",
+          "description": "Wie lange das Modell ungenutzt bleiben darf, bevor es entladen wird und etwa 2–3 GB Speicher freigibt.",
+          "immediately": "Direkt nach der Verarbeitung",
+          "min2": "Nach 2 Minuten",
+          "min5": "Nach 5 Minuten",
+          "min15": "Nach 15 Minuten",
+          "never": "Nie"
+        },
+        "recommended": "Empfohlen"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Aufnahmeordner öffnen",
       "loading": "Verlauf wird geladen...",
       "empty": "Noch keine Transkriptionen. Starte eine Aufnahme, um deinen Verlauf aufzubauen!",
-      "copyToClipboard": "Transkription in Zwischenablage kopieren",
+      "copyToClipboard": "Text kopieren",
       "copyError": "Transkription konnte nicht in die Zwischenablage kopiert werden.",
       "save": "Transkription speichern",
       "unsave": "Aus Gespeicherten entfernen",
       "delete": "Eintrag löschen",
       "deleteError": "Eintrag konnte nicht gelöscht werden. Bitte versuche es erneut.",
-      "retranscribe": "Erneut transkribieren",
+      "retranscribe": "Erneut erkennen",
       "retranscribeError": "Erneute Transkription fehlgeschlagen. Bitte versuche es erneut.",
-      "transcribing": "Transkribiere...",
+      "transcribing": "Wird erkannt…",
       "transcriptionFailed": "Transkription fehlgeschlagen. Du kannst über das Wiederholen-Symbol erneut transkribieren."
     },
     "debug": {
       "title": "Debug",
       "logDirectory": {
-        "title": "Log-Verzeichnis",
-        "description": "Speicherort der Log-Dateien"
+        "title": "Protokollordner",
+        "description": "Füge das Protokoll einem Fehlerbericht bei"
       },
       "logLevel": {
         "title": "Log-Level",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Nach Updates suchen",
-        "description": "Automatisch nach neuen Versionen von Handy suchen",
-        "lockedDescription": "Durch Systemkonfiguration deaktiviert (HANDY_DISABLE_UPDATER)"
+        "description": "Einmal pro Start bei GitHub nachfragen, ob eine neue Version von Tishe erschienen ist. Aufnahmen und Texte werden nicht gesendet",
+        "lockedDescription": "Die Update-Prüfung ist in dieser Version deaktiviert"
       },
       "soundTheme": {
         "label": "Sound-Thema",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Wortkorrektur-Schwelle",
-        "description": "Empfindlichkeit für benutzerdefinierte Wortkorrekturen"
+        "description": "Wie ähnlich ein Wort sein muss, um durch eines deiner Wörter ersetzt zu werden"
       },
       "historyLimit": {
-        "title": "Verlaufslimit",
-        "description": "Maximale Anzahl der Verlaufseinträge",
+        "title": "Wie viele Diktate aufbewahrt werden",
+        "description": "Behaltene Diktate zählen nicht mit",
         "entries": "Einträge"
       },
       "recordingRetention": {
-        "title": "Aufnahmen automatisch löschen",
-        "description": "Alte Aufnahmen automatisch löschen, um Speicherplatz zu sparen",
+        "title": "Alte Diktate löschen",
+        "description": "Mit dem Text wird auch der Ton gelöscht",
         "never": "Nie",
         "preserveLimit": "Neueste {{count}} behalten",
         "days3": "Nach 3 Tagen",
@@ -538,24 +765,24 @@
         "placeholder": "Aufbewahrungszeitraum auswählen..."
       },
       "alwaysOnMicrophone": {
-        "label": "Mikrofon immer aktiv",
-        "description": "Mikrofon für schnellere Reaktion aktiv halten"
+        "label": "Mikrofon eingeschaltet lassen",
+        "description": "Die Aufnahme startet schneller, aber das Mikrofon ist die ganze Zeit belegt"
       },
       "clamshellMicrophone": {
-        "title": "Clamshell-Mikrofon",
-        "description": "Mikrofon bei geschlossenem Laptop-Deckel"
+        "title": "Mikrofon bei geschlossenem Deckel",
+        "description": "Welches Mikrofon verwendet wird, wenn der Laptop zugeklappt ist"
       },
       "postProcessingToggle": {
         "label": "Nachbearbeitung",
         "description": "KI-gestützte Textverfeinerung nach der Transkription aktivieren"
       },
       "muteWhileRecording": {
-        "label": "Während Aufnahme stummschalten",
-        "description": "Systemaudio während der Aufnahme stummschalten"
+        "label": "Computer während der Aufnahme stummschalten",
+        "description": "Musik und Videos gelangen nicht in die Aufnahme"
       },
       "appendTrailingSpace": {
-        "label": "Leerzeichen anhängen",
-        "description": "Leerzeichen nach eingefügter Transkription hinzufügen"
+        "label": "Leerzeichen am Ende anfügen",
+        "description": "Der nächste Satz klebt nicht am vorherigen"
       },
       "keyboardImplementation": {
         "title": "Tastatur-Implementierung",
@@ -568,28 +795,28 @@
         "settings": "Einstellungen:"
       },
       "pasteDelay": {
-        "title": "Einfügeverzögerung (vorher)",
-        "description": "Verzögerung (in Millisekunden) nach dem Kopieren des Textes, bevor der Einfüge-Tastendruck gesendet wird. Erhöhe den Wert, wenn nichts eingefügt wird."
+        "title": "Verzögerung vor dem Einfügen",
+        "description": "Erhöhen, wenn nichts eingefügt wird"
       },
       "pasteDelayAfter": {
-        "title": "Einfügeverzögerung (nachher)",
-        "description": "Verzögerung (in Millisekunden) nach dem Einfüge-Tastendruck, bevor deine vorherige Zwischenablage wiederhergestellt wird. Erhöhe den Wert, wenn der alte Inhalt der Zwischenablage statt der Transkription eingefügt wird."
+        "title": "Verzögerung nach dem Einfügen",
+        "description": "Erhöhen, wenn alter Text aus der Zwischenablage eingefügt wird"
       },
       "holdThreshold": {
         "title": "Halte-Schwellenwert",
-        "description": "Nur im Modus „Automatisch“: wie lange (in Millisekunden) die Tastenkombination gedrückt bleiben muss, damit sie als Halten statt als Tippen zählt. Verringern, wenn die Aufnahme nach kurzem Halten weiterläuft; erhöhen, wenn bewusstes Tippen als Halten gewertet wird."
+        "description": "Ein kürzerer Druck schaltet um, ein längerer gilt als Halten"
       },
       "reliablePaste": {
         "title": "Zuverlässiges Einfügen (Beta)",
-        "description": "Die Zwischenablage erst wiederherstellen, wenn die Ziel-App die Transkription tatsächlich gelesen hat, statt nach einer festen Verzögerung. Soll verhindern, dass bei Systemlast der alte Inhalt der Zwischenablage eingefügt wird. Erfordert eine Einfügemethode über die Zwischenablage; nur macOS und Windows."
+        "description": "Warten, bis das Programm den Text gelesen hat, statt einer festen Zeit"
       },
       "recordingBuffer": {
-        "title": "Zusätzlicher Aufnahmepuffer",
-        "description": "Zusätzliche Zeit (in Millisekunden), um nach dem Loslassen der Taste weiter aufzunehmen, um nachlaufendes Audio zu erfassen. 0 = kein zusätzlicher Puffer."
+        "title": "Nach dem Loslassen weiter aufnehmen",
+        "description": "Wie lange nach dem Loslassen der Taste noch aufgenommen wird"
       },
       "keyboardDiagnostic": {
         "title": "Tastatur-Diagnose",
-        "description": "Prüft, ob Tastaturereignisse Handy erreichen. Es wird nur die Anzahl der Ereignisse erfasst — niemals, welche Tasten du drückst.",
+        "description": "Prüft, ob Tastaturereignisse Tishe erreichen. Es wird nur die Anzahl der Ereignisse erfasst – nie, welche Tasten du drückst.",
         "run": "10-Sekunden-Diagnose starten",
         "running": "Lauscht… drücke dein Tastenkürzel ein paar Mal (z. B. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Maus",
         "verdictBlocked": "Secure Input blockiert Tastenereignisse — Tastenkürzel mit einer normalen Taste können erst wieder funktionieren, wenn das behoben ist.",
         "verdictSuspicious": "Es kamen Modifikator-Ereignisse an, aber keine Tastenereignisse — irgendetwas unterdrückt Tasten, obwohl Secure Input als deaktiviert gemeldet wird. Bitte melde das auf GitHub.",
-        "verdictOk": "Tastenereignisse erreichen Handy normal.",
+        "verdictOk": "Tastaturereignisse erreichen Tishe normal.",
         "verdictNoEvents": "Keine Ereignisse erfasst — hast du während des Tests Tasten gedrückt?",
         "failed": "Diagnose fehlgeschlagen: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "Info",
       "version": {
         "title": "Version",
-        "description": "Aktuelle Version von Handy"
+        "description": "Aktuelle Version von Tishe"
       },
       "appDataDirectory": {
-        "title": "App-Datenverzeichnis",
-        "description": "Speicherort der Handy-Daten"
+        "title": "Datenordner",
+        "description": "Einstellungen, Modelle und Verlauf"
       },
       "sourceCode": {
         "title": "Quellcode",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Entwicklung unterstützen",
-        "description": "Hilf uns, Handy weiterzuentwickeln",
+        "description": "Tishe basiert auf ihrem Programm",
         "button": "Spenden"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Hochleistungs-Inferenz des Whisper-Spracherkennungsmodells von OpenAI",
-          "details": "Handy verwendet ggml für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
+          "details": "Schnelle Spracherkennung auf dem Computer. Danke an Georgi Gerganov und alle Mitwirkenden des Projekts."
         }
       },
       "whatsNewUpdates": {
-        "label": "Neuerungen anzeigen",
-        "description": "Versionshinweise nach Handy-Updates anzeigen"
+        "label": "„Neuigkeiten“ nach einem Update anzeigen",
+        "description": "Eine kurze Liste der Änderungen beim ersten Start einer neuen Version"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Öffnen",
     "copy": "Kopieren",
     "clear": "Leeren",
-    "noOptionsFound": "Keine Optionen gefunden"
+    "noOptionsFound": "Keine Optionen gefunden",
+    "cancel": "Abbrechen",
+    "choose": "Auswählen…",
+    "reset": "Auf Standard zurücksetzen",
+    "search": "Suchen"
   },
   "accessibility": {
-    "permissionsDescription": "Handy benötigt Bedienungshilfen-Berechtigungen, um transkribierten Text einzugeben.",
+    "permissionsDescription": "Zum Einfügen von Text braucht das Programm die Berechtigung „Bedienungshilfen“.",
     "openSettings": "Systemeinstellungen öffnen"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "unbekanntes Modell",
     "pasteFailedTitle": "Text konnte nicht eingefügt werden",
     "pasteFailed": "Der Text konnte nicht in die aktive Anwendung eingefügt werden.",
-    "transcriptionFailedTitle": "Transkription fehlgeschlagen"
+    "transcriptionFailedTitle": "Erkennung fehlgeschlagen"
   },
   "appLanguage": {
-    "title": "Anwendungssprache",
-    "description": "Sprache der Handy-Oberfläche ändern"
+    "title": "Sprache der Oberfläche",
+    "description": "Die Sprache der Beschriftungen im Programm"
   },
   "theme": {
-    "title": "Anwendungsdesign",
-    "description": "Wählen Sie, ob Handy dem Systemthema folgt oder hell bzw. dunkel bleibt",
+    "title": "Design",
+    "description": "Wähle, ob Tishe dem Systemdesign folgt oder immer hell oder dunkel bleibt",
     "options": {
-      "system": "System",
+      "system": "Wie im System",
       "light": "Hell",
       "dark": "Dunkel"
     }
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "Transkribiere...",
     "processing": "Verarbeite...",
+    "waiting": "Das Modell ist mit einer Datei beschäftigt – das Diktat kommt verzögert",
+    "message": {
+      "paste_failed": "Einfügen fehlgeschlagen. Der Text ist im Verlauf gespeichert",
+      "editing_skipped": "Ohne Überarbeitung eingefügt: Die KI ist nicht bereit",
+      "no_microphone": "Kein Mikrofon gefunden",
+      "microphone_denied": "Kein Zugriff auf das Mikrofon",
+      "help": "Was tun"
+    },
     "loadingModel": "Modell wird geladen..."
   },
   "whatsNew": {
-    "title": "Neu in Handy v{{version}}"
+    "title": "Neu in Tishe"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blockiert möglicherweise 1 Tastenkürzel",
@@ -733,5 +972,715 @@
     "learnMore": "So behebst du das",
     "recorderBlocked": "Tastenkürzel können gerade nicht aufgezeichnet werden — macOS Secure Input blockiert Tastenereignisse. Behebe zuerst die Secure-Input-Warnung.",
     "dismiss": "Ausblenden"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg wurde nicht gefunden. Es wird zum Lesen von Audio- und Videodateien benötigt und ist im Tishe-Installer enthalten: Installieren Sie Tishe neu. Oder installieren Sie es mit dem Befehl: winget install Gyan.FFmpeg — und starten Sie Tishe neu.",
+    "input": {
+      "choose": "Dateien hinzufügen…",
+      "filterName": "Audio und Video"
+    },
+    "maxPart": {
+      "title": "Maximale Teillänge",
+      "unit": "Min."
+    },
+    "cloud": {
+      "provider": "Anbieter",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Benutzerdefiniert (OpenAI-kompatibel)"
+      },
+      "baseUrl": "API-URL",
+      "baseUrlDescription": "Basis-URL, die auf /v1 endet.",
+      "apiKey": "API-Schlüssel",
+      "apiKeyDescription": "Wird lokal auf diesem Computer gespeichert.",
+      "model": "Modell",
+      "modelDescription": "gpt-4o-transcribe-Modelle akzeptieren höchstens ~23 Min. pro Anfrage; Teile werden automatisch gekürzt.",
+      "language": "Sprache",
+      "languageDescription": "Sprachcode, z. B. de oder en. Leer lassen für automatische Erkennung.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Personen in der Aufnahme",
+      "auto": "Automatisch erkennen",
+      "model": "Sprechermodell",
+      "modelDescription": "Wird einmal heruntergeladen; unterscheidet Stimmen. Beide sind klein und schnell.",
+      "recommended": "Empfohlen",
+      "cloudUntimed": "Das Modell {{model}} liefert keine Zeitstempel, daher können keine Sprecher markiert werden. Wähle whisper-1, ein Whisper-Modell bei Groq oder die lokale Erkennung.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Mit Tausenden Stimmen trainiert; unterscheidet Stimmen in echten Aufnahmen zuverlässig. Gute Standardwahl."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Ein alternatives Modell: Probiere es aus, wenn das erste bei deinen Aufnahmen Stimmen verwechselt."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Auch das Rohtranskript beifügen",
+      "includeRawDescription": "Die unbearbeitete Ausgabe der Erkennung am Ende des Dokuments anhängen.",
+      "promptPlaceholder": "Integrierte Anweisung für die Sprache der Aufnahme (Russisch oder Englisch)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Zeitstempel",
+      "location": "Speichern in",
+      "choose": "Ordner wählen…",
+      "nextToSource": "Neben der Quelldatei",
+      "notes": "Verarbeitungshinweise",
+      "removeFillers": "Verzögerungslaute entfernen",
+      "saveDebug": "Zwischendateien speichern",
+      "saveDebugDescription": "Legt neben dem Dokument einen Ordner „<name>.debug“ an, mit dem Text nach jedem Schritt: Erkennung, Bereinigung, jede Anfrage an das Sprachmodell und seine Antwort, Endergebnis. Zur Fehlersuche und für den Modellvergleich."
+    },
+    "actions": {
+      "start": "Transkribieren",
+      "cancel": "Abbrechen"
+    },
+    "progress": {
+      "starting": "Wird gestartet…",
+      "elapsed": "Vergangen: {{time}}",
+      "extracting": "Audio wird extrahiert…",
+      "extractingPart": "Audio wird extrahiert…",
+      "diarizing": "Sprecher werden erkannt…",
+      "diarizingPart": "Sprecher werden erkannt…",
+      "splitting": "Wird in Teile zerlegt…",
+      "splittingPart": "Wird in Teile zerlegt…",
+      "transcribing": "Wird transkribiert…",
+      "transcribingPart": "Teil {{part}} von {{total}} wird transkribiert…",
+      "post_processing": "Wird mit LLM bereinigt…",
+      "post_processingPart": "Teil {{part}} von {{total}} wird mit LLM bereinigt…",
+      "writing": "Dokument wird geschrieben…",
+      "writingPart": "Dokument wird geschrieben…"
+    },
+    "result": {
+      "open": "Öffnen",
+      "reveal": "Im Ordner zeigen"
+    },
+    "document": {
+      "title": "Transkript",
+      "sourceFile": "Datei",
+      "duration": "Dauer",
+      "parts": "Teile",
+      "engine": "Erkennung",
+      "llm": "LLM-Nachbearbeitung",
+      "created": "Erstellt",
+      "part": "Teil",
+      "rawTranscript": "Rohtranskript",
+      "speaker": "Sprecher",
+      "notes": "Verarbeitungshinweise",
+      "notesTotal": "Verarbeitungszeit",
+      "notesExtracting": "Audio-Extraktion",
+      "notesDiarizing": "Sprechererkennung",
+      "notesTranscribing": "Erkennung",
+      "notesLlm": "LLM-Verarbeitung",
+      "notesWarnings": "Warnungen",
+      "notesNone": "keine",
+      "notesLanguage": "Sprache des Textes",
+      "llmLocal": "{{model}}, auf diesem Computer",
+      "warnings": {
+        "noTimestampsModel": "Sprecher wurden nicht markiert: Dieses Sprachmodell liefert keine Zeitstempel; verwende ein Whisper-Modell oder die lokale Erkennung",
+        "noTimestampsPart": "Teil {{part}}: Der Sprachdienst hat keine Zeitstempel geliefert, daher konnten keine Sprecher markiert werden",
+        "llmEmpty": "Teil {{part}}, Fragment {{fragment}}: Das LLM hat eine leere Antwort geliefert, Rohtext beibehalten",
+        "llmError": "Teil {{part}}, Fragment {{fragment}}: LLM-Fehler, Rohtext beibehalten ({{error}})",
+        "numbersBack": "Teil {{part}}, Fragment {{fragment}}: Zahlen in {{lines}} Zeilen wiederhergestellt (das LLM hat sie als Wörter geschrieben oder weggelassen)",
+        "linesLost": "Teil {{part}}, Fragment {{fragment}}: Die LLM-Antwort hat die nummerierten Zeilen nicht beibehalten, Rohtext beibehalten",
+        "linesKept": "Teil {{part}}, Fragment {{fragment}}: {{kept}} von {{total}} Zeilen haben ihren Rohtext behalten ({{reasons}})",
+        "kept": {
+          "missing": "fehlt",
+          "duplicate": "doppelt",
+          "empty": "leer",
+          "tooLong": "zu lang",
+          "translated": "übersetzt",
+          "tooShort": "zu kurz",
+          "cutOff": "abgeschnitten"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Abgeschlossene entfernen"
+    },
+    "events": {
+      "title": "Ereignisskript",
+      "choose": "Auswählen…",
+      "none": "Nicht festgelegt – Ereignisse werden nirgendwohin gesendet",
+      "filterName": "Programme und Skripte",
+      "test": "Testen",
+      "testOk": "Das Skript hat ein Testereignis empfangen",
+      "testFailed": "Fehlgeschlagen: {{error}}",
+      "testMessage": "Tishe: Testereignis",
+      "remaining": "noch ~{{minutes}} Min.",
+      "started": "Transkription gestartet",
+      "finished": "Fertig",
+      "cancelled": "Abgebrochen",
+      "interval": {
+        "title": "Intervall für Fortschrittsmeldungen",
+        "description": "Höchstens einmal in so vielen Sekunden. Eine neue Phase oder ein neuer Teil, Start und Ende werden sofort gesendet.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Ändern",
+    "choose": "Auswählen",
+    "open": "Öffnen",
+    "hide": "Ausblenden",
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "copied": "Kopiert",
+    "undo": "Rückgängig",
+    "download": "Herunterladen",
+    "downloadSize": "{{size}} herunterladen",
+    "downloadingPercent": "Wird heruntergeladen · {{percent}} %",
+    "cancelDownload": "Abbrechen",
+    "deleteNamed": "{{name}} löschen",
+    "percent": "{{n}} %",
+    "useValue": "„{{value}}“ verwenden",
+    "fold": {
+      "more": "Mehr",
+      "changed_one": "geändert: {{count}}",
+      "changed_other": "geändert: {{count}}",
+      "changedA11y_one": "{{count}} Einstellung geändert",
+      "changedA11y_other": "{{count}} Einstellungen geändert"
+    },
+    "number": {
+      "hint": "Von {{min}} bis {{max}}",
+      "hintDefault": "Standard {{value}}; von {{min}} bis {{max}}",
+      "notNumber": "Gib eine Zahl ein",
+      "range": "Gib eine Zahl von {{min}} bis {{max}} ein"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} Min.",
+      "hour": "{{n}} Std.",
+      "hourMin": "{{h}} Std. {{m}} Min.",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "heute {{time}}",
+      "yesterday": "gestern {{time}}",
+      "todayTitle": "Heute",
+      "yesterdayTitle": "Gestern"
+    },
+    "player": {
+      "play": "Abspielen",
+      "pause": "Pause",
+      "position": "Wiedergabeposition"
+    },
+    "shortcut": {
+      "change": "Taste für „{{name}}“ ändern",
+      "reset": "Taste auf Standard zurücksetzen"
+    },
+    "echo": {
+      "recognition": "Erkennung: {{model}}",
+      "language": "Sprache: {{language}}",
+      "sharedWithDictation": "gemeinsam mit dem Diktat",
+      "sharedWithFiles": "gemeinsam mit der Dateitranskription",
+      "noModel": "Kein Spracherkennungsmodell"
+    },
+    "llm": {
+      "ready": "Bereit · {{model}} auf diesem Computer",
+      "needed": "Benötigt die KI · {{model}}",
+      "downloading": "KI wird heruntergeladen · {{percent}} %",
+      "runtimeMissing": "Die integrierte KI-Engine fehlt",
+      "otherOptions": "Weitere Optionen",
+      "noKey": "Benötigt einen {{provider}}-Schlüssel",
+      "noUrl": "Benötigt die Serveradresse",
+      "noServerModel": "Benötigt einen Modellnamen",
+      "localServer": "Dein Server auf diesem Computer · {{model}}",
+      "textToServer": "Text geht an {{address}}",
+      "textToService": "Text geht an {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Modell {{name}} löschen?",
+      "deleteModel": "Modell löschen",
+      "deleteModelBody": "{{size}} werden frei. Um das Modell wieder zu nutzen, musst du es erneut herunterladen.",
+      "deleteActiveTitle": "{{name}} löschen? Es ist das aktuelle Modell",
+      "deleteActiveBody": "Diktat und Transkription funktionieren nicht, bis du ein anderes Modell wählst. {{size}} werden frei.",
+      "deleteLlmTitle": "KI-Modell {{name}} löschen?",
+      "deleteLlm": "KI-Modell löschen",
+      "deleteLlmBody": "{{size}} werden frei. Die Überarbeitung funktioniert erst wieder, wenn du es erneut herunterlädst oder ein anderes wählst.",
+      "deleteSpeakerModelBody": "Die Aufteilung nach Sprechern funktioniert erst wieder, wenn du erneut ein Stimmmodell herunterlädst."
+    },
+    "back": {
+      "transcription": "Zurück zu Transkription",
+      "dictation": "Zurück zu Diktat",
+      "meetings": "Zurück zu Meetings",
+      "history": "Zurück zu Verlauf",
+      "models": "Zurück zu Erkennung",
+      "llm": "Zurück zu Überarbeitung",
+      "app": "Zurück zu App",
+      "about": "Zurück zu Info",
+      "debug": "Zurück zu Debug",
+      "next": "Zurück zu Was kommt"
+    },
+    "changed": "geändert"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "geladen",
+      "loading": "wird geladen…",
+      "error": "Laden fehlgeschlagen",
+      "unloaded": "nicht im Speicher",
+      "none": "Kein Modell",
+      "a11y": "Modell {{model}}, {{state}}. Modell wechseln",
+      "menu": "Heruntergeladene Modelle",
+      "all": "Alle Modelle…",
+      "locked": "Transkription läuft – nach dem Ende ändern"
+    },
+    "task": "Transkription: Datei {{current}} von {{total}} · {{percent}} %",
+    "downloading": "Download: {{name}} · {{percent}} %",
+    "downloadingMany": "Download: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Für die Transkription wird ffmpeg benötigt"
+    },
+    "drop": {
+      "title": "Aufnahme hierher ziehen",
+      "text": "Audio oder Video: mp3, m4a, wav, mp4, mkv und weitere. Jede Datei wird zu einem eigenen Dokument.",
+      "more": "Weitere Aufnahmen hierher ziehen oder",
+      "release": "Loslassen zum Hinzufügen",
+      "rejected": "{{names}} – kein Audio oder Video",
+      "oneText": "„{{name}}“ kommt in die Transkriptionswarteschlange",
+      "manyText_one": "{{count}} Aufnahme kommt in die Transkriptionswarteschlange",
+      "manyText_other": "{{count}} Aufnahmen kommen in die Transkriptionswarteschlange",
+      "anyText": "Audio- und Videodateien kommen in die Transkriptionswarteschlange",
+      "noneTitle": "Diese Dateien funktionieren nicht",
+      "noneText": "Nur Audio und Video können transkribiert werden: mp3, m4a, wav, mp4, mkv und weitere.",
+      "otherNote_one": "{{count}} weitere Datei wird übersprungen: Sie ist kein Audio oder Video",
+      "otherNote_other": "{{count}} weitere Dateien werden übersprungen: Sie sind kein Audio oder Video",
+      "alreadyOne": "„{{name}}“ ist bereits in der Warteschlange",
+      "alreadyMany": "Diese Aufnahmen sind bereits in der Warteschlange"
+    },
+    "list": {
+      "label": "Aufnahmen",
+      "waiting": "Wartet",
+      "cancelled": "Abgebrochen",
+      "remaining": "noch etwa {{time}}",
+      "remove": "Entfernen",
+      "removeFile": "{{name}} entfernen",
+      "removeFromList": "Aus der Liste entfernen",
+      "more": "Mehr: {{name}}",
+      "recipeSpeakers": "Sprecher",
+      "recipeEditing": "Überarbeitung",
+      "recipeCloud": "in der Cloud",
+      "parts_one": "{{count}} Teil",
+      "parts_other": "{{count}} Teile",
+      "notes_one": "{{count}} Verarbeitungshinweis",
+      "notes_other": "{{count}} Verarbeitungshinweise",
+      "showAll": "Alle anzeigen ({{count}})",
+      "showFewer": "Weniger anzeigen",
+      "removedOne": "Aus der Liste entfernt",
+      "removedMany_one": "{{count}} Zeile aus der Liste entfernt",
+      "removedMany_other": "{{count}} Zeilen aus der Liste entfernt",
+      "chars_one": "{{n}} Zeichen",
+      "chars_other": "{{n}} Zeichen",
+      "keptNote": "Die letzten {{count}} Ergebnisse werden aufbewahrt. Dokumente auf der Festplatte werden nie gelöscht.",
+      "missing": "Dokument nicht gefunden: Es wurde verschoben oder gelöscht, oder sein Laufwerk ist nicht verbunden",
+      "openDocument": "Dokument {{name}} öffnen"
+    },
+    "recipe": {
+      "title": "Rezept",
+      "locked": "Während der Transkription bleiben die Einstellungen unverändert. Neue Dateien verwenden dieselben Einstellungen.",
+      "where": "Wo erkannt wird",
+      "local": "Auf diesem Computer",
+      "cloud": "In der Cloud",
+      "audioToService": "Audio geht an {{provider}}",
+      "cloudEcho": "Erkennung: {{model}} bei {{provider}}",
+      "speakers": "Sprecher",
+      "speakersDescription": "Das Dokument wird zu einem Gesprächsprotokoll: „Sprecher 1: …“, „Sprecher 2: …“",
+      "speakersMissing": "Benötigt ein Stimmmodell · {{size}}",
+      "speakersDownloading": "Stimmmodell wird heruntergeladen · {{percent}} %",
+      "speakersReady": "Stimmmodell bereit",
+      "countDescription": "Wenn du es weißt, wird die Aufteilung genauer",
+      "editing": "Überarbeitung durch KI",
+      "editingDescription": "Korrigiert Erkennungsfehler und Zeichensetzung. Dauert deutlich länger: etwa 15–35 Min. pro Stunde Aufnahme",
+      "result": "Ergebnis",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "neben der Aufnahme"
+    },
+    "more": {
+      "recognition": "Erkennung",
+      "maxPartDescription": "Eine lange Aufnahme wird an Pausen in Teile geschnitten, die nicht länger als das sind",
+      "speakers": "Sprecher",
+      "editing": "Überarbeitung",
+      "prompt": "Anweisung für Dateien",
+      "promptDescription": "Leer – die integrierte Anweisung in der Sprache der Aufnahme. Reihenfolge: dieses Feld, dann ⚙ des Modells, dann die integrierte",
+      "document": "Dokument",
+      "locationDescription": "Der Name stammt von der Aufnahme; nichts wird überschrieben, stattdessen wird (2) angehängt",
+      "timestampsDescription": "Aufnahmezeit vor jedem Absatz",
+      "removeFillersDescription": "Entfernt „uh“, „um“, „hmm“ in englischen und russischen Aufnahmen. Wörter bleiben",
+      "globalFillers": "Das Quelltranskript bleibt wörtlich. Das Diktat hat eine eigene Einstellung für Füllwörter",
+      "notesDescription": "Am Ende: Dauer jeder Phase und Warnungen",
+      "integrations": "Integrationen",
+      "eventsDescription": "Ein Programm, das über Start, Fortschritt und Ende informiert wird (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Dateien hinzufügen, um zu starten",
+      "noFfmpeg": "Benötigt ffmpeg",
+      "noModel": "Lade zuerst ein Spracherkennungsmodell herunter",
+      "cloudIncomplete": "Benötigt einen {{provider}}-Schlüssel",
+      "cloudIncompleteCustom": "Benötigt API-Adresse, Schlüssel und Modell",
+      "noSpeakerModel": "Benötigt ein Stimmmodell",
+      "running": "Datei {{current}} von {{total}} · {{time}} vergangen",
+      "start_one": "{{count}} Datei transkribieren",
+      "start_other": "{{count}} Dateien transkribieren",
+      "done_one": "Fertig: {{count}} Datei",
+      "done_other": "Fertig: {{count}} Dateien",
+      "errors_one": "{{count}} Datei mit Fehler",
+      "errors_other": "{{count}} Dateien mit Fehlern",
+      "summary_one": "{{count}} Aufnahme",
+      "summary_other": "{{count}} Aufnahmen",
+      "modelDownloading": "Spracherkennungsmodell wird heruntergeladen · {{percent}} %",
+      "llmDownloading": "KI für die Überarbeitung wird heruntergeladen · {{percent}} %",
+      "llmMissing": "Für die Überarbeitung wird eine KI benötigt",
+      "llmNotSetUp": "Die KI für die Überarbeitung ist nicht eingerichtet",
+      "withoutEditing": "Ohne Überarbeitung",
+      "modelNotActive": "Das Spracherkennungsmodell ist nicht eingeschaltet"
+    },
+    "stop": {
+      "title": "Transkription stoppen?",
+      "body": "Fertige Dateien ({{done}}) bleiben gespeichert. Die aktuelle Datei ({{percent}} %) und die wartenden ({{waiting}}) müssen neu gestartet werden.",
+      "confirm": "Stoppen",
+      "keep": "Fortsetzen"
+    },
+    "tray": {
+      "running": "Transkription: Datei {{current}} von {{total}} · {{pct}} %",
+      "ready_one": "Transkription fertig: {{count}} Datei",
+      "ready_other": "Transkription fertig: {{count}} Dateien"
+    },
+    "notify": {
+      "readyOne": "Transkription fertig",
+      "readyMany_one": "Transkription fertig: {{count}} Datei",
+      "readyMany_other": "Transkription fertig: {{count}} Dateien",
+      "failedOne": "Transkription fehlgeschlagen",
+      "failedMany_one": "Transkription fehlgeschlagen: {{count}} Datei",
+      "failedMany_other": "Transkription fehlgeschlagen: {{count}} Dateien",
+      "partial": "{{ok}} von {{total}} fertig · {{errors}}",
+      "errors_one": "{{count}} fehlgeschlagen",
+      "errors_other": "{{count}} fehlgeschlagen",
+      "failedFile": "Fehlgeschlagen: {{name}} · {{reason}}",
+      "open": "Öffnen"
+    },
+    "try": {
+      "before": "Öffne einen beliebigen Editor, setze den Cursor hinein und halte",
+      "after": "gedrückt, während du sprichst. Lass los, und der Text erscheint dort.",
+      "changeKey": "Taste ändern"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Diktat ist bereit ·",
+      "anyWindow": "in jedem Fenster",
+      "keyBusy": "Diktat startet nicht: Die Taste ist belegt",
+      "keyBusyDetail": "Ein anderes Programm belegt {{key}}. Wähle eine andere Taste.",
+      "changeKey": "Taste ändern"
+    },
+    "keys": {
+      "title": "Tasten",
+      "second": "Diktat mit Überarbeitung – zweite Taste",
+      "secondDescription": "Die normale Taste fügt den Text unverändert ein. Diese fügt ihn nach der Überarbeitung durch die KI ein",
+      "instruction": "Anweisung",
+      "manage": "Verwalten…",
+      "secondBusy": "Ein anderes Programm belegt diese Taste: Wähle eine andere"
+    },
+    "more": {
+      "paste": "Text einfügen",
+      "indicator": "Aufnahmeanzeige",
+      "microphone": "Mikrofon und Aufnahme",
+      "prompts": "Anweisungen für Diktat mit Überarbeitung",
+      "promptsDescription_one": "{{count}} Anweisung",
+      "promptsDescription_other": "{{count}} Anweisungen",
+      "promptsRow": "Anweisungen erstellen und bearbeiten",
+      "text": "Diktattext",
+      "fillersDocuments": "Nur für Diktate. In Dokumenten übernimmt das „Verzögerungslaute entfernen“ im Bereich Transkription"
+    },
+    "fix": {
+      "title": "Wenn etwas nicht funktioniert",
+      "paste": "Text wird nicht eingefügt",
+      "pasteHelp": "Wenn du in ein Programm diktiert hast, das als Administrator läuft, erlaubt Windows dort kein Einfügen. Andernfalls erhöhe die Verzögerungen unten.",
+      "cutOff": "Das Ende eines Satzes wird abgeschnitten",
+      "hold": "Ein kurzer Druck zählt als Halten"
+    },
+    "prompts": {
+      "title": "Anweisungen für Diktat mit Überarbeitung",
+      "intro": "Die Anweisung sagt der KI, was mit dem diktierten Text geschehen soll. ${output} ist der diktierte Text.",
+      "current": "Aktuelle Anweisung",
+      "create": "Erstellen",
+      "deleted": "Anweisung „{{name}}“ gelöscht"
+    }
+  },
+  "meetings": {
+    "what": "Tishe wird Meetings und Anrufe auf diesem Computer aufnehmen: dein Mikrofon und die Gegenseite, danach ein nach Sprechern aufgeteiltes Transkript.",
+    "how": "Aufnahmen bleiben auf dem Computer, wie alles andere in Tishe.",
+    "nowTitle": "Schon jetzt",
+    "nowText": "Wenn ein Meeting bereits aufgenommen ist – mit Zoom, Teams oder einem Diktiergerät –, füge die Datei unter „Transkription“ hinzu.",
+    "goTranscription": "Zur Transkription"
+  },
+  "history": {
+    "storage": {
+      "title": "Speicherung",
+      "limit_one": "Das letzte Diktat wird aufbewahrt",
+      "limit_other": "Die letzten {{count}} Diktate werden aufbewahrt",
+      "never": "Diktate werden nicht automatisch gelöscht",
+      "days_3": "Diktate werden nach 3 Tagen gelöscht",
+      "weeks_2": "Diktate werden nach 2 Wochen gelöscht",
+      "months_3": "Diktate werden nach 3 Monaten gelöscht"
+    },
+    "empty": {
+      "title": "Hier erscheinen deine Diktate",
+      "textBefore": "Halte",
+      "textAfter": "in einem beliebigen Fenster gedrückt und sprich.",
+      "textNoKey": "Lege unter „Diktat“ eine Diktattaste fest."
+    },
+    "copy": "Text kopieren",
+    "more": "Weitere Aktionen",
+    "keep": "Behalten",
+    "keepDescription": "Wird nicht automatisch gelöscht",
+    "retry": "Erneut erkennen",
+    "delete": "Löschen",
+    "deleted": "Diktat gelöscht",
+    "failed": "Erkennung fehlgeschlagen",
+    "savedTag": "behalten",
+    "editingSkipped": "ohne Überarbeitung",
+    "showMore": "Vollständig anzeigen",
+    "showLess": "Einklappen",
+    "version": "Textversion",
+    "versionEdited": "Nach der Überarbeitung",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Modelle, die Sprache in Text umwandeln – für Diktate und Dateitranskription. Die Überarbeitung des Textes durch KI findest du im Bereich",
+    "active": {
+      "title": "Aktives Modell",
+      "change": "Modell wechseln",
+      "none": "Kein Modell gewählt",
+      "noneHint": "Lade das für deine Sprache empfohlene herunter – oder ein beliebiges Modell aus dem Katalog unten"
+    },
+    "lockedByTranscription": "Transkription läuft – nach dem Ende ändern",
+    "language": {
+      "title": "Sprache und Übersetzung",
+      "scope": "Gilt für Diktate und Dateitranskription"
+    },
+    "cleanup": {
+      "title": "Textbereinigung",
+      "scope": "Arbeitet im Erkennungsmodell, für Diktate und Dateien"
+    },
+    "memory": {
+      "title": "Speicher"
+    },
+    "onlyLanguage": "nur {{language}}",
+    "languageCount_one": "{{count}} Sprache",
+    "languageCount_other": "{{count}} Sprachen",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Deine Modelle",
+      "yoursCount": "Deine Modelle ({{count}})",
+      "recommended": "Empfohlen",
+      "all": "Alle Modelle",
+      "languageFilter": "Sprache",
+      "streaming": "Streaming",
+      "translation": "Übersetzung",
+      "showAll": "Alle Modelle anzeigen ({{count}})",
+      "showFewer": "Weniger anzeigen"
+    },
+    "row": {
+      "use": "Verwenden",
+      "inUse": "in Verwendung",
+      "more": "Mehr: {{name}}",
+      "delete": "Modell löschen",
+      "translate": "übersetzt ins Englische",
+      "streaming": "Streaming",
+      "accuracy": "Genauigkeit {{n}}/10",
+      "speed": "Geschwindigkeit {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Wo und mit welcher KI Text überarbeitet wird",
+    "status": {
+      "usedFor": "Verwendet für",
+      "files": "Dateiüberarbeitung ({{state}})",
+      "dictation": "Diktat mit Überarbeitung ({{state}})",
+      "on": "an",
+      "off": "aus"
+    },
+    "where": {
+      "title": "Wo die KI läuft",
+      "local": "Auf diesem Computer",
+      "localText": "Text bleibt auf dem Computer",
+      "localUnavailable": "In dieser Version nicht verfügbar",
+      "server": "Eigener Server",
+      "serverText": "Ollama, LM Studio oder deine Adresse · Text geht an deinen Server",
+      "cloud": "Cloud-Dienst",
+      "cloudText": "OpenAI und andere · Text geht an den Dienst"
+    },
+    "variant": {
+      "local": "Integrierte KI",
+      "server": "Server",
+      "cloud": "Dienst"
+    },
+    "local": {
+      "speed": "Geschwindigkeit {{n}} von 5",
+      "quality": "Qualität {{n}} von 5",
+      "footprint": "Festplatte {{disk}} · Arbeitsspeicher ~{{ram}} GB",
+      "showAll": "Alle Modelle anzeigen ({{count}})",
+      "showFewer": "Weniger anzeigen"
+    },
+    "server": {
+      "urlDescription": "OpenAI-kompatible Adresse, die auf /v1 endet",
+      "keyDescription": "Nur wenn dein Server einen verlangt"
+    }
+  },
+  "app": {
+    "purpose": "Wie sich das Programm insgesamt verhält",
+    "launch": "Start und Infobereich",
+    "look": "Aussehen",
+    "updates": "Updates",
+    "checkNow": "Nach einer neuen Version suchen",
+    "checkNowButton": "Jetzt suchen",
+    "experimental": "Experimentelle Funktionen",
+    "quit": {
+      "title": "Tishe beenden?",
+      "body": "„{{name}}“ wird gerade transkribiert ({{pct}} %). Das wird abgebrochen; fertige Dokumente bleiben gespeichert.",
+      "bodyIdle": "Die Transkription wird abgebrochen; fertige Dokumente bleiben gespeichert.",
+      "confirm": "Beenden",
+      "stay": "Bleiben"
+    },
+    "notifications": "Benachrichtigungen",
+    "notifyLabel": "Benachrichtigen, wenn eine Transkription fertig ist",
+    "notifyDescription": "Eine Windows-Benachrichtigung, nur wenn das Fenster ausgeblendet oder nicht im Fokus ist. Ein Klick öffnet das Ergebnis.",
+    "trayHint": "Windows blendet neue Symbole aus. Damit es sichtbar bleibt, ziehe es aus den ausgeblendeten Symbolen auf die Taskleiste."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Neuigkeiten",
+    "project": {
+      "title": "Über das Projekt",
+      "basedOn": "Basiert auf Handy",
+      "basedOnText": "Open Source, MIT-Lizenz",
+      "tishe": "Tishe",
+      "tisheText": "Open Source, MIT-Lizenz. Releases und Fehlerberichte gibt es auf GitHub",
+      "licenses": "Lizenzen",
+      "licensesText": "Bibliotheken und Modelle von Drittanbietern, die Tishe nutzt",
+      "licensesOpen": "Öffnen",
+      "licensesError": "Die Lizenzdatei konnte nicht geöffnet werden",
+      "author": "Entwickler",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub-Profil"
+    },
+    "supportHandy": "Die Handy-Autoren unterstützen",
+    "folders": "Ordner",
+    "versionRelease": "Tishe {{version}}, Release {{release}}"
+  },
+  "debug": {
+    "onBefore": "Der Debug-Modus ist an und bleibt es auch nach einem Neustart.",
+    "onAfter": "blendet ihn aus.",
+    "log": "Protokoll",
+    "previews": "Vorschauen",
+    "keyboard": "Tastatur",
+    "transcription": "Transkription"
+  },
+  "release": {
+    "available": "Version {{release}} ist erschienen",
+    "openPage": "Release-Seite auf GitHub öffnen",
+    "upToDate": "Das ist die neueste Version",
+    "checkFailed": "Updates konnten nicht geprüft werden"
+  },
+  "next": {
+    "lead": "Tishe ist der erste Teil von Private Memory: ein privates Gedächtnis Ihrer Gespräche, das vollständig auf Ihrem Computer lebt.",
+    "now": "Schon heute schreibt Tishe Diktate in jede App und transkribiert lange Aufnahmen mit Sprechertrennung. Ohne Internet und ohne Konto.",
+    "planTitle": "In den nächsten Versionen",
+    "plan": {
+      "meetings": {
+        "title": "Meetings aufnehmen",
+        "text": "Ihr Mikrofon und die anderen Teilnehmer als zwei Spuren, der Text erscheint schon während des Gesprächs."
+      },
+      "summaries": {
+        "title": "Meeting-Zusammenfassungen",
+        "text": "Entscheidungen und Aufgaben direkt nach dem Stopp, in der Sprache des Meetings, vom eingebauten Sprachmodell."
+      },
+      "search": {
+        "title": "Suche in Meetings",
+        "text": "zuerst nach Wörtern, dann nach Bedeutung."
+      },
+      "agents": {
+        "title": "Notizen und Assistenten",
+        "text": "ein Meeting-Ordner für Obsidian und Zugriff für KI-Assistenten auf Ihre Meetings über MCP, weiterhin ohne Cloud."
+      }
+    },
+    "order": "Keine Termine: Die Reihenfolge kann sich je nach Feedback ändern.",
+    "freeTitle": "Kostenlos und Open Source",
+    "freeText": "Der Kern von Tishe ist kostenlos und bleibt es. Verfolgen Sie die Releases und sagen Sie uns auf GitHub, was fehlt.",
+    "follow": "Auf GitHub folgen",
+    "feedback": "Problem oder Idee melden"
+  },
+  "fileErrors": {
+    "notFound": "Datei nicht gefunden: Sie wurde verschoben oder gelöscht.",
+    "noAudio": "Die Datei hat keinen Ton oder konnte nicht gelesen werden.",
+    "unreadable": "Der Ton der Datei konnte nicht gelesen werden. Die Datei ist möglicherweise beschädigt.",
+    "noModel": "Kein Spracherkennungsmodell ausgewählt: Wählen Sie eines unter «$t(sidebar.models)».",
+    "noSpeakerModel": "Das Stimmenmodell ist nicht heruntergeladen: Laden Sie es unter «$t(transcription.more.speakers)» herunter.",
+    "noLlmModel": "Das Sprachmodell ist nicht heruntergeladen: Laden Sie es unter «$t(sidebar.llm)» herunter.",
+    "noLlmRuntime": "Die eingebaute Sprachmodell-Engine fehlt. Installieren Sie Tishe neu.",
+    "cloudKey": "Die Cloud-Erkennung braucht einen API-Schlüssel.",
+    "cloudConfig": "Die Cloud-Erkennung ist nicht eingerichtet: Geben Sie Adresse und Modell an.",
+    "busy": "Gerade wird bereits eine andere Datei transkribiert.",
+    "noSpace": "Der Datenträger ist voll.",
+    "fileInUse": "Das Dokument ist in einem anderen Programm geöffnet (zum Beispiel Word). Schließen Sie es und versuchen Sie es erneut.",
+    "accessDenied": "Kein Zugriff auf den Ordner für das Dokument. Wählen Sie einen anderen Ordner: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Spracherkennungsmodell herunterladen",
+      "text": "Es wandelt Sprache in Text um – für Aufnahmen und für Diktate. Es läuft auf diesem Computer, ohne Internet. Du musst es nur einmal herunterladen.",
+      "language": "Sprache der Aufnahmen",
+      "allModels": "Alle Modelle",
+      "onDisk": "Das Modell {{name}} ist bereits auf dem Computer – du musst es nur noch einschalten.",
+      "whileDownloading": "Während des Downloads kannst du schon Aufnahmen hinzufügen: Die Transkription startet, sobald das Modell bereit ist."
+    },
+    "llm": {
+      "title": "Für die Überarbeitung wird eine KI benötigt",
+      "what": "Die KI korrigiert Erkennungsfehler und setzt Satzzeichen. Wir empfehlen die integrierte: Sie läuft auf diesem Computer, der Text verlässt ihn nicht.",
+      "recommended": "{{size}} auf der Festplatte · braucht etwa {{ram}} GB Arbeitsspeicher · einmaliger Download",
+      "otherWays": "Eigener Server oder Cloud",
+      "downloadOn": "{{size}} herunterladen und einschalten",
+      "runtimeTitle": "Die integrierte KI ist nicht verfügbar",
+      "runtime": "In diesem Build fehlt die Engine für die integrierte KI. Du kannst im Bereich „$t(sidebar.llm)“ einen eigenen Server (Ollama, LM Studio) oder einen Cloud-Dienst verbinden.",
+      "openPage": "„$t(sidebar.llm)“ öffnen",
+      "notSetUp": "{{reason}} – ohne das funktioniert die KI nicht. Schalte die Überarbeitung ein und schließe die Einrichtung im Bereich „$t(sidebar.llm)“ ab.",
+      "onAndSetUp": "Einschalten und einrichten",
+      "onDisk": "Schon auf dem Computer – kein Download nötig.",
+      "turnOn": "Überarbeitung einschalten"
+    },
+    "quick": {
+      "title": "Schnellstart",
+      "progress": "{{done}} von {{total}}",
+      "hide": "Ausblenden",
+      "hideHint": "„Schnellstart“ ausblenden – alle Einstellungen bleiben in den Bereichen links",
+      "model": "Spracherkennungsmodell herunterladen",
+      "modelDone": "Spracherkennungsmodell bereit · {{name}}",
+      "dictation": "Diktat ausprobieren",
+      "dictationDone": "Diktat funktioniert · Diktate werden unter „Verlauf“ gespeichert",
+      "file": "Aufnahme transkribieren",
+      "fileDone": "Erste Aufnahme transkribiert",
+      "fileHint": "Ziehe eine Audio- oder Videodatei in dieses Fenster oder wähle Dateien aus – neben der Aufnahme erscheint ein Word-Dokument.",
+      "llm": "Überarbeitung durch KI",
+      "optional": "optional",
+      "llmHint": "Korrigiert Erkennungsfehler und Zeichensetzung in Dokumenten. {{model}}: {{size}}, läuft auf diesem Computer.",
+      "llmReady": "KI bereit · {{model}}",
+      "doneTitle": "Alles bereit",
+      "doneText": "Tishe ist eingerichtet. Diktate findest du unter „Verlauf“, Dokumente in der Liste unten, Einstellungen in den Bereichen links.",
+      "close": "Schließen"
+    }
   }
 }

@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Ayarlar...",
-    "checkUpdates": "Güncellemeleri Kontrol Et...",
-    "copyLastTranscript": "Son Transkripti Kopyala",
+    "settings": "Tishe'yi aç…",
+    "checkUpdates": "Güncellemeleri denetle…",
+    "copyLastTranscript": "Son dikteyi kopyala",
     "unloadModel": "Modeli Boşalt",
     "model": "Model",
     "quit": "Çıkış",
     "cancel": "İptal",
-    "secureInputWarning": "⚠ Kısayollar Secure Input tarafından engelleniyor"
+    "secureInputWarning": "⚠ Kısayollar Secure Input tarafından engelleniyor",
+    "modelLocked": "Transkripsiyon sürerken model değiştirilemez",
+    "tooltipDictation": "Dikte: {{shortcut}}",
+    "backgroundTitle": "Tishe arka planda çalışmaya devam ediyor",
+    "backgroundBody": "Transkripsiyon sürüyor. Hazır olduğunda bildirim alacaksınız."
   },
   "sidebar": {
     "general": "Genel",
-    "models": "Modeller",
+    "models": "Konuşma tanıma",
     "advanced": "Gelişmiş",
     "postProcessing": "Son İşlem",
     "history": "Geçmiş",
     "debug": "Hata Ayıklama",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "label": "Bölümler",
+    "transcription": "Transkripsiyon",
+    "dictation": "Dikte",
+    "meetings": "Toplantılar",
+    "llm": "Düzenleme",
+    "app": "Uygulama",
+    "soon": "yakında",
+    "state": {
+      "running": "sürüyor",
+      "new": "hazır, görüntülenmedi",
+      "downloading": "indiriliyor"
+    },
+    "next": "Sırada ne var"
   },
   "onboarding": {
     "subtitle": "Başlamak için bir transkripsiyon modeli seçin",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "İzinler Gerekli",
-      "description": "Handy'nin düzgün çalışabilmesi için birkaç izne ihtiyacı var.",
+      "description": "Tishe'nin düzgün çalışabilmesi için birkaç izne ihtiyacı var.",
       "microphone": {
         "title": "Mikrofon Erişimi",
         "description": "Sesinizi transkripsiyon için alabilmek için gereklidir."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "İzinler kontrol edilemedi. Lütfen tekrar deneyin.",
         "requestFailed": "İzin isteği başarısız oldu. Lütfen tekrar deneyin."
-      }
+      },
+      "skip": "Mikrofon olmadan devam et",
+      "skipHint": "Mikrofon yalnızca dikte için gerekir – dosya transkripsiyonu onsuz da çalışır. İzni daha sonra Windows ayarlarından verebilirsiniz."
+    },
+    "step": "Adım {{n}} / {{total}}",
+    "language": {
+      "title": "Kayıtlarınız hangi dilde?",
+      "description": "Bu dil için bir konuşma tanıma modeli indireceğiz. Model bu bilgisayarda çalışır.",
+      "ru": {
+        "title": "Rusça",
+        "limit": "Yalnızca Rusça: İngilizce konuşmayı tanımaz"
+      },
+      "en": {
+        "title": "İngilizce",
+        "limit": "Yalnızca İngilizce"
+      },
+      "eu": {
+        "title": "Başka bir Avrupa dili",
+        "limit": "25 Avrupa dili, dili kendisi tanır"
+      },
+      "other": {
+        "title": "Türkçe veya başka bir dil",
+        "limit": "30 dil: Çince, Japonca, Korece, Arapça, Türkçe, Hintçe ve diğerleri",
+        "limitWhisper": "birçok dil, işlemcide daha yavaş"
+      },
+      "onDisk": "zaten bu bilgisayarda",
+      "shared": "Model hem dikte hem de dosya transkripsiyonu için kullanılacak. Daha sonra “$t(sidebar.models)” bölümünden değiştirebilirsiniz.",
+      "otherModel": "Başka bir model seç",
+      "hideCatalog": "Model listesini gizle",
+      "download": "{{size}} indir",
+      "use": "{{name}} kullan",
+      "downloadNamed": "{{name}} indir · {{size}}",
+      "once": "Bir kez indirilir, sonra internetsiz çalışır"
+    },
+    "download": {
+      "title": "{{name}} indiriliyor",
+      "description": "Bu sırada başka işler yapabilirsiniz: pencereyi kapatmak indirmeyi durdurmaz.",
+      "starting": "Bağlanıyor…",
+      "amount": "{{done}} / {{total}}",
+      "speed": "{{n}} MB/sn",
+      "preparing": "Model hazırlanıyor…",
+      "cancel": "İptal",
+      "failed": "Model indirilmedi",
+      "failedTitle": "Model indirilemedi",
+      "failedHint": "Sunucuya bağlantı yok. İnterneti kontrol edip Yeniden dene'ye basın.",
+      "retry": "Yeniden dene",
+      "continue": "Beklemeden Tishe'yi aç"
+    },
+    "welcome": {
+      "title": "Tishe'ye hoş geldiniz",
+      "lead": "Tishe konuşmayı doğrudan bilgisayarınızda metne dönüştürür – internet ve hesap gerekmez.",
+      "files": "Kayıtların transkripsiyonu – toplantılar, dersler, röportajlar – Word belgesi olarak",
+      "dictation": "Her uygulamada dikte: bir tuşu basılı tutun, konuşun – metin belirir",
+      "private": "Kayıtlar ve metinler bilgisayardan çıkmaz",
+      "stepsLabel": "Kurulum adımları",
+      "steps": {
+        "permissions": "İzinler",
+        "language": "Kayıtların dili",
+        "download": "Model indirme"
+      },
+      "credit": "Viktor Pereverzev · Handy tabanlı"
+    },
+    "tips": {
+      "title": "İndirilirken – nasıl çalışır",
+      "dictationBefore": "Dikte: herhangi bir uygulamada",
+      "dictationAfter": "tuşunu basılı tutup konuşun. Bıraktığınızda metin imlecin olduğu yerde belirir.",
+      "files": "Transkripsiyon: bir ses veya video dosyasını Tishe penceresine sürükleyin – bir Word belgesi elde edersiniz.",
+      "editing": "Yapay zekâ ile düzenleme hataları ve noktalamayı düzeltir – transkripsiyon tarifinden açılır."
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "İngilizce'ye çeviriyi destekleyen modelleri filtrele"
       },
       "noModelsMatch": "Bu filtreyle eşleşen model yok.",
+      "params": {
+        "button": "Parametreler",
+        "open": "Model parametreleri",
+        "title": "Parametreler: {{name}}",
+        "savedAtOnce": "Değişiklikler hemen kaydedilir. Alanlar kullanılan değerleri gösterir; değiştirilmiş bir değerin sıfırlama düğmesi vardır.",
+        "resetAll": "Varsayılanlara dön",
+        "done": "Bitti",
+        "resetField": "Varsayılana dön",
+        "defaultRange": "Varsayılan {{value}}; izin verilen {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Yerleşik talimat. Kendi talimatınızı kullanmak için metni düzenleyin; yerleşik olana dönmek için temizleyin.",
+          "own": "Sizin talimatınız. Sıfırlama düğmesi yerleşik olanı geri getirir."
+        },
+        "asr": {
+          "segment": {
+            "label": "Dosyalar için bölüm uzunluğu, saniye",
+            "description": "Dosyalar duraklamalardan kesilen ve en fazla bu uzunlukta olan parçalar hâlinde tanınır. En kısa parça da buna göre küçülür (25 sn'de 12 sn). Ölçülen: 12–25 sn, noktalamayı 60–120 sn'den daha iyi korur."
+          },
+          "device": {
+            "label": "Aygıt",
+            "description": "“Yalnızca işlemci” grafik yongasını boşaltır ama genellikle daha yavaştır. Dikte için de geçerlidir; bir sonraki tanımadan itibaren etkili olur.",
+            "general": "Hızlandırma ayarındaki gibi",
+            "cpu": "Yalnızca işlemci",
+            "notHere": "Bu modelin aygıtı genel hızlandırma ayarına uyar."
+          }
+        },
+        "llm": {
+          "promptNote": "Rusça ve İngilizce metin için talimatlar. Diğer diller, dilin adıyla birlikte yerleşik İngilizce talimatı alır. Transkripsiyon bölümündeki özel bir talimat bunları tüm diller için değiştirir.",
+          "promptRu": "Rusça metin için talimat",
+          "promptEn": "İngilizce metin için talimat",
+          "temperature": {
+            "label": "Sıcaklık",
+            "description": "Düşük değer daha dikkatlidir: 0,8'de model kelime uydurdu, 0,2 düzenleme için ölçülen değerdir."
+          },
+          "chunk": {
+            "label": "Parça boyutu, karakter",
+            "description": "Modelin tek seferde düzenlediği metin miktarı. Küçük modeller kısa parçalarda aslına daha sadık kalır."
+          },
+          "context": {
+            "label": "Bağlam, token",
+            "description": "Talimat, parça ve yanıt için alan. Daha fazlası daha çok bellek kullanır."
+          },
+          "answer": {
+            "label": "Yanıt sınırı, token",
+            "description": "Kendini tekrar etmeye başlayan bir modeli durdurur. 3000 karakterlik bir parça yaklaşık 1100 token'dır."
+          },
+          "threads": {
+            "label": "Yanıt için işlemci iş parçacıkları",
+            "description": "Metni okumak her zaman tüm donanım iş parçacıklarını kullanır.",
+            "auto": "Otomatik – çekirdek başına bir"
+          },
+          "restartNote": "Sıcaklık, bağlam, yanıt sınırı ve iş parçacıkları model bir sonraki başlatıldığında geçerli olur: çalışan bir model sonraki işten önce yeniden başlar.",
+          "invalid": "Kaydedilmedi: {{detail}}",
+          "contextTooSmall": "Kaydedilmedi: bağlam parçayı ve yanıtı alabilmeli – mevcut parça boyutu ve yanıt sınırıyla en az {{min}} token."
+        }
+      },
       "yourModels": "İndirilen Modeller",
       "availableModels": "İndirilebilir",
-      "searchPlaceholder": "Modelleri ada göre ara…",
+      "searchPlaceholder": "Ada göre ara",
       "rescan": {
         "label": "Yeniden Tara",
-        "tooltip": "Handy dışında modeller klasörüne veya Hugging Face önbelleğine eklenen modelleri yeniden tara"
+        "tooltip": "Klasöre elle eklenen modelleri bul"
       }
     },
     "general": {
       "title": "Genel",
       "shortcut": {
-        "title": "Handy Kısayolları",
+        "title": "Tishe kısayolları",
         "description": "Sesle yazma kaydını başlatmak için klavye kısayollarını yapılandırın",
         "loading": "Kısayollar yükleniyor...",
         "none": "Kısayol yapılandırılmadı",
         "notFound": "Kısayol bulunamadı",
-        "pressKeys": "Tuşlara basın...",
+        "pressKeys": "Bir tuş birleşimine basın… (Esc iptal eder)",
         "bindings": {
           "transcribe": {
-            "name": "Transkripsiyon Kısayolu",
-            "description": "Sesinizi kaydetmek ve metne dönüştürmek için klavye kısayolu."
+            "name": "Dikte",
+            "description": "Basılı tutun ve konuşun – metin etkin pencereye yapıştırılır"
           },
           "cancel": {
-            "name": "İptal Kısayolu",
-            "description": "Mevcut kaydı iptal etmek için klavye kısayolu."
+            "name": "İptal",
+            "description": "Süren kaydı durdurur"
           },
           "transcribe_with_post_process": {
-            "name": "Son İşlem Kısayolu",
-            "description": "İsteğe bağlı: Transkripsiyonunuza her zaman yapay zekâ ile son işlem uygulayan özel bir kısayol tuşu."
+            "name": "Düzenlemeli dikte tuşu",
+            "description": "Metin, yapay zekâ ile düzenlendikten sonra yapıştırılır"
           }
         },
         "errors": {
           "restore": "Orijinal kısayol geri yüklenemedi",
           "set": "Kısayol ayarlanamadı: {{error}}",
-          "reset": "Kısayol orijinal değerine sıfırlanamadı"
+          "reset": "Kısayol orijinal değerine sıfırlanamadı",
+          "taken": "Bu tuşu zaten başka bir program kullanıyor. Başka bir tuş seçin.",
+          "duplicate": "Bu tuş burada zaten başka bir eylem için kullanılıyor."
         }
       },
       "language": {
-        "title": "Dil",
-        "description": "Konuşma tanıma dilini seçin. 'Otomatik' seçeneği dili kendisi belirler, ancak belirli bir dil seçmek o dildeki doğruluğu artırabilir.",
+        "title": "Tanıma dili",
+        "description": "“Otomatik” dili kendisi algılar; dili seçmek daha güvenilirdir",
         "searchPlaceholder": "Dil ara...",
         "noResults": "Dil bulunamadı",
         "auto": "Otomatik"
       },
       "shortcutActivation": {
-        "title": "Kısayol davranışı",
-        "description": "Transkripsiyon kısayolunun kaydı nasıl başlatıp durduracağını seçin.",
+        "title": "Tuş davranışı",
+        "description": "Tuşun kaydı nasıl başlatıp durdurduğu",
         "options": {
           "holdOrToggle": "Otomatik",
           "pushToTalk": "Basılı tut",
@@ -233,29 +375,40 @@
       "title": "Ses",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Tercih ettiğiniz mikrofon cihazını seçin",
+        "description": "Sesin nereden kaydedileceği",
         "placeholder": "Mikrofon seçin...",
         "loading": "Yükleniyor..."
       },
       "channel": {
         "title": "Giriş Kanalı",
-        "description": "Kayıt yapılacak giriş kanalını seçin. Ses arabiriminizde birden fazla giriş varsa bu seçeneği kullanın.",
+        "description": "Birden fazla girişi olan ses kartları için",
         "average": "Tüm kanalların ortalaması",
         "channel": "Kanal {{n}}"
       },
       "audioFeedback": {
-        "label": "Sesli Geri Bildirim",
-        "description": "Kayıt başladığında ve bittiğinde ses çalar"
+        "label": "Sesli geri bildirim",
+        "description": "Kaydın başında ve sonunda bir ses"
       },
       "outputDevice": {
         "title": "Çıkış Cihazı",
-        "description": "Geri bildirim sesleri için ses çıkış cihazını seçin",
+        "description": "Geri bildirim seslerinin çalınacağı yer",
         "placeholder": "Çıkış cihazı seçin...",
         "loading": "Yükleniyor..."
       },
       "volume": {
         "title": "Ses Seviyesi",
-        "description": "Sesli geri bildirimlerin ses seviyesini ayarlayın"
+        "description": "Sesli geri bildirimlerin ses seviyesini ayarlayın",
+        "levels": {
+          "quiet": "Sessiz",
+          "medium": "Orta",
+          "loud": "Yüksek"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Kendi sesiniz",
+        "preview": "Başlama ve bitiş seslerini çal"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Deneysel"
       },
       "experimentalToggle": {
-        "label": "Deneysel Özellikler",
-        "description": "Hala geliştirme aşamasında olan deneysel özellikleri etkinleştir."
+        "label": "Deneysel özellikleri göster",
+        "description": "Geliştirme aşamasındaki özellikler; kararsız olabilir"
       },
       "lazyStreamClose": {
         "label": "Transkripsiyonlar Arasında Mikrofonu Açık Tut",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Gizli Başlat",
-        "description": "Pencereyi açmadan sistem tepsisinde başlatır."
+        "label": "Başlangıçta pencereyi gizle",
+        "description": "Program bildirim alanında başlar"
       },
       "autostart": {
-        "label": "Başlangıçta Çalıştır",
-        "description": "Bilgisayara giriş yaptığınızda Handy otomatik olarak başlatılır."
+        "label": "Windows ile başlat",
+        "description": "Dikte, oturum açar açmaz hazırdır"
       },
       "showTrayIcon": {
-        "label": "Tepsi Simgesini Göster",
-        "description": "Handy simgesini sistem tepsisinde göster."
+        "label": "Bildirim alanında simge",
+        "description": "Simge olmadan, kapatılan pencere ancak program yeniden başlatılınca geri gelir"
       },
       "overlay": {
         "style": {
-          "title": "Ekran Katmanı",
-          "description": "Kayıt sırasında gösterilecek ekran katmanını seçin: 'Yok' katmanı gizler, 'Sade' küçük bir gösterge gösterir, 'Canlı' siz konuşurken transkripsiyonu gerçek zamanlı gösterir (yalnızca akış destekli modeller — model seçicide 'Akış' rozetini arayın). Linux'ta 'Yok' önerilir.",
+          "title": "Gösterge stili",
+          "description": "Dikte sırasında imlecin yanında ne gösterileceği",
           "options": {
             "none": "Yok",
             "minimal": "Sade",
             "live": "Canlı"
-          }
+          },
+          "noneConsequence": "Gösterge olmadan hatalar gösterilmez: yapıştırılamayan metin Geçmiş'te durur"
         },
         "position": {
-          "title": "Ekran Katmanı Konumu",
-          "description": "Ekran katmanının kayıt ve transkripsiyon sırasında nerede görüneceğini belirler.",
+          "title": "Gösterge konumu",
+          "description": "Ekranın üstünde veya altında",
           "options": {
             "bottom": "Alt",
             "top": "Üst"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Yapıştırma Yöntemi",
-        "description": "Metnin nasıl ekleneceğini seçin. Doğrudan: sistem girişiyle yazmayı simüle eder. Yok: yapıştırmayı atlar, sadece geçmişi/panoyu günceller.",
+        "description": "Metnin etkin pencereye nasıl ulaşacağı",
         "options": {
           "clipboard": "Pano ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Pano (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Pano Yönetimi",
-        "description": "Panoyu Değiştirme, transkripsiyon sonrası mevcut pano içeriğini korur. Panoya Kopyala ise yapıştırma işleminden sonra transkripsiyon sonucunu panoda bırakır.",
+        "title": "Pano",
+        "description": "Panodaki önceki içeriği koru veya dikte edilen metni orada bırak",
         "options": {
           "dontModify": "Panoyu Değiştirme",
           "copyToClipboard": "Panoya Kopyala"
         }
       },
       "autoSubmit": {
-        "title": "Otomatik Gönder",
-        "description": "Metin eklendikten sonra seçilen tuş kombinasyonunu otomatik olarak gönderir. macOS'ta Cmd+Enter, Windows/Linux'ta Super+Enter geçerlidir.",
+        "title": "Yapıştırdıktan sonra gönder",
+        "description": "Yapıştırdıktan hemen sonra seçilen tuşa bas, örneğin sohbette Enter",
         "options": {
           "off": "Kapalı",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "İngilizce'ye Çevir",
-        "description": "Transkripsiyon sırasında diğer dillerden İngilizce'ye otomatik olarak çevirir."
+        "description": "Herhangi bir dildeki konuşma İngilizce metne dönüşür"
       },
       "modelUnload": {
-        "title": "Modeli Boşalt",
-        "description": "Belirtilen süre boyunca kullanılmadığında modelin GPU/CPU belleğini otomatik olarak serbest bırakır.",
+        "title": "Modeli şu süreden sonra bellekten kaldır…",
+        "description": "Model bir süre gerekmediğinde belleği boşaltır",
         "options": {
           "never": "Asla",
           "immediately": "Hemen",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Özel Kelimeler",
-        "description": "Desteklenen modellerin adları ve özel terimleri tanımasına yardımcı olun. Bulanık düzeltme şu anda A–Z harflerini ve rakamları kullanan sözcüklerle sınırlıdır.",
+        "title": "Kendi kelimeleriniz",
+        "description": "Whisper modelleri için bir ipucu; diğer modeller yalnızca düzeltme alır, o da yalnızca A–Z harfli kelimeler için",
         "placeholder": "Kelime ekle",
         "add": "Ekle",
         "remove": "{{word}} Kaldır",
-        "duplicate": "\"{{word}}\" zaten mevcut"
+        "duplicate": "\"{{word}}\" zaten mevcut",
+        "removed": "“{{word}}” kaldırıldı"
       },
       "voiceActivityDetection": {
-        "title": "Ses Etkinliği Algılama",
-        "description": "Kayıtlardaki sessizliği filtreler. Akış destekli modeller daha uzun bir VAD kuyruğu kullanır; VAD devre dışı bırakıldığında ham ses kaydedilir."
+        "title": "Sessizliği at",
+        "description": "Tanımaya yalnızca konuşma gider"
       },
       "vadBackend": {
         "title": "Ses Etkinliği Arka Ucu",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Dolgu Sözcüklerini Kaldır",
-        "description": "Transkripsiyonlardaki yaygın duraksama sözcüklerini kaldırır. Bunları korumak için kapatın."
+        "description": "Yapıştırılan metindeki “uh”, “hmm”"
       },
       "chineseScript": {
         "title": "Çince yazı",
-        "description": "Mandarin ve Kantonca transkripsiyonları Basitleştirilmiş veya Geleneksel karakterlerle yazar. Diğer diller değiştirilmez.",
+        "description": "Basitleştirilmiş veya geleneksel karakterler",
         "options": {
           "asTranscribed": "Transkripsiyondaki gibi",
           "simplified": "Basitleştirilmiş",
@@ -434,20 +589,21 @@
           "title": "Temel URL",
           "description": "Seçili sağlayıcı için API temel URL'si. Yalnızca özel sağlayıcı düzenlenebilir.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Adresi seçilen sağlayıcı belirler",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API Anahtarı",
-          "description": "Seçili sağlayıcı için API anahtarı.",
+          "description": "Yalnızca bu bilgisayarda saklanır",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Özel uç noktanızın beklediği model tanımlayıcısını girin.",
-          "descriptionDefault": "Seçili sağlayıcının sunduğu bir modeli seçin.",
+          "descriptionCustom": "Sunucunuzdaki model adı",
+          "descriptionDefault": "Liste sağdaki düğmeyle yenilenir",
           "placeholderWithOptions": "Model ara veya seç",
           "placeholderNoOptions": "Model adı yazın",
-          "refreshModels": "Modelleri Yenile"
+          "refreshModels": "Model listesini yenile"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Seçili Prompt",
           "description": "Transkripsiyonları iyileştirmek için bir şablon seçin veya yeni bir tane oluşturun. Yakalanan transkripte referans vermek için prompt metni içinde ${output} kullanın."
         },
-        "noPrompts": "Kullanılabilir prompt yok",
-        "selectPrompt": "Prompt Seç",
+        "noPrompts": "Talimat yok",
+        "selectPrompt": "Bir talimat seçin",
         "createNew": "Yeni Prompt Oluştur",
-        "promptLabel": "Prompt Etiketi",
+        "promptLabel": "Ad",
         "promptLabelPlaceholder": "Prompt adı girin",
-        "promptInstructions": "Prompt Talimatları",
+        "promptInstructions": "Talimat metni",
         "promptInstructionsPlaceholder": "Transkripsiyondan sonra çalıştırılacak talimatları yazın. Örnek: Aşağıdaki metnin dilbilgisini ve açıklığını iyileştir: ${output}",
         "promptTip": "İpucu: Transkribe edilen metni promptunuza eklemek için <code>${output}</code> kullanın.",
         "updatePrompt": "Promptu Güncelle",
-        "deletePrompt": "Promptu Sil",
-        "createPrompt": "Prompt Oluştur",
+        "deletePrompt": "Sil",
+        "createPrompt": "Oluştur",
         "cancel": "İptal",
-        "selectToEdit": "Ayrıntılarını görüntülemek ve düzenlemek için yukarıdan bir prompt seçin.",
-        "createFirst": "İlk son işlem promptunuzu oluşturmak için yukarıdaki “Yeni Prompt Oluştur” seçeneğine tıklayın."
+        "selectToEdit": "Düzenlemek için bir talimat seçin.",
+        "createFirst": "İlk talimatı eklemek için “Oluştur”a tıklayın."
+      },
+      "local": {
+        "intro": "Model doğrudan bu bilgisayarda çalışır: internet yok, anahtar yok, metniniz cihazdan hiç çıkmaz. İsterseniz bir model indirin. Gerektiğinde kendiliğinden başlar, boşta kalınca bellekten kaldırılır. İşlemcide çalıştığı için bulut hizmetlerinden daha yavaştır. Tüm modeller 16 GB RAM'li bir dizüstü bilgisayara sığar.",
+        "runtimeMissing": "Yerleşik yapay zekâ motoru bulunamadı. Lütfen Tishe'yi yeniden yükleyin.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Dengeli",
+            "model": "Qwen3.5 4B",
+            "description": "Qwen 4B'nin sade sürümü. Noktalamada özenli, ancak gerçek konuşmalarda az sayıda tanıma hatası düzeltir (testlerimiz, 06.10.2026). Hızlandırmalı sürüm daha doğru ve daha hızlıdır."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Google'ın modeli, aslına sadık. Google'ın hızlandırmalı sürümündeki Gemma gibi düzenler, ancak yaklaşık 1,25 kat daha yavaştır."
+          },
+          "gigachat31": {
+            "title": "Rusça için",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "En baştan Rusça üzerinde eğitildi. Token başına 10B parametresinin yalnızca 1,8B'si etkindir, bu yüzden boyutunun düşündürdüğünden daha hızlıdır. Daha fazla bellek ister."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Rusça için Qwen",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Rusça sözcük dağarcığı ve Rusça metinlerle ek eğitim almış Qwen3 4B (2507). Testte Gemma E2B'den daha az düzeltme yapıyor ve onun yarı hızında (kayıt saati başına yaklaşık 27 dk)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIA'nın küçük modeli, resmî olarak yalnızca İngilizce. Testte metni hem Rusçada hem İngilizcede neredeyse hiç değiştirmedi ve Gemma'dan yavaş (kayıt saati başına yaklaşık 35 dk)."
+          },
+          "qwen35_9b": {
+            "title": "En yüksek",
+            "model": "Qwen3.5 9B",
+            "description": "En akıllı yerel model: bağlamda ve zor düzeltmelerde en iyisi. En yavaşı."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Dengeli",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Yerleşik hızlandırmalı daha yeni bir sürümde Qwen 4B. Sade Qwen 4B'den daha doğru ve yaklaşık 1,2 kat daha hızlı, ancak testlerimizde Gemma'nın yarısı kadar hata düzeltir."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma hafif",
+            "model": "Gemma 4 E2B · Google sürümü",
+            "description": "Google'ın resmî sürümündeki küçük Gemma, hızlandırmalı (+98 MB). Gemma E4B'den iki kat hızlı (kayıt saati başına yaklaşık 14 dk), düzeltmelerinin yaklaşık 2/3'ünü yapar."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google sürümü",
+            "description": "Testlerimizde en iyi kalite (06.10.2026). Google'ın resmî sürümü, hızlandırmalı (+99 MB): sade Gemma E4B gibi düzenler, yaklaşık 1,25 kat daha hızlı. Kayıt saati başına yaklaşık 26 dk."
+          }
+        },
+        "speedupBadge": "hızlandırma",
+        "speedupHint": "Küçük bir yardımcı model birkaç kelimeyi önceden tahmin eder, ana model bunları doğrular. İşlemcide bu yaklaşık 1,2–1,3 kat daha hızlıdır.",
+        "untested": "test edilmedi",
+        "delete": "Modeli sil",
+        "state": {
+          "stopped": "Belleğe yüklenmedi",
+          "loading": "Belleğe yükleniyor…",
+          "ready": "Belleğe yüklendi"
+        },
+        "unloadNow": "Şimdi bellekten kaldır",
+        "unload": {
+          "title": "Bellekten kaldırma",
+          "description": "Modelin bellekten kaldırılmadan önce ne kadar boşta kalabileceği; kaldırılınca yaklaşık 2–3 GB bellek boşalır.",
+          "immediately": "İşlemden hemen sonra",
+          "min2": "2 dakika sonra",
+          "min5": "5 dakika sonra",
+          "min15": "15 dakika sonra",
+          "never": "Asla"
+        },
+        "recommended": "Önerilen"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Kayıtlar Klasörünü Aç",
       "loading": "Geçmiş yükleniyor...",
       "empty": "Henüz transkripsiyon yok. Geçmişinizi oluşturmak için kayda başlayın!",
-      "copyToClipboard": "Transkripsiyonu panoya kopyala",
+      "copyToClipboard": "Metni kopyala",
       "copyError": "Transkripsiyon panoya kopyalanamadı.",
       "save": "Transkripsiyonu kaydet",
       "unsave": "Kaydedilenlerden kaldır",
       "delete": "Kaydı sil",
       "deleteError": "Kayıt silinemedi. Lütfen tekrar deneyin.",
-      "retranscribe": "Yeniden transkribe et",
+      "retranscribe": "Yeniden tanı",
       "retranscribeError": "Yeniden transkripsiyon başarısız oldu. Lütfen tekrar deneyin.",
-      "transcribing": "Transkribe ediliyor...",
+      "transcribing": "Tanınıyor…",
       "transcriptionFailed": "Transkripsiyon başarısız oldu. Yeniden deneme simgesini kullanarak tekrar transkribe edebilirsiniz."
     },
     "debug": {
       "title": "Hata Ayıklama",
       "logDirectory": {
-        "title": "Log Dizini",
-        "description": "Log dosyalarının saklandığı konum"
+        "title": "Günlük klasörü",
+        "description": "Günlüğü hata raporuna ekleyin"
       },
       "logLevel": {
         "title": "Log Seviyesi",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Güncellemeleri Kontrol Et",
-        "description": "Handy için yeni sürümleri otomatik olarak kontrol eder",
-        "lockedDescription": "Sistem yapılandırması tarafından devre dışı bırakıldı (HANDY_DISABLE_UPDATER)"
+        "description": "Her açılışta bir kez GitHub'a Tishe'nin yeni bir sürümünün çıkıp çıkmadığını sor. Kayıtlar ve metinler gönderilmez",
+        "lockedDescription": "Bu sürümde güncelleme denetimi kapalı"
       },
       "soundTheme": {
         "label": "Ses Teması",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Kelime Düzeltme Eşiği",
-        "description": "Özel kelime düzeltmeleri için hassasiyet"
+        "description": "Bir kelimenin sizinkilerden biriyle değiştirilmesi için ne kadar benzemesi gerektiği"
       },
       "historyLimit": {
-        "title": "Geçmiş Limiti",
-        "description": "Saklanacak maksimum geçmiş kaydı sayısı",
+        "title": "Kaç dikte saklansın",
+        "description": "Saklanan dikteler sayılmaz",
         "entries": "kayıt"
       },
       "recordingRetention": {
-        "title": "Kayıtları Otomatik Sil",
-        "description": "Alan tasarrufu için eski kayıtları otomatik olarak siler",
+        "title": "Eski dikteleri sil",
+        "description": "Metinle birlikte ses de silinir",
         "never": "Asla",
         "preserveLimit": "Son {{count}} kaydı tut",
         "days3": "3 gün sonra",
@@ -538,24 +765,24 @@
         "placeholder": "Saklama süresi seçin..."
       },
       "alwaysOnMicrophone": {
-        "label": "Mikrofon Her Zaman Açık",
-        "description": "Daha hızlı yanıt için mikrofonu aktif tutar"
+        "label": "Mikrofonu açık tut",
+        "description": "Kayıt daha hızlı başlar, ama mikrofon sürekli meşgul olur"
       },
       "clamshellMicrophone": {
-        "title": "Kapalı Kapak Mikrofonu",
-        "description": "Dizüstü bilgisayar kapağı kapalıyken kullanılacak mikrofon"
+        "title": "Kapak kapalıyken mikrofon",
+        "description": "Dizüstü bilgisayar kapalıyken hangi mikrofonun kullanılacağı"
       },
       "postProcessingToggle": {
         "label": "Son İşlem",
         "description": "Transkripsiyon sonrası yapay zekâ destekli metin iyileştirmeyi etkinleştirir"
       },
       "muteWhileRecording": {
-        "label": "Kayıt Sırasında Sessize Al",
-        "description": "Kayıt sırasında sistem sesini kapatır"
+        "label": "Kayıt sırasında bilgisayarın sesini kapat",
+        "description": "Müzik ve video kayda girmez"
       },
       "appendTrailingSpace": {
-        "label": "Sonuna Boşluk Ekle",
-        "description": "Yapıştırılan transkripsiyondan sonra boşluk ekler"
+        "label": "Sona boşluk ekle",
+        "description": "Sonraki cümle öncekine yapışmaz"
       },
       "keyboardImplementation": {
         "title": "Klavye Uygulaması",
@@ -568,28 +795,28 @@
         "settings": "Ayarlar:"
       },
       "pasteDelay": {
-        "title": "Yapıştırma Gecikmesi (Önce)",
-        "description": "Metin kopyalandıktan sonra, yapıştırma tuşu gönderilmeden önceki gecikme (milisaniye cinsinden). Hiçbir şey yapıştırılmıyorsa artırın."
+        "title": "Yapıştırmadan önce gecikme",
+        "description": "Hiçbir şey yapıştırılmıyorsa artırın"
       },
       "pasteDelayAfter": {
-        "title": "Yapıştırma Gecikmesi (Sonra)",
-        "description": "Yapıştırma tuşundan sonra, önceki panonuz geri yüklenmeden önceki gecikme (milisaniye cinsinden). Transkripsiyon yerine eski pano içeriği yapıştırılıyorsa artırın."
+        "title": "Yapıştırdıktan sonra gecikme",
+        "description": "Panodaki eski metin yapıştırılıyorsa artırın"
       },
       "holdThreshold": {
         "title": "Basılı tutma eşiği",
-        "description": "Yalnızca Otomatik modda: kısayolun dokunma yerine basılı tutma sayılması için ne kadar süre (milisaniye) basılı tutulması gerektiği. Kısa basılı tutmalardan sonra kayıt açık kalmaya devam ediyorsa azaltın; bilinçli dokunmalar basılı tutma olarak algılanıyorsa artırın."
+        "description": "Daha kısa basış açıp kapatır, daha uzun basış basılı tutma sayılır"
       },
       "reliablePaste": {
         "title": "Güvenilir Yapıştırma (Beta)",
-        "description": "Panoyu sabit bir gecikmenin ardından değil, hedef uygulama transkripsiyonu gerçekten okuduktan sonra geri yükler. Sistem yükü altında eski pano içeriğinin yapıştırılması sorununu gidermeyi amaçlar. Pano üzerinden çalışan bir yapıştırma yöntemi gerektirir; yalnızca macOS ve Windows."
+        "description": "Sabit bir süre yerine programın metni okumasını bekle"
       },
       "recordingBuffer": {
-        "title": "Ekstra Kayıt Tamponu",
-        "description": "Tuşu bıraktıktan sonra arka plandaki sesi yakalamak için kaydı sürdürme süresi (milisaniye). 0 = ekstra tampon yok."
+        "title": "Bıraktıktan sonra kayda devam et",
+        "description": "Tuş bırakıldıktan sonra ne kadar daha kaydedileceği"
       },
       "keyboardDiagnostic": {
         "title": "Klavye Tanılaması",
-        "description": "Klavye olaylarının Handy'ye ulaşıp ulaşmadığını denetler. Yalnızca olay sayıları kaydedilir — hangi tuşlara bastığınız asla kaydedilmez.",
+        "description": "Klavye olaylarının Tishe'ye ulaşıp ulaşmadığını denetler. Yalnızca olay sayısı kaydedilir – hangi tuşlara bastığınız asla kaydedilmez.",
         "run": "10 sn'lik tanılamayı çalıştır",
         "running": "Dinleniyor… kısayolunuza birkaç kez basın (ör. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Fare",
         "verdictBlocked": "Secure Input tuş olaylarını engelliyor — normal tuş içeren kısayollar bu sorun çözülene kadar çalışamaz.",
         "verdictSuspicious": "Değiştirici olayları geldi ancak hiç tuş olayı gelmedi — Secure Input devre dışı görünmesine rağmen bir şey tuşları bastırıyor. Lütfen bunu GitHub'da bildirin.",
-        "verdictOk": "Tuş olayları Handy'ye normal şekilde ulaşıyor.",
+        "verdictOk": "Tuş olayları Tishe'ye normal şekilde ulaşıyor.",
         "verdictNoEvents": "Hiç olay yakalanmadı — test sırasında herhangi bir tuşa bastınız mı?",
         "failed": "Tanılama başarısız: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "Hakkında",
       "version": {
         "title": "Sürüm",
-        "description": "Handy'nin mevcut sürümü"
+        "description": "Tishe'nin geçerli sürümü"
       },
       "appDataDirectory": {
-        "title": "Uygulama Veri Dizini",
-        "description": "Handy'nin verilerini sakladığı konum"
+        "title": "Veri klasörü",
+        "description": "Ayarlar, modeller ve geçmiş"
       },
       "sourceCode": {
         "title": "Kaynak Kodu",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Geliştirmeyi Destekle",
-        "description": "Handy'yi geliştirmeye devam etmemize yardımcı olun",
+        "description": "Tishe onların programı temel alınarak yapıldı",
         "button": "Bağış Yap"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Cihaz üzerinde makine öğrenmesi çıkarımı için yüksek performanslı tensör kütüphanesi",
-          "details": "Handy'nin yerel konuşmadan metne dönüştürme özelliği transcribe.cpp ve ggml üzerine kuruludur. Georgi Gerganov'a ve katkıda bulunanlara harika çalışmaları için teşekkür ederiz."
+          "details": "Bilgisayarda hızlı konuşma tanıma. Georgi Gerganov'a ve projeye katkıda bulunanlara teşekkürler."
         }
       },
       "whatsNewUpdates": {
-        "label": "Yenilikleri Göster",
-        "description": "Handy güncellemelerinden sonra sürüm notlarını göster"
+        "label": "Güncellemeden sonra “Yenilikler”i göster",
+        "description": "Yeni bir sürümün ilk açılışında kısa bir değişiklik listesi"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Aç",
     "copy": "Kopyala",
     "clear": "Temizle",
-    "noOptionsFound": "Seçenek bulunamadı"
+    "noOptionsFound": "Seçenek bulunamadı",
+    "cancel": "İptal",
+    "choose": "Seç…",
+    "reset": "Varsayılana sıfırla",
+    "search": "Ara"
   },
   "accessibility": {
-    "permissionsDescription": "Handy, transkribe edilen metni yazabilmek için erişilebilirlik izinlerine ihtiyaç duyar.",
+    "permissionsDescription": "Metin yapıştırmak için programın “Erişilebilirlik” iznine ihtiyacı var.",
     "openSettings": "Sistem Ayarlarını Aç"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "bilinmeyen model",
     "pasteFailedTitle": "Metin yapıştırılamadı",
     "pasteFailed": "Metin etkin uygulamaya yapıştırılamadı.",
-    "transcriptionFailedTitle": "Transkripsiyon başarısız oldu"
+    "transcriptionFailedTitle": "Tanınamadı"
   },
   "appLanguage": {
-    "title": "Uygulama Dili",
-    "description": "Handy arayüzünün dilini değiştirin"
+    "title": "Arayüz dili",
+    "description": "Programdaki yazıların dili"
   },
   "theme": {
-    "title": "Uygulama Teması",
-    "description": "Handy'nin sistem temasını izlemesini ya da açık veya koyu kalmasını seçin",
+    "title": "Tema",
+    "description": "Tishe'nin sistem temasını mı izleyeceğini, yoksa hep açık ya da koyu mu kalacağını seçin",
     "options": {
-      "system": "Sistem",
+      "system": "Sistemdeki gibi",
       "light": "Açık",
       "dark": "Koyu"
     }
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "Transkribe ediliyor...",
     "processing": "İşleniyor...",
+    "waiting": "Model bir dosyayla meşgul – dikte gecikecek",
+    "message": {
+      "paste_failed": "Yapıştırılamadı. Metin Geçmiş'e kaydedildi",
+      "editing_skipped": "Düzenlenmeden yapıştırıldı: yapay zekâ hazır değil",
+      "no_microphone": "Mikrofon bulunamadı",
+      "microphone_denied": "Mikrofona erişim yok",
+      "help": "Ne yapmalı"
+    },
     "loadingModel": "Model yükleniyor..."
   },
   "whatsNew": {
-    "title": "Handy v{{version}} yenilikleri"
+    "title": "Tishe'de yenilikler"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} 1 kısayolu engelliyor olabilir",
@@ -733,5 +972,715 @@
     "learnMore": "Bu nasıl düzeltilir",
     "recorderBlocked": "Şu anda kısayol kaydedilemiyor — macOS Secure Input tuş olaylarını engelliyor. Önce Secure Input uyarısını giderin.",
     "dismiss": "Kapat"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg bulunamadı. Ses ve video dosyalarını okumak için gereklidir ve Tishe yükleyicisiyle birlikte gelir: Tishe'yi yeniden yükleyin. Ya da şu komutla yükleyin: winget install Gyan.FFmpeg — ve Tishe'yi yeniden başlatın.",
+    "input": {
+      "choose": "Dosya ekle…",
+      "filterName": "Ses ve video"
+    },
+    "maxPart": {
+      "title": "En uzun bölüm süresi",
+      "unit": "dk"
+    },
+    "cloud": {
+      "provider": "Sağlayıcı",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Özel (OpenAI uyumlu)"
+      },
+      "baseUrl": "API adresi",
+      "baseUrlDescription": "/v1 ile biten temel adres.",
+      "apiKey": "API anahtarı",
+      "apiKeyDescription": "Bu bilgisayarda yerel olarak saklanır.",
+      "model": "Model",
+      "modelDescription": "gpt-4o-transcribe modelleri istek başına en fazla ~23 dk kabul eder; bölümler otomatik olarak kısaltılır.",
+      "language": "Dil",
+      "languageDescription": "Dil kodu, örneğin tr veya en. Otomatik algılama için boş bırakın.",
+      "languagePlaceholder": "otomatik"
+    },
+    "diarization": {
+      "count": "Kayıttaki kişi sayısı",
+      "auto": "Otomatik algıla",
+      "model": "Konuşmacı modeli",
+      "modelDescription": "Bir kez indirilir; sesleri ayırt eder. İkisi de küçük ve hızlıdır.",
+      "recommended": "Önerilen",
+      "cloudUntimed": "{{model}} modeli zaman damgası döndürmez, bu yüzden konuşmacılar işaretlenemez. whisper-1'i, Groq'taki bir whisper modelini veya yerel tanımayı seçin.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Binlerce ses üzerinde eğitildi; gerçek kayıtlarda sesleri güvenilir şekilde ayırt eder. İyi bir varsayılan seçim."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Alternatif bir model: ilk model kayıtlarınızda sesleri karıştırıyorsa bunu deneyin."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Ham transkripti de ekle",
+      "includeRawDescription": "Tanımanın düzenlenmemiş çıktısını belgenin sonuna ekle.",
+      "promptPlaceholder": "Kaydın dili için yerleşik talimat (Rusça veya İngilizce)"
+    },
+    "output": {
+      "format": "Biçim",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Zaman damgaları",
+      "location": "Kaydetme yeri",
+      "choose": "Klasör seç…",
+      "nextToSource": "Kaynak dosyanın yanına",
+      "notes": "İşleme notları",
+      "removeFillers": "Duraksama seslerini kaldır",
+      "saveDebug": "Ara dosyaları kaydet",
+      "saveDebugDescription": "Belgenin yanında, her adımdan sonraki metni içeren bir “<name>.debug” klasörü oluşturur: tanıma, temizleme, dil modeline her istek ve yanıtı, son sonuç. Hataları izlemek ve model karşılaştırması için."
+    },
+    "actions": {
+      "start": "Transkribe et",
+      "cancel": "İptal"
+    },
+    "progress": {
+      "starting": "Başlatılıyor…",
+      "elapsed": "Geçen süre: {{time}}",
+      "extracting": "Ses çıkarılıyor…",
+      "extractingPart": "Ses çıkarılıyor…",
+      "diarizing": "Konuşmacılar algılanıyor…",
+      "diarizingPart": "Konuşmacılar algılanıyor…",
+      "splitting": "Bölümlere ayrılıyor…",
+      "splittingPart": "Bölümlere ayrılıyor…",
+      "transcribing": "Transkribe ediliyor…",
+      "transcribingPart": "Bölüm {{part}} / {{total}} transkribe ediliyor…",
+      "post_processing": "LLM ile temizleniyor…",
+      "post_processingPart": "Bölüm {{part}} / {{total}} LLM ile temizleniyor…",
+      "writing": "Belge yazılıyor…",
+      "writingPart": "Belge yazılıyor…"
+    },
+    "result": {
+      "open": "Aç",
+      "reveal": "Klasörde göster"
+    },
+    "document": {
+      "title": "Transkript",
+      "sourceFile": "Dosya",
+      "duration": "Süre",
+      "parts": "Bölümler",
+      "engine": "Tanıma",
+      "llm": "LLM ile son işlem",
+      "created": "Oluşturulma",
+      "part": "Bölüm",
+      "rawTranscript": "Ham transkript",
+      "speaker": "Konuşmacı",
+      "notes": "İşleme notları",
+      "notesTotal": "İşleme süresi",
+      "notesExtracting": "Ses çıkarma",
+      "notesDiarizing": "Konuşmacı algılama",
+      "notesTranscribing": "Tanıma",
+      "notesLlm": "LLM işlemi",
+      "notesWarnings": "Uyarılar",
+      "notesNone": "yok",
+      "notesLanguage": "Metnin dili",
+      "llmLocal": "{{model}}, bu bilgisayarda",
+      "warnings": {
+        "noTimestampsModel": "konuşmacılar işaretlenmedi: bu konuşma modeli zaman damgası döndürmüyor; bir whisper modeli veya yerel tanıma kullanın",
+        "noTimestampsPart": "bölüm {{part}}: konuşma hizmeti zaman damgası döndürmedi, bu yüzden konuşmacılar işaretlenemedi",
+        "llmEmpty": "bölüm {{part}}, parça {{fragment}}: LLM boş yanıt verdi, ham metin korundu",
+        "llmError": "bölüm {{part}}, parça {{fragment}}: LLM hatası, ham metin korundu ({{error}})",
+        "numbersBack": "bölüm {{part}}, parça {{fragment}}: {{lines}} satırda sayılar geri kondu (LLM onları yazıyla yazdı veya çıkardı)",
+        "linesLost": "bölüm {{part}}, parça {{fragment}}: LLM yanıtı numaralı satırları korumadı, ham metin korundu",
+        "linesKept": "bölüm {{part}}, parça {{fragment}}: {{total}} satırdan {{kept}} tanesi ham metnini korudu ({{reasons}})",
+        "kept": {
+          "missing": "eksik",
+          "duplicate": "yinelenen",
+          "empty": "boş",
+          "tooLong": "çok uzun",
+          "translated": "çevrilmiş",
+          "tooShort": "çok kısa",
+          "cutOff": "kesik"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Bitenleri temizle"
+    },
+    "events": {
+      "title": "Olay betiği",
+      "choose": "Seç…",
+      "none": "Ayarlanmadı – olaylar hiçbir yere gönderilmez",
+      "filterName": "Programlar ve betikler",
+      "test": "Test et",
+      "testOk": "Betik bir test olayı aldı",
+      "testFailed": "Başarısız: {{error}}",
+      "testMessage": "Tishe: test olayı",
+      "remaining": "~{{minutes}} dk kaldı",
+      "started": "Transkripsiyon başladı",
+      "finished": "Bitti",
+      "cancelled": "İptal edildi",
+      "interval": {
+        "title": "İlerleme bildirimi aralığı",
+        "description": "En fazla bu kadar saniyede bir. Yeni bir aşama veya bölüm, başlangıç ve bitiş hemen gönderilir.",
+        "unit": "sn"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Değiştir",
+    "choose": "Seç",
+    "open": "Aç",
+    "hide": "Gizle",
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "copied": "Kopyalandı",
+    "undo": "Geri al",
+    "download": "İndir",
+    "downloadSize": "{{size}} indir",
+    "downloadingPercent": "İndiriliyor · %{{percent}}",
+    "cancelDownload": "İptal",
+    "deleteNamed": "{{name}} sil",
+    "percent": "%{{n}}",
+    "useValue": "“{{value}}” kullan",
+    "fold": {
+      "more": "Daha fazla",
+      "changed_one": "değişen: {{count}}",
+      "changed_other": "değişen: {{count}}",
+      "changedA11y_one": "{{count}} ayar değişti",
+      "changedA11y_other": "{{count}} ayar değişti"
+    },
+    "number": {
+      "hint": "{{min}} ile {{max}} arası",
+      "hintDefault": "Varsayılan {{value}}; {{min}} ile {{max}} arası",
+      "notNumber": "Bir sayı girin",
+      "range": "{{min}} ile {{max}} arasında bir sayı girin"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} sn",
+      "min": "{{n}} dk",
+      "hour": "{{n}} sa",
+      "hourMin": "{{h}} sa {{m}} dk",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "bugün {{time}}",
+      "yesterday": "dün {{time}}",
+      "todayTitle": "Bugün",
+      "yesterdayTitle": "Dün"
+    },
+    "player": {
+      "play": "Oynat",
+      "pause": "Duraklat",
+      "position": "Oynatma konumu"
+    },
+    "shortcut": {
+      "change": "“{{name}}” için tuşu değiştir",
+      "reset": "Tuşu varsayılana sıfırla"
+    },
+    "echo": {
+      "recognition": "Tanıma: {{model}}",
+      "language": "dil: {{language}}",
+      "sharedWithDictation": "dikte ile ortak",
+      "sharedWithFiles": "dosya transkripsiyonu ile ortak",
+      "noModel": "Konuşma tanıma modeli yok"
+    },
+    "llm": {
+      "ready": "Hazır · {{model}} bu bilgisayarda",
+      "needed": "Yapay zekâ gerekli · {{model}}",
+      "downloading": "Yapay zekâ indiriliyor · %{{percent}}",
+      "runtimeMissing": "Yerleşik yapay zekâ motoru eksik",
+      "otherOptions": "Diğer seçenekler",
+      "noKey": "{{provider}} anahtarı gerekli",
+      "noUrl": "Sunucu adresi gerekli",
+      "noServerModel": "Model adı gerekli",
+      "localServer": "Bu bilgisayardaki sunucunuz · {{model}}",
+      "textToServer": "Metin {{address}} adresine gider",
+      "textToService": "Metin {{provider}} hizmetine gider"
+    },
+    "confirm": {
+      "deleteModelTitle": "{{name}} modeli silinsin mi?",
+      "deleteModel": "Modeli sil",
+      "deleteModelBody": "{{size}} yer açılacak. Modeli yeniden kullanmak için onu tekrar indirmeniz gerekecek.",
+      "deleteActiveTitle": "{{name}} silinsin mi? Geçerli model bu",
+      "deleteActiveBody": "Başka bir model seçene kadar dikte ve transkripsiyon çalışmaz. {{size}} yer açılacak.",
+      "deleteLlmTitle": "{{name}} yapay zekâ modeli silinsin mi?",
+      "deleteLlm": "Yapay zekâ modelini sil",
+      "deleteLlmBody": "{{size}} yer açılacak. Yeniden indirene veya başka birini seçene kadar düzenleme çalışmaz.",
+      "deleteSpeakerModelBody": "Yeniden bir ses modeli indirene kadar konuşmacılara ayırma çalışmaz."
+    },
+    "back": {
+      "transcription": "Transkripsiyon'a dön",
+      "dictation": "Dikte'ye dön",
+      "meetings": "Toplantılar'a dön",
+      "history": "Geçmiş'e dön",
+      "models": "Konuşma tanıma'ya dön",
+      "llm": "Düzenleme'ye dön",
+      "app": "Uygulama'ya dön",
+      "about": "Hakkında'ya dön",
+      "debug": "Hata Ayıklama'ya dön",
+      "next": "Sırada ne var'a dön"
+    },
+    "changed": "değişti"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "yüklendi",
+      "loading": "yükleniyor…",
+      "error": "yüklenemedi",
+      "unloaded": "bellekte değil",
+      "none": "Model yok",
+      "a11y": "Model {{model}}, {{state}}. Modeli değiştir",
+      "menu": "İndirilen modeller",
+      "all": "Tüm modeller…",
+      "locked": "Transkripsiyon sürüyor – bittikten sonra değiştirin"
+    },
+    "task": "Transkripsiyon: dosya {{current}} / {{total}} · %{{percent}}",
+    "downloading": "İndiriliyor: {{name}} · %{{percent}}",
+    "downloadingMany": "İndiriliyor: {{count}} · %{{percent}}"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transkripsiyon için ffmpeg gerekli"
+    },
+    "drop": {
+      "title": "Kaydı buraya bırakın",
+      "text": "Ses veya video: mp3, m4a, wav, mp4, mkv ve diğerleri. Her dosya ayrı bir belge olur.",
+      "more": "Daha fazla kayıt bırakın veya",
+      "release": "Eklemek için bırakın",
+      "rejected": "{{names}} – ses veya video değil",
+      "oneText": "“{{name}}” transkripsiyon kuyruğuna girecek",
+      "manyText_one": "{{count}} kayıt transkripsiyon kuyruğuna girecek",
+      "manyText_other": "{{count}} kayıt transkripsiyon kuyruğuna girecek",
+      "anyText": "Ses ve video dosyaları transkripsiyon kuyruğuna girecek",
+      "noneTitle": "Bu dosyalar uygun değil",
+      "noneText": "Yalnızca ses ve video transkribe edilebilir: mp3, m4a, wav, mp4, mkv ve diğerleri.",
+      "otherNote_one": "{{count}} dosya daha atlanacak: ses veya video değil",
+      "otherNote_other": "{{count}} dosya daha atlanacak: ses veya video değiller",
+      "alreadyOne": "“{{name}}” zaten kuyrukta",
+      "alreadyMany": "Bu kayıtlar zaten kuyrukta"
+    },
+    "list": {
+      "label": "Kayıtlar",
+      "waiting": "Bekliyor",
+      "cancelled": "İptal edildi",
+      "remaining": "yaklaşık {{time}} kaldı",
+      "remove": "Kaldır",
+      "removeFile": "{{name}} kaldır",
+      "removeFromList": "Listeden kaldır",
+      "more": "Daha fazla: {{name}}",
+      "recipeSpeakers": "konuşmacılar",
+      "recipeEditing": "düzenleme",
+      "recipeCloud": "bulutta",
+      "parts_one": "{{count}} bölüm",
+      "parts_other": "{{count}} bölüm",
+      "notes_one": "{{count}} işleme notu",
+      "notes_other": "{{count}} işleme notu",
+      "showAll": "Tümünü göster ({{count}})",
+      "showFewer": "Daha az göster",
+      "removedOne": "Listeden kaldırıldı",
+      "removedMany_one": "{{count}} satır listeden kaldırıldı",
+      "removedMany_other": "{{count}} satır listeden kaldırıldı",
+      "chars_one": "{{n}} karakter",
+      "chars_other": "{{n}} karakter",
+      "keptNote": "Son {{count}} sonuç saklanır. Diskteki belgeler asla silinmez.",
+      "missing": "Belge bulunamadı: taşındı, silindi ya da sürücüsünün bağlantısı kesildi",
+      "openDocument": "{{name}} belgesini aç"
+    },
+    "recipe": {
+      "title": "Tarif",
+      "locked": "Transkripsiyon sürerken ayarlar değişmez. Yeni dosyalar aynı ayarları kullanır.",
+      "where": "Tanıma nerede yapılsın",
+      "local": "Bu bilgisayarda",
+      "cloud": "Bulutta",
+      "audioToService": "Ses {{provider}} hizmetine gider",
+      "cloudEcho": "Tanıma: {{provider}} üzerinde {{model}}",
+      "speakers": "Konuşmacılar",
+      "speakersDescription": "Belge bir konuşma dökümüne dönüşür: “Konuşmacı 1: …”, “Konuşmacı 2: …”",
+      "speakersMissing": "Ses modeli gerekli · {{size}}",
+      "speakersDownloading": "Ses modeli indiriliyor · %{{percent}}",
+      "speakersReady": "Ses modeli hazır",
+      "countDescription": "Biliyorsanız ayrım daha doğru olur",
+      "editing": "Yapay zekâ ile düzenleme",
+      "editingDescription": "Tanıma ve noktalama hatalarını düzeltir. Belirgin şekilde daha uzun sürer: kayıt saati başına yaklaşık 15–35 dk",
+      "result": "Sonuç",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "kaydın yanına"
+    },
+    "more": {
+      "recognition": "Tanıma",
+      "maxPartDescription": "Uzun bir kayıt, duraklamalardan bu süreyi aşmayan bölümlere kesilir",
+      "speakers": "Konuşmacılar",
+      "editing": "Düzenleme",
+      "prompt": "Dosyalar için talimat",
+      "promptDescription": "Boş – kaydın dilindeki yerleşik talimat. Öncelik: bu alan, sonra modelin ⚙ ayarı, sonra yerleşik talimat",
+      "document": "Belge",
+      "locationDescription": "Ad kayıttan alınır; hiçbir şeyin üzerine yazılmaz, bunun yerine (2) eklenir",
+      "timestampsDescription": "Her paragraftan önce kayıt zamanı",
+      "removeFillersDescription": "İngilizce ve Rusça kayıtlarda “uh”, “um”, “hmm” seslerini kaldırır. Kelimeler kalır",
+      "globalFillers": "Kaynak transkript kelimesi kelimesine kalır. Diktenin kendi dolgu sözcüğü ayarı vardır",
+      "notesDescription": "Sonda: her aşamanın süresi ve uyarılar",
+      "integrations": "Entegrasyonlar",
+      "eventsDescription": "Başlangıç, ilerleme ve bitişten haberdar edilen bir program (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Başlamak için dosya ekleyin",
+      "noFfmpeg": "ffmpeg gerekli",
+      "noModel": "Önce bir konuşma tanıma modeli indirin",
+      "cloudIncomplete": "{{provider}} anahtarı gerekli",
+      "cloudIncompleteCustom": "API adresi, anahtar ve model gerekli",
+      "noSpeakerModel": "Ses modeli gerekli",
+      "running": "Dosya {{current}} / {{total}} · geçen süre {{time}}",
+      "start_one": "{{count}} dosyayı transkribe et",
+      "start_other": "{{count}} dosyayı transkribe et",
+      "done_one": "Bitti: {{count}} dosya",
+      "done_other": "Bitti: {{count}} dosya",
+      "errors_one": "{{count}} dosyada hata",
+      "errors_other": "{{count}} dosyada hata",
+      "summary_one": "{{count}} kayıt",
+      "summary_other": "{{count}} kayıt",
+      "modelDownloading": "Konuşma tanıma modeli indiriliyor · %{{percent}}",
+      "llmDownloading": "Düzenleme için yapay zekâ indiriliyor · %{{percent}}",
+      "llmMissing": "Düzenleme için yapay zekâ gerekli",
+      "llmNotSetUp": "Düzenleme için yapay zekâ ayarlanmadı",
+      "withoutEditing": "Düzenleme olmadan",
+      "modelNotActive": "Konuşma tanıma modeli açık değil"
+    },
+    "stop": {
+      "title": "Transkripsiyon durdurulsun mu?",
+      "body": "Biten dosyalar ({{done}}) kaydedildi. Geçerli dosya (%{{percent}}) ve bekleyenler ({{waiting}}) yeniden başlatılmalı.",
+      "confirm": "Durdur",
+      "keep": "Devam et"
+    },
+    "tray": {
+      "running": "Transkripsiyon: dosya {{current}} / {{total}} · %{{pct}}",
+      "ready_one": "Transkripsiyon hazır: {{count}} dosya",
+      "ready_other": "Transkripsiyon hazır: {{count}} dosya"
+    },
+    "notify": {
+      "readyOne": "Transkripsiyon hazır",
+      "readyMany_one": "Transkripsiyon hazır: {{count}} dosya",
+      "readyMany_other": "Transkripsiyon hazır: {{count}} dosya",
+      "failedOne": "Transkripsiyon başarısız oldu",
+      "failedMany_one": "Transkripsiyon başarısız: {{count}} dosya",
+      "failedMany_other": "Transkripsiyon başarısız: {{count}} dosya",
+      "partial": "{{total}} dosyadan {{ok}} tanesi bitti · {{errors}}",
+      "errors_one": "{{count}} başarısız",
+      "errors_other": "{{count}} başarısız",
+      "failedFile": "Başarısız: {{name}} · {{reason}}",
+      "open": "Aç"
+    },
+    "try": {
+      "before": "Herhangi bir düzenleyici açın, imleci içine koyun ve konuşurken",
+      "after": "tuşunu basılı tutun. Bıraktığınızda metin orada görünür.",
+      "changeKey": "Tuşu değiştir"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Dikte hazır ·",
+      "anyWindow": "her pencerede",
+      "keyBusy": "Dikte başlamıyor: tuş meşgul",
+      "keyBusyDetail": "{{key}} tuşunu başka bir program kullanıyor. Başka bir tuş seçin.",
+      "changeKey": "Tuşu değiştir"
+    },
+    "keys": {
+      "title": "Tuşlar",
+      "second": "Düzenlemeli dikte – ikinci tuş",
+      "secondDescription": "Normal tuş metni olduğu gibi yapıştırır. Bu tuş, yapay zekâ ile düzenledikten sonra yapıştırır",
+      "instruction": "Talimat",
+      "manage": "Yönet…",
+      "secondBusy": "Bu tuşu başka bir program kullanıyor: başka bir tuş seçin"
+    },
+    "more": {
+      "paste": "Metin yapıştırma",
+      "indicator": "Kayıt göstergesi",
+      "microphone": "Mikrofon ve kayıt",
+      "prompts": "Düzenlemeli dikte için talimatlar",
+      "promptsDescription_one": "{{count}} talimat",
+      "promptsDescription_other": "{{count}} talimat",
+      "promptsRow": "Talimat oluştur ve düzenle",
+      "text": "Dikte metni",
+      "fillersDocuments": "Yalnızca dikte için. Belgelerde bunu Transkripsiyon sayfasındaki “Duraksama seslerini kaldır” yapar"
+    },
+    "fix": {
+      "title": "Bir şey çalışmıyorsa",
+      "paste": "Metin yapıştırılmıyor",
+      "pasteHelp": "Yönetici olarak çalışan bir programa dikte ediyorsanız Windows ona yapıştırmaya izin vermez. Aksi hâlde aşağıdaki gecikmeleri artırın.",
+      "cutOff": "Cümlenin sonu kesiliyor",
+      "hold": "Kısa basış, basılı tutma sayılıyor"
+    },
+    "prompts": {
+      "title": "Düzenlemeli dikte için talimatlar",
+      "intro": "Talimat, yapay zekâya dikte edilen metinle ne yapacağını söyler. ${output} dikte edilen metindir.",
+      "current": "Geçerli talimat",
+      "create": "Oluştur",
+      "deleted": "“{{name}}” talimatı silindi"
+    }
+  },
+  "meetings": {
+    "what": "Tishe bu bilgisayarda toplantıları ve aramaları kaydedecek: sizin mikrofonunuzu ve karşı tarafı, ardından konuşmacılara ayrılmış bir transkript.",
+    "how": "Kayıtlar, Tishe'deki her şey gibi bilgisayarda kalır.",
+    "nowTitle": "Şimdiden",
+    "nowText": "Bir toplantı zaten kaydedildiyse – Zoom, Teams veya ses kayıt cihazıyla – dosyayı “Transkripsiyon” bölümünden ekleyin.",
+    "goTranscription": "Transkripsiyon'a git"
+  },
+  "history": {
+    "storage": {
+      "title": "Saklama",
+      "limit_one": "Son {{count}} dikte saklanır",
+      "limit_other": "Son {{count}} dikte saklanır",
+      "never": "Dikteler otomatik olarak silinmez",
+      "days_3": "Dikteler 3 gün sonra silinir",
+      "weeks_2": "Dikteler 2 hafta sonra silinir",
+      "months_3": "Dikteler 3 ay sonra silinir"
+    },
+    "empty": {
+      "title": "Dikteleriniz burada görünecek",
+      "textBefore": "Herhangi bir pencerede",
+      "textAfter": "tuşunu basılı tutun ve konuşun.",
+      "textNoKey": "“Dikte” bölümünde bir dikte tuşu ayarlayın."
+    },
+    "copy": "Metni kopyala",
+    "more": "Diğer eylemler",
+    "keep": "Sakla",
+    "keepDescription": "Otomatik olarak silinmez",
+    "retry": "Yeniden tanı",
+    "delete": "Sil",
+    "deleted": "Dikte silindi",
+    "failed": "Tanınamadı",
+    "savedTag": "saklanıyor",
+    "editingSkipped": "düzenlenmeden",
+    "showMore": "Tamamını göster",
+    "showLess": "Daralt",
+    "version": "Metin sürümü",
+    "versionEdited": "Düzenlemeden sonra",
+    "versionRaw": "Özgün"
+  },
+  "models": {
+    "purpose": "Konuşmayı metne dönüştüren modeller; dikte ve dosya transkripsiyonu için. Metnin yapay zekâ ile düzenlenmesi şu bölümde:",
+    "active": {
+      "title": "Etkin model",
+      "change": "Modeli değiştir",
+      "none": "Model seçilmedi",
+      "noneHint": "Diliniz için önerileni indirin – ya da aşağıdaki katalogdan herhangi bir modeli"
+    },
+    "lockedByTranscription": "Transkripsiyon sürüyor – bittikten sonra değiştirin",
+    "language": {
+      "title": "Dil ve çeviri",
+      "scope": "Dikte ve dosya transkripsiyonu için geçerli"
+    },
+    "cleanup": {
+      "title": "Metin temizleme",
+      "scope": "Tanıma modelinin içinde, dikte ve dosyalar için çalışır"
+    },
+    "memory": {
+      "title": "Bellek"
+    },
+    "onlyLanguage": "yalnızca {{language}}",
+    "languageCount_one": "{{count}} dil",
+    "languageCount_other": "{{count}} dil",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Modelleriniz",
+      "yoursCount": "Modelleriniz ({{count}})",
+      "recommended": "Önerilen",
+      "all": "Tüm modeller",
+      "languageFilter": "Dil",
+      "streaming": "Akış",
+      "translation": "Çeviri",
+      "showAll": "Tüm modelleri göster ({{count}})",
+      "showFewer": "Daha az göster"
+    },
+    "row": {
+      "use": "Kullan",
+      "inUse": "kullanımda",
+      "more": "Daha fazla: {{name}}",
+      "delete": "Modeli sil",
+      "translate": "İngilizceye çevirir",
+      "streaming": "akış",
+      "accuracy": "doğruluk {{n}}/10",
+      "speed": "hız {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Metnin nerede ve hangi yapay zekâyla düzenlendiği",
+    "status": {
+      "usedFor": "Kullanım alanı",
+      "files": "dosya düzenleme ({{state}})",
+      "dictation": "düzenlemeli dikte ({{state}})",
+      "on": "açık",
+      "off": "kapalı"
+    },
+    "where": {
+      "title": "Yapay zekânın çalıştığı yer",
+      "local": "Bu bilgisayarda",
+      "localText": "Metin bilgisayarda kalır",
+      "localUnavailable": "Bu sürümde kullanılamaz",
+      "server": "Kendi sunucunuz",
+      "serverText": "Ollama, LM Studio veya kendi adresiniz · metin sunucunuza gider",
+      "cloud": "Bulut hizmeti",
+      "cloudText": "OpenAI ve diğerleri · metin hizmete gider"
+    },
+    "variant": {
+      "local": "Yerleşik yapay zekâ",
+      "server": "Sunucu",
+      "cloud": "Hizmet"
+    },
+    "local": {
+      "speed": "hız {{n}}/5",
+      "quality": "kalite {{n}}/5",
+      "footprint": "disk {{disk}} · bellek ~{{ram}} GB",
+      "showAll": "Tüm modelleri göster ({{count}})",
+      "showFewer": "Daha az göster"
+    },
+    "server": {
+      "urlDescription": "/v1 ile biten OpenAI uyumlu adres",
+      "keyDescription": "Yalnızca sunucunuz isterse"
+    }
+  },
+  "app": {
+    "purpose": "Programın genel davranışı",
+    "launch": "Başlatma ve bildirim alanı",
+    "look": "Görünüm",
+    "updates": "Güncellemeler",
+    "checkNow": "Yeni sürüm denetle",
+    "checkNowButton": "Şimdi denetle",
+    "experimental": "Deneysel özellikler",
+    "quit": {
+      "title": "Tishe'den çıkılsın mı?",
+      "body": "“{{name}}” transkribe ediliyor (%{{pct}}). Bu işlem duracak; biten belgeler kaydedildi.",
+      "bodyIdle": "Transkripsiyon duracak; biten belgeler kaydedildi.",
+      "confirm": "Çık",
+      "stay": "Kal"
+    },
+    "notifications": "Bildirimler",
+    "notifyLabel": "Transkripsiyon hazır olunca bildir",
+    "notifyDescription": "Yalnızca pencere gizliyken veya odakta değilken bir Windows bildirimi. Tıklamak sonucu açar.",
+    "trayHint": "Windows yeni simgeleri gizler. Görünür kalması için onu gizli simgelerden görev çubuğuna sürükleyin."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Yenilikler",
+    "project": {
+      "title": "Proje hakkında",
+      "basedOn": "Handy tabanlı",
+      "basedOnText": "Açık kaynak, MIT lisansı",
+      "tishe": "Tishe",
+      "tisheText": "Açık kaynak, MIT lisansı. Sürümler ve hata bildirimleri GitHub'da",
+      "licenses": "Lisanslar",
+      "licensesText": "Tishe'nin kullandığı üçüncü taraf kitaplıklar ve modeller",
+      "licensesOpen": "Aç",
+      "licensesError": "Lisans dosyası açılamadı",
+      "author": "Geliştirici",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub profili"
+    },
+    "supportHandy": "Handy'nin yazarlarını destekleyin",
+    "folders": "Klasörler",
+    "versionRelease": "Tishe {{version}}, {{release}} sürümü"
+  },
+  "debug": {
+    "onBefore": "Hata ayıklama modu açık ve yeniden başlatmalar arasında açık kalır.",
+    "onAfter": "ile gizlenir.",
+    "log": "Günlük",
+    "previews": "Önizlemeler",
+    "keyboard": "Klavye",
+    "transcription": "Transkripsiyon"
+  },
+  "release": {
+    "available": "{{release}} sürümü çıktı",
+    "openPage": "Sürüm sayfasını GitHub'da aç",
+    "upToDate": "Bu en son sürüm",
+    "checkFailed": "Güncellemeler denetlenemedi"
+  },
+  "next": {
+    "lead": "Tishe, Private Memory'nin ilk parçasıdır: konuşmalarınızın tamamen bilgisayarınızda yaşayan özel hafızası.",
+    "now": "Tishe bugün bile söylediklerinizi herhangi bir uygulamaya yazar ve uzun kayıtları konuşmacılara ayırarak metne döker. İnternetsiz ve hesapsız.",
+    "planTitle": "Sonraki sürümlerde",
+    "plan": {
+      "meetings": {
+        "title": "Toplantı kaydı",
+        "text": "mikrofonunuz ve diğer katılımcılar iki ayrı kanalda, metin konuşma sırasında belirir."
+      },
+      "summaries": {
+        "title": "Toplantı özetleri",
+        "text": "kaydı durdurur durdurmaz kararlar ve görevler, toplantının dilinde, yerleşik dil modeli tarafından."
+      },
+      "search": {
+        "title": "Toplantılarda arama",
+        "text": "önce kelimelere, sonra anlama göre."
+      },
+      "agents": {
+        "title": "Notlar ve asistanlar",
+        "text": "Obsidian için bir toplantı klasörü ve yapay zekâ asistanlarının MCP üzerinden toplantılarınıza erişimi, yine buluta gerek olmadan."
+      }
+    },
+    "order": "Tarih vermiyoruz: sıra geri bildirimlere göre değişebilir.",
+    "freeTitle": "Ücretsiz ve açık kaynak",
+    "freeText": "Tishe'nin çekirdeği ücretsizdir ve öyle kalacak. Sürümleri takip edin, eksikleri GitHub'da bize yazın.",
+    "follow": "GitHub'da takip et",
+    "feedback": "Sorun veya fikir bildir"
+  },
+  "fileErrors": {
+    "notFound": "Dosya bulunamadı: taşınmış veya silinmiş.",
+    "noAudio": "Dosyada ses yok ya da dosya okunamadı.",
+    "unreadable": "Dosyadaki ses okunamadı. Dosya bozuk olabilir.",
+    "noModel": "Konuşma tanıma modeli seçilmedi: «$t(sidebar.models)» bölümünden birini seçin.",
+    "noSpeakerModel": "Ses modeli indirilmedi: «$t(transcription.more.speakers)» bölümünden indirin.",
+    "noLlmModel": "Dil modeli indirilmedi: «$t(sidebar.llm)» bölümünden indirin.",
+    "noLlmRuntime": "Yerleşik dil modeli motoru bulunamadı. Tishe'yi yeniden yükleyin.",
+    "cloudKey": "Bulutta tanıma için bir API anahtarı gerekir.",
+    "cloudConfig": "Bulutta tanıma ayarlanmamış: adresi ve modeli girin.",
+    "busy": "Şu anda başka bir dosya zaten metne dökülüyor.",
+    "noSpace": "Disk dolu.",
+    "fileInUse": "Belge başka bir programda açık (örneğin Word). Kapatıp yeniden deneyin.",
+    "accessDenied": "Belge klasörüne erişim yok. Başka bir klasör seçin: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Bir konuşma tanıma modeli indirin",
+      "text": "Konuşmayı metne dönüştürür – hem kayıtlar hem de dikte için. Bu bilgisayarda, internetsiz çalışır. Yalnızca bir kez indirmeniz yeterli.",
+      "language": "Kayıtların dili",
+      "allModels": "Tüm modeller",
+      "onDisk": "{{name}} modeli zaten bilgisayarda – yalnızca açmanız gerekiyor.",
+      "whileDownloading": "İndirme sürerken kayıt ekleyebilirsiniz: model hazır olduğunda transkripsiyon başlar."
+    },
+    "llm": {
+      "title": "Düzenleme için yapay zekâ gerekli",
+      "what": "Yapay zekâ tanıma hatalarını ve noktalamayı düzeltir. Yerleşik olanı öneririz: bu bilgisayarda çalışır, metin hiçbir yere gitmez.",
+      "recommended": "Diskte {{size}} · yaklaşık {{ram}} GB bellek gerekir · bir kez indirilir",
+      "otherWays": "Kendi sunucunuz veya bulut",
+      "downloadOn": "{{size}} indir ve aç",
+      "runtimeTitle": "Yerleşik yapay zekâ kullanılamıyor",
+      "runtime": "Bu sürümde yerleşik yapay zekâ motoru yok. “$t(sidebar.llm)” bölümünden kendi sunucunuzu (Ollama, LM Studio) veya bir bulut hizmetini bağlayabilirsiniz.",
+      "openPage": "“$t(sidebar.llm)” bölümünü aç",
+      "notSetUp": "{{reason}} – bu olmadan yapay zekâ çalışmaz. Düzenlemeyi açın ve kurulumu “$t(sidebar.llm)” bölümünde tamamlayın.",
+      "onAndSetUp": "Aç ve ayarla",
+      "onDisk": "Zaten bu bilgisayarda — bir şey indirmeye gerek yok.",
+      "turnOn": "Düzenlemeyi aç"
+    },
+    "quick": {
+      "title": "Hızlı başlangıç",
+      "progress": "{{done}} / {{total}}",
+      "hide": "Gizle",
+      "hideHint": "“Hızlı başlangıç”ı gizle – tüm ayarlar soldaki bölümlerde kalır",
+      "model": "Bir konuşma tanıma modeli indirin",
+      "modelDone": "Konuşma tanıma modeli hazır · {{name}}",
+      "dictation": "Dikteyi deneyin",
+      "dictationDone": "Dikte çalışıyor · dikteler “Geçmiş” bölümüne kaydedilir",
+      "file": "Bir kaydı transkribe edin",
+      "fileDone": "İlk kayıt transkribe edildi",
+      "fileHint": "Bir ses veya video dosyasını bu pencereye sürükleyin ya da dosya seçin – kaydın yanında bir Word belgesi oluşur.",
+      "llm": "Yapay zekâ ile düzenleme",
+      "optional": "isteğe bağlı",
+      "llmHint": "Belgelerdeki tanıma ve noktalama hatalarını düzeltir. {{model}}: {{size}}, bu bilgisayarda çalışır.",
+      "llmReady": "Yapay zekâ hazır · {{model}}",
+      "doneTitle": "Her şey hazır",
+      "doneText": "Tishe kuruldu. Dikteler “Geçmiş” bölümünde, belgeler aşağıdaki listede, ayarlar soldaki bölümlerde.",
+      "close": "Kapat"
+    }
   }
 }

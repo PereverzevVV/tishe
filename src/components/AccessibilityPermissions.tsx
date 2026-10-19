@@ -1,3 +1,5 @@
+import { Alert } from "./ui/Alert";
+import { Button } from "./ui/Button";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { type } from "@tauri-apps/plugin-os";
@@ -67,39 +69,19 @@ const AccessibilityPermissions: React.FC = () => {
     return null;
   }
 
-  // Configure button text and style based on state
-  const buttonConfig: Record<PermissionState, ButtonConfig | null> = {
-    request: {
-      text: t("accessibility.openSettings"),
-      className:
-        "px-2 py-1 text-sm font-semibold bg-mid-gray/10 border  border-mid-gray/80 hover:bg-logo-primary/10 rounded cursor-pointer hover:border-logo-primary",
-    },
-    verify: {
-      text: t("accessibility.openSettings"),
-      className:
-        "bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-md text-sm flex items-center justify-center cursor-pointer",
-    },
-    granted: null,
-  };
-
-  const config = buttonConfig[permissionState] as ButtonConfig;
-
+  // Inline warning (VISUAL_DESIGN_SYSTEM §12.21): dictation cannot paste
+  // without the permission, so the icon is red.
   return (
-    <div className="p-4 w-full rounded-lg border border-mid-gray">
-      <div className="flex justify-between items-center gap-2">
-        <div className="">
-          <p className="text-sm font-medium">
-            {t("accessibility.permissionsDescription")}
-          </p>
-        </div>
-        <button
-          onClick={handleButtonClick}
-          className={`min-h-10 ${config.className}`}
-        >
-          {config.text}
-        </button>
-      </div>
-    </div>
+    <Alert
+      variant="error"
+      actions={
+        <Button variant="secondary" size="sm" onClick={handleButtonClick}>
+          {t("accessibility.openSettings")}
+        </Button>
+      }
+    >
+      {t("accessibility.permissionsDescription")}
+    </Alert>
   );
 };
 

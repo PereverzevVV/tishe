@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Inställningar...",
-    "checkUpdates": "Sök efter uppdateringar...",
-    "copyLastTranscript": "Kopiera senaste transkriptionen",
+    "settings": "Öppna Tishe…",
+    "checkUpdates": "Sök efter uppdateringar…",
+    "copyLastTranscript": "Kopiera senaste diktering",
     "unloadModel": "Avlasta modell",
     "model": "Modell",
     "quit": "Avsluta",
     "cancel": "Avbryt",
-    "secureInputWarning": "⚠ Kortkommandon blockeras av Secure Input"
+    "secureInputWarning": "⚠ Kortkommandon blockeras av Secure Input",
+    "modelLocked": "Modellen kan inte bytas medan en transkribering pågår",
+    "tooltipDictation": "Diktering: {{shortcut}}",
+    "backgroundTitle": "Tishe fortsätter att arbeta i bakgrunden",
+    "backgroundBody": "Transkriberingen fortsätter. Du får en avisering när den är klar."
   },
   "sidebar": {
     "general": "Allmänt",
-    "models": "Modeller",
+    "models": "Igenkänning",
     "advanced": "Avancerat",
     "postProcessing": "Efterbearbetning",
     "history": "Historik",
     "debug": "Felsökning",
-    "about": "Om"
+    "about": "Om",
+    "label": "Avsnitt",
+    "transcription": "Transkribering",
+    "dictation": "Diktering",
+    "meetings": "Möten",
+    "llm": "AI-redigering",
+    "app": "App",
+    "soon": "snart",
+    "state": {
+      "running": "pågår",
+      "new": "klar, inte visad",
+      "downloading": "laddas ned"
+    },
+    "next": "Vad händer sen"
   },
   "onboarding": {
     "subtitle": "För att komma igång, välj en transkriptionsmodell",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Behörigheter krävs",
-      "description": "Handy behöver ett par behörigheter för att fungera korrekt.",
+      "description": "Tishe behöver ett par behörigheter för att fungera korrekt.",
       "microphone": {
         "title": "Mikrofonåtkomst",
         "description": "Krävs för att höra din röst för transkription."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Misslyckades med att kontrollera behörigheter. Försök igen.",
         "requestFailed": "Misslyckades med att begära behörighet. Försök igen."
-      }
+      },
+      "skip": "Fortsätt utan mikrofon",
+      "skipHint": "Mikrofonen behövs bara för diktering – transkribering av filer fungerar utan den. Du kan tillåta den senare i Windows-inställningarna."
+    },
+    "step": "Steg {{n}} av {{total}}",
+    "language": {
+      "title": "Vilket språk är dina inspelningar på?",
+      "description": "Vi laddar ned en taligenkänningsmodell för det här språket. Den körs på den här datorn.",
+      "ru": {
+        "title": "Ryska",
+        "limit": "Bara ryska: känner inte igen engelskt tal"
+      },
+      "en": {
+        "title": "Engelska",
+        "limit": "Bara engelska"
+      },
+      "eu": {
+        "title": "Svenska eller ett annat europeiskt språk",
+        "limit": "25 europeiska språk, känner själv igen språket"
+      },
+      "other": {
+        "title": "Ett annat språk",
+        "limit": "30 språk: kinesiska, japanska, koreanska, arabiska, turkiska, hindi med flera",
+        "limitWhisper": "många språk, långsammare på processorn"
+      },
+      "onDisk": "finns redan på den här datorn",
+      "shared": "Modellen används både för diktering och för transkribering av filer. Du kan byta den senare under ”$t(sidebar.models)”.",
+      "otherModel": "Välj en annan modell",
+      "hideCatalog": "Dölj listan med modeller",
+      "download": "Ladda ned {{size}}",
+      "use": "Använd {{name}}",
+      "downloadNamed": "Ladda ned {{name}} · {{size}}",
+      "once": "Laddas ned en gång och fungerar sedan utan internet"
+    },
+    "download": {
+      "title": "Laddar ned {{name}}",
+      "description": "Du kan göra annat under tiden: att stänga fönstret stoppar inte nedladdningen.",
+      "starting": "Ansluter…",
+      "amount": "{{done}} av {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Förbereder modellen…",
+      "cancel": "Avbryt",
+      "failed": "Modellen laddades inte ned",
+      "failedTitle": "Det gick inte att ladda ned modellen",
+      "failedHint": "Ingen anslutning till servern. Kontrollera internet och klicka på Försök igen.",
+      "retry": "Försök igen",
+      "continue": "Öppna Tishe utan att vänta"
+    },
+    "welcome": {
+      "title": "Välkommen till Tishe",
+      "lead": "Tishe gör tal till text direkt på din dator – utan internet och utan konto.",
+      "files": "Transkribera inspelningar – möten, föreläsningar, intervjuer – till ett Word-dokument",
+      "dictation": "Diktera i vilket program som helst: håll ned en tangent, prata – och texten dyker upp",
+      "private": "Inspelningar och texter lämnar aldrig datorn",
+      "stepsLabel": "Steg i konfigurationen",
+      "steps": {
+        "permissions": "Behörigheter",
+        "language": "Inspelningarnas språk",
+        "download": "Nedladdning av modell"
+      },
+      "credit": "Viktor Pereverzev · bygger på Handy"
+    },
+    "tips": {
+      "title": "Medan den laddas ned – så fungerar det",
+      "dictationBefore": "Diktering: håll ned",
+      "dictationAfter": "i valfritt program och prata. Släpp – så dyker texten upp vid markören.",
+      "files": "Transkribering: släpp en ljud- eller videofil i Tishe-fönstret så får du ett Word-dokument.",
+      "editing": "Redigering med AI rättar fel och skiljetecken – du slår på den i transkriberingens recept."
     }
   },
   "modelSelector": {
@@ -161,42 +245,44 @@
     "general": {
       "title": "Allmänt",
       "shortcut": {
-        "title": "Handy-kortkommandon",
+        "title": "Kortkommandon för Tishe",
         "description": "Konfigurera kortkommandon för att starta tal-till-text-inspelning",
         "loading": "Laddar kortkommandon...",
         "none": "Inga kortkommandon konfigurerade",
         "notFound": "Kortkommando hittades inte",
-        "pressKeys": "Tryck på tangenter...",
+        "pressKeys": "Tryck en kombination… (Esc avbryter)",
         "bindings": {
           "transcribe": {
-            "name": "Kortkommando för transkribering",
-            "description": "Kortkommandot för att spela in och transkribera din röst."
+            "name": "Diktering",
+            "description": "Håll ned och prata – texten klistras in i det aktiva fönstret"
           },
           "cancel": {
-            "name": "Kortkommando för att avbryta",
-            "description": "Kortkommandot för att avbryta den aktuella inspelningen."
+            "name": "Avbryt",
+            "description": "Avbryter den pågående inspelningen"
           },
           "transcribe_with_post_process": {
-            "name": "Snabbkommando för efterbearbetning",
-            "description": "Valfritt: En dedikerad snabbknapp som alltid tillämpar AI-efterbearbetning på din transkription."
+            "name": "Tangent för diktering med redigering",
+            "description": "Texten klistras in efter redigering med AI"
           }
         },
         "errors": {
           "restore": "Misslyckades med att återställa ursprungligt kortkommando",
           "set": "Misslyckades med att ställa in kortkommando: {{error}}",
-          "reset": "Misslyckades med att återställa kortkommando till ursprungsvärdet"
+          "reset": "Misslyckades med att återställa kortkommando till ursprungsvärdet",
+          "taken": "Ett annat program använder redan den här tangenten. Välj en annan.",
+          "duplicate": "Den här tangenten används redan här för en annan åtgärd."
         }
       },
       "language": {
-        "title": "Språk",
-        "description": "Välj språk för taligenkänning. Auto kommer automatiskt att bestämma språket, medan val av ett specifikt språk kan förbättra noggrannheten för det språket.",
+        "title": "Igenkänningsspråk",
+        "description": "”Auto” identifierar språket själv; att välja det är säkrare",
         "searchPlaceholder": "Sök språk...",
         "noResults": "Inga språk hittades",
         "auto": "Automatiskt"
       },
       "shortcutActivation": {
-        "title": "Genvägens beteende",
-        "description": "Välj hur kortkommandot för transkribering startar och stoppar inspelningen.",
+        "title": "Tangentens beteende",
+        "description": "Hur tangenten startar och stoppar inspelningen",
         "options": {
           "holdOrToggle": "Automatiskt",
           "pushToTalk": "Håll",
@@ -223,39 +309,106 @@
         "translation": "Filtrera modeller som stöder översättning till engelska"
       },
       "noModelsMatch": "Inga modeller matchar detta filter.",
-      "searchPlaceholder": "Sök modeller efter namn…",
+      "params": {
+        "button": "Parametrar",
+        "open": "Modellparametrar",
+        "title": "Parametrar: {{name}}",
+        "savedAtOnce": "Ändringar sparas direkt. Fälten visar värdena som används; ett ändrat värde har en återställningsknapp.",
+        "resetAll": "Återställ standardvärden",
+        "done": "Klar",
+        "resetField": "Tillbaka till standard",
+        "defaultRange": "Standard {{value}}; tillåtet {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Inbyggd instruktion. Redigera texten för att använda din egen; töm den för att gå tillbaka till den inbyggda.",
+          "own": "Din instruktion. Återställningsknappen ger tillbaka den inbyggda."
+        },
+        "asr": {
+          "segment": {
+            "label": "Segmentlängd för filer, sekunder",
+            "description": "Filer känns igen i bitar som klipps vid pauser och är högst så här långa. Den kortaste biten krymper med (12 s vid 25 s). Uppmätt: 12–25 s bevarar skiljetecken bättre än 60–120 s."
+          },
+          "device": {
+            "label": "Enhet",
+            "description": "”Bara processor” avlastar grafikkretsen men är oftast långsammare. Gäller även diktering; börjar gälla vid nästa igenkänning.",
+            "general": "Som i accelerationsinställningen",
+            "cpu": "Bara processor",
+            "notHere": "Den här modellens enhet följer den allmänna accelerationsinställningen."
+          }
+        },
+        "llm": {
+          "promptNote": "Instruktioner för rysk och engelsk text. Andra språk får den inbyggda engelska instruktionen med språkets namn. En egen instruktion under Transkribering ersätter dem för alla språk.",
+          "promptRu": "Instruktion för rysk text",
+          "promptEn": "Instruktion för engelsk text",
+          "temperature": {
+            "label": "Temperatur",
+            "description": "Lägre är försiktigare: vid 0,8 hittade modellen på ord, 0,2 är det uppmätta värdet för redigering."
+          },
+          "chunk": {
+            "label": "Blockstorlek, tecken",
+            "description": "Hur mycket text modellen redigerar åt gången. Små modeller håller sig troget till originalet i korta block."
+          },
+          "context": {
+            "label": "Kontext, token",
+            "description": "Utrymme för instruktionen, blocket och svaret. Mer tar mer minne."
+          },
+          "answer": {
+            "label": "Svarsgräns, token",
+            "description": "Stoppar en modell som börjar upprepa sig. Ett block på 3000 tecken är ungefär 1100 token."
+          },
+          "threads": {
+            "label": "Processortrådar för svaret",
+            "description": "Läsningen av texten använder alltid alla hårdvarutrådar.",
+            "auto": "Auto – en per kärna"
+          },
+          "restartNote": "Temperatur, kontext, svarsgräns och trådar gäller nästa gång modellen startar: en körande modell startas om före nästa uppgift.",
+          "invalid": "Inte sparat: {{detail}}",
+          "contextTooSmall": "Inte sparat: kontexten måste rymma blocket och svaret – minst {{min}} token med nuvarande blockstorlek och svarsgräns."
+        }
+      },
+      "searchPlaceholder": "Sök på namn",
       "rescan": {
         "label": "Skanna om",
-        "tooltip": "Skanna om efter modeller som lagts till i modellmappen eller Hugging Face-cachen utanför Handy"
+        "tooltip": "Hitta modeller som lagts till i mappen för hand"
       }
     },
     "sound": {
       "title": "Ljud",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Välj din föredragna mikrofonenhet",
+        "description": "Var rösten spelas in från",
         "placeholder": "Välj mikrofon...",
         "loading": "Laddar..."
       },
       "channel": {
         "title": "Ingångskanal",
-        "description": "Välj vilken ingångskanal du vill spela in från. Använd detta om ditt ljudgränssnitt har flera ingångar.",
+        "description": "För ljudkort med flera ingångar",
         "average": "Medelvärde av alla kanaler",
         "channel": "Kanal {{n}}"
       },
       "audioFeedback": {
         "label": "Ljudåterkoppling",
-        "description": "Spela upp ljud när inspelningen startar och stoppar"
+        "description": "Ett ljud i början och slutet av inspelningen"
       },
       "outputDevice": {
         "title": "Utmatningsenhet",
-        "description": "Välj din föredragna ljudutmatningsenhet för återkopplingsljud",
+        "description": "Var återkopplingsljuden spelas",
         "placeholder": "Välj utmatningsenhet...",
         "loading": "Laddar..."
       },
       "volume": {
         "title": "Volym",
-        "description": "Justera volymen för ljudåterkopplingsljud"
+        "description": "Justera volymen för ljudåterkopplingsljud",
+        "levels": {
+          "quiet": "Tyst",
+          "medium": "Medel",
+          "loud": "Högt"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Eget",
+        "preview": "Spela start- och stoppljud"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Experimentellt"
       },
       "experimentalToggle": {
-        "label": "Experimentella funktioner",
-        "description": "Aktivera experimentella funktioner som fortfarande är under utveckling."
+        "label": "Visa experimentella funktioner",
+        "description": "Funktioner under utveckling; kan vara instabila"
       },
       "lazyStreamClose": {
         "label": "Håll mikrofonen öppen mellan transkriptioner",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Starta dold",
-        "description": "Starta i systemfältet utan att öppna fönstret."
+        "label": "Dölj fönstret vid start",
+        "description": "Programmet startar i meddelandefältet"
       },
       "autostart": {
-        "label": "Starta vid uppstart",
-        "description": "Starta Handy automatiskt när du loggar in på din dator."
+        "label": "Starta med Windows",
+        "description": "Dikteringen är redo direkt efter inloggning"
       },
       "showTrayIcon": {
-        "label": "Visa ikon i systemfältet",
-        "description": "Visa Handy-ikonen i systemfältet."
+        "label": "Ikon i meddelandefältet",
+        "description": "Utan ikonen kommer ett stängt fönster bara tillbaka om programmet startas igen"
       },
       "overlay": {
         "style": {
-          "title": "Overlay",
-          "description": "Välj inspelningsöverlägget: ”Ingen” döljer det, ”Minimal” visar en kompakt indikator, ”Live” visar transkriberingen i realtid medan du talar (endast modeller med streamingstöd — leta efter Streaming-märket i modellväljaren). På Linux rekommenderas ”Ingen”.",
+          "title": "Indikatorns stil",
+          "description": "Vad som visas vid markören under diktering",
           "options": {
             "none": "Ingen",
             "minimal": "Minimal",
             "live": "Live"
-          }
+          },
+          "noneConsequence": "Utan indikatorn visas inte fel: en text som inte klistrades in finns i Historik"
         },
         "position": {
-          "title": "Överlagringsposition",
-          "description": "Visa visuell återkoppling under inspelning och transkription. På Linux rekommenderas 'Ingen'.",
+          "title": "Indikatorns position",
+          "description": "Överst eller nederst på skärmen",
           "options": {
             "bottom": "Nederst",
             "top": "Överst"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Klistra-in-metod",
-        "description": "Välj hur text infogas. Direkt: simulerar skrivande via systeminmatning. Ingen: hoppar över klistra in, uppdaterar endast historik/urklipp.",
+        "description": "Hur texten kommer in i det aktiva fönstret",
         "options": {
           "clipboard": "Urklipp ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Urklipp (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Hantering av urklipp",
-        "description": "Ändra inte urklipp bevarar ditt nuvarande urklippsinnehåll efter transkription. Kopiera till urklipp lämnar transkriptionsresultatet i ditt urklipp efter att ha klistrat in.",
+        "title": "Urklipp",
+        "description": "Behåll det som fanns i urklipp eller lämna den dikterade texten där",
         "options": {
           "dontModify": "Ändra inte urklipp",
           "copyToClipboard": "Kopiera till urklipp"
         }
       },
       "autoSubmit": {
-        "title": "Skicka automatiskt",
-        "description": "Skicka automatiskt den valda tangentkombinationen efter textinsättning. Cmd+Enter gäller på macOS, medan Windows/Linux använder Super+Enter.",
+        "title": "Skicka efter inklistring",
+        "description": "Tryck på vald tangent direkt efter inklistringen, till exempel Enter i en chatt",
         "options": {
           "off": "Av",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Översätt till engelska",
-        "description": "Översätt automatiskt tal från andra språk till engelska under transkription."
+        "description": "Tal på vilket språk som helst blir engelsk text"
       },
       "modelUnload": {
-        "title": "Avlasta modell",
-        "description": "Frigör automatiskt GPU/CPU-minne när modellen inte har använts under den angivna tiden",
+        "title": "Ta bort modellen ur minnet efter…",
+        "description": "Frigör minne när modellen inte behövs på ett tag",
         "options": {
           "never": "Aldrig",
           "immediately": "Omedelbart",
@@ -376,16 +530,17 @@
         }
       },
       "customWords": {
-        "title": "Anpassade ord",
-        "description": "Hjälp modeller som stöds att känna igen namn och specialtermer. Ungefärlig korrigering är för närvarande begränsad till ord med bokstäverna A–Z och siffror.",
+        "title": "Egna ord",
+        "description": "Ett tips för Whisper-modeller; andra modeller får bara rättelser, och bara för ord med A–Z",
         "placeholder": "Lägg till ett ord",
         "add": "Lägg till",
         "remove": "Ta bort {{word}}",
-        "duplicate": "\"{{word}}\" finns redan"
+        "duplicate": "\"{{word}}\" finns redan",
+        "removed": "”{{word}}” borttaget"
       },
       "voiceActivityDetection": {
-        "title": "Röstaktivitetsdetektering",
-        "description": "Filtrerar bort tystnad från inspelningar. Modeller med streamingstöd använder en längre VAD-svans; om VAD inaktiveras spelas rått ljud in."
+        "title": "Hoppa över tystnad",
+        "description": "Bara tal går till igenkänningen"
       },
       "vadBackend": {
         "title": "Backend för röstdetektering",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Ta bort utfyllnadsord",
-        "description": "Tar bort vanliga tvekljud från transkriberingar. Stäng av för att behålla dem."
+        "description": "”uh”, ”hmm” i den inklistrade texten"
       },
       "chineseScript": {
         "title": "Kinesisk skrift",
-        "description": "Skriver mandarin- och kantonesiska transkriptioner med förenklade eller traditionella tecken. Andra språk lämnas oförändrade.",
+        "description": "Förenklade eller traditionella tecken",
         "options": {
           "asTranscribed": "Som transkriberat",
           "simplified": "Förenklad",
@@ -434,20 +589,21 @@
           "title": "Bas-URL",
           "description": "API-bas-URL för den valda leverantören. Endast den anpassade leverantören kan redigeras.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Adressen bestäms av vald leverantör",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API-nyckel",
-          "description": "API-nyckel för den valda leverantören.",
+          "description": "Lagras bara på den här datorn",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Modell",
-          "descriptionCustom": "Ange den modellidentifierare som förväntas av din anpassade slutpunkt.",
-          "descriptionDefault": "Välj en modell som exponeras av den valda leverantören.",
+          "descriptionCustom": "Modellens namn på din server",
+          "descriptionDefault": "Knappen till höger uppdaterar listan",
           "placeholderWithOptions": "Sök eller välj en modell",
           "placeholderNoOptions": "Ange ett modellnamn",
-          "refreshModels": "Uppdatera modeller"
+          "refreshModels": "Uppdatera modellistan"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Vald prompt",
           "description": "Välj en mall för att förfina transkriptioner eller skapa en ny. Använd ${output} inuti prompttexten för att referera till den fångade transkriptionen."
         },
-        "noPrompts": "Inga prompter tillgängliga",
-        "selectPrompt": "Välj en prompt",
+        "noPrompts": "Inga instruktioner",
+        "selectPrompt": "Välj en instruktion",
         "createNew": "Skapa ny prompt",
-        "promptLabel": "Prompt-etikett",
+        "promptLabel": "Namn",
         "promptLabelPlaceholder": "Ange namn på prompt",
-        "promptInstructions": "Prompt-instruktioner",
+        "promptInstructions": "Instruktionens text",
         "promptInstructionsPlaceholder": "Skriv instruktionerna som ska köras efter transkription. Exempel: Förbättra grammatik och tydlighet för följande text: ${output}",
         "promptTip": "Tips: Använd <code>${output}</code> för att infoga den transkriberade texten i din prompt.",
         "updatePrompt": "Uppdatera prompt",
-        "deletePrompt": "Ta bort prompt",
-        "createPrompt": "Skapa prompt",
+        "deletePrompt": "Ta bort",
+        "createPrompt": "Skapa",
         "cancel": "Avbryt",
-        "selectToEdit": "Välj en prompt ovan för att visa och redigera dess detaljer.",
-        "createFirst": "Klicka på 'Skapa ny prompt' ovan för att skapa din första prompt för efterbearbetning."
+        "selectToEdit": "Välj en instruktion för att redigera den.",
+        "createFirst": "Klicka på ”Skapa” för att lägga till den första instruktionen."
+      },
+      "local": {
+        "intro": "Modellen körs direkt på den här datorn: inget internet, inga nycklar, din text lämnar aldrig enheten. Ladda ned en modell om du vill. Den startar själv när den behövs och tas bort ur minnet när den är inaktiv. Den körs på processorn och är därför långsammare än molntjänster. Alla modeller får plats på en bärbar dator med 16 GB RAM.",
+        "runtimeMissing": "Den inbyggda AI-motorn hittades inte. Installera om Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Balanserad",
+            "model": "Qwen3.5 4B",
+            "description": "Den vanliga Qwen 4B-versionen. Noggrann med skiljetecken, men rättar få igenkänningsfel i verkliga samtal (våra tester, 2026-10-06). Versionen med acceleration är noggrannare och snabbare."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Googles modell, trogen originalet. Redigerar som Gemma i Googles version med acceleration, men ungefär 1,25 gånger långsammare."
+          },
+          "gigachat31": {
+            "title": "För ryska",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Tränad på ryska från början. Bara 1,8B av dess 10B parametrar är aktiva per token, så den är snabbare än storleken antyder. Behöver mer minne."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen för ryska",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) med ryskt ordförråd och extra träning på ryska texter. I testet rättar den mindre än Gemma E2B och är hälften så snabb (cirka 27 min per timmes inspelning)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "NVIDIA:s lilla modell, officiellt bara engelska. I testet lämnade den texten nästan oförändrad på både ryska och engelska och är långsammare än Gemma (cirka 35 min per timmes inspelning)."
+          },
+          "qwen35_9b": {
+            "title": "Maximal",
+            "model": "Qwen3.5 9B",
+            "description": "Den smartaste lokala modellen: bäst på sammanhang och svåra rättelser. Den långsammaste."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Balanserad",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B i en nyare version med inbyggd acceleration. Noggrannare och ungefär 1,2 gånger snabbare än vanliga Qwen 4B, men rättar hälften så många fel som Gemma i våra tester."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma lätt",
+            "model": "Gemma 4 E2B · Googles version",
+            "description": "Den mindre Gemma i Googles officiella version, med acceleration (+98 MB). Dubbelt så snabb som Gemma E4B (ungefär 14 min per timme inspelning) med ungefär 2/3 av dess rättelser."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Googles version",
+            "description": "Bästa kvaliteten i våra tester (2026-10-06). Googles officiella version med acceleration (+99 MB): redigerar som vanliga Gemma E4B, ungefär 1,25 gånger snabbare. Ungefär 26 min per timme inspelning."
+          }
+        },
+        "speedupBadge": "acceleration",
+        "speedupHint": "En liten hjälpmodell gissar flera ord framåt och huvudmodellen kontrollerar dem. På en processor är det ungefär 1,2–1,3 gånger snabbare.",
+        "untested": "otestad",
+        "delete": "Ta bort modell",
+        "state": {
+          "stopped": "Inte inläst i minnet",
+          "loading": "Läses in i minnet…",
+          "ready": "Inläst i minnet"
+        },
+        "unloadNow": "Ta bort ur minnet nu",
+        "unload": {
+          "title": "Ta bort ur minnet",
+          "description": "Hur länge modellen får vara inaktiv innan den tas bort ur minnet, vilket frigör ungefär 2–3 GB.",
+          "immediately": "Direkt efter bearbetningen",
+          "min2": "Efter 2 minuter",
+          "min5": "Efter 5 minuter",
+          "min15": "Efter 15 minuter",
+          "never": "Aldrig"
+        },
+        "recommended": "Rekommenderas"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Öppna mapp för inspelningar",
       "loading": "Laddar historik...",
       "empty": "Inga transkriptioner ännu. Börja spela in för att bygga upp din historik!",
-      "copyToClipboard": "Kopiera transkription till urklipp",
+      "copyToClipboard": "Kopiera text",
       "copyError": "Det gick inte att kopiera transkriptionen till urklipp.",
       "save": "Spara transkription",
       "unsave": "Ta bort från sparade",
       "delete": "Ta bort post",
       "deleteError": "Misslyckades med att ta bort post. Försök igen.",
-      "retranscribe": "Transkribera igen",
+      "retranscribe": "Kör igenkänning igen",
       "retranscribeError": "Misslyckades med att transkribera igen. Försök igen.",
-      "transcribing": "Transkriberar...",
+      "transcribing": "Känner igen…",
       "transcriptionFailed": "Transkribering misslyckades. Du kan transkribera igen med hjälp av ikonen för nytt försök."
     },
     "debug": {
       "title": "Felsökning",
       "logDirectory": {
         "title": "Loggmapp",
-        "description": "Plats där loggfiler lagras"
+        "description": "Bifoga loggen till en felrapport"
       },
       "logLevel": {
         "title": "Loggnivå",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Sök efter uppdateringar",
-        "description": "Sök automatiskt efter nya versioner av Handy",
-        "lockedDescription": "Inaktiverad av systemkonfiguration (HANDY_DISABLE_UPDATER)"
+        "description": "Fråga GitHub en gång per start om en ny version av Tishe har kommit. Inspelningar och texter skickas inte",
+        "lockedDescription": "Sökning efter uppdateringar är avstängd i den här versionen"
       },
       "soundTheme": {
         "label": "Ljudtema",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Tröskelvärde för ordkorrigering",
-        "description": "Känslighet för anpassade ordkorrigeringar"
+        "description": "Hur likt ett av dina ord ett ord måste vara för att ersättas"
       },
       "historyLimit": {
-        "title": "Historikgräns",
-        "description": "Maximalt antal historikposter som ska sparas",
+        "title": "Hur många dikteringar som sparas",
+        "description": "Behållna dikteringar räknas inte",
         "entries": "poster"
       },
       "recordingRetention": {
-        "title": "Radera inspelningar automatiskt",
-        "description": "Radera gamla inspelningar automatiskt för att spara utrymme",
+        "title": "Ta bort gamla dikteringar",
+        "description": "Ljudet tas bort tillsammans med texten",
         "never": "Aldrig",
         "preserveLimit": "Behåll de senaste {{count}}",
         "days3": "Efter 3 dagar",
@@ -538,24 +765,24 @@
         "placeholder": "Välj lagringsperiod..."
       },
       "alwaysOnMicrophone": {
-        "label": "Alltid påslagen mikrofon",
-        "description": "Håll mikrofonen aktiv för snabbare svar"
+        "label": "Håll mikrofonen på",
+        "description": "Inspelningen startar snabbare, men mikrofonen är upptagen hela tiden"
       },
       "clamshellMicrophone": {
-        "title": "Clamshell-mikrofon",
-        "description": "Mikrofon som ska användas när bärbara datorns lock är stängt"
+        "title": "Mikrofon med stängt lock",
+        "description": "Vilken mikrofon som används när den bärbara datorn är stängd"
       },
       "postProcessingToggle": {
         "label": "Efterbearbetning",
         "description": "Aktivera AI-driven textförfining efter transkription"
       },
       "muteWhileRecording": {
-        "label": "Ljudlös under inspelning",
-        "description": "Stäng av systemljudet under inspelning"
+        "label": "Stäng av datorns ljud under inspelning",
+        "description": "Musik och video kommer inte med i inspelningen"
       },
       "appendTrailingSpace": {
-        "label": "Lägg till avslutande mellanslag",
-        "description": "Lägg till ett mellanslag efter klistrad transkription"
+        "label": "Lägg till ett mellanslag i slutet",
+        "description": "Nästa fras klistras inte ihop med den förra"
       },
       "keyboardImplementation": {
         "title": "Tangentbordsimplementering",
@@ -568,28 +795,28 @@
         "settings": "Inställningar:"
       },
       "pasteDelay": {
-        "title": "Fördröjning vid klistra in (före)",
-        "description": "Fördröjning (i millisekunder) efter att text kopierats, innan tangenttryckningen för att klistra in skickas. Öka om ingenting klistras in."
+        "title": "Fördröjning före inklistring",
+        "description": "Öka om inget klistras in"
       },
       "pasteDelayAfter": {
-        "title": "Fördröjning vid klistra in (efter)",
-        "description": "Fördröjning (i millisekunder) efter tangenttryckningen för att klistra in, innan ditt tidigare urklipp återställs. Öka om det gamla urklippsinnehållet klistras in i stället för transkriptionen."
+        "title": "Fördröjning efter inklistring",
+        "description": "Öka om gammal text från urklipp klistras in"
       },
       "holdThreshold": {
         "title": "Tröskel för hållning",
-        "description": "Endast i automatiskt läge: hur länge (i millisekunder) genvägen måste hållas nere för att räknas som hållning i stället för ett tryck. Sänk värdet om inspelningen fortsätter efter korta hållningar; höj det om avsiktliga tryck tolkas som hållning."
+        "description": "Ett kortare tryck växlar, ett längre räknas som att hålla ned"
       },
       "reliablePaste": {
         "title": "Tillförlitlig inklistring (Beta)",
-        "description": "Återställ urklipp först när målappen faktiskt har läst transkriptionen, i stället för efter en fast fördröjning. Avsett att åtgärda att det gamla urklippsinnehållet klistras in när systemet är belastat. Kräver en klistra-in-metod via urklipp; endast macOS och Windows."
+        "description": "Vänta tills programmet har läst texten i stället för en fast tid"
       },
       "recordingBuffer": {
-        "title": "Extra inspelningsbuffert",
-        "description": "Extra tid (i millisekunder) för att fortsätta spela in efter att du släppt tangenten, för att fånga upp avslutande ljud. 0 = ingen extra buffert."
+        "title": "Fortsätt spela in efter släpp",
+        "description": "Hur länge till som spelas in efter att tangenten släppts"
       },
       "keyboardDiagnostic": {
         "title": "Tangentbordsdiagnostik",
-        "description": "Kontrollerar om tangentbordshändelser når Handy. Endast antalet händelser registreras — aldrig vilka tangenter du trycker på.",
+        "description": "Kontrollerar om tangentbordshändelser når Tishe. Bara antalet händelser registreras – aldrig vilka tangenter du trycker på.",
         "run": "Kör 10 s diagnostik",
         "running": "Lyssnar… tryck på ditt kortkommando några gånger (t.ex. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Mus",
         "verdictBlocked": "Secure Input blockerar tangenthändelser — kortkommandon med en vanlig tangent kan inte fungera förrän det är löst.",
         "verdictSuspicious": "Modifierarhändelser kom fram men inga tangenthändelser — något undertrycker tangenter trots att Secure Input rapporteras som inaktiverat. Rapportera gärna detta på GitHub.",
-        "verdictOk": "Tangenthändelser når Handy som vanligt.",
+        "verdictOk": "Tangenthändelser når Tishe som de ska.",
         "verdictNoEvents": "Inga händelser fångades — tryckte du på några tangenter under testet?",
         "failed": "Diagnostiken misslyckades: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "Om",
       "version": {
         "title": "Version",
-        "description": "Nuvarande version av Handy"
+        "description": "Aktuell version av Tishe"
       },
       "appDataDirectory": {
-        "title": "Mapp för appdata",
-        "description": "Plats där Handy lagrar sina data"
+        "title": "Datamapp",
+        "description": "Inställningar, modeller och historik"
       },
       "sourceCode": {
         "title": "Källkod",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Stöd utvecklingen",
-        "description": "Hjälp oss att fortsätta bygga Handy",
+        "description": "Tishe bygger på deras program",
         "button": "Donera"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Högpresterande inferens av OpenAI:s Whisper-modell för automatisk taligenkänning",
-          "details": "Handy använder ggml för snabb, lokal tal-till-text-behandling. Tack till det fantastiska arbete som utförts av Georgi Gerganov med medarbetare."
+          "details": "Snabb taligenkänning på datorn. Tack till Georgi Gerganov och projektets bidragsgivare."
         }
       },
       "whatsNewUpdates": {
-        "label": "Visa nyheter",
-        "description": "Visa versionsinformation efter Handy-uppdateringar"
+        "label": "Visa ”Nyheter” efter en uppdatering",
+        "description": "En kort lista över ändringar vid första starten av en ny version"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Öppna",
     "copy": "Kopiera",
     "clear": "Rensa",
-    "noOptionsFound": "Inga alternativ hittades"
+    "noOptionsFound": "Inga alternativ hittades",
+    "cancel": "Avbryt",
+    "choose": "Välj…",
+    "reset": "Återställ standard",
+    "search": "Sök"
   },
   "accessibility": {
-    "permissionsDescription": "Handy behöver behörighet för hjälpmedel för att kunna skriva transkriberad text.",
+    "permissionsDescription": "För att klistra in text behöver programmet behörigheten ”Hjälpmedel”.",
     "openSettings": "Öppna systeminställningar"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "noInputDevice": "Ingen ljudenhet hittades. Anslut en mikrofon eller ett headset och försök igen.",
     "pasteFailedTitle": "Det gick inte att klistra in texten",
     "pasteFailed": "Texten kunde inte klistras in i det aktiva programmet.",
-    "transcriptionFailedTitle": "Transkriptionen misslyckades"
+    "transcriptionFailedTitle": "Kunde inte känna igen"
   },
   "appLanguage": {
-    "title": "Applikationsspråk",
-    "description": "Ändra språket i Handy-gränssnittet"
+    "title": "Gränssnittets språk",
+    "description": "Språket i programmets texter"
   },
   "theme": {
-    "title": "Apptema",
-    "description": "Välj om Handy ska följa systemets tema eller förbli ljust eller mörkt",
+    "title": "Tema",
+    "description": "Välj om Tishe följer systemets tema eller alltid är ljust eller mörkt",
     "options": {
-      "system": "System",
+      "system": "Som systemet",
       "light": "Ljust",
       "dark": "Mörkt"
     }
@@ -718,10 +949,18 @@
   "overlay": {
     "transcribing": "Transkriberar...",
     "processing": "Bearbetar...",
+    "waiting": "Modellen är upptagen med en fil – dikteringen blir försenad",
+    "message": {
+      "paste_failed": "Det gick inte att klistra in. Texten är sparad i Historik",
+      "editing_skipped": "Inklistrad utan redigering: AI:n är inte redo",
+      "no_microphone": "Ingen mikrofon hittades",
+      "microphone_denied": "Ingen åtkomst till mikrofonen",
+      "help": "Vad du kan göra"
+    },
     "loadingModel": "Laddar modell..."
   },
   "whatsNew": {
-    "title": "Nytt i Handy v{{version}}"
+    "title": "Nytt i Tishe"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} kanske blockerar 1 kortkommando",
@@ -733,5 +972,715 @@
     "learnMore": "Så här löser du det",
     "recorderBlocked": "Det går inte att spela in kortkommandon just nu — macOS Secure Input blockerar tangenthändelser. Lös varningen om Secure Input först.",
     "dismiss": "Avfärda"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg hittades inte. Det behövs för att läsa ljud- och videofiler och ingår i Tishes installationsprogram: installera om Tishe. Eller installera det med kommandot: winget install Gyan.FFmpeg — och starta om Tishe.",
+    "input": {
+      "choose": "Lägg till filer…",
+      "filterName": "Ljud och video"
+    },
+    "maxPart": {
+      "title": "Maximal längd på en del",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Leverantör",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Anpassad (OpenAI-kompatibel)"
+      },
+      "baseUrl": "API-URL",
+      "baseUrlDescription": "Bas-URL som slutar på /v1.",
+      "apiKey": "API-nyckel",
+      "apiKeyDescription": "Lagras lokalt på den här datorn.",
+      "model": "Modell",
+      "modelDescription": "gpt-4o-transcribe-modeller tar emot högst ~23 min per förfrågan; delar kortas automatiskt.",
+      "language": "Språk",
+      "languageDescription": "Språkkod, till exempel sv eller en. Lämna tomt för automatisk identifiering.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Personer i inspelningen",
+      "auto": "Identifiera automatiskt",
+      "model": "Talarmodell",
+      "modelDescription": "Laddas ned en gång; skiljer röster åt. Båda är små och snabba.",
+      "recommended": "Rekommenderas",
+      "cloudUntimed": "Modellen {{model}} returnerar inga tidsstämplar, så talare kan inte markeras. Välj whisper-1, en whisper-modell hos Groq eller lokal igenkänning.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Tränad på tusentals röster; skiljer röster åt pålitligt i verkliga inspelningar. Bra standardval."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "En alternativ modell: prova den om den första blandar ihop röster i dina inspelningar."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Ta även med den råa transkriberingen",
+      "includeRawDescription": "Lägg till igenkänningens oredigerade resultat i slutet av dokumentet.",
+      "promptPlaceholder": "Inbyggd instruktion för inspelningens språk (ryska eller engelska)"
+    },
+    "output": {
+      "format": "Format",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Tidsstämplar",
+      "location": "Spara i",
+      "choose": "Välj mapp…",
+      "nextToSource": "Bredvid källfilen",
+      "notes": "Bearbetningsanteckningar",
+      "removeFillers": "Ta bort tvekljud",
+      "saveDebug": "Spara mellanfiler",
+      "saveDebugDescription": "Skapar en mapp ”<name>.debug” bredvid dokumentet med texten efter varje steg: igenkänning, rensning, varje förfrågan till språkmodellen och dess svar, slutresultat. För felsökning och för modelljämförelsen."
+    },
+    "actions": {
+      "start": "Transkribera",
+      "cancel": "Avbryt"
+    },
+    "progress": {
+      "starting": "Startar…",
+      "elapsed": "Förfluten tid: {{time}}",
+      "extracting": "Extraherar ljud…",
+      "extractingPart": "Extraherar ljud…",
+      "diarizing": "Identifierar talare…",
+      "diarizingPart": "Identifierar talare…",
+      "splitting": "Delar upp i delar…",
+      "splittingPart": "Delar upp i delar…",
+      "transcribing": "Transkriberar…",
+      "transcribingPart": "Transkriberar del {{part}} av {{total}}…",
+      "post_processing": "Rensar med LLM…",
+      "post_processingPart": "Rensar del {{part}} av {{total}} med LLM…",
+      "writing": "Skriver dokumentet…",
+      "writingPart": "Skriver dokumentet…"
+    },
+    "result": {
+      "open": "Öppna",
+      "reveal": "Visa i mapp"
+    },
+    "document": {
+      "title": "Transkribering",
+      "sourceFile": "Fil",
+      "duration": "Längd",
+      "parts": "Delar",
+      "engine": "Igenkänning",
+      "llm": "Efterbearbetning med LLM",
+      "created": "Skapad",
+      "part": "Del",
+      "rawTranscript": "Rå transkribering",
+      "speaker": "Talare",
+      "notes": "Bearbetningsanteckningar",
+      "notesTotal": "Bearbetningstid",
+      "notesExtracting": "Ljudextrahering",
+      "notesDiarizing": "Talaridentifiering",
+      "notesTranscribing": "Igenkänning",
+      "notesLlm": "LLM-bearbetning",
+      "notesWarnings": "Varningar",
+      "notesNone": "inga",
+      "notesLanguage": "Textens språk",
+      "llmLocal": "{{model}}, på den här datorn",
+      "warnings": {
+        "noTimestampsModel": "talare markerades inte: den här talmodellen returnerar inga tidsstämplar; använd en whisper-modell eller lokal igenkänning",
+        "noTimestampsPart": "del {{part}}: taltjänsten returnerade inga tidsstämplar, så talare kunde inte markeras",
+        "llmEmpty": "del {{part}}, fragment {{fragment}}: LLM:en gav ett tomt svar, rå text behölls",
+        "llmError": "del {{part}}, fragment {{fragment}}: LLM-fel, rå text behölls ({{error}})",
+        "numbersBack": "del {{part}}, fragment {{fragment}}: siffror återställda i {{lines}} rader (LLM:en skrev dem med bokstäver eller tog bort dem)",
+        "linesLost": "del {{part}}, fragment {{fragment}}: LLM-svaret behöll inte de numrerade raderna, rå text behölls",
+        "linesKept": "del {{part}}, fragment {{fragment}}: {{kept}} av {{total}} rader behöll sin råa text ({{reasons}})",
+        "kept": {
+          "missing": "saknas",
+          "duplicate": "dubblett",
+          "empty": "tom",
+          "tooLong": "för lång",
+          "translated": "översatt",
+          "tooShort": "för kort",
+          "cutOff": "avklippt"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Rensa klara"
+    },
+    "events": {
+      "title": "Händelseskript",
+      "choose": "Välj…",
+      "none": "Inte angivet – händelser skickas ingenstans",
+      "filterName": "Program och skript",
+      "test": "Testa",
+      "testOk": "Skriptet tog emot en testhändelse",
+      "testFailed": "Misslyckades: {{error}}",
+      "testMessage": "Tishe: testhändelse",
+      "remaining": "~{{minutes}} min kvar",
+      "started": "Transkriberingen startade",
+      "finished": "Klar",
+      "cancelled": "Avbruten",
+      "interval": {
+        "title": "Intervall för förloppsmeddelanden",
+        "description": "Högst en gång per så många sekunder. Ett nytt steg eller en ny del, start och slut skickas direkt.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Ändra",
+    "choose": "Välj",
+    "open": "Öppna",
+    "hide": "Dölj",
+    "save": "Spara",
+    "saved": "Sparat",
+    "copied": "Kopierat",
+    "undo": "Ångra",
+    "download": "Ladda ned",
+    "downloadSize": "Ladda ned {{size}}",
+    "downloadingPercent": "Laddar ned · {{percent}} %",
+    "cancelDownload": "Avbryt",
+    "deleteNamed": "Ta bort {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Använd ”{{value}}”",
+    "fold": {
+      "more": "Mer",
+      "changed_one": "ändrad: {{count}}",
+      "changed_other": "ändrade: {{count}}",
+      "changedA11y_one": "{{count}} inställning ändrad",
+      "changedA11y_other": "{{count}} inställningar ändrade"
+    },
+    "number": {
+      "hint": "Från {{min}} till {{max}}",
+      "hintDefault": "Standard {{value}}; från {{min}} till {{max}}",
+      "notNumber": "Ange ett tal",
+      "range": "Ange ett tal från {{min}} till {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} h",
+      "hourMin": "{{h}} h {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "i dag {{time}}",
+      "yesterday": "i går {{time}}",
+      "todayTitle": "I dag",
+      "yesterdayTitle": "I går"
+    },
+    "player": {
+      "play": "Spela",
+      "pause": "Pausa",
+      "position": "Uppspelningsposition"
+    },
+    "shortcut": {
+      "change": "Ändra tangent för ”{{name}}”",
+      "reset": "Återställ tangenten till standard"
+    },
+    "echo": {
+      "recognition": "Igenkänning: {{model}}",
+      "language": "språk: {{language}}",
+      "sharedWithDictation": "delas med diktering",
+      "sharedWithFiles": "delas med filtranskribering",
+      "noModel": "Ingen taligenkänningsmodell"
+    },
+    "llm": {
+      "ready": "Redo · {{model}} på den här datorn",
+      "needed": "Behöver AI:n · {{model}}",
+      "downloading": "Laddar ned AI:n · {{percent}} %",
+      "runtimeMissing": "Den inbyggda AI-motorn saknas",
+      "otherOptions": "Andra alternativ",
+      "noKey": "Behöver en {{provider}}-nyckel",
+      "noUrl": "Behöver serverns adress",
+      "noServerModel": "Behöver ett modellnamn",
+      "localServer": "Din server på den här datorn · {{model}}",
+      "textToServer": "Texten skickas till {{address}}",
+      "textToService": "Texten skickas till {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Ta bort modellen {{name}}?",
+      "deleteModel": "Ta bort modell",
+      "deleteModelBody": "{{size}} frigörs. För att använda modellen igen måste du ladda ned den.",
+      "deleteActiveTitle": "Ta bort {{name}}? Det är den aktuella modellen",
+      "deleteActiveBody": "Diktering och transkribering slutar fungera tills du väljer en annan modell. {{size}} frigörs.",
+      "deleteLlmTitle": "Ta bort AI-modellen {{name}}?",
+      "deleteLlm": "Ta bort AI-modell",
+      "deleteLlmBody": "{{size}} frigörs. Redigering fungerar inte förrän du laddar ned den igen eller väljer en annan.",
+      "deleteSpeakerModelBody": "Uppdelning per talare fungerar inte förrän du laddar ned en röstmodell igen."
+    },
+    "back": {
+      "transcription": "Tillbaka till Transkribering",
+      "dictation": "Tillbaka till Diktering",
+      "meetings": "Tillbaka till Möten",
+      "history": "Tillbaka till Historik",
+      "models": "Tillbaka till Igenkänning",
+      "llm": "Tillbaka till AI-redigering",
+      "app": "Tillbaka till App",
+      "about": "Tillbaka till Om",
+      "debug": "Tillbaka till Felsökning",
+      "next": "Tillbaka till Vad händer sen"
+    },
+    "changed": "ändrad"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "inläst",
+      "loading": "läses in…",
+      "error": "kunde inte läsas in",
+      "unloaded": "inte i minnet",
+      "none": "Ingen modell",
+      "a11y": "Modell {{model}}, {{state}}. Byt modell",
+      "menu": "Nedladdade modeller",
+      "all": "Alla modeller…",
+      "locked": "En transkribering pågår – byt när den är klar"
+    },
+    "task": "Transkribering: fil {{current}} av {{total}} · {{percent}} %",
+    "downloading": "Laddar ned: {{name}} · {{percent}} %",
+    "downloadingMany": "Laddar ned: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Transkribering behöver ffmpeg"
+    },
+    "drop": {
+      "title": "Släpp en inspelning här",
+      "text": "Ljud eller video: mp3, m4a, wav, mp4, mkv med flera. Varje fil blir ett eget dokument.",
+      "more": "Släpp fler inspelningar eller",
+      "release": "Släpp för att lägga till",
+      "rejected": "{{names}} – inte ljud eller video",
+      "oneText": "”{{name}}” läggs i transkriberingskön",
+      "manyText_one": "{{count}} inspelning läggs i transkriberingskön",
+      "manyText_other": "{{count}} inspelningar läggs i transkriberingskön",
+      "anyText": "Ljud- och videofiler läggs i transkriberingskön",
+      "noneTitle": "De här filerna fungerar inte",
+      "noneText": "Bara ljud och video kan transkriberas: mp3, m4a, wav, mp4, mkv med flera.",
+      "otherNote_one": "{{count}} fil till hoppas över: den är inte ljud eller video",
+      "otherNote_other": "{{count}} filer till hoppas över: de är inte ljud eller video",
+      "alreadyOne": "”{{name}}” finns redan i kön",
+      "alreadyMany": "De här inspelningarna finns redan i kön"
+    },
+    "list": {
+      "label": "Inspelningar",
+      "waiting": "Väntar",
+      "cancelled": "Avbruten",
+      "remaining": "ungefär {{time}} kvar",
+      "remove": "Ta bort",
+      "removeFile": "Ta bort {{name}}",
+      "removeFromList": "Ta bort från listan",
+      "more": "Mer: {{name}}",
+      "recipeSpeakers": "talare",
+      "recipeEditing": "redigering",
+      "recipeCloud": "i molnet",
+      "parts_one": "{{count}} del",
+      "parts_other": "{{count}} delar",
+      "notes_one": "{{count}} bearbetningsanteckning",
+      "notes_other": "{{count}} bearbetningsanteckningar",
+      "showAll": "Visa alla ({{count}})",
+      "showFewer": "Visa färre",
+      "removedOne": "Borttagen från listan",
+      "removedMany_one": "{{count}} rad borttagen från listan",
+      "removedMany_other": "{{count}} rader borttagna från listan",
+      "chars_one": "{{n}} tecken",
+      "chars_other": "{{n}} tecken",
+      "keptNote": "De senaste {{count}} resultaten sparas. Dokument på disken tas aldrig bort.",
+      "missing": "Dokumentet hittades inte: det har flyttats eller tagits bort, eller så är dess enhet frånkopplad",
+      "openDocument": "Öppna dokumentet {{name}}"
+    },
+    "recipe": {
+      "title": "Recept",
+      "locked": "Inställningarna ändras inte medan transkriberingen pågår. Nya filer använder samma inställningar.",
+      "where": "Var igenkänningen sker",
+      "local": "På den här datorn",
+      "cloud": "I molnet",
+      "audioToService": "Ljudet skickas till {{provider}}",
+      "cloudEcho": "Igenkänning: {{model}} hos {{provider}}",
+      "speakers": "Talare",
+      "speakersDescription": "Dokumentet blir ett samtalsprotokoll: ”Talare 1: …”, ”Talare 2: …”",
+      "speakersMissing": "Behöver en röstmodell · {{size}}",
+      "speakersDownloading": "Laddar ned röstmodellen · {{percent}} %",
+      "speakersReady": "Röstmodellen är redo",
+      "countDescription": "Om du vet det blir uppdelningen mer exakt",
+      "editing": "Redigering med AI",
+      "editingDescription": "Rättar igenkänningsfel och skiljetecken. Tar märkbart längre tid: ungefär 15–35 min per timme inspelning",
+      "result": "Resultat",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "bredvid inspelningen"
+    },
+    "more": {
+      "recognition": "Igenkänning",
+      "maxPartDescription": "En lång inspelning klipps vid pauser i delar som inte är längre än så här",
+      "speakers": "Talare",
+      "editing": "Redigering",
+      "prompt": "Instruktion för filer",
+      "promptDescription": "Tomt – den inbyggda instruktionen på inspelningens språk. Ordning: det här fältet, sedan modellens ⚙, sedan den inbyggda",
+      "document": "Dokument",
+      "locationDescription": "Namnet kommer från inspelningen; inget skrivs över, i stället läggs (2) till",
+      "timestampsDescription": "Inspelningstid före varje stycke",
+      "removeFillersDescription": "Tar bort ”uh”, ”um”, ”hmm” i engelska och ryska inspelningar. Ord blir kvar",
+      "globalFillers": "Källtranskriberingen förblir ordagrann. Diktering har en egen inställning för utfyllnadsord",
+      "notesDescription": "I slutet: tid för varje steg och varningar",
+      "integrations": "Integrationer",
+      "eventsDescription": "Ett program som får besked om start, förlopp och slut (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Lägg till filer för att börja",
+      "noFfmpeg": "Behöver ffmpeg",
+      "noModel": "Ladda först ned en taligenkänningsmodell",
+      "cloudIncomplete": "Behöver en {{provider}}-nyckel",
+      "cloudIncompleteCustom": "Behöver API-adress, nyckel och modell",
+      "noSpeakerModel": "Behöver en röstmodell",
+      "running": "Fil {{current}} av {{total}} · {{time}} har gått",
+      "start_one": "Transkribera {{count}} fil",
+      "start_other": "Transkribera {{count}} filer",
+      "done_one": "Klart: {{count}} fil",
+      "done_other": "Klart: {{count}} filer",
+      "errors_one": "{{count}} fil med fel",
+      "errors_other": "{{count}} filer med fel",
+      "summary_one": "{{count}} inspelning",
+      "summary_other": "{{count}} inspelningar",
+      "modelDownloading": "Taligenkänningsmodellen laddas ned · {{percent}} %",
+      "llmDownloading": "AI:n för redigering laddas ned · {{percent}} %",
+      "llmMissing": "Redigering kräver en AI",
+      "llmNotSetUp": "AI:n för redigering är inte inställd",
+      "withoutEditing": "Utan redigering",
+      "modelNotActive": "Taligenkänningsmodellen är inte påslagen"
+    },
+    "stop": {
+      "title": "Stoppa transkriberingen?",
+      "body": "Klara filer ({{done}}) är sparade. Den aktuella filen ({{percent}} %) och de som väntar ({{waiting}}) måste startas om.",
+      "confirm": "Stoppa",
+      "keep": "Fortsätt"
+    },
+    "tray": {
+      "running": "Transkribering: fil {{current}} av {{total}} · {{pct}} %",
+      "ready_one": "Transkriberingen är klar: {{count}} fil",
+      "ready_other": "Transkriberingen är klar: {{count}} filer"
+    },
+    "notify": {
+      "readyOne": "Transkriberingen är klar",
+      "readyMany_one": "Transkriberingen är klar: {{count}} fil",
+      "readyMany_other": "Transkriberingen är klar: {{count}} filer",
+      "failedOne": "Transkriberingen misslyckades",
+      "failedMany_one": "Transkriberingen misslyckades: {{count}} fil",
+      "failedMany_other": "Transkriberingen misslyckades: {{count}} filer",
+      "partial": "{{ok}} av {{total}} klara · {{errors}}",
+      "errors_one": "{{count}} misslyckades",
+      "errors_other": "{{count}} misslyckades",
+      "failedFile": "Misslyckades: {{name}} · {{reason}}",
+      "open": "Öppna"
+    },
+    "try": {
+      "before": "Öppna valfri redigerare, placera markören där och håll ned",
+      "after": "medan du pratar. Släpp, så dyker texten upp där.",
+      "changeKey": "Byt tangent"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Dikteringen är redo ·",
+      "anyWindow": "i alla fönster",
+      "keyBusy": "Dikteringen startar inte: tangenten är upptagen",
+      "keyBusyDetail": "Ett annat program använder {{key}}. Välj en annan tangent.",
+      "changeKey": "Byt tangent"
+    },
+    "keys": {
+      "title": "Tangenter",
+      "second": "Diktering med redigering – andra tangenten",
+      "secondDescription": "Den vanliga tangenten klistrar in texten som den är. Den här klistrar in den efter redigering med AI",
+      "instruction": "Instruktion",
+      "manage": "Hantera…",
+      "secondBusy": "Ett annat program använder den här tangenten: välj en annan"
+    },
+    "more": {
+      "paste": "Inklistring av text",
+      "indicator": "Inspelningsindikator",
+      "microphone": "Mikrofon och inspelning",
+      "prompts": "Instruktioner för diktering med redigering",
+      "promptsDescription_one": "{{count}} instruktion",
+      "promptsDescription_other": "{{count}} instruktioner",
+      "promptsRow": "Skapa och redigera instruktioner",
+      "text": "Dikteringstext",
+      "fillersDocuments": "Bara för diktering. I dokument sköts det av ”Ta bort tvekljud” på sidan Transkribering"
+    },
+    "fix": {
+      "title": "Om något inte fungerar",
+      "paste": "Texten klistras inte in",
+      "pasteHelp": "Om du dikterar i ett program som körs som administratör tillåter Windows inte inklistring där. Annars kan du öka fördröjningarna nedan.",
+      "cutOff": "Slutet av en fras klipps av",
+      "hold": "Ett kort tryck räknas som att hålla ned"
+    },
+    "prompts": {
+      "title": "Instruktioner för diktering med redigering",
+      "intro": "Instruktionen talar om för AI:n vad den ska göra med den dikterade texten. ${output} är den dikterade texten.",
+      "current": "Aktuell instruktion",
+      "create": "Skapa",
+      "deleted": "Instruktionen ”{{name}}” togs bort"
+    }
+  },
+  "meetings": {
+    "what": "Tishe kommer att spela in möten och samtal på den här datorn: din mikrofon och motparten, och sedan en transkribering uppdelad per talare.",
+    "how": "Inspelningarna stannar på datorn, precis som allt annat i Tishe.",
+    "nowTitle": "Redan nu",
+    "nowText": "Om ett möte redan är inspelat – med Zoom, Teams eller en diktafon – lägger du till filen under ”Transkribering”.",
+    "goTranscription": "Gå till Transkribering"
+  },
+  "history": {
+    "storage": {
+      "title": "Lagring",
+      "limit_one": "Den senaste dikteringen sparas",
+      "limit_other": "De senaste {{count}} dikteringarna sparas",
+      "never": "Dikteringar tas inte bort automatiskt",
+      "days_3": "Dikteringar tas bort efter 3 dagar",
+      "weeks_2": "Dikteringar tas bort efter 2 veckor",
+      "months_3": "Dikteringar tas bort efter 3 månader"
+    },
+    "empty": {
+      "title": "Dina dikteringar visas här",
+      "textBefore": "Håll ned",
+      "textAfter": "i valfritt fönster och prata.",
+      "textNoKey": "Ställ in en dikteringstangent under ”Diktering”."
+    },
+    "copy": "Kopiera text",
+    "more": "Fler åtgärder",
+    "keep": "Behåll",
+    "keepDescription": "Tas inte bort automatiskt",
+    "retry": "Kör igenkänning igen",
+    "delete": "Ta bort",
+    "deleted": "Dikteringen togs bort",
+    "failed": "Kunde inte känna igen",
+    "savedTag": "behålls",
+    "editingSkipped": "utan redigering",
+    "showMore": "Visa hela",
+    "showLess": "Fäll ihop",
+    "version": "Textversion",
+    "versionEdited": "Efter redigering",
+    "versionRaw": "Original"
+  },
+  "models": {
+    "purpose": "Modeller som gör tal till text, för diktering och filtranskribering. Redigering av texten med AI finns under",
+    "active": {
+      "title": "Aktiv modell",
+      "change": "Byt modell",
+      "none": "Ingen modell vald",
+      "noneHint": "Ladda ned den som rekommenderas för ditt språk – eller valfri modell från katalogen nedan"
+    },
+    "lockedByTranscription": "En transkribering pågår – byt när den är klar",
+    "language": {
+      "title": "Språk och översättning",
+      "scope": "Gäller diktering och filtranskribering"
+    },
+    "cleanup": {
+      "title": "Textrensning",
+      "scope": "Fungerar inuti igenkänningsmodellen, för diktering och filer"
+    },
+    "memory": {
+      "title": "Minne"
+    },
+    "onlyLanguage": "bara {{language}}",
+    "languageCount_one": "{{count}} språk",
+    "languageCount_other": "{{count}} språk",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Dina modeller",
+      "yoursCount": "Dina modeller ({{count}})",
+      "recommended": "Rekommenderade",
+      "all": "Alla modeller",
+      "languageFilter": "Språk",
+      "streaming": "Strömning",
+      "translation": "Översättning",
+      "showAll": "Visa alla modeller ({{count}})",
+      "showFewer": "Visa färre"
+    },
+    "row": {
+      "use": "Använd",
+      "inUse": "används",
+      "more": "Mer: {{name}}",
+      "delete": "Ta bort modell",
+      "translate": "översätter till engelska",
+      "streaming": "strömning",
+      "accuracy": "noggrannhet {{n}}/10",
+      "speed": "hastighet {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Var och med vilken AI texten redigeras",
+    "status": {
+      "usedFor": "Används för",
+      "files": "redigering av filer ({{state}})",
+      "dictation": "diktering med redigering ({{state}})",
+      "on": "på",
+      "off": "av"
+    },
+    "where": {
+      "title": "Var AI:n körs",
+      "local": "På den här datorn",
+      "localText": "Texten stannar på datorn",
+      "localUnavailable": "Inte tillgängligt i den här versionen",
+      "server": "Egen server",
+      "serverText": "Ollama, LM Studio eller din adress · texten skickas till din server",
+      "cloud": "Molntjänst",
+      "cloudText": "OpenAI med flera · texten skickas till tjänsten"
+    },
+    "variant": {
+      "local": "Inbyggd AI",
+      "server": "Server",
+      "cloud": "Tjänst"
+    },
+    "local": {
+      "speed": "hastighet {{n}} av 5",
+      "quality": "kvalitet {{n}} av 5",
+      "footprint": "disk {{disk}} · minne ~{{ram}} GB",
+      "showAll": "Visa alla modeller ({{count}})",
+      "showFewer": "Visa färre"
+    },
+    "server": {
+      "urlDescription": "OpenAI-kompatibel adress som slutar på /v1",
+      "keyDescription": "Bara om din server kräver en"
+    }
+  },
+  "app": {
+    "purpose": "Hur programmet beter sig som helhet",
+    "launch": "Start och meddelandefält",
+    "look": "Utseende",
+    "updates": "Uppdateringar",
+    "checkNow": "Sök efter en ny version",
+    "checkNowButton": "Sök nu",
+    "experimental": "Experimentella funktioner",
+    "quit": {
+      "title": "Avsluta Tishe?",
+      "body": "”{{name}}” transkriberas ({{pct}} %). Det avbryts; klara dokument är sparade.",
+      "bodyIdle": "Transkriberingen avbryts; klara dokument är sparade.",
+      "confirm": "Avsluta",
+      "stay": "Stanna kvar"
+    },
+    "notifications": "Aviseringar",
+    "notifyLabel": "Meddela mig när en transkribering är klar",
+    "notifyDescription": "En Windows-avisering, bara när fönstret är dolt eller inte i fokus. Ett klick öppnar resultatet.",
+    "trayHint": "Windows döljer nya ikoner. För att hålla den synlig, dra den från de dolda ikonerna till aktivitetsfältet."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Nyheter",
+    "project": {
+      "title": "Om projektet",
+      "basedOn": "Bygger på Handy",
+      "basedOnText": "Öppen källkod, MIT-licens",
+      "tishe": "Tishe",
+      "tisheText": "Öppen källkod, MIT-licens. Utgåvor och felrapporter finns på GitHub",
+      "licenses": "Licenser",
+      "licensesText": "Tredjepartsbibliotek och modeller som Tishe använder",
+      "licensesOpen": "Öppna",
+      "licensesError": "Det gick inte att öppna licensfilen",
+      "author": "Utvecklare",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "GitHub-profil"
+    },
+    "supportHandy": "Stöd Handys skapare",
+    "folders": "Mappar",
+    "versionRelease": "Tishe {{version}}, utgåva {{release}}"
+  },
+  "debug": {
+    "onBefore": "Felsökningsläget är på och förblir på mellan starterna.",
+    "onAfter": "döljer det.",
+    "log": "Logg",
+    "previews": "Förhandsvisningar",
+    "keyboard": "Tangentbord",
+    "transcription": "Transkribering"
+  },
+  "release": {
+    "available": "Version {{release}} har kommit",
+    "openPage": "Öppna utgåvans sida på GitHub",
+    "upToDate": "Det här är den senaste versionen",
+    "checkFailed": "Det gick inte att söka efter uppdateringar"
+  },
+  "next": {
+    "lead": "Tishe är den första delen av Private Memory: ett privat minne av dina samtal som finns helt på din dator.",
+    "now": "Redan nu skriver Tishe det du dikterar i vilket program som helst och transkriberar långa inspelningar med talaruppdelning. Utan internet och utan konto.",
+    "planTitle": "I kommande versioner",
+    "plan": {
+      "meetings": {
+        "title": "Inspelning av möten",
+        "text": "din mikrofon och de andra deltagarna som två spår, och texten dyker upp medan ni pratar."
+      },
+      "summaries": {
+        "title": "Mötessammanfattningar",
+        "text": "beslut och uppgifter direkt efter stopp, på mötets språk, skrivna av den inbyggda språkmodellen."
+      },
+      "search": {
+        "title": "Sökning i möten",
+        "text": "först efter ord, sedan efter betydelse."
+      },
+      "agents": {
+        "title": "Anteckningar och assistenter",
+        "text": "en mötesmapp för Obsidian och åtkomst för AI-assistenter till dina möten via MCP, fortfarande utan moln."
+      }
+    },
+    "order": "Inga datum: ordningen kan ändras efter återkoppling.",
+    "freeTitle": "Gratis och öppen källkod",
+    "freeText": "Kärnan i Tishe är gratis och förblir gratis. Följ utgåvorna och berätta på GitHub vad som saknas.",
+    "follow": "Följ på GitHub",
+    "feedback": "Rapportera ett problem eller en idé"
+  },
+  "fileErrors": {
+    "notFound": "Filen hittades inte: den har flyttats eller tagits bort.",
+    "noAudio": "Filen har inget ljud, eller så gick den inte att läsa.",
+    "unreadable": "Ljudet i filen gick inte att läsa. Filen kan vara skadad.",
+    "noModel": "Ingen taligenkänningsmodell är vald: välj en under «$t(sidebar.models)».",
+    "noSpeakerModel": "Röstmodellen är inte nedladdad: ladda ned den under «$t(transcription.more.speakers)».",
+    "noLlmModel": "Språkmodellen är inte nedladdad: ladda ned den under «$t(sidebar.llm)».",
+    "noLlmRuntime": "Den inbyggda språkmodellsmotorn saknas. Installera om Tishe.",
+    "cloudKey": "Igenkänning i molnet kräver en API-nyckel.",
+    "cloudConfig": "Igenkänning i molnet är inte inställd: ange adress och modell.",
+    "busy": "En annan fil transkriberas redan just nu.",
+    "noSpace": "Disken är full.",
+    "fileInUse": "Dokumentet är öppet i ett annat program (till exempel Word). Stäng det och försök igen.",
+    "accessDenied": "Ingen åtkomst till mappen för dokumentet. Välj en annan mapp: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Ladda ned en taligenkänningsmodell",
+      "text": "Den gör tal till text – både för inspelningar och för diktering. Den körs på den här datorn, utan internet. Du behöver bara ladda ned den en gång.",
+      "language": "Inspelningarnas språk",
+      "allModels": "Alla modeller",
+      "onDisk": "Modellen {{name}} finns redan på datorn – du behöver bara slå på den.",
+      "whileDownloading": "Du kan lägga till inspelningar medan den laddas ned: transkriberingen startar när modellen är redo."
+    },
+    "llm": {
+      "title": "Redigering kräver en AI",
+      "what": "AI:n rättar igenkänningsfel och skiljetecken. Vi rekommenderar den inbyggda: den körs på den här datorn och texten lämnar den inte.",
+      "recommended": "{{size}} på disken · kräver cirka {{ram}} GB minne · laddas ned en gång",
+      "otherWays": "Egen server eller moln",
+      "downloadOn": "Ladda ned {{size}} och slå på",
+      "runtimeTitle": "Den inbyggda AI:n är inte tillgänglig",
+      "runtime": "Den här versionen saknar motor för den inbyggda AI:n. Du kan ansluta en egen server (Ollama, LM Studio) eller en molntjänst under ”$t(sidebar.llm)”.",
+      "openPage": "Öppna ”$t(sidebar.llm)”",
+      "notSetUp": "{{reason}} – utan det fungerar inte AI:n. Slå på redigering och slutför inställningen under ”$t(sidebar.llm)”.",
+      "onAndSetUp": "Slå på och ställ in",
+      "onDisk": "Finns redan på datorn — inget behöver laddas ned.",
+      "turnOn": "Slå på redigering"
+    },
+    "quick": {
+      "title": "Snabbstart",
+      "progress": "{{done}} av {{total}}",
+      "hide": "Dölj",
+      "hideHint": "Dölj ”Snabbstart” – alla inställningar finns kvar i avsnitten till vänster",
+      "model": "Ladda ned en taligenkänningsmodell",
+      "modelDone": "Taligenkänningsmodellen är redo · {{name}}",
+      "dictation": "Prova diktering",
+      "dictationDone": "Dikteringen fungerar · dikteringar sparas under ”Historik”",
+      "file": "Transkribera en inspelning",
+      "fileDone": "Första inspelningen transkriberad",
+      "fileHint": "Släpp en ljud- eller videofil i det här fönstret eller välj filer – ett Word-dokument dyker upp bredvid inspelningen.",
+      "llm": "Redigering med AI",
+      "optional": "valfritt",
+      "llmHint": "Rättar igenkänningsfel och skiljetecken i dokument. {{model}}: {{size}}, körs på den här datorn.",
+      "llmReady": "AI:n är redo · {{model}}",
+      "doneTitle": "Allt klart",
+      "doneText": "Tishe är klart att använda. Dikteringar finns under ”Historik”, dokument i listan nedan och inställningar i avsnitten till vänster.",
+      "close": "Stäng"
+    }
   }
 }

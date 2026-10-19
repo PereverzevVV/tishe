@@ -16,7 +16,7 @@ export const HistoryLimit: React.FC<HistoryLimitProps> = ({
   const { t } = useTranslation();
   const { getSetting, updateSetting, isUpdating } = useSettings();
 
-  const historyLimit = getSetting("history_limit") ?? 5;
+  const historyLimit = getSetting("history_limit") ?? 50;
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
@@ -27,13 +27,15 @@ export const HistoryLimit: React.FC<HistoryLimitProps> = ({
 
   return (
     <SettingContainer
+      settingKey="history_limit"
+      ownReset
       title={t("settings.debug.historyLimit.title")}
       description={t("settings.debug.historyLimit.description")}
       descriptionMode={descriptionMode}
       grouped={grouped}
       layout="horizontal"
     >
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center gap-2">
         <Input
           type="number"
           min="0"
@@ -43,7 +45,7 @@ export const HistoryLimit: React.FC<HistoryLimitProps> = ({
           disabled={isUpdating("history_limit")}
           className="w-20"
         />
-        <span className="text-sm text-text">
+        <span className="t-type-caption t-text-secondary">
           {t("settings.debug.historyLimit.entries")}
         </span>
       </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, {
   createContext,
   useCallback,
@@ -56,6 +57,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   className = "",
   autoPlay = false,
 }) => {
+  const { t } = useTranslation();
   const group = useContext(AudioPlayerGroupContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -276,47 +278,51 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   const progressPercent = getProgressPercent();
 
+  // Neutral player (VISUAL_DESIGN_SYSTEM §12.24): the played part is the grey
+  // «on» colour — blue is reserved for work in progress.
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       <audio ref={audioRef} src={src ?? undefined} preload="metadata" />
 
       <button
+        type="button"
         onClick={togglePlay}
         disabled={isLoading}
-        className="transition-colors cursor-pointer text-text hover:text-logo-primary disabled:opacity-50"
-        aria-label={isPlaying ? "Pause" : "Play"}
+        className="t-btn t-btn-quiet t-btn-sm t-btn-icon"
+        aria-label={isPlaying ? t("ui.player.pause") : t("ui.player.play")}
+        title={isPlaying ? t("ui.player.pause") : t("ui.player.play")}
       >
-        {isPlaying ? (
-          <Pause width={20} height={20} fill="currentColor" />
-        ) : (
-          <Play width={20} height={20} fill="currentColor" />
-        )}
+        {isPlaying ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
       </button>
 
-      <div className="flex-1 flex items-center gap-2">
-        <span className="text-xs text-text/60 min-w-[30px] tabular-nums">
-          {formatTime(currentTime)}
-        </span>
+      {/* Compact until the first play: only ▶, no empty 0:00 scale (§12.15). */}
+      {(src || !onLoadRequest) && (
+        <div className="flex flex-1 items-center gap-2">
+          <span className="t-type-caption t-text-tertiary min-w-8">
+            {formatTime(currentTime)}
+          </span>
 
-        <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          step="0.01"
-          value={currentTime}
-          onChange={handleSeek}
-          onMouseDown={handleSliderMouseDown}
-          onTouchStart={handleSliderTouchStart}
-          className={`flex-1 h-1 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-logo-primary ${progressPercent >= 99.5 ? "[&::-webkit-slider-thumb]:translate-x-0.5 [&::-moz-range-thumb]:translate-x-0.5" : ""}`}
-          style={{
-            background: `linear-gradient(to right, #FAA2CA 0%, #FAA2CA ${progressPercent}%, rgba(128, 128, 128, 0.2) ${progressPercent}%, rgba(128, 128, 128, 0.2) 100%)`,
-          }}
-        />
+          <input
+            type="range"
+            min="0"
+            max={duration || 0}
+            step="0.01"
+            value={currentTime}
+            onChange={handleSeek}
+            onMouseDown={handleSliderMouseDown}
+            onTouchStart={handleSliderTouchStart}
+            aria-label={t("ui.player.position")}
+            className="t-player-range flex-1"
+            style={{
+              background: `linear-gradient(to right, var(--t-control-on) ${progressPercent}%, var(--t-overlay-pressed) ${progressPercent}%)`,
+            }}
+          />
 
-        <span className="text-xs text-text/60 min-w-[30px] tabular-nums">
-          {formatTime(duration)}
-        </span>
-      </div>
+          <span className="t-type-caption t-text-tertiary min-w-8">
+            {formatTime(duration)}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

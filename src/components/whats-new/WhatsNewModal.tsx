@@ -20,7 +20,7 @@ export const WhatsNewModal: React.FC<WhatsNewModalProps> = ({
   return (
     <Dialog
       open={open}
-      title={t("whatsNew.title", { version: note.version })}
+      title={t("whatsNew.title")}
       closeLabel={t("common.close")}
       onOpenChange={(nextOpen) => {
         if (!nextOpen) onDismiss();

@@ -54,11 +54,15 @@ const OVERLAY_STREAM_WIDTH: f64 = 400.0;
 const OVERLAY_STREAM_HEIGHT: f64 = 120.0;
 
 /// Overlay window size (logical) for a given UI state.
+/// Tishe: a message after a failure and the «waiting for the model» state
+/// carry a sentence, so they get a wider pill (S15).
+const OVERLAY_MESSAGE_WIDTH: f64 = 360.0;
+
 fn overlay_dimensions(state: &str) -> (f64, f64) {
-    if state == "streaming" {
-        (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT)
-    } else {
-        (OVERLAY_WIDTH, OVERLAY_HEIGHT)
+    match state {
+        "streaming" => (OVERLAY_STREAM_WIDTH, OVERLAY_STREAM_HEIGHT),
+        "message" | "waiting" => (OVERLAY_MESSAGE_WIDTH, OVERLAY_HEIGHT),
+        _ => (OVERLAY_WIDTH, OVERLAY_HEIGHT),
     }
 }
 
@@ -628,6 +632,81 @@ pub fn show_transcribing_overlay(app_handle: &AppHandle) {
 /// Shows the processing overlay window
 pub fn show_processing_overlay(app_handle: &AppHandle) {
     show_overlay_state(app_handle, "processing");
+}
+
+/// Tishe: dictation waits while a file transcription holds the model
+/// («Модель занята расшифровкой файла — диктовка задержится»).
+pub fn show_waiting_overlay(app_handle: &AppHandle) {
+    show_overlay_state(app_handle, "waiting");
+}
+
+/// What went wrong in a dictation, shown in the overlay for a few seconds
+/// (UX_INTERACTION_ARCHITECTURE «Оверлей», S15). The window maps the kind to
+/// the text and, for «Что делать», to the place in «Если что-то не работает».
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize, specta::Type)]
+#[serde(rename_all = "snake_case")]
+pub enum OverlayMessageKind {
+    /// The text could not be pasted; it is in «История».
+    PasteFailed,
+    /// Dictation with editing pasted the text as is: the LLM was not ready.
+    EditingSkipped,
+    /// No microphone to record from.
+    NoMicrophone,
+    /// The system denied access to the microphone.
+    MicrophoneDenied,
+}
+
+impl OverlayMessageKind {
+    /// Every message has «Что делать»; kept as a method so a message without
+    /// one stays a one-line change.
+    fn has_help(self) -> bool {
+        true
+    }
+}
+
+#[derive(Clone, serde::Serialize)]
+struct OverlayMessagePayload {
+    kind: OverlayMessageKind,
+    help: bool,
+}
+
+/// Shows a message in the overlay and hides it after 4 s (6 s with «Что
+/// делать»), unless a new dictation shows the overlay first. With the overlay
+/// turned off nothing is shown: the text is in «История», and the overlay
+/// setting says so.
+pub fn show_overlay_message(app_handle: &AppHandle, kind: OverlayMessageKind) {
+    if !OVERLAY_ENABLED.load(Ordering::Relaxed) {
+        hide_recording_overlay(app_handle);
+        return;
+    }
+    let help = kind.has_help();
+    let handle = app_handle.clone();
+    let _ = app_handle.run_on_main_thread(move || {
+        show_overlay_state_on_main(&handle, "message");
+        let _ = handle.emit_to(
+            "recording_overlay",
+            "overlay-message",
+            OverlayMessagePayload { kind, help },
+        );
+        let shown = OVERLAY_SHOW_GENERATION.load(Ordering::SeqCst);
+        let later = handle.clone();
+        std::thread::spawn(move || {
+            std::thread::sleep(std::time::Duration::from_secs(if help { 6 } else { 4 }));
+            if OVERLAY_SHOW_GENERATION.load(Ordering::SeqCst) == shown {
+                hide_recording_overlay(&later);
+            }
+        });
+    });
+}
+
+/// «Что делать» in an overlay message: show the window at the help for this
+/// kind of failure and put the overlay away.
+#[tauri::command]
+#[specta::specta]
+pub fn overlay_help(app: AppHandle, kind: OverlayMessageKind) {
+    crate::show_main_window(&app);
+    let _ = app.emit_to("main", "open-help", kind);
+    hide_recording_overlay(&app);
 }
 
 /// Updates the overlay window position based on current settings

@@ -11,3 +11,8 @@
 # tauri.windows.conf.json on Windows, into /usr/lib/Handy (deb/rpm) via
 # tauri.conf.json on Linux.
 /transcribe-libs/
+
+# Downloaded by scripts/fetch-llama.ps1: llama.cpp server for the built-in
+# local LLM, bundled into <install>/llama on Windows.
+/llama-runtime/
+/ffmpeg-runtime/

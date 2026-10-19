@@ -8,6 +8,7 @@ interface ShortcutInputProps {
   grouped?: boolean;
   shortcutId: string;
   disabled?: boolean;
+  dependent?: boolean;
 }
 
 /**

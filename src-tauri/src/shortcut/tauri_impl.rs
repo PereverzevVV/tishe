@@ -4,12 +4,43 @@
 //! global-shortcut plugin.
 
 use log::{debug, error, warn};
-use tauri::AppHandle;
+use std::collections::BTreeSet;
+use std::sync::Mutex;
+use tauri::{AppHandle, Emitter};
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutState};
 
 use crate::settings::{self, ShortcutBinding};
 
 use super::handler::handle_shortcut_event;
+
+/// Bindings whose key Windows refused to register because another program
+/// holds it (Tishe, S2: «Клавиша занята другой программой»). Only this
+/// implementation can be refused: handy-keys hears keys through a hook.
+static CONFLICTS: Mutex<BTreeSet<String>> = Mutex::new(BTreeSet::new());
+
+fn set_conflict(app: &AppHandle, binding_id: &str, conflict: bool) {
+    let changed = match CONFLICTS.lock() {
+        Ok(mut set) => {
+            if conflict {
+                set.insert(binding_id.to_string())
+            } else {
+                set.remove(binding_id)
+            }
+        }
+        Err(_) => false,
+    };
+    if changed {
+        let _ = app.emit("shortcut-conflicts-changed", conflicts());
+    }
+}
+
+/// Binding ids whose key is held by another program.
+pub fn conflicts() -> Vec<String> {
+    CONFLICTS
+        .lock()
+        .map(|set| set.iter().cloned().collect())
+        .unwrap_or_default()
+}
 
 /// Initialize shortcuts using Tauri's global-shortcut plugin
 pub fn init_shortcuts(app: &AppHandle) {
@@ -133,14 +164,18 @@ pub fn register_shortcut(app: &AppHandle, binding: ShortcutBinding) -> Result<()
                 binding.current_binding, e
             );
             error!("register_tauri_shortcut registration error: {}", error_msg);
+            // Windows refuses a hotkey that another program has registered.
+            set_conflict(app, &binding.id, true);
             error_msg
         })?;
 
+    set_conflict(app, &binding.id, false);
     Ok(())
 }
 
 /// Unregister a shortcut from Tauri's global-shortcut plugin
 pub fn unregister_shortcut(app: &AppHandle, binding: ShortcutBinding) -> Result<(), String> {
+    set_conflict(app, &binding.id, false);
     let shortcut = match binding.current_binding.parse::<Shortcut>() {
         Ok(s) => s,
         Err(e) => {

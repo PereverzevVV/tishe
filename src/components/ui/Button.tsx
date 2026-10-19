@@ -1,59 +1,83 @@
 import React from "react";
+import { Spinner } from "./Spinner";
+
+/**
+ * Button (VISUAL_DESIGN_SYSTEM §12.1).
+ *
+ * primary   — the one main action of the screen (graphite fill);
+ * secondary — a secondary action with a consequence (grey fill);
+ * quiet     — an action in place: rows, "Показать все", "Убрать";
+ * danger    — only the last confirm button of an irreversible-action dialog.
+ *
+ * The old Handy variants are kept as aliases so existing callers keep working:
+ * ghost and danger-ghost are quiet, primary-soft and warning are secondary.
+ */
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "quiet"
+  | "danger"
+  | "ghost"
+  | "primary-soft"
+  | "warning"
+  | "danger-ghost";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?:
-    | "primary"
-    | "primary-soft"
-    | "secondary"
-    | "warning"
-    | "danger"
-    | "danger-ghost"
-    | "ghost";
+  variant?: ButtonVariant;
   size?: "sm" | "md" | "lg";
+  /** Square icon-only button; needs an aria-label. */
+  icon?: boolean;
+  /** Shows a spinner on the left and blocks repeated presses. */
+  loading?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  children,
-  className = "",
-  variant = "primary",
-  size = "md",
-  ...props
-}) => {
-  const baseClasses =
-    "font-medium rounded-lg border focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+const VARIANT_CLASS: Record<ButtonVariant, string> = {
+  primary: "t-btn-primary",
+  secondary: "t-btn-secondary",
+  quiet: "t-btn-quiet",
+  danger: "t-btn-danger",
+  ghost: "t-btn-quiet",
+  "primary-soft": "t-btn-secondary",
+  warning: "t-btn-secondary",
+  "danger-ghost": "t-btn-quiet",
+};
 
-  const variantClasses = {
-    primary:
-      "text-white bg-background-ui border-background-ui hover:bg-background-ui/80 hover:border-background-ui/80 focus:ring-1 focus:ring-background-ui",
-    "primary-soft":
-      "text-text bg-logo-primary/20 border-transparent hover:bg-logo-primary/30 focus:ring-1 focus:ring-logo-primary",
-    secondary:
-      "bg-mid-gray/10 border-mid-gray/20 hover:bg-background-ui/30 hover:border-logo-primary focus:outline-none",
-    // Secondary's neutral resting look, but hover/focus use the semantic
-    // --color-warning token (theme.css) instead of the pink accent — for
-    // buttons sitting on warning surfaces like SecureInputWarning
-    warning:
-      "text-text bg-mid-gray/10 border-mid-gray/20 hover:bg-warning/15 hover:border-warning focus:ring-1 focus:ring-warning",
-    danger:
-      "text-white bg-red-600 border-mid-gray/20 hover:bg-red-700 hover:border-red-700 focus:ring-1 focus:ring-red-500",
-    "danger-ghost":
-      "text-red-400 border-transparent hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/20",
-    ghost:
-      "text-current border-transparent hover:bg-mid-gray/10 hover:border-logo-primary focus:bg-mid-gray/20",
-  };
+const SIZE_CLASS = { sm: "t-btn-sm", md: "", lg: "t-btn-lg" } as const;
 
-  const sizeClasses = {
-    sm: "px-2 py-1 text-xs",
-    md: "px-4 py-[5px] text-sm",
-    lg: "px-4 py-2 text-base",
-  };
-
-  return (
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      className = "",
+      variant = "primary",
+      size = "md",
+      icon = false,
+      loading = false,
+      disabled,
+      type = "button",
+      ...props
+    },
+    ref,
+  ) => (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      ref={ref}
+      type={type}
+      className={[
+        "t-btn",
+        VARIANT_CLASS[variant],
+        SIZE_CLASS[size],
+        icon ? "t-btn-icon" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...props}
     >
+      {loading && <Spinner size={size === "sm" ? 14 : 16} />}
       {children}
     </button>
-  );
-};
+  ),
+);
+Button.displayName = "Button";

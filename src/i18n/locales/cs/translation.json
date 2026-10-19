@@ -1,22 +1,39 @@
 {
   "tray": {
-    "settings": "Nastavení...",
-    "checkUpdates": "Zkontrolovat aktualizace...",
-    "copyLastTranscript": "Zkopírovat poslední přepis",
+    "settings": "Otevřít Tishe…",
+    "checkUpdates": "Zkontrolovat aktualizace…",
+    "copyLastTranscript": "Kopírovat poslední diktát",
     "unloadModel": "Uvolnit model",
     "model": "Model",
     "quit": "Ukončit",
     "cancel": "Zrušit",
-    "secureInputWarning": "⚠ Zkratky blokuje Secure Input"
+    "secureInputWarning": "⚠ Zkratky blokuje Secure Input",
+    "modelLocked": "Během přepisu nelze model změnit",
+    "tooltipDictation": "Diktování: {{shortcut}}",
+    "backgroundTitle": "Tishe dál běží na pozadí",
+    "backgroundBody": "Přepis pokračuje. Až bude hotový, dostanete oznámení."
   },
   "sidebar": {
     "general": "Obecné",
-    "models": "Modely",
+    "models": "Rozpoznávání",
     "advanced": "Pokročilé",
     "postProcessing": "Následné zpracování",
     "history": "Historie",
     "debug": "Ladění",
-    "about": "O aplikaci"
+    "about": "O aplikaci",
+    "label": "Sekce",
+    "transcription": "Přepis",
+    "dictation": "Diktování",
+    "meetings": "Schůzky",
+    "llm": "Úpravy s AI",
+    "app": "Aplikace",
+    "soon": "brzy",
+    "state": {
+      "running": "probíhá",
+      "new": "hotovo, nezobrazeno",
+      "downloading": "stahuje se"
+    },
+    "next": "Co dál"
   },
   "onboarding": {
     "subtitle": "Pro začátek vyberte model pro přepis",
@@ -101,7 +118,7 @@
     },
     "permissions": {
       "title": "Vyžadována oprávnění",
-      "description": "Handy potřebuje několik oprávnění pro správné fungování.",
+      "description": "Tishe potřebuje několik oprávnění pro správné fungování.",
       "microphone": {
         "title": "Přístup k mikrofonu",
         "description": "Potřebný pro zachycení vašeho hlasu k přepisu."
@@ -117,7 +134,74 @@
       "errors": {
         "checkFailed": "Nepodařilo se zkontrolovat oprávnění. Zkuste to prosím znovu.",
         "requestFailed": "Nepodařilo se požádat o oprávnění. Zkuste to prosím znovu."
-      }
+      },
+      "skip": "Pokračovat bez mikrofonu",
+      "skipHint": "Mikrofon je potřeba jen pro diktování – přepis souborů funguje i bez něj. Povolit ho můžete později v nastavení Windows."
+    },
+    "step": "Krok {{n}} z {{total}}",
+    "language": {
+      "title": "V jakém jazyce jsou vaše nahrávky?",
+      "description": "Stáhneme model rozpoznávání řeči pro tento jazyk. Běží na tomto počítači.",
+      "ru": {
+        "title": "Ruština",
+        "limit": "Jen ruština: nerozpozná anglickou řeč"
+      },
+      "en": {
+        "title": "Angličtina",
+        "limit": "Jen angličtina"
+      },
+      "eu": {
+        "title": "Čeština nebo jiný evropský jazyk",
+        "limit": "25 evropských jazyků, jazyk rozpozná sám"
+      },
+      "other": {
+        "title": "Jiný jazyk",
+        "limit": "30 jazyků: čínština, japonština, korejština, arabština, turečtina, hindština a další",
+        "limitWhisper": "mnoho jazyků, na procesoru pomalejší"
+      },
+      "onDisk": "už je v tomto počítači",
+      "shared": "Model se použije pro diktování i pro přepis souborů. Později ho můžete změnit v sekci „$t(sidebar.models)“.",
+      "otherModel": "Vybrat jiný model",
+      "hideCatalog": "Skrýt seznam modelů",
+      "download": "Stáhnout {{size}}",
+      "use": "Použít {{name}}",
+      "downloadNamed": "Stáhnout {{name}} · {{size}}",
+      "once": "Stáhne se jednou, pak funguje bez internetu"
+    },
+    "download": {
+      "title": "Stahuje se {{name}}",
+      "description": "Mezitím můžete dělat něco jiného: zavření okna stahování nezastaví.",
+      "starting": "Připojování…",
+      "amount": "{{done}} z {{total}}",
+      "speed": "{{n}} MB/s",
+      "preparing": "Příprava modelu…",
+      "cancel": "Zrušit",
+      "failed": "Model nebyl stažen",
+      "failedTitle": "Model se nepodařilo stáhnout",
+      "failedHint": "Žádné spojení se serverem. Zkontrolujte internet a stiskněte Zkusit znovu.",
+      "retry": "Zkusit znovu",
+      "continue": "Otevřít Tishe bez čekání"
+    },
+    "welcome": {
+      "title": "Vítejte v Tishe",
+      "lead": "Tishe převádí řeč na text přímo ve vašem počítači – bez internetu a bez účtu.",
+      "files": "Přepis nahrávek – schůzek, přednášek, rozhovorů – do dokumentu Word",
+      "dictation": "Diktování v libovolné aplikaci: podržte klávesu, mluvte – a text se objeví",
+      "private": "Nahrávky a texty neopouštějí počítač",
+      "stepsLabel": "Kroky nastavení",
+      "steps": {
+        "permissions": "Oprávnění",
+        "language": "Jazyk nahrávek",
+        "download": "Stažení modelu"
+      },
+      "credit": "Viktor Pereverzev · založeno na Handy"
+    },
+    "tips": {
+      "title": "Během stahování – jak to funguje",
+      "dictationBefore": "Diktování: v libovolné aplikaci podržte",
+      "dictationAfter": "a mluvte. Pusťte – text se objeví tam, kde je kurzor.",
+      "files": "Přepis: přetáhněte zvukový nebo video soubor do okna Tishe – vznikne dokument Word.",
+      "editing": "Úpravy pomocí AI opraví chyby a interpunkci – zapínají se v receptu přepisu."
     }
   },
   "modelSelector": {
@@ -170,53 +254,111 @@
         "translation": "Filtrovat modely podporující překlad do angličtiny"
       },
       "noModelsMatch": "Tomuto filtru neodpovídají žádné modely.",
+      "params": {
+        "button": "Parametry",
+        "open": "Parametry modelu",
+        "title": "Parametry: {{name}}",
+        "savedAtOnce": "Změny se ukládají hned. Pole ukazují používané hodnoty; změněná hodnota má tlačítko pro obnovení.",
+        "resetAll": "Obnovit výchozí",
+        "done": "Hotovo",
+        "resetField": "Vrátit výchozí",
+        "defaultRange": "Výchozí {{value}}; povoleno {{min}}–{{max}}.",
+        "prompt": {
+          "builtIn": "Vestavěný pokyn. Upravte text, abyste použili vlastní; vymažte ho, abyste se vrátili k vestavěnému.",
+          "own": "Váš pokyn. Tlačítko obnovení vrátí vestavěný."
+        },
+        "asr": {
+          "segment": {
+            "label": "Délka úseku pro soubory, sekundy",
+            "description": "Soubory se rozpoznávají po kouscích stříhaných v pauzách, nejvýše takto dlouhých. Nejkratší kousek se zmenšuje s nimi (12 s při 25 s). Naměřeno: 12–25 s zachovává interpunkci lépe než 60–120 s."
+          },
+          "device": {
+            "label": "Zařízení",
+            "description": "„Jen procesor“ uvolní grafický čip, ale bývá pomalejší. Platí i pro diktování; projeví se při příštím rozpoznávání.",
+            "general": "Podle nastavení akcelerace",
+            "cpu": "Jen procesor",
+            "notHere": "Zařízení tohoto modelu se řídí obecným nastavením akcelerace."
+          }
+        },
+        "llm": {
+          "promptNote": "Pokyny pro ruský a anglický text. Ostatní jazyky dostanou vestavěný anglický pokyn s názvem jazyka. Vlastní pokyn v sekci Přepis je nahradí pro všechny jazyky.",
+          "promptRu": "Pokyn pro ruský text",
+          "promptEn": "Pokyn pro anglický text",
+          "temperature": {
+            "label": "Teplota",
+            "description": "Nižší je opatrnější: při 0,8 si model vymýšlel slova, 0,2 je naměřená hodnota pro úpravy."
+          },
+          "chunk": {
+            "label": "Velikost bloku, znaky",
+            "description": "Kolik textu model upraví najednou. Malé modely se u krátkých bloků drží originálu věrněji."
+          },
+          "context": {
+            "label": "Kontext, tokeny",
+            "description": "Místo pro pokyn, blok a odpověď. Víc zabere víc paměti."
+          },
+          "answer": {
+            "label": "Limit odpovědi, tokeny",
+            "description": "Zastaví model, který se začne opakovat. Blok o 3000 znacích je zhruba 1100 tokenů."
+          },
+          "threads": {
+            "label": "Vlákna procesoru pro odpověď",
+            "description": "Čtení textu vždy využívá všechna hardwarová vlákna.",
+            "auto": "Automaticky – jedno na jádro"
+          },
+          "restartNote": "Teplota, kontext, limit odpovědi a vlákna platí od příštího spuštění modelu: běžící model se před další úlohou restartuje.",
+          "invalid": "Neuloženo: {{detail}}",
+          "contextTooSmall": "Neuloženo: kontext musí pojmout blok i odpověď – při současné velikosti bloku a limitu odpovědi aspoň {{min}} tokenů."
+        }
+      },
       "yourModels": "Stažené modely",
       "availableModels": "Dostupné ke stažení",
-      "searchPlaceholder": "Hledat modely podle názvu…",
+      "searchPlaceholder": "Hledat podle názvu",
       "rescan": {
         "label": "Znovu prohledat",
-        "tooltip": "Znovu prohledat modely přidané do složky modelů nebo mezipaměti Hugging Face mimo Handy"
+        "tooltip": "Najít modely přidané do složky ručně"
       }
     },
     "general": {
       "title": "Obecné",
       "shortcut": {
-        "title": "Zkratky Handy",
+        "title": "Klávesové zkratky Tishe",
         "description": "Nastavte klávesové zkratky pro spuštění nahrávání řeči na text",
         "loading": "Načítám zkratky...",
         "none": "Žádné zkratky nejsou nastavené",
         "notFound": "Zkratka nenalezena",
-        "pressKeys": "Stiskněte klávesy...",
+        "pressKeys": "Stiskněte kombinaci… (Esc zruší)",
         "bindings": {
           "transcribe": {
-            "name": "Zkratka přepisu",
-            "description": "Klávesová zkratka pro nahrávání a přepis vašeho hlasu."
+            "name": "Diktování",
+            "description": "Podržte a mluvte – text se vloží do aktivního okna"
           },
           "cancel": {
-            "name": "Zkratka zrušení",
-            "description": "Klávesová zkratka pro zrušení aktuálního nahrávání."
+            "name": "Zrušení",
+            "description": "Přeruší probíhající nahrávání"
           },
           "transcribe_with_post_process": {
-            "name": "Klávesa pro následné zpracování",
-            "description": "Volitelné: Vyhrazená klávesová zkratka, která vždy použije AI následné zpracování na váš přepis."
+            "name": "Klávesa diktování s úpravami",
+            "description": "Text se vloží po úpravě pomocí AI"
           }
         },
         "errors": {
           "restore": "Nepodařilo se obnovit původní zkratku",
           "set": "Nepodařilo se nastavit zkratku: {{error}}",
-          "reset": "Nepodařilo se vrátit zkratku na původní hodnotu"
+          "reset": "Nepodařilo se vrátit zkratku na původní hodnotu",
+          "taken": "Tuto klávesu už používá jiný program. Vyberte jinou.",
+          "duplicate": "Tato klávesa se zde už používá pro jinou akci."
         }
       },
       "language": {
-        "title": "Jazyk",
-        "description": "Vyberte jazyk rozpoznávání řeči. Auto jazyk určí automaticky, zatímco výběr konkrétního jazyka může zlepšit přesnost.",
+        "title": "Jazyk rozpoznávání",
+        "description": "„Auto“ rozpozná jazyk sám; přesná volba je spolehlivější",
         "searchPlaceholder": "Hledat jazyky...",
         "noResults": "Žádné jazyky nenalezeny",
         "auto": "Automaticky"
       },
       "shortcutActivation": {
-        "title": "Chování zkratky",
-        "description": "Zvolte, jak má zkratka přepisu spouštět a zastavovat nahrávání.",
+        "title": "Chování klávesy",
+        "description": "Jak klávesa zahajuje a ukončuje nahrávání",
         "options": {
           "holdOrToggle": "Automaticky",
           "pushToTalk": "Podržet",
@@ -233,29 +375,40 @@
       "title": "Zvuk",
       "microphone": {
         "title": "Mikrofon",
-        "description": "Vyberte preferované zařízení mikrofonu",
+        "description": "Odkud nahrávat hlas",
         "placeholder": "Vyberte mikrofon...",
         "loading": "Načítání..."
       },
       "channel": {
         "title": "Vstupní kanál",
-        "description": "Vyberte vstupní kanál, ze kterého se má nahrávat. Tuto možnost použijte, pokud má vaše zvukové rozhraní více vstupů.",
+        "description": "Pro zvukové karty s více vstupy",
         "average": "Průměr všech kanálů",
         "channel": "Kanál {{n}}"
       },
       "audioFeedback": {
         "label": "Zvuková odezva",
-        "description": "Přehrát zvuk při zahájení a ukončení nahrávání"
+        "description": "Zvuk na začátku a na konci nahrávání"
       },
       "outputDevice": {
         "title": "Výstupní zařízení",
-        "description": "Vyberte preferované výstupní zařízení pro zvuky odezvy",
+        "description": "Kam přehrávat zvuky odezvy",
         "placeholder": "Vyberte výstupní zařízení...",
         "loading": "Načítání..."
       },
       "volume": {
         "title": "Hlasitost",
-        "description": "Upravte hlasitost zvukové odezvy"
+        "description": "Upravte hlasitost zvukové odezvy",
+        "levels": {
+          "quiet": "Tiše",
+          "medium": "Středně",
+          "loud": "Hlasitě"
+        }
+      },
+      "theme": {
+        "marimba": "Marimba",
+        "pop": "Pop",
+        "custom": "Vlastní",
+        "preview": "Přehrát zvuky začátku a konce"
       }
     },
     "advanced": {
@@ -267,8 +420,8 @@
         "experimental": "Experimentální"
       },
       "experimentalToggle": {
-        "label": "Experimentální funkce",
-        "description": "Povolit experimentální funkce, které jsou stále ve vývoji."
+        "label": "Zobrazit experimentální funkce",
+        "description": "Funkce ve vývoji; mohou být nestabilní"
       },
       "lazyStreamClose": {
         "label": "Ponechat mikrofon zapnutý mezi přepisy",
@@ -288,30 +441,31 @@
         }
       },
       "startHidden": {
-        "label": "Spouštět skrytě",
-        "description": "Spustit do systémové lišty bez otevření okna."
+        "label": "Skrýt okno při spuštění",
+        "description": "Program se spustí v oznamovací oblasti"
       },
       "autostart": {
-        "label": "Spouštět při startu",
-        "description": "Automaticky spustit Handy po přihlášení do počítače."
+        "label": "Spouštět s Windows",
+        "description": "Diktování je připravené hned po přihlášení"
       },
       "showTrayIcon": {
-        "label": "Zobrazit ikonu v systémové liště",
-        "description": "Zobrazit ikonu Handy v systémové liště."
+        "label": "Ikona v oznamovací oblasti",
+        "description": "Bez ikony se zavřené okno vrátí jen novým spuštěním programu"
       },
       "overlay": {
         "style": {
-          "title": "Překryv",
-          "description": "Vyberte překryv při nahrávání: „Žádné“ jej skryje, „Minimální“ zobrazí kompaktní indikátor, „Živě“ zobrazuje přepis v reálném čase, když mluvíte (pouze modely podporující streaming — hledejte odznak „Streaming“ ve výběru modelů). Na Linuxu se doporučuje „Žádné“.",
+          "title": "Vzhled indikátoru",
+          "description": "Co zobrazovat u kurzoru při diktování",
           "options": {
             "none": "Žádné",
             "minimal": "Minimální",
             "live": "Živě"
-          }
+          },
+          "noneConsequence": "Bez indikátoru se chyby nezobrazují: nevložený text je v Historii"
         },
         "position": {
-          "title": "Pozice překryvu",
-          "description": "Zobrazovat vizuální překryv během nahrávání a přepisu. Na Linuxu je doporučeno 'Žádné'.",
+          "title": "Umístění indikátoru",
+          "description": "Nahoře nebo dole na obrazovce",
           "options": {
             "bottom": "Dole",
             "top": "Nahoře"
@@ -320,7 +474,7 @@
       },
       "pasteMethod": {
         "title": "Způsob vložení",
-        "description": "Vyberte, jak se text vkládá. Přímé: simuluje psaní přes systémový vstup. Žádné: přeskočí vložení a aktualizuje pouze historii/schránku.",
+        "description": "Jak se text dostane do aktivního okna",
         "options": {
           "clipboard": "Schránka ({{modifier}}+V)",
           "clipboardCtrlShiftV": "Schránka (Ctrl+Shift+V)",
@@ -339,16 +493,16 @@
         }
       },
       "clipboardHandling": {
-        "title": "Práce se schránkou",
-        "description": "'Neměnit schránku' zachová po přepisu aktuální obsah schránky. 'Kopírovat do schránky' ponechá po vložení výsledek přepisu ve schránce.",
+        "title": "Schránka",
+        "description": "Ponechat ve schránce předchozí obsah, nebo nadiktovaný text",
         "options": {
           "dontModify": "Neměnit schránku",
           "copyToClipboard": "Kopírovat do schránky"
         }
       },
       "autoSubmit": {
-        "title": "Automatické odeslání",
-        "description": "Automaticky odešle vybranou kombinaci kláves po vložení textu. Cmd+Enter platí pro macOS, zatímco Windows/Linux používají Super+Enter.",
+        "title": "Odeslat po vložení",
+        "description": "Stisknout zvolenou klávesu hned po vložení, třeba Enter v chatu",
         "options": {
           "off": "Vypnuto",
           "enter": "Enter",
@@ -359,11 +513,11 @@
       },
       "translateToEnglish": {
         "label": "Překládat do angličtiny",
-        "description": "Během přepisu automaticky překládat řeč z jiných jazyků do angličtiny."
+        "description": "Řeč v libovolném jazyce se stane anglickým textem"
       },
       "modelUnload": {
-        "title": "Uvolnění modelu",
-        "description": "Automaticky uvolnit paměť GPU/CPU, když model nebyl použit po zadanou dobu",
+        "title": "Uvolnit model z paměti po…",
+        "description": "Uvolní paměť, když model delší dobu není potřeba",
         "options": {
           "never": "Nikdy",
           "immediately": "Okamžitě",
@@ -377,15 +531,16 @@
       },
       "customWords": {
         "title": "Vlastní slova",
-        "description": "Pomozte podporovaným modelům rozpoznávat jména a odborné termíny. Přibližné opravy jsou v současnosti omezeny na slova obsahující písmena A–Z a číslice.",
+        "description": "Nápověda pro modely Whisper; ostatní modely dostávají jen opravy, a to jen pro slova z písmen A–Z",
         "placeholder": "Přidat slovo",
         "add": "Přidat",
         "remove": "Odebrat {{word}}",
-        "duplicate": "\"{{word}}\" již existuje"
+        "duplicate": "\"{{word}}\" již existuje",
+        "removed": "„{{word}}“ odstraněno"
       },
       "voiceActivityDetection": {
-        "title": "Detekce hlasové aktivity",
-        "description": "Odfiltruje ticho z nahrávek. Modely podporující streaming používají delší doběh VAD; vypnutí VAD nahrává surový zvuk."
+        "title": "Zahazovat ticho",
+        "description": "Do rozpoznávání jde jen řeč"
       },
       "vadBackend": {
         "title": "Backend detekce hlasu",
@@ -397,11 +552,11 @@
       },
       "fillerWordRemoval": {
         "title": "Odstranit výplňová slova",
-        "description": "Odstraňuje běžná slova vyjadřující váhání z přepisů. Vypnutím je zachováte."
+        "description": "„uh“, „hmm“ ve vloženém textu"
       },
       "chineseScript": {
         "title": "Čínské písmo",
-        "description": "Zapisuje přepisy v mandarínštině a kantonštině zjednodušenými nebo tradičními znaky. Ostatní jazyky zůstávají beze změny.",
+        "description": "Zjednodušené nebo tradiční znaky",
         "options": {
           "asTranscribed": "Jak bylo přepsáno",
           "simplified": "Zjednodušené",
@@ -434,20 +589,21 @@
           "title": "Základní URL",
           "description": "Základní URL API pro vybraného poskytovatele. Upravitelné je pouze u vlastního poskytovatele.",
           "placeholder": "https://api.openai.com/v1",
+          "managed": "Adresu určuje zvolený poskytovatel",
           "placeholderAnthropic": "https://api.anthropic.com/v1"
         },
         "apiKey": {
           "title": "API klíč",
-          "description": "API klíč pro vybraného poskytovatele.",
+          "description": "Uloženo jen v tomto počítači",
           "placeholder": "sk-..."
         },
         "model": {
           "title": "Model",
-          "descriptionCustom": "Zadejte identifikátor modelu očekávaný vaším vlastním endpointem.",
-          "descriptionDefault": "Vyberte model dostupný u vybraného poskytovatele.",
+          "descriptionCustom": "Název modelu na vašem serveru",
+          "descriptionDefault": "Seznam obnovíte tlačítkem vpravo",
           "placeholderWithOptions": "Vyhledejte nebo vyberte model",
           "placeholderNoOptions": "Zadejte název modelu",
-          "refreshModels": "Obnovit modely"
+          "refreshModels": "Obnovit seznam modelů"
         }
       },
       "prompts": {
@@ -456,20 +612,91 @@
           "title": "Vybraný prompt",
           "description": "Vyberte šablonu pro zpřesnění přepisu nebo vytvořte novou. V textu promptu použijte ${output} pro vložení zachyceného přepisu."
         },
-        "noPrompts": "Nejsou k dispozici žádné prompty",
-        "selectPrompt": "Vyberte prompt",
+        "noPrompts": "Žádné pokyny",
+        "selectPrompt": "Vyberte pokyn",
         "createNew": "Vytvořit nový prompt",
-        "promptLabel": "Název promptu",
+        "promptLabel": "Název",
         "promptLabelPlaceholder": "Zadejte název promptu",
-        "promptInstructions": "Instrukce promptu",
+        "promptInstructions": "Text pokynu",
         "promptInstructionsPlaceholder": "Napište instrukce, které se mají spustit po přepisu. Příklad: Zlepšete gramatiku a srozumitelnost následujícího textu: ${output}",
         "promptTip": "Tip: Použijte <code>${output}</code> pro vložení přepsaného textu do promptu.",
         "updatePrompt": "Aktualizovat prompt",
-        "deletePrompt": "Smazat prompt",
-        "createPrompt": "Vytvořit prompt",
+        "deletePrompt": "Smazat",
+        "createPrompt": "Vytvořit",
         "cancel": "Zrušit",
-        "selectToEdit": "Vyberte výše prompt, abyste zobrazili a upravili jeho podrobnosti.",
-        "createFirst": "Klikněte nahoře na 'Vytvořit nový prompt' a vytvořte svůj první prompt pro následné zpracování."
+        "selectToEdit": "Vyberte pokyn, který chcete upravit.",
+        "createFirst": "Klikněte na „Vytvořit“ a přidejte první pokyn."
+      },
+      "local": {
+        "intro": "Model běží přímo na tomto počítači: bez internetu, bez klíčů, váš text nikdy neopustí zařízení. Pokud chcete, stáhněte si jeden model. Spouští se sám, když je potřeba, a při nečinnosti se uvolní z paměti. Běží na procesoru, proto je pomalejší než cloudové služby. Všechny modely se vejdou do notebooku s 16 GB RAM.",
+        "runtimeMissing": "Vestavěný AI engine nebyl nalezen. Přeinstalujte prosím Tishe.",
+        "models": {
+          "qwen35_4b": {
+            "title": "Vyvážený",
+            "model": "Qwen3.5 4B",
+            "description": "Základní sestavení Qwen 4B. Pečlivý v interpunkci, ale v reálných rozhovorech opraví málo chyb rozpoznávání (naše testy, 6. 10. 2026). Sestavení se zrychlením je přesnější a rychlejší."
+          },
+          "gemma4_e4b": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · Google",
+            "description": "Model od Googlu, věrný originálu. Upravuje jako Gemma v sestavení Googlu se zrychlením, ale zhruba 1,25× pomaleji."
+          },
+          "gigachat31": {
+            "title": "Pro ruštinu",
+            "model": "GigaChat 3.1 10B-A1.8B · Sber",
+            "description": "Od začátku trénovaný na ruštině. Na token je aktivních jen 1,8B z jeho 10B parametrů, proto je rychlejší, než by napovídala jeho velikost. Potřebuje víc paměti."
+          },
+          "ruadapt_qwen3_4b": {
+            "title": "Qwen pro ruštinu",
+            "model": "RuadaptQwen3 4B · RefalMachine",
+            "description": "Qwen3 4B (2507) s ruským slovníkem a dalším tréninkem na ruských textech. V testu opraví méně než Gemma E2B a je o polovinu pomalejší (asi 27 min na hodinu záznamu)."
+          },
+          "nemotron3_nano_4b": {
+            "title": "Nemotron",
+            "model": "Nemotron 3 Nano 4B · NVIDIA",
+            "description": "Malý model od NVIDIA, oficiálně jen pro angličtinu. V testu nechal text téměř beze změny v ruštině i angličtině a je pomalejší než Gemma (asi 35 min na hodinu záznamu)."
+          },
+          "qwen35_9b": {
+            "title": "Maximum",
+            "model": "Qwen3.5 9B",
+            "description": "Nejchytřejší lokální model: nejlepší v kontextu a obtížných opravách. Nejpomalejší."
+          },
+          "qwen35_4b_mtp": {
+            "title": "Vyvážený",
+            "model": "Qwen3.5 4B MTP",
+            "description": "Qwen 4B v novějším sestavení s vestavěným zrychlením. Přesnější a zhruba 1,2× rychlejší než základní Qwen 4B, ale v našich testech opraví o polovinu méně chyb než Gemma."
+          },
+          "gemma4_e2b_qat": {
+            "title": "Gemma lehká",
+            "model": "Gemma 4 E2B · sestavení Googlu",
+            "description": "Menší Gemma v oficiálním sestavení Googlu se zrychlením (+98 MB). Dvakrát rychlejší než Gemma E4B (asi 14 min na hodinu nahrávky) s asi 2/3 jejích oprav."
+          },
+          "gemma4_e4b_qat": {
+            "title": "Gemma",
+            "model": "Gemma 4 E4B · sestavení Googlu",
+            "description": "Nejlepší kvalita v našich testech (6. 10. 2026). Oficiální sestavení Googlu se zrychlením (+99 MB): upravuje jako základní Gemma E4B, zhruba 1,25× rychleji. Asi 26 min na hodinu nahrávky."
+          }
+        },
+        "speedupBadge": "zrychlení",
+        "speedupHint": "Malý pomocný model odhadne několik slov dopředu a hlavní model je ověří. Na procesoru je to zhruba 1,2–1,3× rychlejší.",
+        "untested": "netestováno",
+        "delete": "Smazat model",
+        "state": {
+          "stopped": "Není načten v paměti",
+          "loading": "Načítání do paměti…",
+          "ready": "Načten v paměti"
+        },
+        "unloadNow": "Uvolnit hned",
+        "unload": {
+          "title": "Uvolnění z paměti",
+          "description": "Jak dlouho může model zahálet, než se uvolní z paměti a uvolní tím zhruba 2–3 GB.",
+          "immediately": "Hned po zpracování",
+          "min2": "Po 2 minutách",
+          "min5": "Po 5 minutách",
+          "min15": "Po 15 minutách",
+          "never": "Nikdy"
+        },
+        "recommended": "Doporučeno"
       }
     },
     "history": {
@@ -477,22 +704,22 @@
       "openFolder": "Otevřít složku nahrávek",
       "loading": "Načítám historii...",
       "empty": "Zatím žádné přepisy. Začněte nahrávat a vytvořte si historii!",
-      "copyToClipboard": "Kopírovat přepis do schránky",
+      "copyToClipboard": "Kopírovat text",
       "copyError": "Přepis se nepodařilo zkopírovat do schránky.",
       "save": "Uložit přepis",
       "unsave": "Odebrat z uložených",
       "delete": "Smazat záznam",
       "deleteError": "Nepodařilo se smazat záznam. Zkuste to prosím znovu.",
-      "retranscribe": "Přepsat znovu",
+      "retranscribe": "Rozpoznat znovu",
       "retranscribeError": "Opětovný přepis se nezdařil. Zkuste to prosím znovu.",
-      "transcribing": "Přepisuji...",
+      "transcribing": "Rozpoznávám…",
       "transcriptionFailed": "Přepis selhal. Můžete zkusit přepis znovu pomocí ikony opakování."
     },
     "debug": {
       "title": "Ladění",
       "logDirectory": {
         "title": "Složka protokolů",
-        "description": "Umístění, kde jsou uloženy soubory protokolu"
+        "description": "Přiložte protokol k hlášení o chybě"
       },
       "logLevel": {
         "title": "Úroveň logování",
@@ -511,8 +738,8 @@
       },
       "updateChecks": {
         "label": "Kontrolovat aktualizace",
-        "description": "Automaticky kontrolovat nové verze Handy",
-        "lockedDescription": "Zakázáno systémovou konfigurací (HANDY_DISABLE_UPDATER)"
+        "description": "Jednou při spuštění se zeptat GitHubu, zda vyšla nová verze Tishe. Nahrávky ani texty se neodesílají",
+        "lockedDescription": "Kontrola aktualizací je v tomto sestavení vypnutá"
       },
       "soundTheme": {
         "label": "Zvukový motiv",
@@ -520,16 +747,16 @@
       },
       "wordCorrectionThreshold": {
         "title": "Práh korekce slov",
-        "description": "Citlivost pro opravy vlastních slov"
+        "description": "Jak moc musí být slovo podobné vašemu, aby se jím nahradilo"
       },
       "historyLimit": {
-        "title": "Limit historie",
-        "description": "Maximální počet záznamů historie k uchování",
+        "title": "Kolik diktátů uchovávat",
+        "description": "Ponechané diktáty se nepočítají",
         "entries": "záznamů"
       },
       "recordingRetention": {
-        "title": "Automatické mazání nahrávek",
-        "description": "Automaticky mazat staré nahrávky pro úsporu místa",
+        "title": "Mazat staré diktáty",
+        "description": "S textem se smaže i zvuk",
         "never": "Nikdy",
         "preserveLimit": "Ponechat posledních {{count}}",
         "days3": "Po 3 dnech",
@@ -538,24 +765,24 @@
         "placeholder": "Vyberte dobu uchování..."
       },
       "alwaysOnMicrophone": {
-        "label": "Vždy zapnutý mikrofon",
-        "description": "Udržovat mikrofon aktivní pro rychlejší odezvu"
+        "label": "Nechávat mikrofon zapnutý",
+        "description": "Nahrávání začne rychleji, ale mikrofon je obsazený pořád"
       },
       "clamshellMicrophone": {
         "title": "Mikrofon při zavřeném víku",
-        "description": "Mikrofon, který se použije při zavřeném víku notebooku"
+        "description": "Který mikrofon použít, když je notebook zavřený"
       },
       "postProcessingToggle": {
         "label": "Následné zpracování",
         "description": "Povolit AI vylepšení textu po přepisu"
       },
       "muteWhileRecording": {
-        "label": "Ztlumit při nahrávání",
-        "description": "Ztlumit systémový zvuk během nahrávání"
+        "label": "Ztlumit počítač během nahrávání",
+        "description": "Hudba a videa se do nahrávky nedostanou"
       },
       "appendTrailingSpace": {
-        "label": "Přidat koncovou mezeru",
-        "description": "Přidat mezeru po vloženém přepisu"
+        "label": "Přidávat mezeru na konec",
+        "description": "Další věta se nespojí s předchozí"
       },
       "keyboardImplementation": {
         "title": "Implementace klávesnice",
@@ -568,28 +795,28 @@
         "settings": "Nastavení:"
       },
       "pasteDelay": {
-        "title": "Zpoždění vložení (před)",
-        "description": "Zpoždění (v milisekundách) po zkopírování textu, před odesláním klávesy pro vložení. Zvyšte, pokud se nic nevloží."
+        "title": "Prodleva před vložením",
+        "description": "Zvyšte, pokud se nic nevkládá"
       },
       "pasteDelayAfter": {
-        "title": "Zpoždění vložení (po)",
-        "description": "Zpoždění (v milisekundách) po klávese pro vložení, před obnovením předchozí schránky. Zvyšte, pokud se místo přepisu vkládá starý obsah schránky."
+        "title": "Prodleva po vložení",
+        "description": "Zvyšte, pokud se vkládá starý text ze schránky"
       },
       "holdThreshold": {
         "title": "Práh podržení",
-        "description": "Pouze v automatickém režimu: jak dlouho (v milisekundách) musí být zkratka držena, aby se počítala jako podržení místo klepnutí. Snižte, pokud po krátkém podržení nahrávání zůstává zapnuté; zvyšte, pokud jsou záměrná klepnutí vyhodnocena jako podržení."
+        "description": "Kratší stisk přepíná, delší se počítá jako podržení"
       },
       "reliablePaste": {
         "title": "Spolehlivé vložení (Beta)",
-        "description": "Obnoví schránku teprve poté, co cílová aplikace skutečně přečte přepis, místo po pevně daném zpoždění. Má odstranit vkládání starého obsahu schránky při zatížení systému. Vyžaduje způsob vložení přes schránku; pouze macOS a Windows."
+        "description": "Čekat, až program text přečte, místo pevné doby"
       },
       "recordingBuffer": {
-        "title": "Extra vyrovnávací paměť nahrávání",
-        "description": "Extra čas (v milisekundách) pro pokračování nahrávání po uvolnění klávesy, pro zachycení zbývajícího zvuku. 0 = žádná extra vyrovnávací paměť."
+        "title": "Nahrávat i po puštění",
+        "description": "Jak dlouho ještě nahrávat po puštění klávesy"
       },
       "keyboardDiagnostic": {
         "title": "Diagnostika klávesnice",
-        "description": "Ověří, zda události klávesnice dorazí do Handy. Zaznamenává se pouze počet událostí — nikdy to, které klávesy stisknete.",
+        "description": "Kontroluje, zda události klávesnice dorazí do Tishe. Zaznamenává se jen počet událostí – nikdy to, které klávesy mačkáte.",
         "run": "Spustit 10s diagnostiku",
         "running": "Naslouchání… několikrát stiskněte svou zkratku (např. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -603,7 +830,7 @@
         "mouse": "Myš",
         "verdictBlocked": "Secure Input blokuje události kláves — zkratky obsahující běžnou klávesu nemohou fungovat, dokud se to nevyřeší.",
         "verdictSuspicious": "Dorazily události modifikátorů, ale žádné události kláves — něco klávesy potlačuje, přestože Secure Input hlásí, že je vypnutý. Nahlaste to prosím na GitHubu.",
-        "verdictOk": "Události kláves dorazí do Handy normálně.",
+        "verdictOk": "Události kláves dorazí do Tishe normálně.",
         "verdictNoEvents": "Nebyly zachyceny žádné události — stiskli jste během testu nějaké klávesy?",
         "failed": "Diagnostika selhala: {{error}}"
       },
@@ -626,11 +853,11 @@
       "title": "O aplikaci",
       "version": {
         "title": "Verze",
-        "description": "Aktuální verze Handy"
+        "description": "Aktuální verze Tishe"
       },
       "appDataDirectory": {
-        "title": "Adresář dat aplikace",
-        "description": "Umístění, kde Handy ukládá data"
+        "title": "Složka dat",
+        "description": "Nastavení, modely a historie"
       },
       "sourceCode": {
         "title": "Zdrojový kód",
@@ -639,7 +866,7 @@
       },
       "supportDevelopment": {
         "title": "Podpořte vývoj",
-        "description": "Pomozte nám pokračovat ve vývoji Handy",
+        "description": "Tishe vychází z jejich programu",
         "button": "Přispět"
       },
       "acknowledgments": {
@@ -647,12 +874,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Vysoce výkonné inferenční zpracování modelu automatického rozpoznávání řeči Whisper od OpenAI",
-          "details": "Handy používá ggml pro rychlé lokální zpracování řeči na text. Díky skvělé práci Georgiho Gerganova a přispěvatelů."
+          "details": "Rychlé rozpoznávání řeči v počítači. Děkujeme Georgimu Gerganovovi a přispěvatelům projektu."
         }
       },
       "whatsNewUpdates": {
-        "label": "Zobrazovat novinky",
-        "description": "Zobrazovat poznámky k vydání po aktualizacích Handy"
+        "label": "Zobrazit „Co je nového“ po aktualizaci",
+        "description": "Krátký seznam změn při prvním spuštění nové verze"
       }
     }
   },
@@ -678,10 +905,14 @@
     "open": "Otevřít",
     "copy": "Kopírovat",
     "clear": "Vymazat",
-    "noOptionsFound": "Nenalezeny žádné možnosti"
+    "noOptionsFound": "Nenalezeny žádné možnosti",
+    "cancel": "Zrušit",
+    "choose": "Vybrat…",
+    "reset": "Obnovit výchozí",
+    "search": "Hledat"
   },
   "accessibility": {
-    "permissionsDescription": "Handy potřebuje oprávnění usnadnění přístupu, aby mohlo psát přepsaný text.",
+    "permissionsDescription": "Aby mohl vkládat text, potřebuje program oprávnění „Zpřístupnění“.",
     "openSettings": "Otevřít Nastavení systému"
   },
   "errors": {
@@ -700,17 +931,17 @@
     "modelLoadFailedUnknown": "neznámý model",
     "pasteFailedTitle": "Vložení textu se nezdařilo",
     "pasteFailed": "Text nebylo možné vložit do aktivní aplikace.",
-    "transcriptionFailedTitle": "Přepis selhal"
+    "transcriptionFailedTitle": "Nepodařilo se rozpoznat"
   },
   "appLanguage": {
-    "title": "Jazyk aplikace",
-    "description": "Změňte jazyk rozhraní Handy"
+    "title": "Jazyk rozhraní",
+    "description": "Jazyk popisků v programu"
   },
   "theme": {
-    "title": "Motiv aplikace",
-    "description": "Zvolte, zda má Handy sledovat motiv systému, nebo zůstat světlý či tmavý",
+    "title": "Motiv",
+    "description": "Vyberte, zda se Tishe řídí motivem systému, nebo zůstává světlý či tmavý",
     "options": {
-      "system": "Systém",
+      "system": "Podle systému",
       "light": "Světlý",
       "dark": "Tmavý"
     }
@@ -718,20 +949,780 @@
   "overlay": {
     "transcribing": "Přepisuji...",
     "processing": "Zpracovávám...",
+    "waiting": "Model je zaneprázdněn souborem – diktát se zpozdí",
+    "message": {
+      "paste_failed": "Nepodařilo se vložit. Text je uložen v Historii",
+      "editing_skipped": "Vloženo bez úprav: AI není připravená",
+      "no_microphone": "Mikrofon nebyl nalezen",
+      "microphone_denied": "Žádný přístup k mikrofonu",
+      "help": "Co dělat"
+    },
     "loadingModel": "Načítání modelu..."
   },
   "whatsNew": {
-    "title": "Novinky v Handy v{{version}}"
+    "title": "Co je nového v Tishe"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} může blokovat 1 zkratku",
+    "blockedWithCulprit_few": "{{name}} může blokovat {{count}} zkratky",
+    "blockedWithCulprit_many": "{{name}} může blokovat {{count}} zkratky",
     "blockedWithCulprit_other": "{{name}} může blokovat {{count}} zkratek",
     "blockedNoCulprit_one": "macOS dočasně blokuje 1 zkratku",
+    "blockedNoCulprit_few": "macOS dočasně blokuje {{count}} zkratky",
+    "blockedNoCulprit_many": "macOS dočasně blokuje {{count}} zkratky",
     "blockedNoCulprit_other": "macOS dočasně blokuje {{count}} zkratek",
     "recorderBlockedWithCulprit": "{{name}} může blokovat změny zkratek",
     "recorderBlockedNoCulprit": "macOS dočasně blokuje změny zkratek",
     "learnMore": "Jak to vyřešit",
     "recorderBlocked": "Zkratky teď nelze nahrát — Secure Input v macOS blokuje události kláves. Nejprve vyřešte upozornění na Secure Input.",
     "dismiss": "Zavřít"
+  },
+  "fileTranscription": {
+    "ffmpegMissing": "ffmpeg nebyl nalezen. Je potřeba ke čtení zvukových a video souborů a je součástí instalátoru Tishe: přeinstalujte Tishe. Nebo ho nainstalujte příkazem: winget install Gyan.FFmpeg — a restartujte Tishe.",
+    "input": {
+      "choose": "Přidat soubory…",
+      "filterName": "Zvuk a video"
+    },
+    "maxPart": {
+      "title": "Maximální délka části",
+      "unit": "min"
+    },
+    "cloud": {
+      "provider": "Poskytovatel",
+      "providers": {
+        "openai": "OpenAI",
+        "groq": "Groq",
+        "custom": "Vlastní (kompatibilní s OpenAI)"
+      },
+      "baseUrl": "URL API",
+      "baseUrlDescription": "Základní URL končící na /v1.",
+      "apiKey": "Klíč API",
+      "apiKeyDescription": "Uloženo místně v tomto počítači.",
+      "model": "Model",
+      "modelDescription": "Modely gpt-4o-transcribe přijmou nejvýše ~23 min na požadavek; části se automaticky zkrátí.",
+      "language": "Jazyk",
+      "languageDescription": "Kód jazyka, například cs nebo en. Pro automatické rozpoznání nechte prázdné.",
+      "languagePlaceholder": "auto"
+    },
+    "diarization": {
+      "count": "Lidé v nahrávce",
+      "auto": "Rozpoznat automaticky",
+      "model": "Model mluvčích",
+      "modelDescription": "Stahuje se jednou; rozlišuje hlasy. Oba jsou malé a rychlé.",
+      "recommended": "Doporučeno",
+      "cloudUntimed": "Model {{model}} nevrací časové značky, takže mluvčí nelze označit. Vyberte whisper-1, model whisper u Groq nebo místní rozpoznávání.",
+      "models": {
+        "wespeaker_resnet34": {
+          "title": "WeSpeaker ResNet34",
+          "description": "Trénovaný na tisících hlasů; v reálných nahrávkách spolehlivě rozlišuje hlasy. Dobrá výchozí volba."
+        },
+        "eres2net": {
+          "title": "3D-Speaker ERes2Net",
+          "description": "Alternativní model: zkuste ho, pokud první na vašich nahrávkách plete hlasy."
+        }
+      }
+    },
+    "llm": {
+      "includeRaw": "Přidat i surový přepis",
+      "includeRawDescription": "Připojit na konec dokumentu neupravený výstup rozpoznávání.",
+      "promptPlaceholder": "Vestavěný pokyn pro jazyk nahrávky (ruština nebo angličtina)"
+    },
+    "output": {
+      "format": "Formát",
+      "docx": "Word (.docx)",
+      "markdown": "Markdown (.md)",
+      "timestamps": "Časové značky",
+      "location": "Uložit do",
+      "choose": "Vybrat složku…",
+      "nextToSource": "Vedle zdrojového souboru",
+      "notes": "Poznámky ke zpracování",
+      "removeFillers": "Odstranit zaváhání",
+      "saveDebug": "Ukládat mezisoubory",
+      "saveDebugDescription": "Vytvoří vedle dokumentu složku „<name>.debug“ s textem po každém kroku: rozpoznání, čištění, každý požadavek na jazykový model a jeho odpověď, výsledek. Pro hledání chyb a pro srovnání modelů."
+    },
+    "actions": {
+      "start": "Přepsat",
+      "cancel": "Zrušit"
+    },
+    "progress": {
+      "starting": "Spouštění…",
+      "elapsed": "Uplynulo {{time}}",
+      "extracting": "Extrahování zvuku…",
+      "extractingPart": "Extrahování zvuku…",
+      "diarizing": "Rozpoznávání mluvčích…",
+      "diarizingPart": "Rozpoznávání mluvčích…",
+      "splitting": "Dělení na části…",
+      "splittingPart": "Dělení na části…",
+      "transcribing": "Přepisování…",
+      "transcribingPart": "Přepisování části {{part}} z {{total}}…",
+      "post_processing": "Čištění pomocí LLM…",
+      "post_processingPart": "Čištění části {{part}} z {{total}} pomocí LLM…",
+      "writing": "Zápis dokumentu…",
+      "writingPart": "Zápis dokumentu…"
+    },
+    "result": {
+      "open": "Otevřít",
+      "reveal": "Zobrazit ve složce"
+    },
+    "document": {
+      "title": "Přepis",
+      "sourceFile": "Soubor",
+      "duration": "Délka",
+      "parts": "Části",
+      "engine": "Rozpoznávání",
+      "llm": "Zpracování pomocí LLM",
+      "created": "Vytvořeno",
+      "part": "Část",
+      "rawTranscript": "Surový přepis",
+      "speaker": "Mluvčí",
+      "notes": "Poznámky ke zpracování",
+      "notesTotal": "Doba zpracování",
+      "notesExtracting": "Extrahování zvuku",
+      "notesDiarizing": "Rozpoznávání mluvčích",
+      "notesTranscribing": "Rozpoznávání",
+      "notesLlm": "Zpracování LLM",
+      "notesWarnings": "Upozornění",
+      "notesNone": "žádná",
+      "notesLanguage": "Jazyk textu",
+      "llmLocal": "{{model}}, v tomto počítači",
+      "warnings": {
+        "noTimestampsModel": "mluvčí nebyli označeni: tento řečový model nevrací časové značky; použijte model whisper nebo místní rozpoznávání",
+        "noTimestampsPart": "část {{part}}: řečová služba nevrátila časové značky, takže mluvčí nešlo označit",
+        "llmEmpty": "část {{part}}, úsek {{fragment}}: LLM vrátil prázdnou odpověď, ponechán surový text",
+        "llmError": "část {{part}}, úsek {{fragment}}: chyba LLM, ponechán surový text ({{error}})",
+        "numbersBack": "část {{part}}, úsek {{fragment}}: čísla vrácena v {{lines}} řádcích (LLM je napsal slovy nebo vynechal)",
+        "linesLost": "část {{part}}, úsek {{fragment}}: odpověď LLM nezachovala číslované řádky, ponechán surový text",
+        "linesKept": "část {{part}}, úsek {{fragment}}: {{kept}} z {{total}} řádků si ponechalo surový text ({{reasons}})",
+        "kept": {
+          "missing": "chybí",
+          "duplicate": "duplikát",
+          "empty": "prázdný",
+          "tooLong": "příliš dlouhý",
+          "translated": "přeložený",
+          "tooShort": "příliš krátký",
+          "cutOff": "useknutý"
+        }
+      }
+    },
+    "queue": {
+      "clearFinished": "Vymazat dokončené"
+    },
+    "events": {
+      "title": "Skript událostí",
+      "choose": "Vybrat…",
+      "none": "Nenastaveno – události se nikam neodesílají",
+      "filterName": "Programy a skripty",
+      "test": "Otestovat",
+      "testOk": "Skript přijal testovací událost",
+      "testFailed": "Selhalo: {{error}}",
+      "testMessage": "Tishe: testovací událost",
+      "remaining": "zbývá ~{{minutes}} min",
+      "started": "Přepis zahájen",
+      "finished": "Hotovo",
+      "cancelled": "Zrušeno",
+      "interval": {
+        "title": "Interval hlášení o průběhu",
+        "description": "Nejvýše jednou za tolik sekund. Nová fáze nebo část, začátek a konec se posílají hned.",
+        "unit": "s"
+      }
+    }
+  },
+  "ui": {
+    "productName": "Tishe",
+    "change": "Změnit",
+    "choose": "Vybrat",
+    "open": "Otevřít",
+    "hide": "Skrýt",
+    "save": "Uložit",
+    "saved": "Uloženo",
+    "copied": "Zkopírováno",
+    "undo": "Zpět",
+    "download": "Stáhnout",
+    "downloadSize": "Stáhnout {{size}}",
+    "downloadingPercent": "Stahování · {{percent}} %",
+    "cancelDownload": "Zrušit",
+    "deleteNamed": "Smazat {{name}}",
+    "percent": "{{n}} %",
+    "useValue": "Použít „{{value}}“",
+    "fold": {
+      "more": "Více",
+      "changed_one": "změněno: {{count}}",
+      "changed_few": "změněno: {{count}}",
+      "changed_many": "změněno: {{count}}",
+      "changed_other": "změněno: {{count}}",
+      "changedA11y_one": "Změněno {{count}} nastavení",
+      "changedA11y_few": "Změněna {{count}} nastavení",
+      "changedA11y_many": "Změněno {{count}} nastavení",
+      "changedA11y_other": "Změněno {{count}} nastavení"
+    },
+    "number": {
+      "hint": "Od {{min}} do {{max}}",
+      "hintDefault": "Výchozí {{value}}; od {{min}} do {{max}}",
+      "notNumber": "Zadejte číslo",
+      "range": "Zadejte číslo od {{min}} do {{max}}"
+    },
+    "units": {
+      "ms": "ms",
+      "sec": "{{n}} s",
+      "min": "{{n}} min",
+      "hour": "{{n}} h",
+      "hourMin": "{{h}} h {{m}} min",
+      "mb": "{{n}} MB",
+      "gb": "{{n}} GB"
+    },
+    "when": {
+      "today": "dnes {{time}}",
+      "yesterday": "včera {{time}}",
+      "todayTitle": "Dnes",
+      "yesterdayTitle": "Včera"
+    },
+    "player": {
+      "play": "Přehrát",
+      "pause": "Pozastavit",
+      "position": "Pozice přehrávání"
+    },
+    "shortcut": {
+      "change": "Změnit klávesu pro „{{name}}“",
+      "reset": "Vrátit výchozí klávesu"
+    },
+    "echo": {
+      "recognition": "Rozpoznávání: {{model}}",
+      "language": "jazyk: {{language}}",
+      "sharedWithDictation": "sdíleno s diktováním",
+      "sharedWithFiles": "sdíleno s přepisem souborů",
+      "noModel": "Žádný model rozpoznávání řeči"
+    },
+    "llm": {
+      "ready": "Připraveno · {{model}} v tomto počítači",
+      "needed": "Potřebuje AI · {{model}}",
+      "downloading": "Stahování AI · {{percent}} %",
+      "runtimeMissing": "Chybí vestavěný AI engine",
+      "otherOptions": "Další možnosti",
+      "noKey": "Potřebuje klíč {{provider}}",
+      "noUrl": "Potřebuje adresu serveru",
+      "noServerModel": "Potřebuje název modelu",
+      "localServer": "Váš server v tomto počítači · {{model}}",
+      "textToServer": "Text jde na {{address}}",
+      "textToService": "Text jde do {{provider}}"
+    },
+    "confirm": {
+      "deleteModelTitle": "Smazat model {{name}}?",
+      "deleteModel": "Smazat model",
+      "deleteModelBody": "Uvolní se {{size}}. Abyste model mohli znovu použít, budete ho muset stáhnout.",
+      "deleteActiveTitle": "Smazat {{name}}? Je to aktuální model",
+      "deleteActiveBody": "Diktování a přepis přestanou fungovat, dokud nevyberete jiný model. Uvolní se {{size}}.",
+      "deleteLlmTitle": "Smazat model AI {{name}}?",
+      "deleteLlm": "Smazat model AI",
+      "deleteLlmBody": "Uvolní se {{size}}. Úpravy nebudou fungovat, dokud ho znovu nestáhnete nebo nevyberete jiný.",
+      "deleteSpeakerModelBody": "Rozdělení podle mluvčích nebude fungovat, dokud znovu nestáhnete model hlasů."
+    },
+    "back": {
+      "transcription": "Zpět na Přepis",
+      "dictation": "Zpět na Diktování",
+      "meetings": "Zpět na Schůzky",
+      "history": "Zpět na Historii",
+      "models": "Zpět na Rozpoznávání",
+      "llm": "Zpět na Úpravy s AI",
+      "app": "Zpět na Aplikaci",
+      "about": "Zpět na O aplikaci",
+      "debug": "Zpět na Ladění",
+      "next": "Zpět na Co dál"
+    },
+    "changed": "změněno"
+  },
+  "statusBar": {
+    "model": {
+      "ready": "načten",
+      "loading": "načítání…",
+      "error": "načtení selhalo",
+      "unloaded": "není v paměti",
+      "none": "Žádný model",
+      "a11y": "Model {{model}}, {{state}}. Změnit model",
+      "menu": "Stažené modely",
+      "all": "Všechny modely…",
+      "locked": "Probíhá přepis – změňte po jeho skončení"
+    },
+    "task": "Přepis: soubor {{current}} z {{total}} · {{percent}} %",
+    "downloading": "Stahování: {{name}} · {{percent}} %",
+    "downloadingMany": "Stahování: {{count}} · {{percent}} %"
+  },
+  "transcription": {
+    "ffmpeg": {
+      "title": "Přepis potřebuje ffmpeg"
+    },
+    "drop": {
+      "title": "Přetáhněte sem nahrávku",
+      "text": "Zvuk nebo video: mp3, m4a, wav, mp4, mkv a další. Z každého souboru vznikne samostatný dokument.",
+      "more": "Přetáhněte další nahrávky nebo",
+      "release": "Pusťte pro přidání",
+      "rejected": "{{names}} – není zvuk ani video",
+      "oneText": "„{{name}}“ se zařadí do fronty přepisu",
+      "manyText_one": "{{count}} nahrávka se zařadí do fronty přepisu",
+      "manyText_few": "{{count}} nahrávky se zařadí do fronty přepisu",
+      "manyText_many": "{{count}} nahrávky se zařadí do fronty přepisu",
+      "manyText_other": "{{count}} nahrávek se zařadí do fronty přepisu",
+      "anyText": "Zvukové a video soubory se zařadí do fronty přepisu",
+      "noneTitle": "Tyto soubory nepůjdou",
+      "noneText": "Přepsat lze jen zvuk a video: mp3, m4a, wav, mp4, mkv a další.",
+      "otherNote_one": "Ještě {{count}} soubor bude přeskočen: není to zvuk ani video",
+      "otherNote_few": "Ještě {{count}} soubory budou přeskočeny: nejsou to zvuk ani video",
+      "otherNote_many": "Ještě {{count}} souboru bude přeskočeno: nejsou to zvuk ani video",
+      "otherNote_other": "Ještě {{count}} souborů bude přeskočeno: nejsou to zvuk ani video",
+      "alreadyOne": "„{{name}}“ už je ve frontě",
+      "alreadyMany": "Tyto nahrávky už jsou ve frontě"
+    },
+    "list": {
+      "label": "Nahrávky",
+      "waiting": "Čeká",
+      "cancelled": "Zrušeno",
+      "remaining": "zbývá asi {{time}}",
+      "remove": "Odebrat",
+      "removeFile": "Odebrat {{name}}",
+      "removeFromList": "Odebrat ze seznamu",
+      "more": "Více: {{name}}",
+      "recipeSpeakers": "mluvčí",
+      "recipeEditing": "úpravy",
+      "recipeCloud": "v cloudu",
+      "parts_one": "{{count}} část",
+      "parts_few": "{{count}} části",
+      "parts_many": "{{count}} části",
+      "parts_other": "{{count}} částí",
+      "notes_one": "{{count}} poznámka ke zpracování",
+      "notes_few": "{{count}} poznámky ke zpracování",
+      "notes_many": "{{count}} poznámky ke zpracování",
+      "notes_other": "{{count}} poznámek ke zpracování",
+      "showAll": "Zobrazit vše ({{count}})",
+      "showFewer": "Zobrazit méně",
+      "removedOne": "Odebráno ze seznamu",
+      "removedMany_one": "{{count}} řádek odebrán ze seznamu",
+      "removedMany_few": "{{count}} řádky odebrány ze seznamu",
+      "removedMany_many": "{{count}} řádku odebráno ze seznamu",
+      "removedMany_other": "{{count}} řádků odebráno ze seznamu",
+      "chars_one": "{{n}} znak",
+      "chars_few": "{{n}} znaky",
+      "chars_many": "{{n}} znaku",
+      "chars_other": "{{n}} znaků",
+      "keptNote": "Uchovává se posledních {{count}} výsledků. Dokumenty na disku se nikdy nemažou.",
+      "missing": "Dokument nenalezen: byl přesunut nebo smazán, nebo je jeho disk odpojený",
+      "openDocument": "Otevřít dokument {{name}}"
+    },
+    "recipe": {
+      "title": "Recept",
+      "locked": "Během přepisu zůstávají nastavení beze změny. Nové soubory použijí stejná nastavení.",
+      "where": "Kde rozpoznávat",
+      "local": "V tomto počítači",
+      "cloud": "V cloudu",
+      "audioToService": "Zvuk jde do {{provider}}",
+      "cloudEcho": "Rozpoznávání: {{model}} u {{provider}}",
+      "speakers": "Mluvčí",
+      "speakersDescription": "Z dokumentu se stane záznam rozhovoru: „Mluvčí 1: …“, „Mluvčí 2: …“",
+      "speakersMissing": "Potřebuje model hlasů · {{size}}",
+      "speakersDownloading": "Stahování modelu hlasů · {{percent}} %",
+      "speakersReady": "Model hlasů připraven",
+      "countDescription": "Pokud to víte, rozdělení bude přesnější",
+      "editing": "Úpravy pomocí AI",
+      "editingDescription": "Opraví chyby rozpoznávání a interpunkci. Znatelně déle: asi 15–35 min na hodinu nahrávky",
+      "result": "Výsledek",
+      "format": {
+        "docx": "Word",
+        "markdown": "Markdown"
+      },
+      "nextToSource": "vedle nahrávky"
+    },
+    "more": {
+      "recognition": "Rozpoznávání",
+      "maxPartDescription": "Dlouhá nahrávka se v pauzách rozstříhá na části ne delší než tato hodnota",
+      "speakers": "Mluvčí",
+      "editing": "Úpravy",
+      "prompt": "Pokyn pro soubory",
+      "promptDescription": "Prázdné – vestavěný pokyn v jazyce nahrávky. Priorita: toto pole, pak ⚙ modelu, pak vestavěný",
+      "document": "Dokument",
+      "locationDescription": "Název se vezme z nahrávky; nic se nepřepíše, místo toho se přidá (2)",
+      "timestampsDescription": "Čas nahrávky před každým odstavcem",
+      "removeFillersDescription": "Odstraní „uh“, „um“, „hmm“ v anglických a ruských nahrávkách. Slova zůstanou",
+      "globalFillers": "Zdrojový přepis zůstává doslovný. Diktování má vlastní nastavení výplňových slov",
+      "notesDescription": "Na konci: doba každé fáze a upozornění",
+      "integrations": "Integrace",
+      "eventsDescription": "Program, kterému se hlásí začátek, průběh a konec (.exe, .ps1, .bat, .cmd)"
+    },
+    "panel": {
+      "addFiles": "Začněte přidáním souborů",
+      "noFfmpeg": "Potřebuje ffmpeg",
+      "noModel": "Nejdřív stáhněte model rozpoznávání",
+      "cloudIncomplete": "Potřebuje klíč {{provider}}",
+      "cloudIncompleteCustom": "Potřebuje adresu API, klíč a model",
+      "noSpeakerModel": "Potřebuje model hlasů",
+      "running": "Soubor {{current}} z {{total}} · uplynulo {{time}}",
+      "start_one": "Přepsat {{count}} soubor",
+      "start_few": "Přepsat {{count}} soubory",
+      "start_many": "Přepsat {{count}} souboru",
+      "start_other": "Přepsat {{count}} souborů",
+      "done_one": "Hotovo: {{count}} soubor",
+      "done_few": "Hotovo: {{count}} soubory",
+      "done_many": "Hotovo: {{count}} souboru",
+      "done_other": "Hotovo: {{count}} souborů",
+      "errors_one": "{{count}} soubor s chybou",
+      "errors_few": "{{count}} soubory s chybou",
+      "errors_many": "{{count}} souboru s chybou",
+      "errors_other": "{{count}} souborů s chybou",
+      "summary_one": "{{count}} nahrávka",
+      "summary_few": "{{count}} nahrávky",
+      "summary_many": "{{count}} nahrávky",
+      "summary_other": "{{count}} nahrávek",
+      "modelDownloading": "Stahování modelu rozpoznávání · {{percent}} %",
+      "llmDownloading": "Stahování AI pro úpravy · {{percent}} %",
+      "llmMissing": "Pro úpravy je potřeba AI",
+      "llmNotSetUp": "AI pro úpravy není nastavená",
+      "withoutEditing": "Bez úprav",
+      "modelNotActive": "Model rozpoznávání není zapnutý"
+    },
+    "stop": {
+      "title": "Zastavit přepis?",
+      "body": "Hotové soubory ({{done}}) jsou uložené. Aktuální soubor ({{percent}} %) a čekající ({{waiting}}) bude nutné spustit znovu.",
+      "confirm": "Zastavit",
+      "keep": "Pokračovat"
+    },
+    "tray": {
+      "running": "Přepis: soubor {{current}} z {{total}} · {{pct}} %",
+      "ready_one": "Přepis hotov: {{count}} soubor",
+      "ready_few": "Přepis hotov: {{count}} soubory",
+      "ready_many": "Přepis hotov: {{count}} souboru",
+      "ready_other": "Přepis hotov: {{count}} souborů"
+    },
+    "notify": {
+      "readyOne": "Přepis je hotový",
+      "readyMany_one": "Přepis hotov: {{count}} soubor",
+      "readyMany_few": "Přepis hotov: {{count}} soubory",
+      "readyMany_many": "Přepis hotov: {{count}} souboru",
+      "readyMany_other": "Přepis hotov: {{count}} souborů",
+      "failedOne": "Přepis selhal",
+      "failedMany_one": "Přepis selhal: {{count}} soubor",
+      "failedMany_few": "Přepis selhal: {{count}} soubory",
+      "failedMany_many": "Přepis selhal: {{count}} souboru",
+      "failedMany_other": "Přepis selhal: {{count}} souborů",
+      "partial": "Hotovo {{ok}} z {{total}} · {{errors}}",
+      "errors_one": "{{count}} selhal",
+      "errors_few": "{{count}} selhaly",
+      "errors_many": "{{count}} selhalo",
+      "errors_other": "{{count}} selhalo",
+      "failedFile": "Selhalo: {{name}} · {{reason}}",
+      "open": "Otevřít"
+    },
+    "try": {
+      "before": "Otevřete libovolný editor, umístěte do něj kurzor a podržte",
+      "after": "během mluvení. Pusťte ji a text se tam objeví.",
+      "changeKey": "Změnit klávesu"
+    }
+  },
+  "dictation": {
+    "status": {
+      "ready": "Diktování je připravené ·",
+      "anyWindow": "v libovolném okně",
+      "keyBusy": "Diktování se nespustí: klávesa je obsazená",
+      "keyBusyDetail": "{{key}} používá jiný program. Vyberte jinou klávesu.",
+      "changeKey": "Změnit klávesu"
+    },
+    "keys": {
+      "title": "Klávesy",
+      "second": "Diktování s úpravami – druhá klávesa",
+      "secondDescription": "Běžná klávesa vloží text tak, jak je. Tato ho vloží po úpravě pomocí AI",
+      "instruction": "Pokyn",
+      "manage": "Spravovat…",
+      "secondBusy": "Tuto klávesu používá jiný program: vyberte jinou"
+    },
+    "more": {
+      "paste": "Vkládání textu",
+      "indicator": "Indikátor nahrávání",
+      "microphone": "Mikrofon a nahrávání",
+      "prompts": "Pokyny pro diktování s úpravami",
+      "promptsDescription_one": "{{count}} pokyn",
+      "promptsDescription_few": "{{count}} pokyny",
+      "promptsDescription_many": "{{count}} pokynu",
+      "promptsDescription_other": "{{count}} pokynů",
+      "promptsRow": "Vytvářet a upravovat pokyny",
+      "text": "Text diktátu",
+      "fillersDocuments": "Jen pro diktování. V dokumentech to dělá „Odstranit zaváhání“ na stránce Přepis"
+    },
+    "fix": {
+      "title": "Pokud něco nefunguje",
+      "paste": "Text se nevkládá",
+      "pasteHelp": "Pokud diktujete do programu spuštěného jako správce, Windows do něj nedovolí vkládat. Jinak zvyšte prodlevy níže.",
+      "cutOff": "Konec věty se usekne",
+      "hold": "Krátký stisk se počítá jako podržení"
+    },
+    "prompts": {
+      "title": "Pokyny pro diktování s úpravami",
+      "intro": "Pokyn říká AI, co má s nadiktovaným textem udělat. ${output} je nadiktovaný text.",
+      "current": "Aktuální pokyn",
+      "create": "Vytvořit",
+      "deleted": "Pokyn „{{name}}“ smazán"
+    }
+  },
+  "meetings": {
+    "what": "Tishe bude nahrávat schůzky a hovory v tomto počítači: váš mikrofon i druhou stranu, a pak připraví přepis rozdělený podle mluvčích.",
+    "how": "Nahrávky zůstávají v počítači, stejně jako všechno ostatní v Tishe.",
+    "nowTitle": "Už teď",
+    "nowText": "Pokud je schůzka už nahraná – přes Zoom, Teams nebo diktafon –, přidejte soubor v sekci „Přepis“.",
+    "goTranscription": "Přejít na Přepis"
+  },
+  "history": {
+    "storage": {
+      "title": "Uchovávání",
+      "limit_one": "Uchovávají se poslední diktáty: {{count}}",
+      "limit_few": "Uchovávají se poslední diktáty: {{count}}",
+      "limit_many": "Uchovávají se poslední diktáty: {{count}}",
+      "limit_other": "Uchovávají se poslední diktáty: {{count}}",
+      "never": "Diktáty se automaticky nemažou",
+      "days_3": "Diktáty se mažou po 3 dnech",
+      "weeks_2": "Diktáty se mažou po 2 týdnech",
+      "months_3": "Diktáty se mažou po 3 měsících"
+    },
+    "empty": {
+      "title": "Tady se objeví vaše diktáty",
+      "textBefore": "Podržte",
+      "textAfter": "v libovolném okně a mluvte.",
+      "textNoKey": "Nastavte klávesu pro diktování v sekci „Diktování“."
+    },
+    "copy": "Kopírovat text",
+    "more": "Další akce",
+    "keep": "Ponechat",
+    "keepDescription": "Automaticky se nemaže",
+    "retry": "Rozpoznat znovu",
+    "delete": "Smazat",
+    "deleted": "Diktát smazán",
+    "failed": "Nepodařilo se rozpoznat",
+    "savedTag": "ponecháno",
+    "editingSkipped": "bez úprav",
+    "showMore": "Zobrazit celé",
+    "showLess": "Sbalit",
+    "version": "Verze textu",
+    "versionEdited": "Po úpravě",
+    "versionRaw": "Originál"
+  },
+  "models": {
+    "purpose": "Modely, které převádějí řeč na text – pro diktování a přepis souborů. Úpravy textu pomocí AI najdete v sekci",
+    "active": {
+      "title": "Aktivní model",
+      "change": "Změnit model",
+      "none": "Není vybrán žádný model",
+      "noneHint": "Stáhněte model doporučený pro váš jazyk – nebo libovolný z katalogu níže"
+    },
+    "lockedByTranscription": "Probíhá přepis – změňte po jeho skončení",
+    "language": {
+      "title": "Jazyk a překlad",
+      "scope": "Platí pro diktování i přepis souborů"
+    },
+    "cleanup": {
+      "title": "Čištění textu",
+      "scope": "Funguje uvnitř modelu rozpoznávání, pro diktování i soubory"
+    },
+    "memory": {
+      "title": "Paměť"
+    },
+    "onlyLanguage": "jen {{language}}",
+    "languageCount_one": "{{count}} jazyk",
+    "languageCount_few": "{{count}} jazyky",
+    "languageCount_many": "{{count}} jazyka",
+    "languageCount_other": "{{count}} jazyků",
+    "catalog": {
+      "title": "Katalog",
+      "yours": "Vaše modely",
+      "yoursCount": "Vaše modely ({{count}})",
+      "recommended": "Doporučené",
+      "all": "Všechny modely",
+      "languageFilter": "Jazyk",
+      "streaming": "Streamování",
+      "translation": "Překlad",
+      "showAll": "Zobrazit všechny modely ({{count}})",
+      "showFewer": "Zobrazit méně"
+    },
+    "row": {
+      "use": "Použít",
+      "inUse": "používá se",
+      "more": "Více: {{name}}",
+      "delete": "Smazat model",
+      "translate": "překládá do angličtiny",
+      "streaming": "streamování",
+      "accuracy": "přesnost {{n}}/10",
+      "speed": "rychlost {{n}}/10"
+    }
+  },
+  "llm": {
+    "purpose": "Kde a jakou AI se text upravuje",
+    "status": {
+      "usedFor": "Používá se pro",
+      "files": "úpravy souborů ({{state}})",
+      "dictation": "diktování s úpravami ({{state}})",
+      "on": "zapnuto",
+      "off": "vypnuto"
+    },
+    "where": {
+      "title": "Kde AI běží",
+      "local": "V tomto počítači",
+      "localText": "Text zůstává v počítači",
+      "localUnavailable": "V tomto sestavení není k dispozici",
+      "server": "Vlastní server",
+      "serverText": "Ollama, LM Studio nebo vaše adresa · text jde na váš server",
+      "cloud": "Cloudová služba",
+      "cloudText": "OpenAI a další · text jde do služby"
+    },
+    "variant": {
+      "local": "Vestavěná AI",
+      "server": "Server",
+      "cloud": "Služba"
+    },
+    "local": {
+      "speed": "rychlost {{n}} z 5",
+      "quality": "kvalita {{n}} z 5",
+      "footprint": "disk {{disk}} · paměť ~{{ram}} GB",
+      "showAll": "Zobrazit všechny modely ({{count}})",
+      "showFewer": "Zobrazit méně"
+    },
+    "server": {
+      "urlDescription": "Adresa kompatibilní s OpenAI končící na /v1",
+      "keyDescription": "Jen pokud ho váš server vyžaduje"
+    }
+  },
+  "app": {
+    "purpose": "Jak se program chová jako celek",
+    "launch": "Spuštění a oznamovací oblast",
+    "look": "Vzhled",
+    "updates": "Aktualizace",
+    "checkNow": "Zkontrolovat novou verzi",
+    "checkNowButton": "Zkontrolovat",
+    "experimental": "Experimentální funkce",
+    "quit": {
+      "title": "Ukončit Tishe?",
+      "body": "Probíhá přepis „{{name}}“ ({{pct}} %). Zastaví se; hotové dokumenty jsou uložené.",
+      "bodyIdle": "Přepis se zastaví; hotové dokumenty jsou uložené.",
+      "confirm": "Ukončit",
+      "stay": "Zůstat"
+    },
+    "notifications": "Oznámení",
+    "notifyLabel": "Upozornit, až bude přepis hotový",
+    "notifyDescription": "Oznámení Windows, jen když je okno skryté nebo neaktivní. Kliknutí otevře výsledek.",
+    "trayHint": "Windows nové ikony skrývá. Aby byla stále vidět, přetáhněte ji ze skrytých ikon na hlavní panel."
+  },
+  "about": {
+    "versionText": "Tishe {{version}}",
+    "whatsNew": "Co je nového",
+    "project": {
+      "title": "O projektu",
+      "basedOn": "Založeno na Handy",
+      "basedOnText": "Otevřený zdrojový kód, licence MIT",
+      "tishe": "Tishe",
+      "tisheText": "Otevřený kód, licence MIT. Vydání a hlášení chyb jsou na GitHubu",
+      "licenses": "Licence",
+      "licensesText": "Knihovny a modely třetích stran, které Tishe používá",
+      "licensesOpen": "Otevřít",
+      "licensesError": "Soubor s licencemi se nepodařilo otevřít",
+      "author": "Vývojář",
+      "authorName": "Viktor Pereverzev",
+      "authorProfile": "Profil na GitHubu"
+    },
+    "supportHandy": "Podpořit autory Handy",
+    "folders": "Složky",
+    "versionRelease": "Tishe {{version}}, vydání {{release}}"
+  },
+  "debug": {
+    "onBefore": "Režim ladění je zapnutý a zůstává zapnutý i mezi spuštěními.",
+    "onAfter": "ho skryje.",
+    "log": "Protokol",
+    "previews": "Náhledy",
+    "keyboard": "Klávesnice",
+    "transcription": "Přepis"
+  },
+  "release": {
+    "available": "Vyšla verze {{release}}",
+    "openPage": "Otevřít stránku vydání na GitHubu",
+    "upToDate": "Toto je nejnovější verze",
+    "checkFailed": "Aktualizace se nepodařilo zkontrolovat"
+  },
+  "next": {
+    "lead": "Tishe je první částí Private Memory: soukromé paměti vašich rozhovorů, která celá žije ve vašem počítači.",
+    "now": "Už teď Tishe píše diktát do libovolné aplikace a přepisuje dlouhé nahrávky s rozlišením mluvčích. Bez internetu a bez účtu.",
+    "planTitle": "V dalších verzích",
+    "plan": {
+      "meetings": {
+        "title": "Nahrávání schůzek",
+        "text": "váš mikrofon a ostatní účastníci jako dvě stopy, text se objevuje během hovoru."
+      },
+      "summaries": {
+        "title": "Shrnutí schůzek",
+        "text": "rozhodnutí a úkoly hned po zastavení nahrávání, v jazyce schůzky, od vestavěného jazykového modelu."
+      },
+      "search": {
+        "title": "Hledání ve schůzkách",
+        "text": "nejprve podle slov, pak podle významu."
+      },
+      "agents": {
+        "title": "Poznámky a asistenti",
+        "text": "složka schůzky pro Obsidian a přístup AI asistentů k vašim schůzkám přes MCP, stále bez cloudu."
+      }
+    },
+    "order": "Termíny neslibujeme: pořadí se může změnit podle zpětné vazby.",
+    "freeTitle": "Zdarma a s otevřeným kódem",
+    "freeText": "Základ Tishe je zdarma a zdarma zůstane. Sledujte vydání a napište nám na GitHubu, co chybí.",
+    "follow": "Sledovat na GitHubu",
+    "feedback": "Nahlásit problém nebo nápad"
+  },
+  "fileErrors": {
+    "notFound": "Soubor nebyl nalezen: byl přesunut nebo smazán.",
+    "noAudio": "Soubor nemá zvuk, nebo ho nelze přečíst.",
+    "unreadable": "Zvuk ze souboru se nepodařilo přečíst. Soubor může být poškozený.",
+    "noModel": "Není vybrán model rozpoznávání: vyberte ho v «$t(sidebar.models)».",
+    "noSpeakerModel": "Model hlasů není stažený: stáhněte ho v «$t(transcription.more.speakers)».",
+    "noLlmModel": "Jazykový model není stažený: stáhněte ho v «$t(sidebar.llm)».",
+    "noLlmRuntime": "Chybí vestavěný engine jazykového modelu. Přeinstalujte Tishe.",
+    "cloudKey": "Cloudové rozpoznávání potřebuje klíč API.",
+    "cloudConfig": "Cloudové rozpoznávání není nastavené: zadejte adresu a model.",
+    "busy": "Právě se už přepisuje jiný soubor.",
+    "noSpace": "Disk je plný.",
+    "fileInUse": "Dokument je otevřený v jiném programu (například ve Wordu). Zavřete ho a zkuste to znovu.",
+    "accessDenied": "Ke složce pro dokument není přístup. Vyberte jinou složku: «$t(ui.fold.more) → $t(transcription.more.document)»."
+  },
+  "setup": {
+    "asr": {
+      "title": "Stáhněte model rozpoznávání řeči",
+      "text": "Převádí řeč na text – pro nahrávky i pro diktování. Běží na tomto počítači, bez internetu. Stačí ho stáhnout jednou.",
+      "language": "Jazyk nahrávek",
+      "allModels": "Všechny modely",
+      "onDisk": "Model {{name}} už je v počítači – stačí ho zapnout.",
+      "whileDownloading": "Během stahování už můžete přidávat nahrávky: přepis začne, jakmile bude model připravený."
+    },
+    "llm": {
+      "title": "Pro úpravy je potřeba AI",
+      "what": "AI opravuje chyby rozpoznávání a interpunkci. Doporučujeme vestavěnou: běží na tomto počítači a text nikam neodchází.",
+      "recommended": "{{size}} na disku · potřebuje asi {{ram}} GB paměti · stahuje se jednou",
+      "otherWays": "Vlastní server nebo cloud",
+      "downloadOn": "Stáhnout {{size}} a zapnout",
+      "runtimeTitle": "Vestavěná AI není k dispozici",
+      "runtime": "Tato verze neobsahuje engine vestavěné AI. Vlastní server (Ollama, LM Studio) nebo cloudovou službu můžete připojit v sekci „$t(sidebar.llm)“.",
+      "openPage": "Otevřít „$t(sidebar.llm)“",
+      "notSetUp": "{{reason}} – bez toho AI nebude fungovat. Zapněte úpravy a dokončete nastavení v sekci „$t(sidebar.llm)“.",
+      "onAndSetUp": "Zapnout a nastavit",
+      "onDisk": "Už je v počítači — nic není třeba stahovat.",
+      "turnOn": "Zapnout úpravy"
+    },
+    "quick": {
+      "title": "Rychlý start",
+      "progress": "{{done}} z {{total}}",
+      "hide": "Skrýt",
+      "hideHint": "Skrýt „Rychlý start“ – všechna nastavení zůstávají v sekcích vlevo",
+      "model": "Stáhněte model rozpoznávání",
+      "modelDone": "Model rozpoznávání připraven · {{name}}",
+      "dictation": "Vyzkoušejte diktování",
+      "dictationDone": "Diktování funguje · diktáty se ukládají v sekci „Historie“",
+      "file": "Přepište nahrávku",
+      "fileDone": "První nahrávka přepsána",
+      "fileHint": "Přetáhněte zvukový nebo video soubor do tohoto okna nebo vyberte soubory – vedle nahrávky se objeví dokument Word.",
+      "llm": "Úpravy pomocí AI",
+      "optional": "volitelné",
+      "llmHint": "Opravuje chyby rozpoznávání a interpunkci v dokumentech. {{model}}: {{size}}, běží na tomto počítači.",
+      "llmReady": "AI připravena · {{model}}",
+      "doneTitle": "Vše připraveno",
+      "doneText": "Tishe je nastavené. Diktáty najdete v sekci „Historie“, dokumenty v seznamu níže, nastavení v sekcích vlevo.",
+      "close": "Zavřít"
+    }
   }
 }

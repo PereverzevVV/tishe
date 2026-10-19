@@ -1,0 +1,93 @@
+{
+  "_comment": "Tishe: models Handy's generated catalog.json does not list yet. Merged after it in mod.rs; an entry is skipped once catalog.json has the same id. Same schema as catalog.json.",
+  "models": [
+    {
+      "id": "handy-computer/parakeet-ultra-gguf",
+      "revision": "39eeb55181f0d354fd934f06e92fd8d5037fed8e",
+      "slug": "parakeet-ultra",
+      "name": "Parakeet Ultra 0.6B",
+      "architecture": "parakeet",
+      "family": "parakeet",
+      "parameters": "0.6B",
+      "description": "Moondream's further-trained Parakeet v3: more accurate and more robust to noise. Supports 25 European languages",
+      "base_model": "moondream/parakeet-ultra",
+      "license": "cc-by-4.0",
+      "language_count": 25,
+      "languages": [
+        "bg",
+        "hr",
+        "cs",
+        "da",
+        "nl",
+        "en",
+        "et",
+        "fi",
+        "fr",
+        "de",
+        "el",
+        "hu",
+        "it",
+        "lv",
+        "lt",
+        "mt",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "sk",
+        "sl",
+        "es",
+        "sv",
+        "uk"
+      ],
+      "capabilities": {
+        "streaming": false,
+        "translate": false,
+        "lang_detect": true,
+        "timestamps": "token"
+      },
+      "speed_score": 79,
+      "accuracy_score": 89,
+      "files": [
+        {
+          "filename": "parakeet-ultra-Q4_K_M.gguf",
+          "quant": "Q4_K_M",
+          "size_bytes": 486280096,
+          "sha256": "c69b7a5f9071a7afd8a1818ef7ae542c386c4b01ed0cac380c19a99947646bf9"
+        },
+        {
+          "filename": "parakeet-ultra-Q5_K_M.gguf",
+          "quant": "Q5_K_M",
+          "size_bytes": 549800864,
+          "sha256": "f6e3d8172547a3bb468e92ff395696e6d2e0371a9e52690a27741b4e8561c997"
+        },
+        {
+          "filename": "parakeet-ultra-Q6_K.gguf",
+          "quant": "Q6_K",
+          "size_bytes": 611196832,
+          "sha256": "ba146253d9b5eb7c729dfa897174cb5bad0a7d05129863805e0caf7d571c7493"
+        },
+        {
+          "filename": "parakeet-ultra-Q8_0.gguf",
+          "quant": "Q8_0",
+          "size_bytes": 740363168,
+          "sha256": "007a59761e9258779f189df396b50d12b83bb5b79e66df4b955c230d2f2a0a59"
+        },
+        {
+          "filename": "parakeet-ultra-F16.gguf",
+          "quant": "F16",
+          "size_bytes": 1256724448,
+          "sha256": "cd97f94fa50a034a9019a47e2ed7a2de3963eed8316d1df4de9efdccca6fe78d"
+        },
+        {
+          "filename": "parakeet-ultra-F32.gguf",
+          "quant": "F32",
+          "size_bytes": 2509290240,
+          "sha256": "ae1df0bc1abd85407718b9be718634aad81cbba44ae18da078cc0dfa2d6eb5de"
+        }
+      ],
+      "default_quant": "Q8_0",
+      "recommended": false
+    }
+  ]
+}

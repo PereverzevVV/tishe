@@ -48,7 +48,7 @@ export const MicrophoneSelector: React.FC<MicrophoneSelectorProps> = React.memo(
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="flex items-center space-x-1">
+        <div className="flex min-w-0 items-center gap-1">
           <Dropdown
             options={microphoneOptions}
             selectedValue={selectedMicrophone}
@@ -65,10 +65,12 @@ export const MicrophoneSelector: React.FC<MicrophoneSelectorProps> = React.memo(
             }
             onOpen={refreshAudioDevices}
           />
-          <ResetButton
-            onClick={handleReset}
-            disabled={isUpdating("selected_microphone") || isLoading}
-          />
+          {selectedMicrophone !== "Default" && (
+            <ResetButton
+              onClick={handleReset}
+              disabled={isUpdating("selected_microphone") || isLoading}
+            />
+          )}
         </div>
       </SettingContainer>
     );

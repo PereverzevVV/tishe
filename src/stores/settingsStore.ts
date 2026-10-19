@@ -6,6 +6,7 @@ import type {
   AudioDevice,
   PostProcessApiFormat,
   ChineseScript,
+  ModelUnloadTimeout,
   TranscribeAcceleratorSetting,
   OrtAcceleratorSetting,
   ShortcutActivation,
@@ -102,6 +103,8 @@ const settingUpdaters: {
     commands.changeUpdateChecksSetting(value as boolean),
   show_whats_new_on_update: (value) =>
     commands.changeShowWhatsNewOnUpdateSetting(value as boolean),
+  transcription_notifications: (value) =>
+    commands.changeTranscriptionNotificationsSetting(value as boolean),
   whats_new_last_seen_version: (value) =>
     commands.changeWhatsNewLastSeenVersionSetting(value as string),
   shortcut_activation: (value) =>
@@ -202,6 +205,8 @@ const settingUpdaters: {
     commands.changeTranscribeGpuDevice(value as string | null),
   extra_recording_buffer_ms: (value) =>
     commands.changeExtraRecordingBufferSetting(value as number),
+  local_llm_unload_timeout: (value) =>
+    commands.setLocalLlmUnloadTimeout(value as ModelUnloadTimeout),
 };
 
 export const useSettingsStore = create<SettingsStore>()(

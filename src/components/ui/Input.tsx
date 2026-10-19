@@ -1,32 +1,20 @@
 import React from "react";
 
+/** Text field (VISUAL_DESIGN_SYSTEM §12.2): 32 high, 1 px control border. */
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Kept for callers; both variants are 32 high (§8.1). */
   variant?: "default" | "compact";
+  invalid?: boolean;
 }
 
-export const Input: React.FC<InputProps> = ({
-  className = "",
-  variant = "default",
-  disabled,
-  ...props
-}) => {
-  const baseClasses =
-    "px-2 py-1 text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 rounded-md text-start transition-all duration-150";
-
-  const interactiveClasses = disabled
-    ? "opacity-60 cursor-not-allowed bg-mid-gray/10 border-mid-gray/40"
-    : "hover:bg-logo-primary/10 hover:border-logo-primary focus:outline-none focus:bg-logo-primary/20 focus:border-logo-primary";
-
-  const variantClasses = {
-    default: "px-3 py-2",
-    compact: "px-2 py-1",
-  } as const;
-
-  return (
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className = "", variant: _variant, invalid, ...props }, ref) => (
     <input
-      className={`${baseClasses} ${variantClasses[variant]} ${interactiveClasses} ${className}`}
-      disabled={disabled}
+      ref={ref}
+      className={`t-field ${className}`}
+      aria-invalid={invalid || undefined}
       {...props}
     />
-  );
-};
+  ),
+);
+Input.displayName = "Input";

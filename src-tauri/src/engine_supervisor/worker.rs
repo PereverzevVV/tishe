@@ -117,7 +117,7 @@ pub fn run() -> i32 {
                     inject_fault("run", info.on_gpu);
                     match session.run(&pcm, &options) {
                         Ok(transcript) => Response::Transcript(transcript),
-                        Err(e) => Response::Error(e.to_string()),
+                        Err(e) => run_error(e),
                     }
                 }
                 None => not_loaded(),
@@ -250,6 +250,27 @@ fn serve_stream(
 
 fn not_loaded() -> Response {
     Response::Error("no model loaded".to_string())
+}
+
+/// Tishe: a decode that began repeating itself (or hit the generation budget)
+/// still returns what was recognized before that, repeats already dropped by
+/// transcribe-cpp. Failing instead lost the whole file: one looping segment of
+/// Qwen3-ASR 1.7B aborted a 24-minute transcription (DOCUMENTATION §9.14).
+fn run_error(e: transcribe_cpp::Error) -> Response {
+    match e {
+        transcribe_cpp::Error::OutputRepetition {
+            message,
+            partial: Some(partial),
+        }
+        | transcribe_cpp::Error::OutputTruncated {
+            message,
+            partial: Some(partial),
+        } => {
+            warn!("Decode stopped early, keeping the partial transcript: {message}");
+            Response::Transcript(*partial)
+        }
+        e => Response::Error(e.to_string()),
+    }
 }
 
 fn load(
